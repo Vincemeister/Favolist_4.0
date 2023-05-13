@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_13_090834) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_13_104137) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,27 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_13_090834) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_lists_on_user_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "title"
+    t.float "price"
+    t.text "review"
+    t.text "description"
+    t.bigint "list_id", null: false
+    t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["list_id"], name: "index_products_on_list_id"
+  end
+
+  create_table "referrals", force: :cascade do |t|
+    t.string "code"
+    t.text "details"
+    t.bigint "product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_referrals_on_product_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -36,4 +57,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_13_090834) do
   end
 
   add_foreign_key "lists", "users"
+  add_foreign_key "products", "lists"
+  add_foreign_key "referrals", "products"
 end
