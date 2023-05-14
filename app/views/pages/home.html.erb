@@ -1,6 +1,4 @@
 <h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
 <% @products.each do |product| %>
-  <% render 'shared/product_card_feed', product: product %>
+  <%= render 'shared/product_card_feed', product: product %>
 <% end %>
-

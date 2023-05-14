@@ -90,5 +90,6 @@ puts "Creating 5 users and add one list and 3 products per user and list"
 
     product.photos.attach(io: product_image, filename: "product_image.jpg", content_type: "image/jpg")
     product.logo.attach(io: logo, filename: "logo.jpg", content_type: "image/jpg")
+    product.save!
   end
 end

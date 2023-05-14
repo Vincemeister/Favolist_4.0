@@ -50,7 +50,6 @@ gem "sassc-rails"
 
 gem "devise"
 gem "autoprefixer-rails"
-gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -62,6 +61,10 @@ end
 # ADDED AFTER TEMPLATE
 gem "faker"
 gem "cloudinary"
+source "https://token:7F03DB71-762E-485E-B73A-A3C88B457C05@dl.fontawesome.com/basic/fontawesome-pro/ruby/" do
+  gem "font-awesome-pro-sass", "6.4.0"
+end
+
 
 
 group :development do
