@@ -1,0 +1,24 @@
+product-card-feed {
+
+  box-sizing: border-box;
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px;
+
+  position: relative;
+  width: 393px;
+
+  /* Generic/White */
+
+  background: #FFFFFF;
+  /* Neutral/200 */
+
+  border-bottom: 1px solid $light-gray;
+
+  
+
+}
