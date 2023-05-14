@@ -1,4 +1,4 @@
-product-card-feed {
+.product-card-feed {
 
   /* Auto layout */
 
@@ -13,7 +13,7 @@ product-card-feed {
 
   border-bottom: 1px solid $light-gray;
 
-  product-card-header {
+  .product-card-header {
 
     /* Auto layout */
 
@@ -26,13 +26,16 @@ product-card-feed {
 
   /* Inside auto layout */
 
-  flex: none;
-  order: 0;
-  align-self: stretch;
-  flex-grow: 0;
+
+  flex-grow: 1;
 
   }
 
+  .main-product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
 
 }
