@@ -1,15 +1,5 @@
 
-<div class="product-header d-flex justify-content-start flex-row px-3">
-
-  <% if params[:controller] == "products" && params[:action] == "show" %>
-    <%= link_to "", data: {controller: "back-link", back_link_target: "link", back_link_list_value: product.list.id, back_link_user_value: current_user.id} do %>
-      <i class="fas fa-arrow-left fa-light text-decoration-none" style="color: #444444;"></i>
-    <% end %>
-  <% end %>
-
-
-
-
+<div class="product-header>
   <div class="title-and-price mx-auto text-center">
     <% if params[:controller] != "lists" %>
       <%= link_to list_path(product.list), class: "text-decoration-none", style: "color: #444444; font-weight: 100;" do %>
