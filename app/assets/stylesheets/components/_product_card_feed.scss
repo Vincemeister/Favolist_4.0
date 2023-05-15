@@ -53,6 +53,11 @@
       justify-content: flex-start;
       align-items: center;
       width: 100%;
+      margin-right: 8px;
+
+      .avatar-small {
+        margin-right: 8px;
+      }
     }
 
     .product-card-cardbar-logo {
@@ -76,7 +81,13 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: 100%;
+        font-size: 1.2rem;
+        margin-left: 8px;
+
+        p {
+          font-size: 0.75rem;
+          margin: 0px;
+        }
       }
     }
   }

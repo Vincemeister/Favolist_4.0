@@ -1,47 +1,50 @@
 <div class="product-card-feed">
-  <div class="product-card-header">
-    <h6><%= product.list.name %></h6>
-    <h5><%= product.title  %></h5>
-    <h6><%= product.price %></h6>
-     <i class="fa-light fa-circle-plus"></i>
-  </div>
-  <div class="product-card-image">
-    <% if product.photos.attached? %>
-     <div class="main-product-image">
-      <%= image_tag product.photos.first %>
-     </div>
-    <% else %>
-      <p>No image available</p>
-    <% end %>
-  </div>
-  <div class="product-card-cardbar">
-    <div class="product-card-cardbar-left">
-      <%= image_tag product.user.avatar, class: 'avatar' %>
-      <%= product.user.username %>
+  <%= link_to product_path(product) do %>
+    <div class="product-card-header">
+      <h6><%= product.list.name %></h6>
+      <h5><%= product.title  %></h5>
+      <h6><%= product.price %></h6>
     </div>
-    <div class="product-card-cardbar-logo">
-      <% if product.logo.attached? %>
-        <div class="product-card-cardbar">
-          <%= image_tag product.logo %>
-        </div>
+    <div class="product-card-image">
+      <% if product.photos.attached? %>
+      <div class="main-product-image">
+        <%= image_tag product.photos.first %>
+      </div>
       <% else %>
         <p>No image available</p>
       <% end %>
     </div>
-    <div class="product-card-cardbar-right">
-     <i class="fa-light fa-circle-plus"></i>
-      <div class="product-card-cardbar-iconbox">
-        <i class="fa-sharp fa-light fa-bookmark"></i>
-        <p>230</p>
+    <div class="product-card-cardbar">
+      <div class="product-card-cardbar-left">
+        <%= image_tag product.user.avatar, class: 'avatar-small' %>
+        <%= product.user.username %>
       </div>
-      <div class="product-card-cardbar-iconbox">
-        <i class="fa-light fa-circle-plus"></i>
-        <p>230</p>
+      <div class="product-card-cardbar-logo">
+        <% if product.logo.attached? %>
+          <div class="product-card-cardbar">
+            <%= image_tag product.logo %>
+          </div>
+        <% else %>
+          <p>No image available</p>
+        <% end %>
       </div>
-      <div class="product-card-cardbar-iconbox">
-        <i class="fa-light fa-comment"></i>
-        <p>230</p>
+      <div class="product-card-cardbar-right">
+        <div class="product-card-cardbar-iconbox">
+          <i class="fa-sharp fa-light fa-bookmark"></i>
+          <p>30</p>
+        </div>
+        <div class="product-card-cardbar-iconbox">
+          <i class="fa-light fa-circle-plus"></i>
+          <p>8</p>
+        </div>
+        <div class="product-card-cardbar-iconbox">
+          <i class="fa-light fa-comment"></i>
+          <p>72</p>
+        </div>
       </div>
     </div>
-  </div>
+    <div class="product-card-review">
+      <%= product.review %>
+    </div>
+  <% end %>
 </div>

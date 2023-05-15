@@ -1,12 +1,23 @@
-.navbar-lewagon {
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   justify-content: space-between;
   background: white;
-}
+  color: $gray;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 56px; /* Set the height of your navbar */
+  padding: 0px 16px;
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
-}
+  a {
+    color: $gray;
+    text-decoration: none;
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+    &:hover {
+      color: darken($gray, 10%);
+    }
+  }
+
 }
