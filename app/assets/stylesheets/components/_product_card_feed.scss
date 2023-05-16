@@ -6,12 +6,23 @@
   flex-direction: column;
   align-items: center;
   padding: 24px 16px;
-
   position: relative;
   width: 100%;
-
-
   border-bottom: 1px solid $light-gray;
+
+  a {
+    color: $body-color;
+    text-decoration: none;
+  }
+
+  .product-card-header-and-back-arrow-and-ellipsis-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
 
   .product-card-header {
 
