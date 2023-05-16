@@ -1,0 +1,45 @@
+<div class="profile-box-user-show">
+  <%= image_tag @user.avatar, class: 'avatar-large' %>
+  <div class="profile-box-user-show-username-and-product-and-list-and-follows-count-textbox">
+    <h6><%=@user.username%></h6>
+    <span><%= @user.followers.count %> followers • <%= @user.followed.count %> following</span>
+  </div>
+  <div class="btn btn-primary">Follow</div>
+</div>
+
+
+  <ul class="nav nav-pills nav-justified" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active product-tabs" id="pills-products-tab" data-bs-toggle="pill" data-bs-target="#pills-products" type="button" role="tab" aria-controls="pills-products" aria-selected="true"><i class="fa-sharp fa-regular fa-square"></i>products</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link product-tabs" id="pills-lists-tab" data-bs-toggle="pill" data-bs-target="#pills-lists" type="button" role="tab" aria-controls="pills-lists" aria-selected="false"><i class="fa-sharp fa-regular fa-table-cells"></i>lists</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link product-tabs" id="pills-referrals-tab" data-bs-toggle="pill" data-bs-target="#pills-referrals" type="button" role="tab" aria-controls="pills-referrals" aria-selected="false"><i class="fa-sharp fa-regular fa-tag"></i>referrals</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link product-tabs" id="pills-about-tab" data-bs-toggle="pill" data-bs-target="#pills-about" type="button" role="tab" aria-controls="pills-about" aria-selected="false"><i class="fa-sharp fa-regular fa-user"></i>about</button>
+    </li>
+  </ul>
+
+
+  <div class="tab-content product-content" id="pills-tabContent">
+    <div class="tab-pane fade show active linebreak" id="pills-products" role="tabpanel" aria-labelledby="pills-products-tab">
+      <% @user.products.each do |product| %>
+        <%= render 'shared/product_card_feed', product: product %>
+      <% end %>
+    </div>
+    <div class="tab-pane fade linebreak" id="pills-lists" role="tabpanel" aria-labelledby="pills-lists-tab">
+
+    </div>
+    <div class="tab-pane fade linebreak" id="pills-referrals" role="tabpanel" aria-labelledby="pills-referrals-tab">
+      <div class="d-flex justify-content-between align-items-center px-3">
+
+      </div>
+    </div>
+    <div class="tab-pane fade linebreak" id="pills-about" role="tabpanel" aria-labelledby="pills-about-tab">
+    <h6>About <%= @user.username %></h6>
+    <p><%= @user.bio %></p>
+    </div>
+  </div>

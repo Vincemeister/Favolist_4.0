@@ -16,8 +16,10 @@
     </div>
     <div class="product-card-cardbar">
       <div class="product-card-cardbar-left">
-        <%= image_tag product.user.avatar, class: 'avatar-small' %>
-        <%= product.user.username %>
+        <%= link_to user_path(product.user) do %>
+          <%= image_tag product.user.avatar, class: 'avatar-small' %>
+          <%= product.user.username %>
+        <% end %>
       </div>
       <div class="product-card-cardbar-logo">
         <% if product.logo.attached? %>
