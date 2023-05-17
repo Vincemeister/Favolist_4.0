@@ -1,0 +1,30 @@
+.search-container {
+  padding: 16px;
+  text-align: center;
+  width: 100%;
+}
+
+.search-form {
+  position: relative;
+
+  .form-control {
+    padding-right: 40px; // adjust as needed
+  }
+
+  button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    border: none;
+    background: none;
+    height: 100%;
+    padding: 0 10px; // adjust as needed
+    font-size: 1.25em; // adjust as needed
+    color: #333; // adjust as needed
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

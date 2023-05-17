@@ -1,0 +1,6 @@
+user index
+
+<%= render "shared/search", url: users_path %>
+<% @users.each do |user| %>
+  <%= render 'shared/user_card', user: user %>
+<% end %>

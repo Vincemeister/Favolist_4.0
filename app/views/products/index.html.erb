@@ -1,0 +1,6 @@
+products index
+
+<%= render "shared/search", url: products_path %>
+<% @products.each do |product| %>
+  <%= render 'shared/product_card_feed', product: product %>
+<% end %>
