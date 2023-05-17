@@ -2,8 +2,12 @@
   <%= link_to "#" do %>
     <i class="fa-sharp fa-regular fa-magnifying-glass"></i>
   <% end %>
-  <%= link_to "#" do %>
-    <i class="fa-sharp fa-solid fa-user"></i>
+  <% if user_signed_in? %>
+    <%= link_to user_path(current_user) do %>
+      <i class="fa-sharp fa-solid fa-user"></i>
+    <% end %>
+  <% else %>
+    <%= link_to 'Sign in', new_user_session_path %>
   <% end %>
   <%= link_to root_path do %>
     <i class="fa-sharp fa-solid fa-house"></i>

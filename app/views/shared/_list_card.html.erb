@@ -1,7 +1,21 @@
 <%= link_to list_path(list), class: "text-decoration-none" do %>
-    <% tiles, grid_class = generate_tiled_background(list) %>
-    <div class="<%= grid_class %>">
-      <%= tiles.html_safe %>
-      <!-- remaining code -->
+    <div class="list-grid-container">
+      <% tiles, grid_class = generate_tiled_background(list) %>
+      <div class="<%= grid_class %>">
+        <%= tiles.html_safe %>
+        <div class="grid-text">
+          <div class="user-info">
+            <%= image_tag list.user.avatar, class: "avatar" %>
+            <div class="user-text">
+              <div class="username"><%= list.user.username %></div>
+              <div class="follower-count"><%= list.user.followers.count %> followers</div>
+            </div>
+          </div>
+          <div class="list-product-count"><%= pluralize(list.products.count, 'product') %></div>
+          <div class="list-name"><%= list.name %></div>
+        </div>
+
+        <!-- remaining code -->
+      </div>
     </div>
 <% end %>

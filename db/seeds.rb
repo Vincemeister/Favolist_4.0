@@ -16,7 +16,7 @@ puts "Creating Vincent and 5 users..."
 
 vincent = User.create!(
   username: "vincent",
-  email: "vincent@gmail.com",
+  email: "vr@gmail.com",
   password: "password",
 )
 avatar = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1684039630/Favolist%204.0/owl.jpg")
@@ -36,13 +36,11 @@ puts "Adding list for Vincent"
 
 puts "Adding products to Vincent's List"
 
-product_image = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1684045499/Favolist%204.0/oura_pjds07.jpg")
-logo = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1684038909/Favolist%204.0/oura_logo_4.jpg")
 
 puts "Adding products to Vincent's List"
 
-3.times do
-  Product.create!(
+4.times do
+  product = Product.create!(
     title: Faker::Commerce.product_name,
     price: Faker::Commerce.price,
     review: Faker::Lorem.paragraph,
@@ -50,6 +48,14 @@ puts "Adding products to Vincent's List"
     list: list,
     url: Faker::Internet.url,
   )
+
+  product_image = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1684045499/Favolist%204.0/oura_pjds07.jpg")
+  logo = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1684038909/Favolist%204.0/oura_logo_4.jpg")
+
+  product.photos.attach(io: product_image, filename: "product_image.jpg", content_type: "image/jpg")
+  product.logo.attach(io: logo, filename: "logo.jpg", content_type: "image/jpg")
+  product.save!
+
 end
 
 puts "Creating 5 users and add one list and 3 products per user and list"

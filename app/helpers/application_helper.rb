@@ -20,6 +20,7 @@ module ApplicationHelper
       else
         tiles << "<div class='tile' style='background-image: linear-gradient(#{default_color}, #{default_color})'></div>"
       end
+
     end
 
     grid_class = case number_of_tiles
