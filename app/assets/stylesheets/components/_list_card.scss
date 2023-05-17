@@ -1,0 +1,41 @@
+
+
+.list-grid-1 {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  width: 100%;
+  height: 100vw;
+}
+
+.list-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  width: 100%;
+  height: 100vw;
+}
+
+.list-grid-9 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: 100%;
+  height: 100vw;
+}
+
+.list-grid-16 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  width: 100%;
+  height: 100vw;
+}
+
+.tile {
+  background-size: cover;
+  background-position: center;
+  height: 100%; /* Set height to fill the parent grid item */
+  width: 100%; /* Set width to fill the parent grid item */
+  height: 100vw;
+}

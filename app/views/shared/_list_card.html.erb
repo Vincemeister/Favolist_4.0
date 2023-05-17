@@ -1,0 +1,7 @@
+<%= link_to list_path(list), class: "text-decoration-none" do %>
+    <% tiles, grid_class = generate_tiled_background(list) %>
+    <div class="<%= grid_class %>">
+      <%= tiles.html_safe %>
+      <!-- remaining code -->
+    </div>
+<% end %>

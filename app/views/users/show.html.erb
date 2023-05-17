@@ -32,7 +32,7 @@
   </div>
   <div class="tab-pane fade linebreak" id="pills-lists" role="tabpanel" aria-labelledby="pills-lists-tab">
     <% @user.lists.each do |list| %>
-      <%= render 'shared/list_card_feed', list: list %>
+      <%= render 'shared/list_card', list: list %>
     <% end %>
   </div>
   <div class="tab-pane fade linebreak" id="pills-referrals" role="tabpanel" aria-labelledby="pills-referrals-tab">
