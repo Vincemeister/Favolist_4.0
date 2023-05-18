@@ -34,6 +34,7 @@ class UsersController < ApplicationController
 
   def show
     @lists = @user.lists
+    @referrals = @user.products.flat_map(&:referrals)
   end
 
   def follows

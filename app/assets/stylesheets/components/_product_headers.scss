@@ -1,11 +1,41 @@
 .product-header {
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-padding: 8px 0px;
-width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  .list-and-title-and-price {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .back-arrow {
+  }
+
+  .ellipsis-icon {
+  }
+
 }
+
+
+
+
+
+
+.product-header-show {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 0px;
+  width: 100%;
+
+
+  }
 
 .product-header-list-view {
   display: flex;
@@ -15,4 +45,4 @@ width: 100%;
   padding: 8px 0px;
   width: 100%;
   text-align: left;
-  }
+}

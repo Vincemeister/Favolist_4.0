@@ -1,4 +1,4 @@
-.product-card-cardbar {
+.cardbar {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -7,41 +7,37 @@
   height: 56px;
   width: 100%;
 
-  .product-card-cardbar-left {
+  a {
+    text-decoration: none;
+    color: $body-color;
+  }
+
+  .cardbar-left {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    width: 100%;
     margin-right: 8px;
 
-    a {
-      text-decoration: none;
-      color: $body-color;
-    }
 
     .avatar-small {
       margin-right: 8px;
     }
   }
 
-  .product-card-cardbar-logo {
-
-    img {
-      height: 100%;
-      object-fit: contain;
-    }
+  .cardbar-logo {
+    height: 100%;
+    object-fit: contain;
   }
 
 
-  .product-card-cardbar-right {
+  .cardbar-right {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
-    width: 100%;
 
-    .product-card-cardbar-iconbox {
+    .cardbar-iconbox {
       display: flex;
       flex-direction: column;
       justify-content: center;

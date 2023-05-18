@@ -1,0 +1,30 @@
+.product-card {
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px;
+  position: relative;
+  width: 100%;
+  border-bottom: 1px solid $light-gray;
+
+  a {
+    color: $body-color;
+    text-decoration: none;
+  }
+
+  .product-card-image {
+    img {
+      width: 100vw;
+      object-fit: scale-down;
+    }
+  }
+
+  /* For the product show page, which has an additional back button and the tabs
+  and respective contents (review, description, referrals). The product show doesn't
+  render the product_card partial. It just copies the code.
+*/
+
+}

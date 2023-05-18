@@ -1,56 +1,55 @@
 
-<!-- Same as the product_card_feed partial -->
+<!-- Same code as the product_card partial - ensure its the same apart frpm the
+ product-card-header-and-back-arrow-and-ellipsis-container and tabs + below tabs  -->
 
-<div class="product-card-feed">
-  <div class="product-card-header-and-back-arrow-and-ellipsis-container">
-    <%= link_to :back do %>
-      <i class="fa-sharp fa-regular fa-arrow-left"></i>
-    <% end %>
-    <div class="product-card-header">
-      <h6><%= @product.list.name %></h6>
-      <h5><%= @product.title  %></h5>
-      <h6><%= @product.price %></h6>
+<div class="product-card">
+    <div class="product-header">
+      <%= link_to  :back do %>
+        <i class="fa-sharp fa-regular fa-arrow-left"></i>
+      <% end %>
+      <div class="list-and-title-and-price">
+        <h6><%= @product.list.name %></h6>
+        <h5><%= @product.title  %></h5>
+        <h6><%= @product.price %></h6>
+      </div>
+      <i class="fa-sharp fa-regular fa-ellipsis"></i>
     </div>
-    <i class="fa-sharp fa-regular fa-ellipsis"></i>
-  </div>
-  <div class="product-card-image">
     <% if @product.photos.attached? %>
-     <div class="main-product-image">
-      <%= image_tag @product.photos.first %>
-     </div>
+      <div class="product-card-image">
+        <%= image_tag @product.photos.first %>
+      </div>
+    <% else %>
+        <p>No image available</p>
+    <% end %>
+  <div class="cardbar">
+    <div class="cardbar-left">
+      <%= link_to user_path(@product.user) do %>
+        <%= image_tag @product.user.avatar, class: 'avatar-small' %>
+        <%= @product.user.username %>
+      <% end %>
+    </div>
+    <% if @product.logo.attached? %>
+        <%= image_tag @product.logo, class: "cardbar-logo" %>
     <% else %>
       <p>No image available</p>
     <% end %>
-  </div>
-  <div class="product-card-cardbar">
-    <div class="product-card-cardbar-left">
-      <%= image_tag @product.user.avatar, class: 'avatar-small' %>
-      <%= @product.user.username %>
-    </div>
-    <div class="product-card-cardbar-logo">
-      <% if @product.logo.attached? %>
-        <div class="product-card-cardbar">
-          <%= image_tag @product.logo %>
-        </div>
-      <% else %>
-        <p>No image available</p>
-      <% end %>
-    </div>
-    <div class="product-card-cardbar-right">
-      <div class="product-card-cardbar-iconbox">
+    <div class="cardbar-right">
+      <div class="cardbar-iconbox">
         <i class="fa-sharp fa-light fa-bookmark"></i>
         <p>30</p>
       </div>
-      <div class="product-card-cardbar-iconbox">
+      <div class="cardbar-iconbox">
         <i class="fa-light fa-circle-plus"></i>
         <p>8</p>
       </div>
-      <div class="product-card-cardbar-iconbox">
+      <div class="cardbar-iconbox">
         <i class="fa-light fa-comment"></i>
         <p>72</p>
       </div>
     </div>
   </div>
+</div>
+
 
 
   <ul class="nav nav-pills nav-justified" id="pills-tab" role="tablist">
@@ -68,11 +67,10 @@
 
   <div class="tab-content product-content container" id="pills-tabContent">
     <div class="tab-pane fade show active linebreak" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
-      <%= @product.review %>
+      <%= simple_format(@product.review) %>
     </div>
     <div class="tab-pane fade linebreak" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
-      <%= @product.description %>
-    </div>
+      <%= simple_format(@product.description) %>
     <div class="tab-pane fade linebreak" id="pills-referrals" role="tabpanel" aria-labelledby="pills-referrals-tab">
       <div class="d-flex justify-content-between align-items-center px-3">
         <p><%= @product.referrals %></p>

@@ -4,4 +4,11 @@ class PagesController < ApplicationController
   def home
     @products = Product.all
   end
+
+  def search
+    @products = Product.search(params[:search])
+    @lists = List.search(params[:search])
+    @referrals = Referral.search(params[:search])
+  end
+
 end

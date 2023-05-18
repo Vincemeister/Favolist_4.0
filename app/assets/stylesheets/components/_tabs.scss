@@ -1,10 +1,10 @@
 .nav-link.active {
   background-color: transparent!important;
-  border-bottom: 2px solid $light-gray!important;
+  border-bottom: 2px solid $primary!important;
 }
 
 .nav-link {
-  color: gray!important;
+  color: $body-color!important;
   font-size: 0.875rem!important;
   display: flex;
   align-items: center;
