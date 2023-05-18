@@ -1,6 +1,5 @@
 referrals index
-
-<%= render "shared/search", url: users_path %>
+<%= render "shared/search", url: referrals_path %>
 <% @referrals.each do |referral| %>
   <%= render 'shared/referral_card', referral: referral %>
 <% end %>

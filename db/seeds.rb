@@ -56,11 +56,19 @@ puts "Adding products to Vincent's List"
   product.logo.attach(io: logo, filename: "logo.jpg", content_type: "image/jpg")
   product.save!
 
+  puts "Adding referral to product"
+
+  referral = Referral.new(
+    code: "https://ouraring.com/discount/de7cd3aa09",
+    details: "Right now is the perfect time to get rowing with Peloton Row.  you can already do. Explore Peloton Row at OnePeloton.com/Row."
+  )
+  referral.product = product
+  referral.save!
 end
 
 puts "Creating 5 users and add one list and 3 products per user and list"
 
-5.times do
+2.times do
   user = User.create!(
     username: Faker::Internet.username,
     email: Faker::Internet.email,
@@ -83,7 +91,7 @@ puts "Creating 5 users and add one list and 3 products per user and list"
 
   puts "Adding products to #{user.username}'s List"
 
-  3.times do
+  2.times do
     product = Product.create!(
       title: Faker::Commerce.product_name,
       price: Faker::Commerce.price,
