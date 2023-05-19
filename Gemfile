@@ -64,6 +64,8 @@ gem "cloudinary"
 source "https://token:7F03DB71-762E-485E-B73A-A3C88B457C05@dl.fontawesome.com/basic/fontawesome-pro/ruby/" do
   gem "font-awesome-pro-sass", "6.4.0"
 end
+gem 'pg_search'
+
 
 
 
