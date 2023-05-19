@@ -8,7 +8,7 @@
   padding: 24px 16px;
   position: relative;
   width: 100%;
-  border-bottom: 1px solid $light-gray;
+  border-bottom: 1px solid #E5E5E5;
 
   a {
     color: $body-color;
@@ -20,6 +20,19 @@
       width: 100vw;
       object-fit: scale-down;
     }
+  }
+
+  .product-card-review {
+
+  }
+
+
+  .truncate-3-lines {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   /* For the product show page, which has an additional back button and the tabs

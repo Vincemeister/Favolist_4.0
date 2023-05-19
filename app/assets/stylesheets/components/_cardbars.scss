@@ -6,6 +6,8 @@
   padding: 8px 0px;
   height: 56px;
   width: 100%;
+  position: relative;
+  gap: 16px;
 
   a {
     text-decoration: none;
@@ -17,17 +19,28 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    margin-right: 8px;
 
 
     .avatar-small {
       margin-right: 8px;
     }
+
+    .username {
+      font-family: 'Outfit';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 20px;
+    }
   }
 
   .cardbar-logo {
-    height: 100%;
     object-fit: contain;
+    max-width: 80px;
+    max-height: 32px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
 

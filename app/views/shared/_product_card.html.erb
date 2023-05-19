@@ -5,7 +5,7 @@
         <h6><%= product.list.name %></h6>
         <%= link_to product_path(product) do %>
           <h5><%= product.title  %></h5>
-          <h6><%= product.price %></h6>
+          <h6 class="price">$<%= product.price.to_i %></h6>
         <% end %>
       </div>
       <i class="fa-sharp fa-regular fa-ellipsis"></i>
@@ -21,7 +21,11 @@
     <div class="cardbar-left">
       <%= link_to user_path(product.user) do %>
         <%= image_tag product.user.avatar, class: 'avatar-small' %>
-        <%= product.user.username %>
+      <% end %>
+      <%= link_to user_path(product.user) do %>
+        <div class="username">
+          <%= product.user.username %>
+        </div>
       <% end %>
     </div>
     <% if product.logo.attached? %>
@@ -46,7 +50,9 @@
   </div>
   <div class="product-card-review">
     <%= link_to product_path(product) do %>
-      <%= product.review %>
+      <p class="truncate-3-lines">
+        <%= product.review%>
+      </p>
     <% end %>
   </div>
 </div>

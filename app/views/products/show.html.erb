@@ -1,16 +1,16 @@
 
-<!-- Same code as the product_card partial - ensure its the same apart frpm the
- product-card-header-and-back-arrow-and-ellipsis-container and tabs + below tabs  -->
+<!-- Almost the same code as the product_card partial - ensure its the same apart frpm the
+ product-card-header-and-back-arrow-and-ellipsis-container and tabs + below tabs, and removing the truncated review and replacing product with @product -->
 
 <div class="product-card">
     <div class="product-header">
-      <%= link_to  :back do %>
-        <i class="fa-sharp fa-regular fa-arrow-left"></i>
+      <%= link_to :back do %>
+        <i class="fa-regular fa-arrow-left"></i>
       <% end %>
       <div class="list-and-title-and-price">
         <h6><%= @product.list.name %></h6>
         <h5><%= @product.title  %></h5>
-        <h6><%= @product.price %></h6>
+        <h6 class="price">$<%= @product.price.to_i %></h6>
       </div>
       <i class="fa-sharp fa-regular fa-ellipsis"></i>
     </div>
@@ -25,7 +25,11 @@
     <div class="cardbar-left">
       <%= link_to user_path(@product.user) do %>
         <%= image_tag @product.user.avatar, class: 'avatar-small' %>
-        <%= @product.user.username %>
+      <% end %>
+      <%= link_to user_path(@product.user) do %>
+        <div class="username">
+          <%= @product.user.username %>
+        </div>
       <% end %>
     </div>
     <% if @product.logo.attached? %>
@@ -48,11 +52,8 @@
       </div>
     </div>
   </div>
-</div>
 
-
-
-  <ul class="nav nav-pills nav-justified" id="pills-tab" role="tablist">
+  <ul class="nav nav-pills nav-fill w-100" id="pills-tab" role="tablist">
     <li class="nav-item" role="presentation">
       <button class="nav-link active product-tabs" id="pills-review-tab" data-bs-toggle="pill" data-bs-target="#pills-review" type="button" role="tab" aria-controls="pills-review" aria-selected="true">Review</button>
     </li>
@@ -65,18 +66,29 @@
   </ul>
 
 
-  <div class="tab-content product-content container" id="pills-tabContent">
+  <div class="tab-content product-content" id="pills-tabContent">
     <div class="tab-pane fade show active linebreak" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
-      <%= simple_format(@product.review) %>
+      <p> <%= simple_format(@product.review) %></p>
     </div>
     <div class="tab-pane fade linebreak" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
-      <%= simple_format(@product.description) %>
+     <p><%= simple_format(@product.description) %></p>
+    </div>
     <div class="tab-pane fade linebreak" id="pills-referrals" role="tabpanel" aria-labelledby="pills-referrals-tab">
-      <div class="d-flex justify-content-between align-items-center px-3">
         <p><%= @product.referrals %></p>
-      </div>
     </div>
   </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
 
 
 

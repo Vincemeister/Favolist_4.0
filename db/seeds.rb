@@ -130,7 +130,7 @@ referral.save!
 
 puts "Creating product for Vincent"
 product = Product.create!(
-  title: "NAYOYA Gymnastic Rings Gymnastic Rings",
+  title: "NAYOYA Gymnastic Rings",
   price: 34.97,
   review: "These are super portable (easily fit in a small backpack) and incredibly durable for the price. I’m using them for mostly dips and muscle-up progressions. The Nayoya allow me to leave the rings outdoors. BUT: If you’re going to travel without chalk, I highly suggest wooden rings.",
   description: "BEST RATED GYM RINGS ON THE MARKET; Includes 2 Gymnastic Rings with straps and adjusting buckles; The rings are made of textured, grippable PC Plastic (to reduce slippage associated with sweaty hands)which is stronger, more durable and of higher quality material then ABS plastic rings and are capable of supporting up to 2,000 lbs making them the best quality gymnastics rings on the market

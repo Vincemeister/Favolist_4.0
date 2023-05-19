@@ -1,9 +1,11 @@
 .product-header {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   width: 100%;
+  gap: 32px;
+  isolation: isolate;
 
   .list-and-title-and-price {
     display: flex;
@@ -17,6 +19,31 @@
   }
 
   .ellipsis-icon {
+  }
+
+  h5 {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 28px;
+    letter-spacing: -0.02em;
+    text-align: center;
+  }
+
+  h6 {
+    font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  }
+
+  h6.price {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+
   }
 
 }
