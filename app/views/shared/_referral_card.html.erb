@@ -2,8 +2,8 @@
   <div class="product-header-and-image">
     <div class="product-header-list-view">
       <h6> <%= referral.product.list.name %> </h6>
-      <h6> <%= referral.product.title %>  </h6>
-      <h6> <%= referral.product.price %> </h6>
+      <h5> <%= referral.product.title %>  </h6>
+      <h6 class="price">$<%= referral.product.price.to_i %></h6>
     </div>
     <%= cl_image_tag(referral.product.photos.first.key, :height => 112, :crop => :scale) %>
   </div>
@@ -13,24 +13,26 @@
   <div class="code-frame">
     <%= referral.code %>
   </div>
-  <div class="product-card-cardbar">
-    <div class="product-card-cardbar-left">
+
+    <div class="cardbar">
+    <div class="cardbar-left">
       <%= link_to user_path(referral.product.user) do %>
         <%= image_tag referral.product.user.avatar, class: 'avatar-small' %>
-        <%= referral.product.user.username %>
       <% end %>
-    </div>
-    <div class="product-card-cardbar-logo">
-      <% if referral.product.logo.attached? %>
-        <div class="product-card-cardbar">
-          <%= image_tag referral.product.logo %>
+      <%= link_to user_path(referral.product.user) do %>
+        <div class="username">
+          <%= referral.product.user.username %>
         </div>
-      <% else %>
-        <p>No image available</p>
       <% end %>
     </div>
-  <div class="product-card-cardbar-right">
-    <%= link_to "View product", product_path(referral.product), class: "btn btn-link" %>
+    <% if referral.product.logo.attached? %>
+        <%= image_tag referral.product.logo, class: "cardbar-logo" %>
+    <% else %>
+      <p>No image available</p>
+    <% end %>
+    <div class="cardbar-right">
+      <%= link_to "View product", product_path(referral.product), class: "btn btn-link" %>
+    </div>
   </div>
-  </div>
+
 </div>
