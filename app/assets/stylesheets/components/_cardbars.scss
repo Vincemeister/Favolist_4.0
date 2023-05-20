@@ -3,11 +3,11 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 0px;
-  height: 56px;
+  padding: 0.5em 0;
+  height: 3.5em;
   width: 100%;
   position: relative;
-  gap: 16px;
+  gap: 1em;
 
   a {
     text-decoration: none;
@@ -19,25 +19,25 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+    margin-right: 0.5em;
 
 
     .avatar-small {
-      margin-right: 8px;
+      margin-right: 0.5em;
     }
 
     .username {
       font-family: 'Outfit';
       font-style: normal;
       font-weight: 600;
-      font-size: 14px;
-      line-height: 20px;
+      font-size: 0.875rem;
     }
   }
 
   .cardbar-logo {
     object-fit: contain;
-    max-width: 80px;
-    max-height: 32px;
+    max-width: 5em;
+    max-height: 2em;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -56,7 +56,7 @@
       justify-content: center;
       align-items: center;
       font-size: 1.2rem;
-      margin-left: 8px;
+      margin-left: 0.5em;
 
       p {
         font-size: 0.75rem;
