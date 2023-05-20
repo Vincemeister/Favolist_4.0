@@ -5,6 +5,10 @@ class ListsController < ApplicationController
     @products = @list.products
   end
 
+  def new
+    @list = List.new
+  end
+
   private
 
   def list_params

@@ -15,7 +15,25 @@
   <%= link_to "#" do %>
     <i class="fa-sharp fa-solid fa-gear"></i>
   <% end %>
-  <%= link_to new_product_path do %>
-    <i class="fa-sharp fa-solid fa-square-plus"></i>
-  <% end %>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+  </button>
+</div>
+
+
+<!-- Modal -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">What do you want to create?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body custom-modal">
+        <%= link_to 'Product', new_product_path, class: "btn btn-primary w-100" %>
+        <%= link_to 'List', new_list_path, class: "btn btn-primary w-100" %>
+      </div>
+    </div>
+  </div>
 </div>

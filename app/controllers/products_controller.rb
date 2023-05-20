@@ -24,6 +24,23 @@ class ProductsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @product.update(product_params)
+      redirect_to list_path(@product.list), notice: 'Product was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    Rails.logger.debug "Attempting to destroy product with id: #{params[:id]}"
+   @product.destroy!
+  end
+
+
   private
 
   def product_params
