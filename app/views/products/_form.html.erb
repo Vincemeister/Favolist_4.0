@@ -1,0 +1,13 @@
+<h3>Share a favorite product</h3>
+<div class="container">
+  <%= simple_form_for @product do |f| %>
+    <%= f.input :title, required: true %>
+    <%= f.input :price, required: true %>
+    <%= f.input :review, required: true %>
+    <%= f.input :description, required: true %>
+    <%= f.association :list, collection: List.where(user: current_user), prompt: 'Select a list', required: true %>
+    <%= f.input :logo, as: :file, required: true %>
+    <%= f.input :photos, as: :file, input_html: { multiple: true }, required: true %>
+    <%= f.button :submit %>
+  <% end %>
+</div>
