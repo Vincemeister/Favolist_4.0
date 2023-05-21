@@ -36,8 +36,11 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    Rails.logger.debug "Attempting to destroy product with id: #{params[:id]}"
-   @product.destroy!
+    if @product.destroy
+      redirect_to list_path(@product.list), notice: 'Product was successfully destroyed.'
+    else
+      redirect_to list_path(@product.list), notice: 'Product was not destroyed.'
+    end
   end
 
 
