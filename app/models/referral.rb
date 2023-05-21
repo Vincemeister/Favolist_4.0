@@ -6,11 +6,22 @@ class Referral < ApplicationRecord
   validates :code, presence: true
   validates :details, presence: true
 
-  pg_search_scope :search_by_product_title_description_list_name_and_user_username,
+  def user_username
+    self.product.list.user.username
+  end
+
+  def list_name
+    self.product.list.name
+  end
+
+  pg_search_scope :search_by_user_and_list,
+  against: [:code, :details],
   associated_against: {
-    product: [:title, :description, :user_username, { list: :name }]
+    product: [:title, :description, { list: [:name, { user: :username }] }]
   },
   using: {
     tsearch: { prefix: true }
   }
+
+
 end

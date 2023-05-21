@@ -6,10 +6,17 @@ class PagesController < ApplicationController
   end
 
   def search
-    @products = Product.search_by_title_and_description_and_list_title_and_user_username(params[:query])
-
-    @lists = List.search(params[:search])
-    @referrals = Referral.search(params[:search])
+    if params[:search].present?
+      @products = Product.search_by_title_and_description_and_list_name_and_user_username(params[:search][:query])
+      @lists = List.search_by_name_and_description_and_product_title_and_user_username(params[:search][:query])
+      @referrals = Referral.search_by_user_and_list(params[:search][:query])
+      @users = User.search_by_user_username_and_list_name(params[:search][:query])
+    else
+      @products = []
+      @lists = []
+      @referrals = []
+      @users = []
+    end
   end
 
 end

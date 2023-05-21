@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include PgSearch::Model
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_many :lists, dependent: :destroy
@@ -16,6 +17,15 @@ class User < ApplicationRecord
 
   has_many :followed_relationships, foreign_key: :follower_id, class_name: 'Follow'
   has_many :followed, through: :followed_relationships, source: :followed, dependent: :destroy
+
+  pg_search_scope :search_by_user_username_and_list_name,
+  against: [:username, :bio],
+  associated_against: {
+    lists: [:name]
+  },
+  using: {
+      tsearch: { prefix: true }
+  }
 
 
   def follow(user_id)

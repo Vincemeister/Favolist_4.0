@@ -4,13 +4,14 @@ class List < ApplicationRecord
   belongs_to :user
   has_many :products, dependent: :destroy
 
-  pg_search_scope :search_by_title_and_description_and_list_name_and_user_username,
-  against: [:title, :description],
+  pg_search_scope :search_by_name_and_description_and_product_title_and_user_username,
+  against: [:name, :description],
   associated_against: {
-    list: [:name],
+    products: [:title],
     user: [:username]
   },
   using: {
-    tsearch: { prefix: true }
+      tsearch: { prefix: true }
   }
+
 end

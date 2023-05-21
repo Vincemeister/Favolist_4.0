@@ -7,17 +7,17 @@ class Product < ApplicationRecord
   has_many_attached :photos, dependent: :destroy
   has_one_attached :logo, dependent: :destroy
 
+
+
   pg_search_scope :search_by_title_and_description_and_list_name_and_user_username,
-  against: [:title, :description, :user_username],
+  against: [:title, :description],
   associated_against: {
-    list: [:name]
+      list: [:name],
+      user: [:username]
   },
   using: {
-    tsearch: { prefix: true }
+      tsearch: { prefix: true }
   }
 
-  #this is for the pg_search to work on the referral model (see referral.rb) so I can search referral by username, since its not directly associated with the product
-  def user_username
-    self.user.try(:username)
-  end
+
 end

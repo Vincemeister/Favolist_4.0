@@ -35,8 +35,6 @@ class ListsController < ApplicationController
       redirect_to list_path(list), notice: 'list was not destroyed.'
     end
   end
-
-
   private
 
   def list_params
