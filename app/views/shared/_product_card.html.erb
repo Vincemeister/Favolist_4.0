@@ -8,7 +8,9 @@
         <div></div>
       <% end %>
       <div class="list-and-title-and-price">
-        <h6><%= product.list.name %></h6>
+        <% unless controller_name == 'lists' && action_name == 'show' %>
+          <h6><%= product.list.name %></h6>
+        <% end %>
         <%= link_to product_path(product) do %>
           <h5><%= product.title  %></h5>
           <h6 class="price">$<%= product.price.to_i %></h6>

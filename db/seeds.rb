@@ -1,19 +1,12 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
 require "open-uri"
 
 puts "Clearing database..."
-
 User.destroy_all
 
-
-puts "Creating Vincent and 5 users..."
-
+#----------------MAIN USERS---------------------------------------------------------------------------------------------
+puts "Creating main users..."
 vincent = User.create!(
   username: "Vincent",
   email: "vr@gmail.com",
@@ -23,30 +16,51 @@ vincent = User.create!(
 avatar = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1684039630/Favolist%204.0/owl.jpg")
 vincent.avatar.attach(io: avatar, filename: 'avatar.jpg', content_type: 'image/jpg')
 vincent.save!
-
-
-
-
-puts "Adding list for Vincent"
+#----------------RANDOM USERS-------------------------------------------------------------------------------------------
+puts "Creating random users with lists and products..."
+3.times do
+  puts "Creating random user..."
+  user = User.create!(
+    username: Faker::Internet.username,
+    email: Faker::Internet.email,
+    password: "password",
+    bio: Faker::Lorem.paragraph(sentence_count: 10)
+  )
+  avatar = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1684039630/Favolist%204.0/owl.jpg")
+  user.avatar.attach(io: avatar, filename: 'avatar.jpg', content_type: 'image/jpg')
+  user.save!
+  puts "Created #{user.username}"
+  list = List.create!(
+    name: "#{user.username}'s List",
+    description: "This is #{user.username}'s list",
+    user: user,
+  )
+  2.times do
+    product = Product.create!(
+      title: Faker::Commerce.product_name,
+      price: Faker::Commerce.price,
+      review: Faker::Lorem.paragraph,
+      description: Faker::Lorem.paragraph,
+      list: list,
+      url: Faker::Internet.url
+    )
+    product_image = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1684045499/Favolist%204.0/oura_pjds07.jpg")
+    logo = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1684038909/Favolist%204.0/oura_logo_4.jpg")
+    product.photos.attach(io: product_image, filename: "product_image.jpg", content_type: "image/jpg")
+    product.logo.attach(io: logo, filename: "logo.jpg", content_type: "image/jpg")
+    product.save!
+  end
+end
+#----------------FITNESS EQUIPMENT--------------------------------------------------------------------------------------
+puts "Creating fitness equipment list for Vincent..."
 
   fitness_equipment = List.create!(
     name: "Vincent's List",
     description: "This is Vincent's list",
     user: vincent,
   )
-
-puts "Adding products to Vincent's List"
-
-
-puts "Adding products to Vincent's List"
-
-#MAIN PRODUCTS FROM VINCENT
-
-
-#----------------FITNESS EQUIPMENT--------------------------------------------------------------------------------------
-
+#-----------------------------------------------------------------------------------------------------------------------
 #---------------Oura ring-------------------------------------------------------
-
 puts "Creating product for Vincent"
 product = Product.create!(
   title: "Oura Ring 3.0",
@@ -73,8 +87,6 @@ logo = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1684038909/F
 product.photos.attach(io: product_image, filename: "product_image.jpg", content_type: "image/jpg")
 product.logo.attach(io: logo, filename: "logo.jpg", content_type: "image/jpg")
 product.save!
-
-
 #-------------Peloton Row-------------------------------------------------------
 ""
 puts "Creating product for Vincent"
@@ -102,9 +114,7 @@ referral = Referral.new(
 )
 referral.product = product
 referral.save!
-
-#-------------Gen 4 Theragun PRO----------------------------------------------------------
-
+#-------------Gen 4 Theragun PRO------------------------------------------------
 puts "Creating product for Vincent"
 product = Product.create!(
   title: "Gen 4 Theragun PRO",
@@ -147,9 +157,7 @@ logo = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1678704276/f
 product.photos.attach(io: product_image, filename: "product_image.jpg", content_type: "image/jpg")
 product.logo.attach(io: logo, filename: "logo.jpg", content_type: "image/jpg")
 product.save!
-
 #-------------FEZiBO Balance Board----------------------------------------------
-
 puts "Creating product for Vincent"
 product = Product.create!(
   title: "FEZiBO Balance Board",
@@ -164,10 +172,7 @@ logo = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1678704724/f
 product.photos.attach(io: product_image, filename: "product_image.jpg", content_type: "image/jpg")
 product.logo.attach(io: logo, filename: "logo.jpg", content_type: "image/jpg")
 product.save!
-
-
 #-------------PSO-RITE Psoas Muscle Release and Deep Tissue Massage Tool--------
-
 puts "Creating product for Vincent"
 product = Product.create!(
   title: "PSO-RITE Psoas Muscle Release and Deep Tissue Massage Tool",
@@ -186,9 +191,7 @@ logo = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1678704430/f
 product.photos.attach(io: product_image, filename: "product_image.jpg", content_type: "image/jpg")
 product.logo.attach(io: logo, filename: "logo.jpg", content_type: "image/jpg")
 product.save!
-
-#-------------Rubz Ball--------------------------------------------
-
+#-------------Rubz Ball---------------------------------------------------------
 puts "Creating product for Vincent"
 product = Product.create!(
   title: "Rubz Ball",
@@ -207,9 +210,7 @@ logo = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1678704491/f
 product.photos.attach(io: product_image, filename: "product_image.jpg", content_type: "image/jpg")
 product.logo.attach(io: logo, filename: "logo.jpg", content_type: "image/jpg")
 product.save!
-
-#-------------Vuori Sunday Performance Jogger--------------------------------------------
-
+#-------------Vuori Sunday Performance Jogger-----------------------------------
 puts "Creating product for Vincent"
 product = Product.create!(
   title: "Vuori Sunday Performance Jogger",
@@ -231,56 +232,13 @@ referral = Referral.new(
 )
 referral.product = product
 referral.save!
+#-----------------------------------------------------------------------------------------------------------------------
+puts "Fitness Equipment list complete!"
+#----------------Health Hacks & Supplements-----------------------------------------------------------------------------
+puts "Creating Health Hacks and Supplements list for Vincent..."
 
-
-
-
-#----------------USERS--------------------------------------------------------------------------------------------------
-
-
-
-
-puts "Creating 5 users and add one list and 3 products per user and list"
-
-3.times do
-  user = User.create!(
-    username: Faker::Internet.username,
-    email: Faker::Internet.email,
-    password: "password",
-    bio: Faker::Lorem.paragraph(sentence_count: 10)
+  fitness_equipment = List.create!(
+    name: "Health Hacks and Supplements",
+    description: "This is Vincent's list",
+    user: vincent,
   )
-  puts "= #{user.username} created"
-  avatar = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1684039630/Favolist%204.0/owl.jpg")
-  user.avatar.attach(io: avatar, filename: 'avatar.jpg', content_type: 'image/jpg')
-  user.save!
-
-  user.save!
-  puts "Created #{user.username}"
-
-  list = List.create!(
-    name: "#{user.username}'s List",
-    description: "This is #{user.username}'s list",
-    user: user,
-  )
-  puts "List for #{user.username} created"
-
-  puts "Adding products to #{user.username}'s List"
-
-  2.times do
-    product = Product.create!(
-      title: Faker::Commerce.product_name,
-      price: Faker::Commerce.price,
-      review: Faker::Lorem.paragraph,
-      description: Faker::Lorem.paragraph,
-      list: list,
-      url: Faker::Internet.url
-    )
-
-    product_image = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1684045499/Favolist%204.0/oura_pjds07.jpg")
-    logo = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1684038909/Favolist%204.0/oura_logo_4.jpg")
-
-    product.photos.attach(io: product_image, filename: "product_image.jpg", content_type: "image/jpg")
-    product.logo.attach(io: logo, filename: "logo.jpg", content_type: "image/jpg")
-    product.save!
-  end
-end

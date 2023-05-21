@@ -1,0 +1,24 @@
+.nav-header-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+  width: 100%;
+  background-color: white;
+}
+
+
+.avatar-and-list-name {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.sticky-header {
+  position: sticky;
+  top: 0; /* Adjust this value based on where you want your sticky element to stick */
+  z-index: 1000; /* You might need to adjust this depending on your layout */
+}
