@@ -20,6 +20,23 @@ class ListsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    @list.update(list_params)
+    redirect_to list_path(@list)
+  end
+
+  def destroy
+    if @list.destroy
+      redirect_to user_path(current_user), notice: 'list was successfully destroyed.'
+    else
+      redirect_to list_path(list), notice: 'list was not destroyed.'
+    end
+  end
+
+
   private
 
   def list_params
