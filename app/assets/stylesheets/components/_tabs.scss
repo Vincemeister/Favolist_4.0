@@ -1,13 +1,30 @@
-.nav-link.active {
+.custom-nav
+{
+  background: white;
+  padding: 1em;
+  display: flex;
+  flex-direction: row;
+}
+
+.custom-nav-link.active {
   background-color: transparent!important;
   border-bottom: 2px solid $primary!important;
 }
 
-.nav-link {
+.custom-nav-link {
   color: $body-color!important;
   font-size: 0.875rem!important;
   display: flex;
   align-items: center;
   flex-direction: column;
   text-decoration: none!important;
+  padding-left: 0%;
+  padding-right: 0%;
+}
+
+
+.sticky-nav {
+  position: sticky;
+  top: 0; /* Adjust this value based on where you want your sticky element to stick */
+  z-index: 1000; /* You might need to adjust this depending on your layout */
 }

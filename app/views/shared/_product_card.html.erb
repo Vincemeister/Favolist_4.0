@@ -1,6 +1,12 @@
 <div class="product-card">
     <div class="product-header">
-      <div></div>
+      <% if controller_name == 'products' && action_name == 'show' %>
+        <%= link_to :back do %>
+          <i class="fa-regular fa-arrow-left"></i>
+        <% end %>
+      <% else %>
+        <div></div>
+      <% end %>
       <div class="list-and-title-and-price">
         <h6><%= product.list.name %></h6>
         <%= link_to product_path(product) do %>
@@ -48,13 +54,41 @@
       </div>
     </div>
   </div>
-  <div class="product-card-review">
-    <%= link_to product_path(product) do %>
-      <p class="truncate-3-lines">
-        <%= product.review%>
-      </p>
-    <% end %>
-  </div>
+
+  <% if controller_name == 'products' && action_name == 'show' %>
+  <!--Full product review, description and referral tabs if in product show page -->
+    <ul class="nav nav-pills nav-fill w-100" id="pills-tab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link custom-nav-link active product-tabs" id="pills-review-tab" data-bs-toggle="pill" data-bs-target="#pills-review" type="button" role="tab" aria-controls="pills-review" aria-selected="true">Review</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link custom-nav-link product-tabs" id="pills-description-tab" data-bs-toggle="pill" data-bs-target="#pills-description" type="button" role="tab" aria-controls="pills-description" aria-selected="false">Description</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link custom-nav-link product-tabs" id="pills-referrals-tab" data-bs-toggle="pill" data-bs-target="#pills-referrals" type="button" role="tab" aria-controls="pills-referrals" aria-selected="false">Referrals</button>
+      </li>
+    </ul>
+    <div class="tab-content product-content" id="pills-tabContent">
+      <div class="tab-pane fade show active linebreak" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
+        <p> <%= simple_format(@product.review) %></p>
+      </div>
+      <div class="tab-pane fade linebreak" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
+        <p><%= simple_format(@product.description) %></p>
+      </div>
+      <div class="tab-pane fade linebreak" id="pills-referrals" role="tabpanel" aria-labelledby="pills-referrals-tab">
+        <p><%= @product.referrals %></p>
+      </div>
+    </div>
+  <% else %>
+  <!--Truncated review snippet if in a feed page -->
+    <div class="product-card-review">
+      <%= link_to product_path(product) do %>
+        <p class="truncate-3-lines">
+          <%= product.review%>
+        </p>
+      <% end %>
+    </div>
+  <% end %>
 </div>
 
 <!--Edit or delete modal, bootstrap -->

@@ -1,0 +1,35 @@
+<div class="user-card">
+  <div class="avatar-and-username-and-counts-and-follow-button">
+    <%= link_to user_path(user) do %>
+      <%= image_tag user.avatar, class: 'avatar-xl' %>
+    <% end %>
+    <div class="username-and-counts">
+      <h5> <%= user.username %> </h5>
+      <% unless controller_name == 'users' && action_name == 'show' %>
+        <div class="user-count">
+          <span class="bold-text"><%= user.lists.count %></span> lists ⸱ <span class="bold-text"><%= user.products.count %></span>  products
+        </div>
+      <% end %>
+      <div class="followers-count">
+        <span class="bold-text"><%= user.followers.count %></span> followers ⸱ <span class="bold-text"><%= user.followed.count %></span>  following
+      </div>
+    </div>
+    <div class="btn btn-primary">Follow</div>
+  </div>
+  <% unless controller_name == 'users' && action_name == 'show' %>
+    <p class="truncate-3-lines">
+      <%= user.bio %>
+    </p>
+  <% end %>
+</div>
+
+
+<%#
+  if current_user != user
+    if current_user.following?(user)
+      link_to "Unfollow", unfollow_user_path(user), method: :delete, class: "btn btn-primary follow-button"
+    else
+      link_to "Follow", follow_user_path(user), method: :post, class: "btn btn-primary follow-button"
+    end
+  end
+%>

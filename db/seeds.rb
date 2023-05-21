@@ -18,6 +18,7 @@ vincent = User.create!(
   username: "Vincent",
   email: "vr@gmail.com",
   password: "password",
+  bio: Faker::Lorem.paragraph(sentence_count: 10)
 )
 avatar = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1684039630/Favolist%204.0/owl.jpg")
 vincent.avatar.attach(io: avatar, filename: 'avatar.jpg', content_type: 'image/jpg')
@@ -241,11 +242,12 @@ referral.save!
 
 puts "Creating 5 users and add one list and 3 products per user and list"
 
-2.times do
+3.times do
   user = User.create!(
     username: Faker::Internet.username,
     email: Faker::Internet.email,
     password: "password",
+    bio: Faker::Lorem.paragraph(sentence_count: 10)
   )
   puts "= #{user.username} created"
   avatar = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1684039630/Favolist%204.0/owl.jpg")
@@ -258,7 +260,7 @@ puts "Creating 5 users and add one list and 3 products per user and list"
   list = List.create!(
     name: "#{user.username}'s List",
     description: "This is #{user.username}'s list",
-    user: user
+    user: user,
   )
   puts "List for #{user.username} created"
 
