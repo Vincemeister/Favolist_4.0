@@ -6,22 +6,29 @@ class Referral < ApplicationRecord
   validates :code, presence: true
   validates :details, presence: true
 
-  def user_username
-    self.product.list.user.username
+
+  def product_user_username
+    product.user.username if product && product.user
   end
 
-  def list_name
-    self.product.list.name
+  def product_list_name
+    product.list.name if product && product.list
   end
 
-  pg_search_scope :search_by_user_and_list,
-  against: [:code, :details],
-  associated_against: {
-    product: [:title, :description, { list: [:name, { user: :username }] }]
-  },
-  using: {
-    tsearch: { prefix: true }
-  }
-
+  # then define your search scope
+  def self.search_by_product_title_user_username_and_list_name(query)
+    search_term = "%#{query}%"
+    find_by_sql(["
+      SELECT referrals.* FROM referrals
+      JOIN products ON referrals.product_id = products.id
+      JOIN lists ON products.list_id = lists.id
+      JOIN users ON lists.user_id = users.id
+      WHERE referrals.code ILIKE :search
+      OR referrals.details ILIKE :search
+      OR products.title ILIKE :search
+      OR users.username ILIKE :search
+      OR lists.name ILIKE :search",
+      { search: search_term }])
+  end
 
 end
