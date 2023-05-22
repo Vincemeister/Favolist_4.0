@@ -4,7 +4,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_many :lists, dependent: :destroy
   has_many :products, through: :lists
-  has_many :referrals, through: :lists, source: :products
+  has_many :referrals, through: :products
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
@@ -18,7 +18,7 @@ class User < ApplicationRecord
   has_many :followed_relationships, foreign_key: :follower_id, class_name: 'Follow'
   has_many :followed, through: :followed_relationships, source: :followed, dependent: :destroy
 
-  pg_search_scope :search_by_user_username_and_list_name,
+  pg_search_scope :search_by_user_username_and_bio_and_list_name,
   against: [:username, :bio],
   associated_against: {
     lists: [:name]
