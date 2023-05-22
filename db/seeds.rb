@@ -51,6 +51,14 @@ puts "Creating random users with lists and products..."
     product.save!
   end
 end
+#----------------ESTABLISHING FOLLOW RELATIONSHIPS----------------------------------------------------------------------
+puts "Establishing Tims  random followships..."
+User.all.reject { |user| user.id == vincent.id }.each do |user|
+  Follow.create(follower_id: user.id, followed_id: vincent.id)
+end
+User.all.reject { |user| user.id == vincent.id }.each do |user|
+  Follow.create(follower_id: vincent.id, followed_id: user.id)
+end
 #----------------FITNESS EQUIPMENT--------------------------------------------------------------------------------------
 puts "Creating fitness equipment list for Vincent..."
 
@@ -88,7 +96,6 @@ product.photos.attach(io: product_image, filename: "product_image.jpg", content_
 product.logo.attach(io: logo, filename: "logo.jpg", content_type: "image/jpg")
 product.save!
 #-------------Peloton Row-------------------------------------------------------
-""
 puts "Creating product for Vincent"
 product = Product.create!(
   title: "Peloton Row",
@@ -136,9 +143,7 @@ referral = Referral.new(
 )
 referral.product = product
 referral.save!
-
 #-------------Nayoya Gymnastic Rings--------------------------------------------
-
 puts "Creating product for Vincent"
 product = Product.create!(
   title: "NAYOYA Gymnastic Rings",

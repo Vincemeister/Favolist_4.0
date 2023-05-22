@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :follow, :unfollow, :follows, :remove_follower, :bookmark, :unbookmark]
 
   def index
-    @users = User.where.not(id: current_user.id)
+    @users = User.all
   end
 
   def follow
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
 
   def follows
     @followers = @user.followers
-    @following = @user.following
+    @followed = @user.followed
   end
 
 

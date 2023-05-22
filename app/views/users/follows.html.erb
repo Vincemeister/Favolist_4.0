@@ -1,0 +1,22 @@
+<ul class="nav custom-nav nav-pills nav-justified sticky-nav" id="pills-tab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link custom-nav-link active product-tabs" id="pills-followers-tab" data-bs-toggle="pill" data-bs-target="#pills-followers" type="button" role="tab" aria-controls="pills-followers" aria-selected="true"><i class="fa-sharp fa-regular fa-square"></i> followers (<%= @user.followers.count %>)</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link custom-nav-link product-tabs" id="pills-followed-tab" data-bs-toggle="pill" data-bs-target="#pills-followed" type="button" role="tab" aria-controls="pills-followed" aria-selected="false"><i class="fa-sharp far fa-table-cells"></i>followed (<%= @user.followed.count %>)</button>
+  </li>
+</ul>
+
+
+<div class="tab-content product-content" id="pills-tabContent">
+  <div class="tab-pane fade show active linebreak" id="pills-followers" role="tabpanel" aria-labelledby="pills-followers-tab">
+    <% @followers.each do |follower| %>
+      <%= render 'shared/user_card', user: follower, current_user_followers_tab: (@user == current_user) %>
+    <% end %>
+  </div>
+  <div class="tab-pane fade linebreak" id="pills-followed" role="tabpanel" aria-labelledby="pills-followed-tab">
+    <% @followed.each do |followed| %>
+      <%= render 'shared/user_card', user: followed, current_user_followed_tab: (@user == current_user) %>
+    <% end %>
+  </div>
+</div>

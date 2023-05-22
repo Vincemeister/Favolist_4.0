@@ -16,6 +16,13 @@
     justify-content: space-between;
   }
 
+  .username-and-conditional-follow-back-or-follows-you-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5em;
+  }
+
   .username-and-counts {
     display: flex;
     flex-direction: column;
@@ -32,5 +39,10 @@
   .bold-text {
     font-weight: 500;
 }
+
+  .small-follows-button {
+    font-size: 0.75rem;
+    color: purple;
+  }
 
 }

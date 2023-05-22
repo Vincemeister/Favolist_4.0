@@ -10,7 +10,15 @@ Rails.application.routes.draw do
 
   resources :products, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 
-  resources :users, only: [:index, :show]
+  resources :users, only: [:index, :show] do
+    member do
+      post :follow
+      post :unfollow
+      post :remove_follower
+    end
+    get :follows, on: :member
+  end
+  
   resources :lists, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   resources :referrals, only: [:index]
 end

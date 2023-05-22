@@ -4,25 +4,48 @@
       <%= image_tag user.avatar, class: 'avatar-xl' %>
     <% end %>
     <div class="username-and-counts">
-      <h5> <%= user.username %> </h5>
+    <div class="username-and-conditional-follow-back-or-follows-you-button">
+      <h5><%= user.username %></h5>
+      <% if local_assigns[:current_user_followers_tab] && !current_user.is_following?(user) %>
+        <%= button_to 'follow back', follow_user_path(user), method: :post, class: "small-follow-button" %>
+      <% elsif local_assigns[:current_user_followed_tab] && user.is_following?(current_user) %>
+        <div class="small-follow-button">
+          follows you
+        </div>
+      <% end %>
+    </div>
       <% unless controller_name == 'users' && action_name == 'show' %>
         <div class="user-count">
-          <span class="bold-text"><%= user.lists.count %></span> lists ⸱ <span class="bold-text"><%= user.products.count %></span>  products
+          <span class="bold-text"><%= user.lists.count %></span> lists ⸱ <span class="bold-text"><%= user.products.count %></span> products
         </div>
       <% end %>
       <div class="followers-count">
-        <span class="bold-text"><%= user.followers.count %></span> followers ⸱ <span class="bold-text"><%= user.followed.count %></span>  following
+        <span class="bold-text"><%= user.followers.count %></span> followers ⸱ <span class="bold-text"><%= user.followed.count %></span> following
       </div>
     </div>
-    <div class="btn btn-primary">Follow</div>
+
+      <% if local_assigns[:current_user_followers_tab] %>
+        <%= button_to 'Remove', remove_follower_user_path(user), method: :post, class: "btn btn-main" %>
+      <% elsif local_assigns[:current_user_followed_tab] %>
+        <%= button_to 'Unfollow', unfollow_user_path(user), method: :post, class: "btn btn-main" %>
+      <% elsif current_user.is_following?(user.id) %>
+        <%= button_to 'Followed', unfollow_user_path(user), method: :post, class: "btn btn-main" %>
+      <% elsif user.is_following?(current_user.id) %>
+        <%= button_to 'Follow Back', follow_user_path(user), method: :post, class: "btn btn-pink" %>
+      <% elsif !user == current_user %>
+        <%= button_to 'Follow', follow_user_path(user), method: :post, class: "btn btn-pink" %>
+      <% else %>
+        <div></div>
+        <%#> empty div so no button appears if you are the user of the user card %>
+    <% end %>
   </div>
+
   <% unless controller_name == 'users' && action_name == 'show' %>
     <p class="truncate-3-lines">
       <%= user.bio %>
     </p>
   <% end %>
 </div>
-
 
 <%#
   if current_user != user
