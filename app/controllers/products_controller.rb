@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :comments]
 
   def index
     @products = Product.all
@@ -44,6 +44,10 @@ class ProductsController < ApplicationController
   end
 
 
+  def comments
+  end
+
+
   private
 
   def product_params
@@ -53,6 +57,4 @@ class ProductsController < ApplicationController
   def set_product
     @product = Product.find(params[:id])
   end
-
-
 end

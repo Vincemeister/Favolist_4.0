@@ -8,7 +8,19 @@ Rails.application.routes.draw do
   get 'pages/about' => 'pages#about'
   get 'pages/search', to: 'pages#search', as: 'search'
 
-  resources :products, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  resources :products, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+
+    member do
+      get :comments
+    end
+
+    resources :comments, only: [:create, :delete] do
+      member do
+        get :replies, as: :comment_replies
+      end
+    end
+
+  end
 
   resources :users, only: [:index, :show] do
     member do
@@ -18,7 +30,7 @@ Rails.application.routes.draw do
     end
     get :follows, on: :member
   end
-  
+
   resources :lists, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   resources :referrals, only: [:index]
 end
