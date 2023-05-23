@@ -26,6 +26,9 @@
       </div>
     </div>
 
+<%# Defining which button to appear (follow, unfollow, remove follower, or followed (the latter serves the same function as remove follower but just discourages the negative action of unfollowing).
+The unfollow nad remove follow buttons only appear on the follow page of current_user, in the followed and following tabs respectively%>
+
       <% if local_assigns[:current_user_followers_tab] %>
         <%= button_to 'Remove', remove_follower_user_path(user), method: :post, class: "btn btn-main" %>
       <% elsif local_assigns[:current_user_followed_tab] %>
