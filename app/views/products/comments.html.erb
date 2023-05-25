@@ -1,17 +1,18 @@
+<div class="nav-header-list sticky-header">
+  <%= link_to :back do %>
+    <i class="fa-regular fa-arrow-left"></i>
+  <% end %>
 
-<div class="comments-container">
-
-
- <h3 class="m-0 p-0">Comments</h3>
-
-
-  <div data-controller="comments">
-    <div class="container">
-      <%= render 'comments/commentform', product: @product, comment: Comment.new, parent_comment_id: nil, remote: true %>
-    </div>
-    <div class="container">
-      <% @product.comments.where(parent_comment_id: nil).each do |comment| %>
-        <%= render "comments/comment", comment: comment, product: @product %>
-      <% end %>
-    </div>
+  <div class="product-title-and-list-name">
+    <h6><%= @product.title %></h6>
+    <h5>Comments</h5>
   </div>
+  <div></div>
+</div>
+
+<div data-controller="comments">
+  <%= render 'comments/commentform', product: @product, comment: Comment.new, parent_comment_id: nil, remote: true %>
+    <% @product.comments.where(parent_comment_id: nil).each do |comment| %>
+      <%= render "comments/comment", comment: comment, product: @product %>
+    <% end %>
+</div>

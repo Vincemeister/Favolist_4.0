@@ -20,18 +20,19 @@
     justify-content: flex-start;
     align-items: center;
     margin-right: 0.5em;
+    height: 100%;
 
 
-    .avatar-small {
-      margin-right: 0.5em;
-    }
+  }
+  .avatar-small {
+    margin-right: 0.5em;
+  }
 
-    .username {
-      font-family: 'Outfit';
-      font-style: normal;
-      font-weight: 600;
-      font-size: 0.875rem;
-    }
+  .username {
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 0.875rem;
   }
 
   .cardbar-logo {
@@ -47,21 +48,25 @@
   .cardbar-right {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
     align-items: center;
+    justify-content: flex-end;
+  }
 
-    .cardbar-iconbox {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      font-size: 1.2rem;
-      margin-left: 0.5em;
+  .cardbar-iconbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    margin-left: 0.5em;
+  }
 
-      p {
-        font-size: 0.75rem;
-        margin: 0px;
-      }
-    }
+
+  .iconbox-text {
+    display: block;
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 0.75rem;
   }
 }

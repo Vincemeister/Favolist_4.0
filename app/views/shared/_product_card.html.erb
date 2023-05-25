@@ -44,15 +44,17 @@
     <div class="cardbar-right">
       <div class="cardbar-iconbox">
         <i class="fa-sharp fa-light fa-bookmark"></i>
-        <p>30</p>
+        <div class="iconbox-text">30</div>
       </div>
       <div class="cardbar-iconbox">
         <i class="fa-light fa-circle-plus"></i>
-        <p>8</p>
+        <div class="iconbox-text">30</div>
       </div>
-      <%= link_to product_comments_path(product), class: 'cardbar-iconbox' do %>
-        <i class="fa-light fa-comment fa-lg"></i>
-        <p> <%= product.comments.count %> </p>
+      <%= link_to product_comments_path(product) do %>
+        <div class="cardbar-iconbox">
+          <i class="fa-light fa-comment"></i>
+          <div class="iconbox-text"><%= product.comments.count %></div>
+        </div>
       <% end %>
     </div>
   </div>
