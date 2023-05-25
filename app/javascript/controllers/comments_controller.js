@@ -10,27 +10,45 @@ export default class extends Controller {
 
 
 
+
+
+
+
+
+
+
+
+  
+
+  /*
   submitForm(event) {
-    event.preventDefault()
+    event.preventDefault();
 
     fetch(this.commentformTarget.action, {
       method: "POST",
       headers: {
         "Accept": "application/json",
         "X-CSRF-Token": document.querySelector('[name="csrf-token"]').content
-       },
+      },
       body: new FormData(this.commentformTarget)
     })
-    .then(response => response.json())
-    .then((data) => {
-      if (data.inserted_item) {
-        this.commentsTarget.insertAdjacentHTML("beforeend", data.inserted_item)
-      }
-      this.commentformTarget.outerHTML = data.form
-    })
-    this.displayFlashMessage("success", "Comment/Reply created successfully");
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Network response was not OK");
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data.inserted_item) {
+          this.commentsTarget.insertAdjacentHTML("beforeend", data.inserted_item);
+        }
+        this.commentformTarget.outerHTML = data.form;
+        this.displayFlashMessage("success", "Comment/Reply created successfully");
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
-
 
   displayFlashMessage(type, message) {
     const flashElement = document.createElement("div");
@@ -42,5 +60,9 @@ export default class extends Controller {
       flashElement.remove();
     }, 3000);
   }
+
+
+
+  */
 
 }

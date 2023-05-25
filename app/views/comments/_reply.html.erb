@@ -1,0 +1,20 @@
+<div class="comment text-decoration-none">
+  <%= cl_image_tag reply.user.avatar.key, crop: "fill", gravity: "center", aspect_ratio: "1:1", class: "avatar"%>
+  <div class="comment-container">
+    <div class="comment-content">
+      <div class="comment-author">
+        <%= reply.user.username %>
+      </div>
+      <div class="comment-body">
+        <%= reply.body %>
+      </div>
+    </div>
+    <div class="comment-date-and-reply">
+      <span class="comment-date-and-reply-button"><%= time_ago_in_words(reply.created_at, include_seconds: false).gsub('about', '').gsub(/minute(s)?\s*/, 'm').gsub(/hour(s)?\s*/, 'h').gsub(/day(s)?\s*/, 'd').gsub(' m', 'm').gsub(' h', 'h').gsub(' d', 'd') %></span>
+      <a href="#!" class="comment-date-and-reply-button">Reply</a>
+      <% if reply.user == current_user %>
+        <a href="#!" class="comment-date-and-reply-button">Delete</a>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,10 +1,15 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_product, only: [:index, :create]
+  before_action :set_comment, only: [:replies]
 
   def create
-    @product = Product.find(params[:product_id])
-    @comment = @product.comments.new(comment_params)
+    @comment = Comment.new(comment_params)
+    @comment.product = @product
     @comment.user = current_user
+    puts params
+    puts comment_params
+
 
     respond_to do |format|
       if @comment.save
@@ -15,6 +20,7 @@ class CommentsController < ApplicationController
         format.json
       end
     end
+
   end
 
   def replies
@@ -23,6 +29,14 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  def set_product
+    @product = Product.find(params[:product_id])
+  end
+
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
 
   def comment_params
     params.require(:comment).permit(:body, :user_id, :product_id, :parent_comment_id)

@@ -9,3 +9,9 @@ application.register("comments", CommentsController)
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import RepliesAndCommentsController from "./replies_and_comments_controller"
+application.register("replies-and-comments", RepliesAndCommentsController)
+
+import RepliesController from "./replies_controller"
+application.register("replies", RepliesController)

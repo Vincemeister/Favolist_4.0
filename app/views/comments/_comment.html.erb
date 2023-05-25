@@ -1,0 +1,35 @@
+<div class="comment text-decoration-none" data-controller="replies" >
+  <%= cl_image_tag comment.user.avatar.key, crop: "fill", gravity: "center", aspect_ratio: "1:1", class: "avatar"%>
+  <div class="comment-container">
+    <div class="comment-content">
+      <div class="comment-author">
+        <%= comment.user.username %>
+      </div>
+      <div class="comment-body">
+        <%= comment.body %>
+      </div>
+    </div>
+    <div class="comment-date-and-reply">
+      <span class="comment-date-and-reply-button"><%= time_ago_in_words(comment.created_at, include_seconds: false).gsub('about', '').gsub(/minute(s)?\s*/, 'm').gsub(/hour(s)?\s*/, 'h').gsub(/day(s)?\s*/, 'd').gsub(' m', 'm').gsub(' h', 'h').gsub(' d', 'd') %></span>
+      <span class="comment-date-and-reply-button" data-action="click->replies#toggleReplyForm">Reply</span>
+      <% if comment.user == current_user %>
+        <span class="comment-date-and-reply-button">Delete</span>
+      <% end %>
+    </div>
+<%= simple_form_for([@product, Comment.new], html: { data: { replies_target: "replyform" }, class: "d-none" }) do |f| %>
+    <%= f.input :body, label: false %>
+    <%= f.hidden_field :parent_comment_id, value: comment.id %>
+    <%= f.submit "Reply" %>
+  <% end %>
+  <% if comment.replies.any? %>
+    <div class="see-all-replies" data-action="click->replies#toggleReplies" data-replies-target="viewrepliesbutton" type="button">
+      See all replies
+    </div>
+  <% end %>
+    <div class="replies d-none" data-replies-target="replies">
+      <% comment.replies.each do |reply| %>
+        <%= render "comments/reply", reply: reply %>
+      <% end %>
+    </div>
+  </div>
+</div>
