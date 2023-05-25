@@ -94,7 +94,6 @@ product_image = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v168
 logo = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1684038909/Favolist%204.0/oura_logo_4.jpg")
 product.photos.attach(io: product_image, filename: "product_image.jpg", content_type: "image/jpg")
 product.logo.attach(io: logo, filename: "logo.jpg", content_type: "image/jpg")
-product.save!
 #-------------Peloton Row-------------------------------------------------------
 puts "Creating product for Vincent"
 product = Product.create!(
@@ -113,6 +112,12 @@ product_image = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v167
 logo = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1678942753/favolist/app%20assets/product%20images/tim%20ferris/Peloton%20Row/Peloton_Row-logo_l7zklg.png")
 product.photos.attach(io: product_image, filename: "product_image.jpg", content_type: "image/jpg")
 product.logo.attach(io: logo, filename: "logo.jpg", content_type: "image/jpg")
+product.save!
+
+product_image = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1685023405/Favolist%204.0/products/peloton%20row/peloton_image_3_kf69qj.webp")
+product.photos.attach(io: product_image, filename: "product_image.jpg", content_type: "image/jpg")
+product_image = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1685023402/Favolist%204.0/products/peloton%20row/peloton_image_2_htsop0.jpg")
+product.photos.attach(io: product_image, filename: "product_image.jpg", content_type: "image/jpg")
 product.save!
 puts "Adding referral to #{product.title}"
 referral = Referral.new(

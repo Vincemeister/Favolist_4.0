@@ -15,3 +15,7 @@ application.register("replies-and-comments", RepliesAndCommentsController)
 
 import RepliesController from "./replies_controller"
 application.register("replies", RepliesController)
+
+// unnecessary, using bootstrap carousel instead
+import Carousel from "stimulus-carousel"
+application.register('carousel', Carousel)
