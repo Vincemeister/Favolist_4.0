@@ -1,4 +1,6 @@
 <%= simple_form_for([product, comment]) do |f| %>
-  <%= f.input :body %>
-  <%= f.button :submit %>
+  <div class="input-button-wrapper">
+    <%= f.input :body, label: false, input_html: {class: 'input-with-button'} %>
+    <%= f.button :submit, "Post", class: "inside-button" %>
+  </div>
 <% end %>

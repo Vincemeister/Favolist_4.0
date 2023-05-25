@@ -16,16 +16,16 @@
         <span class="comment-date-and-reply-button">Delete</span>
       <% end %>
     </div>
-<%= simple_form_for([@product, Comment.new], html: { data: { replies_target: "replyform" }, class: "d-none" }) do |f| %>
-    <%= f.input :body, label: false %>
-    <%= f.hidden_field :parent_comment_id, value: comment.id %>
-    <%= f.submit "Reply" %>
-  <% end %>
-  <% if comment.replies.any? %>
-    <div class="see-all-replies" data-action="click->replies#toggleReplies" data-replies-target="viewrepliesbutton" type="button">
-      See all replies
-    </div>
-  <% end %>
+    <%= simple_form_for([@product, Comment.new], html: { data: { replies_target: "replyform" }, class: "d-none" }) do |f| %>
+      <%= f.input :body, label: false %>
+      <%= f.hidden_field :parent_comment_id, value: comment.id %>
+      <%= f.submit "Reply" %>
+    <% end %>
+    <% if comment.replies.any? %>
+      <div class="see-all-replies" data-action="click->replies#toggleReplies" data-replies-target="viewrepliesbutton" type="button">
+        See all replies
+      </div>
+    <% end %>
     <div class="replies d-none" data-replies-target="replies">
       <% comment.replies.each do |reply| %>
         <%= render "comments/reply", reply: reply %>

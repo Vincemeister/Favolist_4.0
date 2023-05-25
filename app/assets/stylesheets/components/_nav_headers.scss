@@ -1,8 +1,8 @@
-.nav-header-list {
+.nav-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   padding: 1em;
   width: 100%;
   background-color: white;
@@ -14,12 +14,20 @@
 }
 
 
+.align-items-center {
+  align-items: center;
+}
+
 .avatar-and-list-name {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 0.5em;
+
+  h6 {
+    margin: 0%;
+  }
 }
 
 .product-title-and-list-name {

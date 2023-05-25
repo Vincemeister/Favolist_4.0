@@ -1,9 +1,11 @@
+
 .comment {
+
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  padding: 16px;
-  gap: 16px;
+  padding: 1em;
+  gap: 1em;
   width: 100%;
 
   .comment-container {
@@ -18,8 +20,8 @@
     flex-direction: column;
     flex-grow: 1;
     width: 100%;
-    gap: 8px;
-    background-color: lightgray;
+    background-color: lightgrey;
+    padding: 0.5em;
 
 
   }
@@ -42,5 +44,12 @@
   .replies {
     display: flex;
     flex-direction: column;
+    width: 100%;
   }
 }
+
+// div containing a reply is the same as a comment, but with the reply class added
+// on top to change small parts
+.reply {
+  padding: 0%;
+  }
