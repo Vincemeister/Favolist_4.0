@@ -1,0 +1,46 @@
+
+<div class="comment text-decoration-none" data-controller="replies-and-comments" >
+  <%= cl_image_tag @comment.user.avatar.key, crop: "fill", gravity: "center", aspect_ratio: "1:1", class: "avatar"%>
+  <div class="comment-container">
+    <div class="comment-content">
+      <div class="comment-author">
+        <%= @comment.user.username %>
+      </div>
+      <div class="comment-body">
+        <%= @comment.body %>
+      </div>
+    </div>
+    <div class="comment-date-and-reply">
+      <span class="comment-date-and-reply-button"><%= time_ago_in_words(@comment.created_at, include_seconds: false).gsub('about', '').gsub(/minute(s)?\s*/, 'm').gsub(/hour(s)?\s*/, 'h').gsub(/day(s)?\s*/, 'd').gsub(' m', 'm').gsub(' h', 'h').gsub(' d', 'd') %></span>
+      <span class="comment-date-and-reply-button">Reply</span>
+      <% if @comment.user == current_user %>
+        <span class="comment-date-and-reply-button">Delete</span>
+      <% end %>
+    </div>
+    <% @comment.replies.each  do |reply| %>
+      <div class="comment reply text-decoration-none" data-controller="replies-and-comments" >
+        <%= cl_image_tag reply.user.avatar.key, crop: "fill", gravity: "center", aspect_ratio: "1:1", class: "avatar"%>
+        <div class="comment-container">
+          <div class="comment-content">
+            <div class="comment-author">
+              <%= reply.user.username %>
+            </div>
+            <div class="comment-body">
+              <%= reply.body %>
+            </div>
+          </div>
+          <div class="comment-date-and-reply">
+            <span class="comment-date-and-reply-button"><%= time_ago_in_words(reply.created_at, include_seconds: false).gsub('about', '').gsub(/minute(s)?\s*/, 'm').gsub(/hour(s)?\s*/, 'h').gsub(/day(s)?\s*/, 'd').gsub(' m', 'm').gsub(' h', 'h').gsub(' d', 'd') %></span>
+            <span class="comment-date-and-reply-button">Reply</span>
+            <% if reply.user == current_user %>
+              <span class="comment-date-and-reply-button">Delete</span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div id="form-container">
+  <%= render 'comments/commentform', product: @product, comment: Comment.new, parent_comment: @comment, remote: true %>
+</div>

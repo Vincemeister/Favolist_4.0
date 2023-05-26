@@ -1,5 +1,5 @@
 <div class="nav-header sticky-header">
-  <%= link_to :back do %>
+  <%= link_to product_path(@product) do %>
     <i class="fa-regular fa-arrow-left"></i>
   <% end %>
 
@@ -10,9 +10,45 @@
   <div></div>
 </div>
 
-<div data-controller="comments">
-  <%= render 'comments/commentform', product: @product, comment: Comment.new, parent_comment_id: nil, remote: true %>
-  <% @product.comments.where(parent_comment_id: nil).each do |comment| %>
-    <%= render "comments/comment", comment: comment, product: @product %>
+<div data-controller="comments w-100">
+
+<div id="form-container">
+  <%= render 'comments/commentform', product: @product, comment: Comment.new, parent_comment: nil, remote: true %>
+</div>
+
+  <div class="comments">
+
+
+    <% @product.comments.where(parent_comment_id: nil).each do |comment| %>
+      <div class="comment text-decoration-none" data-controller="replies-and-comments" >
+        <%= cl_image_tag comment.user.avatar.key, crop: "fill", gravity: "center", aspect_ratio: "1:1", class: "avatar"%>
+        <div class="comment-container">
+          <div class="comment-content">
+            <div class="comment-author">
+              <%= comment.user.username %>
+            </div>
+            <div class="comment-body">
+              <%= comment.body %>
+            </div>
+          </div>
+          <div class="comment-date-and-reply">
+            <span class="comment-date-and-reply-button"><%= time_ago_in_words(comment.created_at, include_seconds: false).gsub('about', '').gsub(/minute(s)?\s*/, 'm').gsub(/hour(s)?\s*/, 'h').gsub(/day(s)?\s*/, 'd').gsub(' m', 'm').gsub(' h', 'h').gsub(' d', 'd') %></span>
+            <span class="comment-date-and-reply-button" data-action="click->replies-and-comments#togglereplyform">Reply</span>
+            <% if comment.user == current_user %>
+              <span class="comment-date-and-reply-button">Delete</span>
+            <% end %>
+          </div>
+          <%= render "comments/direct_reply_form", product: comment.product, parent_comment: comment, comment: Comment.new, remote: true %>
+          <%= link_to "See all replies", product_comment_path(comment.product, comment), class: "see-all-replies", data: { replies_and_comments_target: "viewrepliesbutton" }%>
+          <div class="commentlastreplies" data-replies-and-comments-target="commentlastreplies">
+            <% if comment.replies.any? %>
+                <%= render "comments/comment_reply", reply: comment.replies.last, parent_comment: comment, product: comment.product %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
   <% end %>
+
+
 </div>

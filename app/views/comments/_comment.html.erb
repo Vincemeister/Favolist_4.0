@@ -1,4 +1,4 @@
-<div class="comment text-decoration-none" data-controller="replies" >
+<div class="comment text-decoration-none" data-controller="replies-and-comments" >
   <%= cl_image_tag comment.user.avatar.key, crop: "fill", gravity: "center", aspect_ratio: "1:1", class: "avatar"%>
   <div class="comment-container">
     <div class="comment-content">
@@ -11,25 +11,21 @@
     </div>
     <div class="comment-date-and-reply">
       <span class="comment-date-and-reply-button"><%= time_ago_in_words(comment.created_at, include_seconds: false).gsub('about', '').gsub(/minute(s)?\s*/, 'm').gsub(/hour(s)?\s*/, 'h').gsub(/day(s)?\s*/, 'd').gsub(' m', 'm').gsub(' h', 'h').gsub(' d', 'd') %></span>
-      <span class="comment-date-and-reply-button" data-action="click->replies#toggleReplyForm">Reply</span>
+      <span class="comment-date-and-reply-button" data-action="click->replies-and-comments#togglereplyform">Reply</span>
       <% if comment.user == current_user %>
         <span class="comment-date-and-reply-button">Delete</span>
       <% end %>
     </div>
-    <%= simple_form_for([@product, Comment.new], html: { data: { replies_target: "replyform" }, class: "d-none" }) do |f| %>
-      <%= f.input :body, label: false %>
-      <%= f.hidden_field :parent_comment_id, value: comment.id %>
-      <%= f.submit "Reply" %>
-    <% end %>
-    <% if comment.replies.any? %>
-      <div class="see-all-replies" data-action="click->replies#toggleReplies" data-replies-target="viewrepliesbutton" type="button">
-        See all replies
+
+    <%= render "comments/direct_reply_form", product: product, parent_comment: comment, comment: Comment.new, remote: true %>
+
+
+
+      <%= link_to "See all replies", product_comment_path(@product, comment), class: "see-all-replies", data: { replies_and_comments_target: "viewrepliesbutton" }%>
+      <div class="commentlastreplies" data-replies-and-comments-target="commentlastreplies">
+        <% if comment.replies.any? %>
+            <%= render "comments/comment_reply", reply: comment.replies.last, parent_comment: comment, product: comment.product %>
+        <% end %>
       </div>
-    <% end %>
-    <div class="replies d-none" data-replies-target="replies">
-      <% comment.replies.each do |reply| %>
-        <%= render "comments/reply", reply: reply %>
-      <% end %>
-    </div>
   </div>
 </div>

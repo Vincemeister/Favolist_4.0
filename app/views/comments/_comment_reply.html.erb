@@ -1,0 +1,13 @@
+<div class="comment reply text-decoration-none">
+  <%= cl_image_tag reply.user.avatar.key, crop: "fill", gravity: "center", aspect_ratio: "1:1", class: "avatar-small"%>
+  <div class="comment-container">
+    <div class="comment-content">
+      <div class="comment-author">
+        <%= reply.user.username %>
+      </div>
+      <div class="comment-body">
+        <%= reply.body %>
+      </div>
+    </div>
+  </div>
+</div>

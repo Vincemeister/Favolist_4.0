@@ -1,63 +1,59 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="comment-and-replies"
+
+
 export default class extends Controller {
+
+  static targets = [ "replyform", "commentlastreplies" ]
+
   connect() {
-    console.log("hello from comment-and-replies controller")
-  };
-
-  static targets = ["replyform", "replies", "viewrepliesbutton", "firstreply"]
-  static values = { repliescount: String, commentid: String }
-
-  toggleReplies(event) {
-    console.log(this.commentidValue)
-    event.preventDefault();
-    this.repliesTarget.classList.toggle("d-none");
-    this.firstreplyTarget.classList.toggle("d-none");
-    this.viewrepliesbuttonTarget.innerHTML =
-      this.repliesTarget.classList.contains("d-none")
-        ? `View all ${this.repliescountValue} replies`
-        : `Hide all ${this.repliescountValue} replies`;
+    console.log("Replies and Comments controller connected")
+    console.log(this.replyformTarget)
+    console.log(this.commentlastrepliesTarget)
+    console.log(this.viewrepliesbuttonTarget)
+    console.log(this.firstreplyTarget)
   }
 
-  toggleReplyForm(event) {
-    event.preventDefault();
+  togglereplyform() {
     this.replyformTarget.classList.toggle("d-none");
-  };
-
-  submitReply(event) {
-    event.preventDefault();
-
-    fetch(this.replyformTarget.action, {
-      method: "POST",
-      headers: {
-        "Accept": "application/json",
-        "X-CSRF-Token": document.querySelector('[name="csrf-token"]').content
-      },
-      body: new FormData(this.replyformTarget)
-    })
-    .then(response => response.json())
-    .then((data) => {
-      if (data.inserted_item) {
-        this.repliesTarget.insertAdjacentHTML("beforeend", data.inserted_item)
-        this.firstreplyTarget.insertAdjacentHTML("beforeend", data.inserted_item)
-      }
-      this.replyformTarget.outerHTML = data.form
-    })
-    this.toggleReplyForm
-    this.displayFlashMessage("success", "Reply created successfully");
   }
 
+    submitReply(event) {
+      event.preventDefault();
 
-  displayFlashMessage(type, message) {
-    const flashElement = document.createElement("div");
-    flashElement.className = `alert alert-${type} flash`;
-    flashElement.innerText = message;
-    document.body.appendChild(flashElement);
+      fetch(this.replyformTarget.action, {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "X-CSRF-Token": document.querySelector('[name="csrf-token"]').content
+        },
+        body: new FormData(this.replyformTarget)
+      })
+      .then(response => response.json())
+      .then((data) => {
+        console.log("Data received from server:", data);
+        if (data.inserted_item) {
+          console.log("Inserting item into the DOM.");
+          this.commentlastrepliesTarget.insertAdjacentHTML("beforeend", data.inserted_item)
+        }
+        console.log("Updating reply form.");
+        this.replyformTarget.outerHTML = data.form
+      })
 
-    setTimeout(() => {
-      flashElement.remove();
-    }, 3000);
+      this.toggleReplyForm
+      this.displayFlashMessage("success", "Reply created successfully");
+    }
+
+
+    displayFlashMessage(type, message) {
+      const flashElement = document.createElement("div");
+      flashElement.className = `alert alert-${type} flash`;
+      flashElement.innerText = message;
+      document.body.appendChild(flashElement);
+
+      setTimeout(() => {
+        flashElement.remove();
+      }, 3000);
+    }
+
   }
-
-}

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       get :comments
     end
 
-    resources :comments, only: [:create, :destroy] do
+    resources :comments, only: [:create, :destroy, :show] do
       member do
         get :replies, as: :comment_replies
       end

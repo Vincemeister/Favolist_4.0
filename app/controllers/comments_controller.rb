@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_product, only: [:index, :create]
-  before_action :set_comment, only: [:replies]
+  before_action :set_product, only: [:index, :create, :show]
+  before_action :set_comment, only: [:replies, :show]
 
   def create
     @comment = Comment.new(comment_params)
@@ -21,6 +21,10 @@ class CommentsController < ApplicationController
       end
     end
 
+  end
+
+  def show
+    @replies = @comment.replies.order(created_at: :asc)
   end
 
   def replies

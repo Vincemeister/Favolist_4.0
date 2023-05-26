@@ -5,15 +5,7 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="replies"
 export default class extends Controller {
 
-  static targets = [ "replies", "viewrepliesbutton", "replyform" ]
-
-  toggleReplies() {
-      this.repliesTarget.classList.toggle("d-none");
-      this.viewrepliesbuttonTarget.innerHTML =
-        this.repliesTarget.classList.contains("d-none")
-          ? `View all  replies`
-          : `Hide all  replies`;
-    }
+  static targets = [ "replies", "replyform", "viewrepliesbutton", "firstreply" ]
 
   toggleReplyForm() {
     this.replyformTarget.classList.toggle("d-none");

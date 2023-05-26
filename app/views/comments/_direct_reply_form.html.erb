@@ -1,0 +1,19 @@
+<%= form_with(model: [product, Comment.new], url: product_comments_path(product), remote: true, method: :post, class: "reply-form d-none", data: { replies_and_comments_target: "replyform"}, id: "reply-form") do |form| %>
+  <%= cl_image_tag current_user.avatar.key, crop: "fill", gravity: "center", aspect_ratio: "1:1", class: "avatar-small"%>
+  <div class="d-flex position-relative form-control comment-input w-100">
+    <%= form.text_area :body, rows: 1, placeholder: 'Add a reply...', class: "comment-textarea" %>
+    <%= button_tag type: "submit", class: "comment-submit small-follow-button" do %>
+      <%= form.hidden_field :parent_comment_id, value: parent_comment.id %>
+      Reply
+    <% end %>
+  </div>
+<% end %>
+
+
+
+<!--
+<div class="reply-form-indicator">
+<span class="reply-form-indicator-text">Replying to <%#= parent_comment.user.username %></span>
+  <span class="reply-form-indicator-close" data-action="click->replies#toggleReplyForm">x</span>
+</div>
+-->
