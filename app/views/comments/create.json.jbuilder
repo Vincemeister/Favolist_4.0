@@ -1,15 +1,4 @@
 if @comment.persisted?
-  if @comment.parent_comment_id
-    json.form render(partial: "comments/replyform", formats: :html, locals: {product: @product, comment: Comment.new, parent_comment_id: @comment.parent_comment_id})
-    json.inserted_item render(partial: "comments/reply", formats: :html, locals: {reply: @comment})
-  else
-    json.form render(partial: "comments/commentform", formats: :html, locals: {product: @product, comment: Comment.new})
-    json.inserted_item render(partial: "comments/comment", formats: :html, locals: {comment: @comment})
-  end
-else
-  if @comment.parent_comment_id
-    json.form render(partial: "comments/replyform", formats: :html, locals: {product: @product, comment: @comment, parent_comment_id: @comment.parent_comment_id})
-  else
-    json.form render(partial: "comments/commentform", formats: :html, locals: {product: @product, comment: @comment})
-  end
+  json.inserted_item render(partial: "comments/comment_reply", formats: :html, locals: { reply: @comment} )
+  json.form render(partial: "comments/direct_reply_form", formats: :html, locals: { product: @comment.product, parent_comment: @comment.parent_comment , comment: Comment.new } )
 end

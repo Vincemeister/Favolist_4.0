@@ -3,25 +3,22 @@ class CommentsController < ApplicationController
   before_action :set_product, only: [:index, :create, :show]
   before_action :set_comment, only: [:replies, :show]
 
-  def create
-    @comment = Comment.new(comment_params)
-    @comment.product = @product
-    @comment.user = current_user
-    puts params
-    puts comment_params
+def create
+  @comment = Comment.new(comment_params)
+  @comment.product = @product
+  @comment.user = current_user
+  @comment.save!
 
-
-    respond_to do |format|
-      if @comment.save
-        format.html { redirect_to product_comments_path(@product) }
-        format.json
-      else
-        format.html { render "products/show", status: :unprocessable_entity }
-        format.json
-      end
+  respond_to do |format|
+    if @comment.save
+      format.html { redirect_to product_comments_path(@product) }
+      format.json
+    else
+      format.html { render "products/show", status: :unprocessable_entity }
+      format.json { render json: { error: @comment.errors.full_messages }, status: :unprocessable_entity }
     end
-
   end
+end
 
   def show
     @replies = @comment.replies.order(created_at: :asc)
@@ -43,6 +40,6 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:body, :user_id, :product_id, :parent_comment_id)
+    params.require(:comment).permit(:body, :parent_comment_id)
   end
 end

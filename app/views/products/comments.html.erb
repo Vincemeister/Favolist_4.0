@@ -12,9 +12,9 @@
 
 <div data-controller="comments w-100">
 
-<div id="form-container">
-  <%= render 'comments/commentform', product: @product, comment: Comment.new, parent_comment: nil, remote: true %>
-</div>
+  <div id="form-container">
+    <%= render 'comments/commentform', product: @product, comment: Comment.new, parent_comment: nil, remote: true %>
+  </div>
 
   <div class="comments">
 
@@ -38,7 +38,7 @@
               <span class="comment-date-and-reply-button">Delete</span>
             <% end %>
           </div>
-          <%= render "comments/direct_reply_form", product: comment.product, parent_comment: comment, comment: Comment.new, remote: true %>
+            <%= render "comments/direct_reply_form", product: comment.product, parent_comment: comment, comment: Comment.new, remote: true %>
           <%= link_to "See all replies", product_comment_path(comment.product, comment), class: "see-all-replies", data: { replies_and_comments_target: "viewrepliesbutton" }%>
           <div class="commentlastreplies" data-replies-and-comments-target="commentlastreplies">
             <% if comment.replies.any? %>
@@ -47,8 +47,8 @@
           </div>
         </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 
 
 </div>

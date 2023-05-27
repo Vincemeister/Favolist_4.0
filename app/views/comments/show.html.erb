@@ -1,5 +1,5 @@
 
-<div class="comment text-decoration-none" data-controller="replies-and-comments" >
+<div class="comment text-decoration-none" >
   <%= cl_image_tag @comment.user.avatar.key, crop: "fill", gravity: "center", aspect_ratio: "1:1", class: "avatar"%>
   <div class="comment-container">
     <div class="comment-content">
@@ -18,7 +18,7 @@
       <% end %>
     </div>
     <% @comment.replies.each  do |reply| %>
-      <div class="comment reply text-decoration-none" data-controller="replies-and-comments" >
+      <div class="comment reply text-decoration-none">
         <%= cl_image_tag reply.user.avatar.key, crop: "fill", gravity: "center", aspect_ratio: "1:1", class: "avatar"%>
         <div class="comment-container">
           <div class="comment-content">

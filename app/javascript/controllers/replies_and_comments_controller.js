@@ -8,10 +8,6 @@ export default class extends Controller {
 
   connect() {
     console.log("Replies and Comments controller connected")
-    console.log(this.replyformTarget)
-    console.log(this.commentlastrepliesTarget)
-    console.log(this.viewrepliesbuttonTarget)
-    console.log(this.firstreplyTarget)
   }
 
   togglereplyform() {
@@ -32,11 +28,18 @@ export default class extends Controller {
       .then(response => response.json())
       .then((data) => {
         console.log("Data received from server:", data);
-        if (data.inserted_item) {
+
+        if (data.error) {
+          console.log("Error from server:", data.error);
+          // Handle error...
+        } else if (data.inserted_item) {
           console.log("Inserting item into the DOM.");
           this.commentlastrepliesTarget.insertAdjacentHTML("beforeend", data.inserted_item)
+          console.log("this is the inserted item", data.inserted_item);
         }
+
         console.log("Updating reply form.");
+        console.log("this is the form", data.form)
         this.replyformTarget.outerHTML = data.form
       })
 
