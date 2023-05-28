@@ -1,3 +1,7 @@
+.comments {
+  margin-bottom: 4em;
+}
+
 
 .comment {
 
@@ -15,6 +19,7 @@
     gap: 8px;
     width: 100%;
   }
+
   .comment-content {
     display: flex;
     flex-direction: column;
@@ -22,9 +27,9 @@
     width: 100%;
     background-color: lightgrey;
     padding: 0.5em;
-
-
   }
+
+
   .comment-author {
     font-size: 0.875em;
     font-weight: bolder;
@@ -44,6 +49,10 @@
   .replies {
     display: flex;
     flex-direction: column;
+    width: 100%;
+  }
+
+  .commentlastreplies {
     width: 100%;
   }
 }

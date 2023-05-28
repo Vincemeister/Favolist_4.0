@@ -10,15 +10,10 @@
   <div></div>
 </div>
 
-<div data-controller="comments w-100">
 
-  <div id="form-container">
-    <%= render 'comments/commentform', product: @product, comment: Comment.new, parent_comment: nil, remote: true %>
-  </div>
+<div class="comments" data-controller="comments">
 
-  <div class="comments">
-
-
+  <div class="comments-container" data-comments-target="comments">
     <% @product.comments.where(parent_comment_id: nil).each do |comment| %>
       <div class="comment text-decoration-none" data-controller="replies-and-comments" >
         <%= cl_image_tag comment.user.avatar.key, crop: "fill", gravity: "center", aspect_ratio: "1:1", class: "avatar"%>
@@ -38,8 +33,10 @@
               <span class="comment-date-and-reply-button">Delete</span>
             <% end %>
           </div>
-            <%= render "comments/direct_reply_form", product: comment.product, parent_comment: comment, comment: Comment.new, remote: true %>
-          <%= link_to "See all replies", product_comment_path(comment.product, comment), class: "see-all-replies", data: { replies_and_comments_target: "viewrepliesbutton" }%>
+          <%= render "comments/direct_reply_form", product: comment.product, parent_comment: comment, reply: Comment.new, remote: true %>
+          <% if comment.replies.count > 1 %>
+            <%= link_to "See all #{comment.replies.count} replies", product_comment_path(comment.product, comment), class: "see-all-replies", data: { replies_and_comments_target: "viewrepliesbutton" }%>
+          <% end %>
           <div class="commentlastreplies" data-replies-and-comments-target="commentlastreplies">
             <% if comment.replies.any? %>
                 <%= render "comments/comment_reply", reply: comment.replies.last, parent_comment: comment, product: comment.product %>
@@ -48,7 +45,11 @@
         </div>
       </div>
     <% end %>
+    <!-- so the scrolling after comment submission works  -->
   </div>
 
+  <div class="scroll-point h-300">
+  </div>
+  <%= render 'comments/commentform', product: @product, comment: Comment.new, parent_comment: nil, context: "comment", remote: true %>
 
 </div>
