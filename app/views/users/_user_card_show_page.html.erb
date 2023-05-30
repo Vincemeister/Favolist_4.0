@@ -1,0 +1,43 @@
+<div class="user-card-show-page text-decoration-none">
+  <%= link_to user_path(user) do %>
+    <%= image_tag user.avatar, class: 'avatar-large' %>
+  <% end %>
+  <div class="username-and-follow-counts">
+    <div class="username-and-conditional-follow-button">
+      <%= link_to user_path(user) do %>
+        <h5><%= user.username %></h5>
+      <% end %>
+      <%# small follow button appearing only in the follows page %>
+      <% if local_assigns[:current_user_followers_tab] && !current_user.is_following?(user) %>
+        <%= button_to 'follow', follow_user_path(user), method: :post, class: "small-follow-button" %>
+      <% elsif local_assigns[:current_user_followed_tab] && user.is_following?(current_user) %>
+        <div class="small-follow-button">
+          follows you
+        </div>
+      <% end %>
+    </div>
+    <div class="followers-count">
+      <div><span class="bold-text"><%= user.followers.count %></span> followers</div>
+      <div><span class="bold-text"><%= user.followed.count %></span> following</div>
+    </div>
+  </div>
+
+<%# Defining which button to appear (follow, unfollow, remove follower, or followed (the latter serves the same function as remove follower but just discourages the negative action of unfollowing).
+The unfollow nad remove follow buttons only appear on the follow page of current_user, in the followed and following tabs respectively%>
+
+  <% if local_assigns[:current_user_followers_tab] %>
+    <%= button_to 'Remove', remove_follower_user_path(user), method: :post, class: "btn btn-main" %>
+  <% elsif local_assigns[:current_user_followed_tab] %>
+    <%= button_to 'Unfollow', unfollow_user_path(user), method: :post, class: "btn btn-main" %>
+  <% elsif current_user.is_following?(user.id) %>
+    <%= button_to 'Followed', unfollow_user_path(user), method: :post, class: "btn btn-main" %>
+  <% elsif user.is_following?(current_user.id) %>
+    <%= button_to 'Follow Back', follow_user_path(user), method: :post, class: "btn btn-pink" %>
+  <% elsif !user == current_user %>
+    <%= button_to 'Follow', follow_user_path(user), method: :post, class: "btn btn-pink" %>
+  <% else %>
+    Bookmarks
+  <% end %>
+
+
+</div>

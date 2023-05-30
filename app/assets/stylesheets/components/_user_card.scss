@@ -7,30 +7,52 @@
   width: 100%;
   border-bottom: 1px solid $light-gray;
 
-  .avatar-and-username-and-counts-and-follow-button {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;;
-    gap: 0.5em;
-    width: 100%;
-    justify-content: flex-start;
-  }
 
-  .username-and-conditional-follow-back-or-follows-you-button {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5em;
-  }
+}
 
-  .username-and-counts {
+.avatar-and-username-and-follow-counts-and-follow-button {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;;
+  gap: 0.5em;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.username-and-conditional-follow-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.username-and-counts {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.bold-text {
+  font-weight: 500;
+}
+
+.user-card-show-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+  gap: 0.5em;
+  width: 100%;
+  border-bottom: 1px solid $light-gray;
+
+  .username-and-follow-counts {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     flex-grow: 1;
   }
 
-  .bold-text {
-    font-weight: 500;
-}
 
 }
