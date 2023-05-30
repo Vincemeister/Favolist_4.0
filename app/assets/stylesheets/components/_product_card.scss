@@ -26,15 +26,6 @@
 
   }
 
-
-  .truncate-3-lines {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
   /* For the product show page, which has an additional back button and the tabs
   and respective contents (review, description, referrals). The product show doesn't
   render the product_card partial. It just copies the code.

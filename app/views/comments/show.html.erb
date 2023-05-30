@@ -39,7 +39,7 @@
         <div class="comment-show-page-replies-container" data-comments-target="comments">
           <% @replies.each do |reply| %>
             <div class="comment reply text-decoration-none" >
-              <%= cl_image_tag reply.user.avatar.key, crop: "fill", gravity: "center", aspect_ratio: "1:1", class: "avatar"%>
+              <%= cl_image_tag reply.user.avatar.key, crop: "fill", gravity: "center", aspect_ratio: "1:1", class: "avatar-small"%>
               <div class="comment-container">
                 <div class="comment-content">
                   <div class="comment-author">

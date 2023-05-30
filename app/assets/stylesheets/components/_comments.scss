@@ -51,14 +51,14 @@
     flex-direction: column;
     width: 100%;
   }
-
-  .commentlastreplies {
-    width: 100%;
-  }
 }
 
 // div containing a reply is the same as a comment, but with the reply class added
 // on top to change small parts
 .reply {
-  padding: 0%;
+  padding: 0.5em 0em;
+}
+
+.comment-replies-container {
+  width:100%;
 }

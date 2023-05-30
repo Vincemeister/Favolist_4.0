@@ -9,11 +9,11 @@
       <% end %>
       <div class="list-and-title-and-price">
         <% unless controller_name == 'lists' && action_name == 'show' %>
-          <h6><%= product.list.name %></h6>
+          <div class="list-name"><%= product.list.name %></div>
         <% end %>
         <%= link_to product_path(product) do %>
-          <h5><%= product.title  %></h5>
-          <h6 class="price">$<%= product.price.to_i %></h6>
+          <div class="product-title"><%= product.title  %></div>
+          <div class="price">$<%= product.price.to_i %></div>
         <% end %>
       </div>
       <i class="fa-sharp fa-regular fa-ellipsis" data-bs-toggle="modal" data-bs-target="#editOrDeleteModal-<%= product.id %>"></i>
@@ -104,22 +104,38 @@
     </ul>
     <div class="tab-content product-content" id="pills-tabContent">
       <div class="tab-pane fade show active linebreak" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
-        <p> <%= simple_format(@product.review) %></p>
+        <div class="context-text">
+          <%= simple_format(@product.review) %></p>
+        </div>
       </div>
       <div class="tab-pane fade linebreak" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
-        <p><%= simple_format(@product.description) %></p>
+        <div class="content-text">
+          <%= simple_format(@product.description) %>
+        </div>
       </div>
       <div class="tab-pane fade linebreak" id="pills-referrals" role="tabpanel" aria-labelledby="pills-referrals-tab">
-        <p><%= @product.referrals %></p>
+        <% product.referrals.each do |referral| %>
+        <%# applying the referral card but only adjusting the referral details and code frame, adjusting padding %>
+          <div class="referral-card px-0">
+            <div class="referral-details content-text ">
+              <%= referral.details %>
+            </div>
+            <div class="code-frame">
+              <%= referral.code %>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
-  <% else %>
+
+    <% else %>
+
   <!--Truncated review snippet if in a feed page -->
-    <div class="product-card-review">
+    <div class="product-card-review content-text">
       <%= link_to product_path(product) do %>
-        <p class="truncate-3-lines">
+        <div class="truncate-3-lines">
           <%= product.review%>
-        </p>
+        </div>
       <% end %>
     </div>
   <% end %>

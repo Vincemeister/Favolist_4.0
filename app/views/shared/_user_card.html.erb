@@ -44,7 +44,7 @@ The unfollow nad remove follow buttons only appear on the follow page of current
 
   <% unless controller_name == 'users' && action_name == 'show' %>
     <%= link_to user_path(user) do %>
-      <p class="truncate-3-lines">
+      <p class="truncate-3-lines content-text">
         <%= user.bio %>
       </p>
     <% end %>

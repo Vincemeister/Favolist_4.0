@@ -106,9 +106,17 @@ Also, remember that with this solution, any content in the grid needs to have a 
     text-align: left;
   }
 
+  .product-count-and-list-name {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 2em;
+  }
+
   .list-product-count {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.25rem;
+    font-weight: 500;
     margin-bottom: 0.5rem;
   }
 

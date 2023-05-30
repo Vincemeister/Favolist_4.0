@@ -15,7 +15,14 @@
     text-align: center;
   }
 
-  h5 {
+  .list-name {
+    font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1.125rem;
+  }
+
+  .product-title {
     font-size: 1.25rem;
     font-weight: 600;
     line-height: 1.75rem;
@@ -23,14 +30,8 @@
     text-align: center;
   }
 
-  h6 {
-    font-family: 'Outfit';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 1.125rem;
-  }
 
-  h6.price {
+  .price {
   font-family: 'Outfit';
   font-style: normal;
   font-weight: 400;

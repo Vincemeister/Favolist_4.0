@@ -36,7 +36,7 @@
           <% if comment.replies.count > 1 %>
             <%= link_to "See all #{comment.replies.count} replies", product_comment_path(comment.product, comment), class: "see-all-replies", data: { replies_and_comments_target: "viewrepliesbutton" }%>
           <% end %>
-          <div class="commentlastreplies" data-replies-and-comments-target="commentlastreplies">
+          <div class="comment-replies-container" data-replies-and-comments-target="commentlastreplies">
             <% if comment.replies.any? %>
                 <%= render "comments/comment_reply", reply: comment.replies.last, parent_comment: comment, product: comment.product %>
             <% end %>
