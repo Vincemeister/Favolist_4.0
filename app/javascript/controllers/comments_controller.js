@@ -56,9 +56,12 @@ export default class extends Controller {
     }, 3000);
   }
 
-
-
-
-
+  // only for the commentform in the comments/show page
+  selectcommentform() {
+    const textarea = this.commentformTarget.querySelector('.comment-textarea');
+    if (textarea) {
+      textarea.focus();
+    }
+  }
 
 }

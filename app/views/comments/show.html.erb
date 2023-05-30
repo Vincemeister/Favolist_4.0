@@ -29,9 +29,10 @@
         </div>
         <div class="comment-date-and-reply">
           <span class="comment-date-and-reply-button"><%= time_ago_in_words(@comment.created_at, include_seconds: false).gsub('about', '').gsub(/minute(s)?\s*/, 'm').gsub(/hour(s)?\s*/, 'h').gsub(/day(s)?\s*/, 'd').gsub(' m', 'm').gsub(' h', 'h').gsub(' d', 'd') %></span>
-          <span class="comment-date-and-reply-button" data-action="click->replies-and-comments#togglereplyform">Reply</span>
+          <%# In the /comments/show page, the reply button autoselects the commentform at the bottom and does not toggle the direct_replies_form as in the products/show page %>
+          <span class="comment-date-and-reply-button" data-action="click->comments#selectcommentform">Reply</span>
           <% if @comment.user == current_user %>
-            <span class="comment-date-and-reply-button">Delete</span>
+            <%= button_to 'Delete', comment_path(@comment), method: :delete, class: 'comment-date-and-reply-button' %>
           <% end %>
         </div>
         <!-- Replies within main comment div to make it nest -->
@@ -50,9 +51,9 @@
                 </div>
                 <div class="comment-date-and-reply">
                   <span class="comment-date-and-reply-button"><%= time_ago_in_words(reply.created_at, include_seconds: false).gsub('about', '').gsub(/minute(s)?\s*/, 'm').gsub(/hour(s)?\s*/, 'h').gsub(/day(s)?\s*/, 'd').gsub(' m', 'm').gsub(' h', 'h').gsub(' d', 'd') %></span>
-                  <span class="comment-date-and-reply-button" data-action="click->replies-and-comments#togglereplyform">Reply</span>
+                  <span class="comment-date-and-reply-button" data-action="click->comments#selectcommentform">Reply</span>
                   <% if reply.user == current_user %>
-                    <span class="comment-date-and-reply-button">Delete</span>
+                      <%= button_to 'Delete', comment_path(reply), method: :delete, class: 'comment-date-and-reply-button' %>
                   <% end %>
                 </div>
               </div>

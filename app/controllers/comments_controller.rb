@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_product, only: [:index, :create, :show]
-  before_action :set_comment, only: [:replies, :show]
+  before_action :set_comment, only: [:replies, :show, :destroy]
   before_action :set_context, only: [:create] # to enable the jbuilder ender logic
 
 
@@ -32,6 +32,13 @@ class CommentsController < ApplicationController
     @parent_comment = Comment.find(params[:id])
     @replies = @parent_comment.replies.includes(:user).order(created_at: :desc)
   end
+
+
+  def destroy
+    @comment.destroy
+    redirect_to product_comments_path(@comment.product)
+  end
+
 
   private
 
