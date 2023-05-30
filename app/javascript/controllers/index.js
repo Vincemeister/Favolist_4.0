@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import BookmarksController from "./bookmarks_controller"
+application.register("bookmarks", BookmarksController)
+
 import CommentsController from "./comments_controller"
 application.register("comments", CommentsController)
 
@@ -15,5 +18,3 @@ application.register("replies-and-comments", RepliesAndCommentsController)
 
 import RepliesController from "./replies_controller"
 application.register("replies", RepliesController)
-
-// unnecessary, using bootstrap carousel instead

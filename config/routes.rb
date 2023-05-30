@@ -20,6 +20,11 @@ Rails.application.routes.draw do
       end
     end
 
+    member do
+      post :bookmark
+      post :unbookmark
+    end
+
   end
 
   resources :comments, only: [:destroy]

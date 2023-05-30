@@ -1,93 +1,108 @@
 <div class="product-card">
-    <div class="product-header">
-      <% if controller_name == 'products' && action_name == 'show' %>
-        <%= link_to :back do %>
-          <i class="fa-regular fa-arrow-left"></i>
-        <% end %>
-      <% else %>
-        <div></div>
+  <div class="product-header">
+    <% if controller_name == 'products' && action_name == 'show' %>
+      <%= link_to :back do %>
+        <i class="fa-regular fa-arrow-left"></i>
       <% end %>
-      <div class="list-and-title-and-price">
-        <% unless controller_name == 'lists' && action_name == 'show' %>
-          <div class="list-name"><%= product.list.name %></div>
-        <% end %>
-        <%= link_to product_path(product) do %>
-          <div class="product-title"><%= product.title  %></div>
-          <div class="price">$<%= product.price.to_i %></div>
+    <% else %>
+      <div></div>
+    <% end %>
+    <div class="list-and-title-and-price">
+      <% unless controller_name == 'lists' && action_name == 'show' %>
+        <div class="list-name"><%= product.list.name %></div>
+      <% end %>
+      <%= link_to product_path(product) do %>
+        <div class="product-title"><%= product.title  %></div>
+        <div class="price">$<%= product.price.to_i %></div>
+      <% end %>
+    </div>
+    <i class="fa-sharp fa-regular fa-ellipsis" data-bs-toggle="modal" data-bs-target="#editOrDeleteModal-<%= product.id %>"></i>
+  </div>
+
+
+
+  <% if product.photos.attached? && product.photos.count > 1 %>
+    <div id="carouselExampleIndicators" class="carousel slide product-card-image">
+      <div class="carousel-indicators">
+        <% product.photos.each_with_index do |photo, index| %>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<%= index %>" class="<%= 'active' if index.zero? %>" aria-label="Slide <%= index + 1 %>"></button>
         <% end %>
       </div>
-      <i class="fa-sharp fa-regular fa-ellipsis" data-bs-toggle="modal" data-bs-target="#editOrDeleteModal-<%= product.id %>"></i>
-    </div>
-
-
-
-<% if product.photos.attached? && product.photos.count > 1 %>
-  <div id="carouselExampleIndicators" class="carousel slide product-card-image">
-    <div class="carousel-indicators">
-      <% product.photos.each_with_index do |photo, index| %>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<%= index %>" class="<%= 'active' if index.zero? %>" aria-label="Slide <%= index + 1 %>"></button>
-      <% end %>
-    </div>
-    <div class="carousel-inner">
-      <% product.photos.each_with_index do |photo, index| %>
-        <div class="carousel-item <%= 'active' if index.zero? %>">
-          <%= image_tag photo, class: "d-block" %>
-        </div>
-      <% end %>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-<% elsif product.photos.attached? %>
-  <div class="product-card-image">
-    <%= image_tag product.photos.first %>
-  </div>
-<% else %>
-  <p>No image available</p>
-<% end %>
-
-
-
-
-    <div class="cardbar">
-      <div class="cardbar-left">
-        <%= link_to user_path(product.user) do %>
-          <%= image_tag product.user.avatar, class: 'avatar-small' %>
-        <% end %>
-        <%= link_to user_path(product.user) do %>
-          <div class="username">
-            <%= product.user.username %>
+      <div class="carousel-inner">
+        <% product.photos.each_with_index do |photo, index| %>
+          <div class="carousel-item <%= 'active' if index.zero? %>">
+            <%= image_tag photo, class: "d-block" %>
           </div>
         <% end %>
       </div>
-      <% if product.logo.attached? %>
-          <%= image_tag product.logo, class: "cardbar-logo" %>
-      <% else %>
-        <p>No image available</p>
-      <% end %>
-      <div class="cardbar-right">
-        <div class="cardbar-iconbox">
-          <i class="fa-sharp fa-light fa-bookmark"></i>
-          <div class="iconbox-text">30</div>
-        </div>
-        <div class="cardbar-iconbox">
-          <i class="fa-light fa-circle-plus"></i>
-          <div class="iconbox-text">30</div>
-        </div>
-        <%= link_to product_comments_path(product) do %>
-          <div class="cardbar-iconbox">
-            <i class="fa-light fa-comment"></i>
-            <div class="iconbox-text"><%= product.comments.count %></div>
-          </div>
-        <% end %>
-      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
+
+
+  <% elsif product.photos.attached? %>
+    <div class="product-card-image">
+      <%= image_tag product.photos.first %>
+    </div>
+  <% else %>
+    <p>No image available</p>
+  <% end %>
+
+
+
+
+  <div class="cardbar text-decoration-none" data-controller="bookmarks">
+    <div class="cardbar-left">
+      <%= link_to user_path(product.user) do %>
+        <%= image_tag product.user.avatar, class: 'avatar-small' %>
+      <% end %>
+      <%= link_to user_path(product.user) do %>
+        <div class="username">
+          <%= product.user.username %>
+        </div>
+      <% end %>
+    </div>
+    <% if product.logo.attached? %>
+        <%= image_tag product.logo, class: "cardbar-logo" %>
+    <% else %>
+      <p>No image available</p>
+    <% end %>
+    <div class="cardbar-right">
+      <div class="cardbar-iconbox">
+        <% if product.bookmarked_by?(current_user) %>
+          <%= link_to unbookmark_product_path(product), method: :post, data: { controller: 'bookmark', action: 'click->bookmark#toggle', bookmark_target: 'bookmarkbutton' } do %>
+            <i class="fa-solid fa-circle-bookmark fa-lg"></i>
+          <% end %>
+        <% else %>
+          <%= link_to bookmark_product_path(product), method: :post, data: { controller: 'bookmark', action: 'click->bookmark#toggle', bookmark_target: 'bookmarkbutton' } do %>
+            <i class="fa-light fa-circle-bookmark fa-lg"></i>
+          <% end %>
+        <% end %>
+        <i class="fa-sharp fa-light fa-bookmark"></i>
+        <div class="iconbox-text">30</div>
+      </div>
+      <div class="cardbar-iconbox">
+        <i class="fa-light fa-circle-plus"></i>
+        <div class="iconbox-text">30</div>
+      </div>
+
+
+
+
+      <%= link_to product_comments_path(product) do %>
+        <div class="cardbar-iconbox">
+          <i class="fa-light fa-comment"></i>
+          <div class="iconbox-text"><%= product.comments.count %></div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 
   <% if controller_name == 'products' && action_name == 'show' %>
   <!--Full product review, description and referral tabs if in product show page -->
