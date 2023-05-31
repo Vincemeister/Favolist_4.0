@@ -9,20 +9,43 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @product  = Product.new
+    original_product = Product.find(params[:original_product_id]) if params[:original_product_id]
+    @product = if original_product
+      Product.new(
+        title: original_product.title,
+        price: original_product.price,
+        description: original_product.description
+        # Don't assign logo and photos here, do it in the create action
+      )
+    else
+      Product.new
+    end
     @user = current_user
   end
 
   def create
     @product = Product.new(product_params)
-    @product.logo.attach(params[:product][:logo])
-    @product.photos.attach(params[:product][:photos])
+
+    if params[:original_product_id]
+      original_product = Product.find(params[:original_product_id])
+      @product.logo.attach(original_product.logo.blob.signed_id) if original_product.logo.attached?
+      original_product.photos.each do |photo|
+        @product.photos.attach(photo.blob.signed_id)
+      end if original_product.photos.attached?
+    else
+      @product.logo.attach(params[:product][:logo]) if params[:product][:logo]
+      @product.photos.attach(params[:product][:photos]) if params[:product][:photos]
+    end
+
     if @product.save
       redirect_to list_path(@product.list)
     else
       render :new
     end
   end
+
+
+
 
   def edit
   end

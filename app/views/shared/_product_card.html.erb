@@ -89,10 +89,10 @@
           </div>
         <% end %>
       <% end %>
-      <div class="cardbar-iconbox">
+      <%= link_to new_product_path(original_product_id: product.id), class: "cardbar-iconbox" do %>
         <i class="fa-light fa-circle-plus"></i>
         <div class="iconbox-text">30</div>
-      </div>
+      <% end %>
 
 
 
