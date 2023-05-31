@@ -3,8 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="bookmarks"
 export default class extends Controller {
   connect() {
-  console.log("Hello, Stimulus!")
-
+    console.log("Hello, Stimulus!")
   }
 
   static targets = ["bookmarkbutton"];
@@ -22,21 +21,37 @@ export default class extends Controller {
       },
       credentials: "same-origin",
     })
-    .then((response) => response.json())
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Network response was not ok');
+      }
+    })
     .then((data) => {
       this.updateButton(data);
+    })
+    .catch(error => {
+      console.error('There has been a problem with your fetch operation:', error);
     });
   }
 
   updateButton(data) {
-
     console.log(data)
-    // if (data.action === "bookmark") {
-    //   this.bookmarkbuttonTarget.innerHTML = "<i class='fa-solid fa-circle-bookmark fa-lg'></i>";
-    //   this.bookmarkbuttonTarget.setAttribute("href", data.unbookmark_product_path);
-    // } else if (data.action === "unbookmark") {
-    //   this.bookmarkbuttonTarget.innerHTML = "<i class='fa-light fa-circle-bookmark fa-lg'></i>";
-    //   this.bookmarkbuttonTarget.setAttribute("href", data.bookmark_product_path);
-    // }
+    if (data.action === "bookmark") {
+      this.bookmarkbuttonTarget.innerHTML = `
+      <div class='cardbar-iconbox'>
+        <i class='fa-solid fa-circle-bookmark'></i>
+        <div class='iconbox-text'>${data.bookmarksCount}</div>
+      </div>`;
+      this.bookmarkbuttonTarget.setAttribute("href", data.unbookmark_path);
+    } else if (data.action === "unbookmark") {
+      this.bookmarkbuttonTarget.innerHTML = `
+      <div class='cardbar-iconbox'>
+        <i class='fa-light fa-circle-bookmark'></i>
+        <div class='iconbox-text'>${data.bookmarksCount}</div>
+      </div>`;
+      this.bookmarkbuttonTarget.setAttribute("href", data.bookmark_path);
+    }
   }
 }

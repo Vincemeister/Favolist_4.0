@@ -1,0 +1,14 @@
+<div class="nav-header align-items-center sticky-header">
+  <%= link_to user_path(current_user) do %>
+    <i class="fa-regular fa-arrow-left"></i>
+  <% end %>
+
+  <div class="avatar-and-list-name">
+    <h6>Bookmarks</h6>
+  </div>
+  <div class="w-16"></div>
+</div>
+
+<% @products.each do |product| %>
+<%= render 'shared/product_card', product: product %>
+<% end %>

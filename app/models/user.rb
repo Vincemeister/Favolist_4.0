@@ -18,6 +18,8 @@ class User < ApplicationRecord
   has_many :followed_relationships, foreign_key: :follower_id, class_name: 'Follow'
   has_many :followed, through: :followed_relationships, source: :followed, dependent: :destroy
 
+
+
   pg_search_scope :search_by_user_username_and_bio_and_list_name,
   against: [:username, :bio],
   associated_against: {

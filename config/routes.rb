@@ -21,11 +21,12 @@ Rails.application.routes.draw do
     end
 
     member do
-      post :bookmark
-      post :unbookmark
+      post :bookmark, to: 'bookmarks#bookmark'
+      post :unbookmark, to: 'bookmarks#unbookmark'
     end
-
   end
+
+  resources :bookmarks, only: [:index]
 
   resources :comments, only: [:destroy]
 

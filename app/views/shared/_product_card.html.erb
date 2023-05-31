@@ -57,7 +57,7 @@
 
 
 
-  <div class="cardbar text-decoration-none" data-controller="bookmarks">
+  <div class="cardbar text-decoration-none">
     <div class="cardbar-left">
       <%= link_to user_path(product.user) do %>
         <%= image_tag product.user.avatar, class: 'avatar-small' %>
@@ -74,19 +74,21 @@
       <p>No image available</p>
     <% end %>
     <div class="cardbar-right">
-      <div class="cardbar-iconbox">
-        <% if product.bookmarked_by?(current_user) %>
-          <%= link_to unbookmark_product_path(product), method: :post, data: { controller: 'bookmark', action: 'click->bookmark#toggle', bookmark_target: 'bookmarkbutton' } do %>
-            <i class="fa-solid fa-circle-bookmark fa-lg"></i>
-          <% end %>
-        <% else %>
-          <%= link_to bookmark_product_path(product), method: :post, data: { controller: 'bookmark', action: 'click->bookmark#toggle', bookmark_target: 'bookmarkbutton' } do %>
-            <i class="fa-light fa-circle-bookmark fa-lg"></i>
-          <% end %>
+      <% if product.bookmarked_by?(current_user) %>
+        <%= link_to unbookmark_product_path(product), method: :post, data: { controller: 'bookmarks', action: 'click->bookmarks#toggle', bookmarks_target: 'bookmarkbutton' } do %>
+          <div class="cardbar-iconbox">
+            <i class="fa-solid fa-circle-bookmark"></i>
+            <div class="iconbox-text"><%= product.bookmarks.count %></div>
+          </div>
         <% end %>
-        <i class="fa-sharp fa-light fa-bookmark"></i>
-        <div class="iconbox-text">30</div>
-      </div>
+      <% else %>
+        <%= link_to bookmark_product_path(product), method: :post, data: { controller: 'bookmarks', action: 'click->bookmarks#toggle', bookmarks_target: 'bookmarkbutton' } do %>
+          <div class="cardbar-iconbox">
+            <i class="fa-light fa-circle-bookmark"></i>
+            <div class="iconbox-text"><%= product.bookmarks.count %></div>
+          </div>
+        <% end %>
+      <% end %>
       <div class="cardbar-iconbox">
         <i class="fa-light fa-circle-plus"></i>
         <div class="iconbox-text">30</div>

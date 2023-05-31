@@ -36,7 +36,7 @@ The unfollow nad remove follow buttons only appear on the follow page of current
   <% elsif !user == current_user %>
     <%= button_to 'Follow', follow_user_path(user), method: :post, class: "btn btn-pink" %>
   <% else %>
-    Bookmarks
+  <%= link_to 'Bookmarks', bookmarks_path %>
   <% end %>
 
 

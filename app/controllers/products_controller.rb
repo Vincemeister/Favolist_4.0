@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy, :comments]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :comments, :bookmark, :unbookmark]
 
   def index
     @products = Product.all
@@ -45,24 +45,6 @@ class ProductsController < ApplicationController
 
 
   def comments
-  end
-
-  def bookmark
-    bookmark = Bookmark.new(user: current_user, product: @product)
-    if bookmark.save
-      render json: { action: "bookmark", unbookmark_path: unbookmark_product_path(@product) }
-    else
-      head :unprocessable_entity
-    end
-  end
-
-  def unbookmark
-    bookmark = Bookmark.find_by(user: current_user, product: @product)
-    if bookmark.destroy
-      render json: { action: "unbookmark", bookmark_path: bookmark_product_path(@product) }
-    else
-      head :unprocessable_entity
-    end
   end
 
 

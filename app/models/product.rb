@@ -25,6 +25,8 @@ class Product < ApplicationRecord
 
 
   def bookmarked_by?(user)
+    return false if user.nil?
+
     bookmarks.where(user_id: user.id).exists?
   end
 
