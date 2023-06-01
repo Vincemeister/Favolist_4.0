@@ -1,6 +1,6 @@
 <div class="user-card-show-page text-decoration-none">
   <%= link_to user_path(user) do %>
-    <%= image_tag user.avatar, class: 'avatar-large' %>
+    <%= image_tag user.avatar, class: 'avatar-xl' %>
   <% end %>
   <div class="username-and-follow-counts">
     <div class="username-and-conditional-follow-button">
@@ -36,7 +36,12 @@ The unfollow nad remove follow buttons only appear on the follow page of current
   <% elsif !user == current_user %>
     <%= button_to 'Follow', follow_user_path(user), method: :post, class: "btn btn-pink" %>
   <% else %>
-  <%= link_to 'Bookmarks', bookmarks_path %>
+  <div class="bookmarks-button">
+    <%= link_to bookmarks_path, class: "btn btn-outlined-primary" do%>
+      <i class="fa-sharp fa-light fa-book-bookmark fa-2xl"></i>
+    <% end %>
+  </div>
+
   <% end %>
 
 

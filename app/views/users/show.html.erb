@@ -1,18 +1,18 @@
 <%= render "user_card_show_page", user: @user %>
 
 
-<ul class="nav custom-nav nav-pills nav-justified sticky-nav" id="pills-tab" role="tablist">
+<ul class="nav custom-nav nav-pills nav-justified sticky-nav text-decoration-none" id="pills-tab" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link custom-nav-link active product-tabs" id="pills-products-tab" data-bs-toggle="pill" data-bs-target="#pills-products" type="button" role="tab" aria-controls="pills-products" aria-selected="true"><i class="fa-sharp fa-regular fa-square"></i> Products (<%= @user.products.count %>)</button>
+    <button class="nav-link custom-nav-link active product-tabs" id="pills-products-tab" data-bs-toggle="pill" data-bs-target="#pills-products" type="button" role="tab" aria-controls="pills-products" aria-selected="true"><i class="fa-sharp fa-light fa-square"></i><div><span class="small-follow-button py-0 px-0 fw-bold"><%= @user.products.count %></span> Products</div></button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link custom-nav-link product-tabs" id="pills-lists-tab" data-bs-toggle="pill" data-bs-target="#pills-lists" type="button" role="tab" aria-controls="pills-lists" aria-selected="false"><i class="fa-sharp far fa-table-cells"></i>Lists (<%= @user.lists.count %>)</button>
+    <button class="nav-link custom-nav-link product-tabs" id="pills-lists-tab" data-bs-toggle="pill" data-bs-target="#pills-lists" type="button" role="tab" aria-controls="pills-lists" aria-selected="false"><i class="fa-sharp fa-light fa-table-cells"></i><div><span class="small-follow-button py-0 px-0 fw-bold align-items-center"><%= @user.lists.count %></span> Lists</div></button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link custom-nav-link product-tabs" id="pills-referrals-tab" data-bs-toggle="pill" data-bs-target="#pills-referrals" type="button" role="tab" aria-controls="pills-referrals" aria-selected="false"><i class="fa-sharp fa-regular fa-tag"></i>Referrals  <%= "(#{@user.referrals.count})" if @user.referrals.count > 0 %></button>
+    <button class="nav-link custom-nav-link product-tabs" id="pills-referrals-tab" data-bs-toggle="pill" data-bs-target="#pills-referrals" type="button" role="tab" aria-controls="pills-referrals" aria-selected="false"><i class="fa-sharp fa-light fa-tag"></i><div><span class="small-follow-button py-0 px-0 fw-bold"><%= "#{@user.referrals.count}" if @user.referrals.count > 0 %></span> Referrals</div></button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link custom-nav-link product-tabs" id="pills-about-tab" data-bs-toggle="pill" data-bs-target="#pills-about" type="button" role="tab" aria-controls="pills-about" aria-selected="false"><i class="fa-sharp fa-regular fa-user"></i>About</button>
+    <button class="nav-link custom-nav-link product-tabs" id="pills-about-tab" data-bs-toggle="pill" data-bs-target="#pills-about" type="button" role="tab" aria-controls="pills-about" aria-selected="false"><i class="fa-sharp fa-light fa-user"></i>About</button>
   </li>
 </ul>
 

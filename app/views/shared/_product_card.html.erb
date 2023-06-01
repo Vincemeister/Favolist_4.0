@@ -40,7 +40,7 @@
 <div class="modal fade" id="editOrDeleteModal-<%= product.id %>" tabindex="-1" aria-labelledby="editOrDeleteModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-header d-flex justify-content-between">
+      <div class="modal-header border-0 d-flex justify-content-between">
         <div class="btn-close invisible"></div> <!-- Invisible dummy div -->
         <h5 class="mx-auto"><%= product.title %></h5> <!-- Add 'mx-auto' class here -->
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -56,7 +56,7 @@
 <div class="modal fade" id="deleteModal-<%= product.id %>" aria-hidden="true" aria-labelledby="deleteModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-    <div class="modal-header d-flex flex-end">
+    <div class="modal-header border-0 d-flex flex-end">
       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body custom-modal">
