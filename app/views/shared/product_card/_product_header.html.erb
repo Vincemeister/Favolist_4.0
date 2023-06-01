@@ -1,0 +1,19 @@
+  <div class="product-header">
+    <% if controller_name == 'products' && action_name == 'show' %>
+      <%= link_to :back do %>
+        <i class="fa-regular fa-arrow-left"></i>
+      <% end %>
+    <% else %>
+      <div></div>
+    <% end %>
+    <div class="list-and-title-and-price">
+      <% unless controller_name == 'lists' && action_name == 'show' %>
+        <div class="list-name"><%= product.list.name %></div>
+      <% end %>
+      <%= link_to product_path(product) do %>
+        <div class="product-title"><%= product.title  %></div>
+        <div class="price">$<%= product.price.to_i %></div>
+      <% end %>
+    </div>
+    <i class="fa-sharp fa-regular fa-ellipsis" data-bs-toggle="modal" data-bs-target="#editOrDeleteModal-<%= product.id %>"></i>
+  </div>

@@ -1,0 +1,49 @@
+
+  <div class="cardbar text-decoration-none">
+    <div class="cardbar-left">
+      <%= link_to user_path(product.user) do %>
+        <%= image_tag product.user.avatar, class: 'avatar-small' %>
+      <% end %>
+      <%= link_to user_path(product.user) do %>
+        <div class="username">
+          <%= product.user.username %>
+        </div>
+      <% end %>
+    </div>
+    <% if product.logo.attached? %>
+        <%= image_tag product.logo, class: "cardbar-logo" %>
+    <% else %>
+      <p>No image available</p>
+    <% end %>
+    <div class="cardbar-right">
+      <% if product.bookmarked_by?(current_user) %>
+        <%= link_to unbookmark_product_path(product), method: :post, data: { controller: 'bookmarks', action: 'click->bookmarks#toggle', bookmarks_target: 'bookmarkbutton' } do %>
+          <div class="cardbar-iconbox">
+            <i class="fa-solid fa-circle-bookmark"></i>
+            <div class="iconbox-text"><%= product.bookmarks.count %></div>
+          </div>
+        <% end %>
+      <% else %>
+        <%= link_to bookmark_product_path(product), method: :post, data: { controller: 'bookmarks', action: 'click->bookmarks#toggle', bookmarks_target: 'bookmarkbutton' } do %>
+          <div class="cardbar-iconbox">
+            <i class="fa-light fa-circle-bookmark"></i>
+            <div class="iconbox-text"><%= product.bookmarks.count %></div>
+          </div>
+        <% end %>
+      <% end %>
+      <%= link_to new_product_path(original_product_id: product.id), class: "cardbar-iconbox" do %>
+        <i class="fa-light fa-circle-plus"></i>
+        <div class="iconbox-text">30</div>
+      <% end %>
+
+
+
+
+      <%= link_to product_comments_path(product) do %>
+        <div class="cardbar-iconbox">
+          <i class="fa-light fa-comment"></i>
+          <div class="iconbox-text"><%= product.comments.count %></div>
+        </div>
+      <% end %>
+    </div>
+  </div>

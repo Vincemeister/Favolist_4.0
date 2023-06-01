@@ -7,16 +7,16 @@
     <%= f.input :description, required: true %>
     <%= f.association :list, collection: List.where(user: current_user), prompt: 'Select a list', required: true %>
     <%= f.input :logo, as: :file, required: true %>
+    <%= f.input :photos, as: :file, input_html: { multiple: true }, required: true %>
+    <div class="mb-3" data-controller="image" id = "Img">
+        <%=f.label :images, class: "form-label"  %>
+        <%= f.file_field :images, multiple: true, class: "form-control", accept: "image/png, image/jpeg, image/jpg", "data-imageuploader-target": "input", "data-action": "imageuploader#preview" %>
+    </div>
 
 
     <%= f.button :submit %>
   <% end %>
 </div>
 <!--
-    <%# <%= f.input :photos, as: :file, input_html: { multiple: true }, required: true %> %>
-    <div class="mb-3" data-controller="image" id = "Img">
-        <%# <%=f.label :images, class: "form-label"  %> %>
-        <%# <%= f.file_field :images, multiple: true, class: "form-control", accept: "image/png, image/jpeg, image/jpg", "data-imageuploader-target": "input", "data-action": "imageuploader#preview" %> %>
-    </div>
 
 -->
