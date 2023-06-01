@@ -40,4 +40,7 @@ module ApplicationHelper
       tiles << "<div class='tile' style='background-image: linear-gradient(#{color}, #{color})'></div>"
     end
   end
+
+
+  
 end

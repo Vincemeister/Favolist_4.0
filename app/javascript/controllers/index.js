@@ -10,8 +10,14 @@ application.register("bookmarks", BookmarksController)
 import CommentsController from "./comments_controller"
 application.register("comments", CommentsController)
 
+import DropzoneController from "./dropzone_controller"
+application.register("dropzone", DropzoneController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import ImageuploaderController from "./imageuploader_controller"
+application.register("imageuploader", ImageuploaderController)
 
 import RepliesAndCommentsController from "./replies_and_comments_controller"
 application.register("replies-and-comments", RepliesAndCommentsController)
