@@ -15,6 +15,7 @@
   flex-direction: row;
   align-items: flex-start;;
   gap: 0.5em;
+  padding: 0.5em 0;
   width: 100%;
   justify-content: flex-start;
 }
@@ -37,12 +38,20 @@
 }
 
 .user-card-show-page {
+  padding: 1em 1em;
+  gap: 0.5em;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1em;
-  width: 100%;
+  flex-direction: column;
+  color: $neutral-700;
+
+  // using bootstrap to define a row and have the 3 child elements take up respective space (3 col 6 col 3 col)
+  .avatar-and-username-and-follow-counts-and-follow-or-bookmarks-button {
+    display: flex;
+    align-items: flex-end;
+    padding: 0.5em 0;
+  }
+
+
 
   .username-and-follow-counts {
     display: flex;
@@ -51,11 +60,53 @@
     align-items: center;
   }
 
+  .username {
+    font-size: $paragraph-medium;
+    font-weight: $semi-bold;
+  }
+
+  .follow-counts {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+
+    font-size: $paragraph-small;
+    font-weight: $regular;
+  }
+
+
+  .bold-number {
+    font-weight: $medium;
+  }
+
+
+  .followed-by-count {
+    font-size: 0.875rem;
+    line-height: 0.875rem;
+  }
 
 }
 
 
-.bookmarks-button {
+.follow-or-bookmarks-button {
+  height: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+  align-items: flex-start;
+  align-self: stretch;
+}
+
+
+.intro {
+  font-size: $paragraph-small;
+  font-weight: $medium;
+}
+
+
+.followed-by-text {
+  font-size: $paragraph-small;
+  font-weight: $medium;
+  color: $neutral-400;
 }
