@@ -1,3 +1,7 @@
+// to import the responsive header settings from the config/_fonts.scss folder
+@import "config/mixins";
+
+
 .text-decoration-none a {
   text-decoration: none;
   color: inherit;
@@ -16,4 +20,57 @@
   overflow: hidden;
   text-overflow: ellipsis;
   line-height: 1.75em;
+}
+
+
+// Responsive headers
+
+h1 {
+  @include typography($heading-1-mobile...);
+
+
+  @media (min-width: 1024px) {
+
+    @include typography($heading-1-desktop...);
+  }
+}
+
+h2 {
+  @include typography($heading-2-mobile...);
+
+  @media (min-width: 1024px) {
+    @include typography($heading-2-desktop...);
+  }
+}
+
+h3 {
+  @include typography($heading-3-mobile...);
+
+  @media (min-width: 1024px) {
+    @include typography($heading-3-desktop...);
+  }
+}
+
+h4 {
+  @include typography($heading-4-mobile...);
+
+  @media (min-width: 1024px) {
+    @include typography($heading-4-desktop...);
+  }
+}
+
+h5 {
+  @include typography($heading-5-mobile...);
+
+  @media (min-width: 1024px) {
+    @include typography($heading-5-desktop...);
+  }
+}
+
+h6 {
+  @include typography($heading-6-mobile...);
+
+  @media (min-width: 1024px) {
+    @include typography($heading-6-desktop...);
+  }
 }
