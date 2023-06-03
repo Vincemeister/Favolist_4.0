@@ -5,14 +5,14 @@
         <%= tiles.html_safe %>
         <div class="grid-text">
           <div class="user-info">
-            <%= image_tag list.user.avatar, class: "avatar" %>
-            <div class="user-text">
+            <%= image_tag list.user.avatar, class: "avatar-small" %>
+            <div class="user-text paragraph-small">
               <div class="username"><%= list.user.username %></div>
               <div class="follower-count"><%= list.user.followers.count %> followers</div>
             </div>
           </div>
           <div class="product-count-and-list-name">
-            <p class="large list-product-count"><%= pluralize(list.products.count, 'product') %></p>
+            <div class="list-product-count paragraph-medium"><%= pluralize(list.products.count, 'product') %></div>
             <h4 class="list-name"><%= list.name %></h4>
           </div>
         </div>

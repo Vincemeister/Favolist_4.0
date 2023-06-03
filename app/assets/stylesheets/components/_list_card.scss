@@ -106,6 +106,14 @@ Also, remember that with this solution, any content in the grid needs to have a 
     text-align: left;
   }
 
+  .username {
+    font-weight: $semi-bold;
+  }
+
+  .follower-count {
+    font-weight: $regular;
+  }
+
   .product-count-and-list-name {
     display: flex;
     flex-direction: column;
@@ -119,7 +127,7 @@ Also, remember that with this solution, any content in the grid needs to have a 
   }
 
   .list-name {
-    font-weight: $medium;
-    line-height: 1em;
+    font-weight: $bold;
+    line-height: 1.2em;
   }
 }
