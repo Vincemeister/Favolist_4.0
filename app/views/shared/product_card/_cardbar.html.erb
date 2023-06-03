@@ -5,7 +5,7 @@
         <%= image_tag product.user.avatar, class: 'avatar-small' %>
       <% end %>
       <%= link_to user_path(product.user) do %>
-        <div class="username">
+        <div class="username paragraph-small">
           <%= product.user.username %>
         </div>
       <% end %>
@@ -20,20 +20,20 @@
         <%= link_to unbookmark_product_path(product), method: :post, data: { controller: 'bookmarks', action: 'click->bookmarks#toggle', bookmarks_target: 'bookmarkbutton' } do %>
           <div class="cardbar-iconbox">
             <i class="fa-solid fa-circle-bookmark"></i>
-            <div class="iconbox-text"><%= product.bookmarks.count %></div>
+            <div class="iconbox-text paragraph-xsmall"><%= product.bookmarks.count %></div>
           </div>
         <% end %>
       <% else %>
         <%= link_to bookmark_product_path(product), method: :post, data: { controller: 'bookmarks', action: 'click->bookmarks#toggle', bookmarks_target: 'bookmarkbutton' } do %>
           <div class="cardbar-iconbox">
             <i class="fa-light fa-circle-bookmark"></i>
-            <div class="iconbox-text"><%= product.bookmarks.count %></div>
+            <div class="iconbox-text paragraph-xsmall"><%= product.bookmarks.count %></div>
           </div>
         <% end %>
       <% end %>
       <%= link_to new_product_path(original_product_id: product.id), class: "cardbar-iconbox" do %>
         <i class="fa-light fa-circle-plus"></i>
-        <div class="iconbox-text">30</div>
+        <div class="iconbox-text paragraph-xsmall">30</div>
       <% end %>
 
 
@@ -42,7 +42,7 @@
       <%= link_to product_comments_path(product) do %>
         <div class="cardbar-iconbox">
           <i class="fa-light fa-comment"></i>
-          <div class="iconbox-text"><%= product.comments.count %></div>
+          <div class="iconbox-text paragraph-xsmall"><%= product.comments.count %></div>
         </div>
       <% end %>
     </div>

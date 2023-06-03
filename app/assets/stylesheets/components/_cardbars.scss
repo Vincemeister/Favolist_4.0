@@ -29,10 +29,7 @@
   }
 
   .username {
-    font-family: 'Outfit';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 0.875rem;
+    font-weight: $semi-bold;
   }
 
   .cardbar-logo {
@@ -64,9 +61,5 @@
 
   .iconbox-text {
     display: block;
-    font-family: 'Outfit';
-    font-style: normal;
-    font-weight: 300;
-    font-size: 0.75rem;
   }
 }

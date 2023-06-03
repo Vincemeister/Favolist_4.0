@@ -1,7 +1,7 @@
 .custom-nav
 {
   background: white;
-  padding: 1em;
+  padding: 0.5em 1em;
   display: flex;
   flex-direction: row;
 }
@@ -12,8 +12,9 @@
 }
 
 .custom-nav-link {
-  color: $body-color!important;
-  font-size: 0.875rem!important;
+  font-size: $font-size-paragraph-small;
+  letter-spacing: 0.05em;
+  color: $neutral-700!important;
   display: flex;
   gap: 0.5em;
   align-items: center;
@@ -28,4 +29,11 @@
   position: sticky;
   top: 0; /* Adjust this value based on where you want your sticky element to stick */
   z-index: 1000; /* You might need to adjust this depending on your layout */
+}
+
+
+.custom-nav-link-count {
+  font-size: $font-size-paragraph-small;
+  color: darken($primary, 20%);
+  font-weight: $semi-bold;
 }

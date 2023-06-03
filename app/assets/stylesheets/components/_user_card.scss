@@ -43,6 +43,8 @@
   display: flex;
   flex-direction: column;
   color: $neutral-700;
+  border-bottom: 1px solid $neutral-100;
+
 
   // using bootstrap to define a row and have the 3 child elements take up respective space (3 col 6 col 3 col)
   .avatar-and-username-and-follow-counts-and-follow-or-bookmarks-button {

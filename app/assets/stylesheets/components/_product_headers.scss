@@ -6,6 +6,7 @@
   width: 100%;
   gap: 2em;
   isolation: isolate;
+  padding-bottom: 1em;
 
   .list-and-title-and-price {
     display: flex;
@@ -16,26 +17,19 @@
   }
 
   .list-name {
-    font-family: 'Outfit';
-  font-style: normal;
-  font-weight: 300;
-  font-size: 1.125rem;
+    font-weight: $regular;
   }
 
   .product-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    line-height: 1.75rem;
-    letter-spacing: -0.02em;
-    text-align: center;
+    font-weight: $semi-bold;
+    line-height: 1em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
   }
 
 
   .price {
-  font-family: 'Outfit';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1rem;
+    font-weight: $semi-bold;
   }
 
 }
