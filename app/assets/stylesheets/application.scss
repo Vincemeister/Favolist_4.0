@@ -6,6 +6,9 @@
 
 // External libraries
 @import "bootstrap/scss/bootstrap";
+// so it doesn't automatically fuck up my own responsive heading settingsz
+$enable-responsive-font-sizes: false;
+
 
 @import "font-awesome-pro";
 @import "font-awesome-pro/brands";

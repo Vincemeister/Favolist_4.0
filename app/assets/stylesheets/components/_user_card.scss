@@ -61,7 +61,6 @@
   }
 
   .username {
-    font-size: $paragraph-medium;
     font-weight: $semi-bold;
   }
 
@@ -71,8 +70,6 @@
     justify-content: center;
     align-items: center;
     gap: 0.5em;
-
-    font-size: $paragraph-small;
     font-weight: $regular;
   }
 
@@ -100,13 +97,12 @@
 
 
 .intro {
-  font-size: $paragraph-small;
-  font-weight: $medium;
+  font-size: $font-size-paragraph-small;
+  line-height: $line-height-paragraph-small;
 }
 
 
 .followed-by-text {
-  font-size: $paragraph-small;
   font-weight: $medium;
   color: $neutral-400;
 }

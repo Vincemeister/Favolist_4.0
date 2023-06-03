@@ -115,11 +115,11 @@ Also, remember that with this solution, any content in the grid needs to have a 
   }
 
   .list-product-count {
-    font-size: $paragraph-large;
     font-weight: $medium;
   }
 
   .list-name {
-    font-weight: $bold;
+    font-weight: $medium;
+    line-height: 1em;
   }
 }

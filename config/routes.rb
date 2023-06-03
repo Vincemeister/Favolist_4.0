@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
   get 'pages/about' => 'pages#about'
   get 'pages/search', to: 'pages#search', as: 'search'
+  get 'pages/test', to: 'pages#test', as: 'test'
 
   resources :products, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
 
