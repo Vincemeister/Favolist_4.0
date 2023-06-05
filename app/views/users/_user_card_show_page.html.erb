@@ -53,12 +53,39 @@
   <!-- End of bootstrap grid -->
   <div class="intro">Entrepreneur & biohacker  | life extension-freak bestselling author. SG resident. Proud Dad of 4. Owner of BioTECH Ltd. in Australia.
   </div>
-  <div class="followed-by-avatars-and-text">
-    <div class="avatars">
+
+
+
+
+
+  <% mutual_followers = current_user.mutual_follows_with(user) %>
+  <% mutual_followers_first_3 = mutual_followers.first(3) %>
+
+    <% if mutual_followers_first_3.any? %>
+    <div class="followed-by-avatars-and-text">
+      <div class="avatar-group">
+        <% mutual_followers_first_3.each do |follower| %>
+          <span class="avatar-xs avatar-in-group">
+            <%= cl_image_tag follower.avatar.key, alt: follower.username %>
+          </span>
+        <% end %>
+      </div>
+      <div class="followed-by-text paragraph-small">
+        Followed by
+        <% case mutual_followers_first_3.size
+          when 1 %>
+          <%= mutual_followers_first_3.first.username %>
+        <% when 2 %>
+          <%= mutual_followers_first_3.first.username %> and <%= mutual_followers_first_3.last.username %>
+        <% else %>
+          <%= mutual_followers_first_3[0].username %>, <%= mutual_followers_first_3[1].username %>, and <%= pluralize(mutual_followers.size - 2, 'other') %> you follow
+        <% end %>
+      </div>
     </div>
-    <div class="followed-by-text paragraph-small">
-      Followed by John, Carry, Xing Gusti
-    </div>
-  </div>
+  <% end %>
+
+
+
+
 
 </div>

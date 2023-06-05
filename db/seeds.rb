@@ -51,12 +51,25 @@ puts "Creating random users with lists and products..."
     product.save!
   end
 end
+#----------------MORE RANDOM USERS WITHOUT PRODUCTS---------------------------------------------------------------------
+puts "Creating random users without products..."
+10.times do
+  puts "Creating random user..."
+  user = User.create!(
+    username: Faker::Internet.username,
+    email: Faker::Internet.email,
+    password: "password",
+    bio: Faker::Lorem.paragraph(sentence_count: 10)
+  )
+  avatar = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1684039630/Favolist%204.0/owl.jpg")
+  user.avatar.attach(io: avatar, filename: 'avatar.jpg', content_type: 'image/jpg')
+  user.save!
+  puts "Created #{user.username}"
+end
 #----------------ESTABLISHING FOLLOW RELATIONSHIPS----------------------------------------------------------------------
 puts "Establishing Tims  random followships..."
 User.all.reject { |user| user.id == vincent.id }.each do |user|
   Follow.create(follower_id: user.id, followed_id: vincent.id)
-end
-User.all.reject { |user| user.id == vincent.id }.each do |user|
   Follow.create(follower_id: vincent.id, followed_id: user.id)
 end
 #-----------------------------------------------------------------------------------------------------------------------

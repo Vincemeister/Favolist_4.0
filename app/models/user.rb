@@ -53,4 +53,8 @@ class User < ApplicationRecord
     @followed = @user.followed
   end
 
+  def mutual_follows_with(user)
+    self.followed & user.followers
+  end
+
 end
