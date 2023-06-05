@@ -8,7 +8,7 @@
     <div class="username-and-follow-counts col-6">
       <div class="username-and-conditional-follow-button">
         <%= link_to user_path(user) do %>
-          <h5><%= user.username %></h5>
+          <h5 class="username"><%= user.username %></h5>
         <% end %>
         <%# small follow button appearing only in the follows page %>
         <% if local_assigns[:current_user_followers_tab] && !current_user.is_following?(user) %>
@@ -33,11 +33,11 @@
       <% elsif local_assigns[:current_user_followed_tab] %>
         <%= button_to 'Unfollow', unfollow_user_path(user), method: :post, class: "btn btn-main" %>
       <% elsif current_user.is_following?(user.id) %>
-        <%= button_to 'Followed', unfollow_user_path(user), method: :post, class: "btn btn-main" %>
+        <%= button_to 'Followed', unfollow_user_path(user), method: :post, class: "button button-secondary button-small" %>
       <% elsif user.is_following?(current_user.id) %>
-        <%= button_to 'Follow Back', follow_user_path(user), method: :post, class: "btn btn-pink" %>
-      <% elsif !user == current_user %>
-        <%= button_to 'Follow', follow_user_path(user), method: :post, class: "btn btn-pink" %>
+        <%= button_to 'Follow Back', follow_user_path(user), method: :post, class: "button button-main button-small" %>
+      <% elsif user != current_user %>
+        <%= button_to 'Follow', follow_user_path(user), method: :post, class: "button button-main button-small" %>
       <% else %>
       <div class="bookmarks-button">
         <%= link_to bookmarks_path do%>

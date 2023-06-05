@@ -1,10 +1,7 @@
 <div class="referral-card">
   <div class="product-header-and-image">
-    <div class="product-header-list-view">
-      <h6> <%= referral.product.list.name %> </h6>
-      <h5> <%= referral.product.title %>  </h6>
-      <h6 class="price">$<%= referral.product.price.to_i %></h6>
-    </div>
+    <!--RENDERING THE HEADER -->
+    <%= render "shared/product_card/product_header", product: referral.product, referral: true %>
     <%= cl_image_tag(referral.product.photos.first.key, :height => 112, :crop => :scale) %>
   </div>
   <div class="referral-details content-text">
@@ -13,26 +10,6 @@
   <div class="code-frame">
     <%= referral.code %>
   </div>
-
-    <div class="cardbar">
-    <div class="cardbar-left">
-      <%= link_to user_path(referral.product.user) do %>
-        <%= image_tag referral.product.user.avatar, class: 'avatar-small' %>
-      <% end %>
-      <%= link_to user_path(referral.product.user) do %>
-        <div class="username">
-          <%= referral.product.user.username %>
-        </div>
-      <% end %>
-    </div>
-    <% if referral.product.logo.attached? %>
-        <%= image_tag referral.product.logo, class: "cardbar-logo" %>
-    <% else %>
-      <p>No image available</p>
-    <% end %>
-    <div class="cardbar-right">
-      <%= link_to "View product", product_path(referral.product), class: "btn btn-link" %>
-    </div>
-  </div>
-
+  <!--RENDERING THE CARDBAR -->
+  <%= render "shared/product_card/cardbar", product: referral.product, referral: true %>
 </div>

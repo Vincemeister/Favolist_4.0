@@ -9,11 +9,6 @@
   position: relative;
   gap: 1em;
 
-  a {
-    text-decoration: none;
-    color: $body-color;
-  }
-
   .cardbar-left {
     display: flex;
     flex-direction: row;
@@ -62,4 +57,5 @@
   .iconbox-text {
     display: block;
   }
+
 }

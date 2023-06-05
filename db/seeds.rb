@@ -60,6 +60,20 @@ User.all.reject { |user| user.id == vincent.id }.each do |user|
   Follow.create(follower_id: vincent.id, followed_id: user.id)
 end
 #-----------------------------------------------------------------------------------------------------------------------
+puts "Creating some more users without follow relationships..."
+3.times do
+  puts "Creating random user..."
+  user = User.create!(
+    username: Faker::Internet.username,
+    email: Faker::Internet.email,
+    password: "password",
+    bio: Faker::Lorem.paragraph(sentence_count: 10)
+  )
+  avatar = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1684039630/Favolist%204.0/owl.jpg")
+  user.avatar.attach(io: avatar, filename: 'avatar.jpg', content_type: 'image/jpg')
+  user.save!
+  puts "Created #{user.username}"
+end
 #----------------FITNESS EQUIPMENT--------------------------------------------------------------------------------------
 puts "Creating fitness equipment list for Vincent..."
 

@@ -5,7 +5,7 @@
   padding: 1em;
   gap: 0.5em;
   width: 100%;
-  border-bottom: 1px solid $light-gray;
+  // border-bottom: 1px solid $light-gray;
 
 
 }
@@ -39,7 +39,7 @@
 
 .user-card-show-page {
   padding: 1em 1em;
-  gap: 0.5em;
+  gap: 1em;
   display: flex;
   flex-direction: column;
   color: $neutral-700;
@@ -60,10 +60,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: $body-color;
   }
 
   .username {
-    font-weight: $semi-bold;
+    margin-bottom: 1em;
   }
 
   .follow-counts {

@@ -1,4 +1,11 @@
 
+
+::-webkit-scrollbar {
+  width: 0px;  /* remove scrollbar space */
+  background: transparent;  /* optional: just make scrollbar invisible */
+}
+
+
 .text-decoration-none a {
   text-decoration: none;
   color: inherit;
@@ -6,6 +13,7 @@
 
 .content-text {
   line-height: 1.75em;
+  color: $neutral-700;
 }
 
 
@@ -133,7 +141,7 @@ h6 {
     font-size: $font-size-paragraph-medium;
     line-height: $line-height-paragraph-medium;
     letter-spacing: 0.02em;
-    color: $neutral-400;
+    color: $neutral-700;
     margin-bottom: 0;
   }
 }
@@ -144,6 +152,6 @@ h6 {
   line-height: $line-height-paragraph-small;
   font-weight: $medium;
   letter-spacing: 0.02em;
-  color: $neutral-400;
+  color: $neutral-700;
   margin-bottom: 0;
 }

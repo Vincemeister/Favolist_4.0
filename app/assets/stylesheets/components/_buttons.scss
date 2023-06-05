@@ -14,3 +14,133 @@
   border-radius: none;
   cursor: pointer;
 }
+
+.button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-weight: $medium;
+  padding: 0.75em 1.25em;
+  border-radius: 6px;
+  text-decoration: none;
+  border: none;
+  font-size: $font-size-button-small;
+  gap: 0.5em;
+}
+
+.button-main {
+  background-color: $primary;
+  color: white;
+}
+
+.button-secondary {
+  background-color: lighten($primary, 45%);
+  // background-color: $primary-50;
+  color: $primary;
+}
+
+.button-tertiary {
+  background-color: transparent;
+  color: $neutral-700;
+  border: 1px solid $neutral-200;
+}
+
+.button-outlined {
+  background-color: transparent;
+  color: $primary;
+  border: 1px solid $primary;
+}
+
+.button-link {
+  background-color: transparent;
+  color: $primary;
+}
+
+a.button.button-link {
+  color: $primary;
+}
+
+
+.button-danger {
+  background-color: $danger;
+  color: white;
+}
+
+// .btn-list-category {
+//   font-family: $button-font;
+//   background: none;
+//   color: $my-dark;
+//   border: 1px solid $my-dark;
+//   text-decoration: none;
+//   letter-spacing: 0.5px;
+//   font-weight: 100;
+//   padding: .5em .5em;
+//   border-radius: 0px;
+// }
+
+
+// .btn-pink {
+//   font-family: $button-font;
+//   background: $my-pink;
+//   color: white;
+//   text-decoration: none;
+//   letter-spacing: 0.5px;
+//   font-weight: 100;
+//   border: none;
+//   border-radius: 0px;
+// }
+
+
+// .btn-gray {
+//   font-family: $button-font;
+//   background: $my-dark-gray;
+//   color: white;
+//   letter-spacing: 0.5px;
+//   font-weight: 100;
+//   border-radius: 0px;
+// }
+
+// .small-follow {
+//   font-family: $button-font;
+//   color: $my-pink;
+//   text-decoration: none;
+//   letter-spacing: 0.5px;
+//   font-weight: 400;
+//   border: none;
+//   text-decoration: none;
+//   font-size: 0.8em;
+//   border-radius: none;
+//   background-color: white;
+// }
+
+
+// .small-reply {
+//   font-family: $button-font;
+//   color: $my-dark-gray;
+//   text-decoration: none;
+//   letter-spacing: 0.5px;
+//   font-weight: 400;
+//   border: none;
+//   text-decoration: none;
+//   font-size: 0.8em;
+//   border-radius: none;
+//   background-color: none;
+// }
+
+
+// .comment-submit {
+
+//   font-family: $button-font;
+//   color: $my-pink;
+//   text-decoration: none;
+//   letter-spacing: 0.5px;
+//   font-weight: 400;
+//   border: none;
+//   text-decoration: none;
+//   border-radius: none;
+//   background-color: none;
+
+
+
+// }

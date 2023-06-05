@@ -21,17 +21,23 @@
 
 <!-- Modal -->
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-header border-0">
-        <div class="btn-close invisible"></div> <!-- Invisible dummy div -->
-        <h5 class="modal-title" id="exampleModalLabel">What do you want to create?</h5>
+      <div class="modal-header">
+        <h5 class="modal-title">What do you want to create?</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body custom-modal">
-        <%= link_to 'Product', new_product_path, class: "btn btn-outline-primary w-100" %>
-        <%= link_to 'List', new_list_path, class: "btn btn-outline-primary w-100" %>
+      <div class="modal-body custom-modal-body ">
+        <%# // to achieve a gap between the buttons on the modal I set a mb-1 %>
+        <%= button_to new_product_path, class: "button button-primary w-100 mb-3" do %>
+          <i class="fa-sharp fa-light fa-square"></i>Product
+        <% end %>
+        <%= button_to new_list_path, class: "button button-primary w-100" do %>
+          <i class="fa-sharp fa-light fa-table-cells"></i>List
+        <% end %>
       </div>
     </div>
   </div>
