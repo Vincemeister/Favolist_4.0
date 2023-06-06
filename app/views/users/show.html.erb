@@ -34,7 +34,10 @@
     <% end %>
   </div>
   <div class="tab-pane fade linebreak" id="pills-about" role="tabpanel" aria-labelledby="pills-about-tab">
-  <h6>About <%= @user.username %></h6>
-  <p><%= @user.bio %></p>
+    <div class="about-text">
+      <h6 class="text-center">About</h6>
+      <p><%= simple_format(@user.bio) %></p>
+    </div>
   </div>
+
 </div>

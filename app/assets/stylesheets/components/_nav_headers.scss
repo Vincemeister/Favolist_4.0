@@ -1,41 +1,49 @@
 .nav-header {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: flex-start;
-  padding: 1em;
+  justify-content: space-between;
   width: 100%;
+  gap: 2em;
+  padding: 1em;
   background-color: white;
-
-  a {
-    color: black;
-    text-decoration: none;
-  }
+  text-decoration: none;
+  color: $neutral-700;
+  border-bottom: 1px solid $neutral-100;
 }
 
 
-.align-items-center {
-  align-items: center;
-}
-
-.avatar-and-list-name {
+.avatar-and-username-{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 0.5em;
-
-  h6 {
-    margin: 0%;
-  }
 }
 
-.product-title-and-list-name {
+.titles {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
+.subtitle {
+  font-weight: $regular;
+  font-size: $font-size-paragraph-small;
+  align-items: center;
+  display: flex;
+  gap: 0.5em;
+}
+
+.main-title {
+  font-size: $font-size-heading-6-mobile;
+  font-weight: $medium;
+  line-height: 1em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
 
 .sticky-header {
   position: sticky;

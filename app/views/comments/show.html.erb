@@ -3,9 +3,9 @@
     <i class="fa-regular fa-arrow-left"></i>
   <% end %>
 
-  <div class="product-title-and-list-name">
-    <h6><%= @product.title %></h6>
-    <h5> <%= @comment.user.username %>'s comment</h5>
+  <div class="titles">
+    <div class="subtitle"><%= @product.title %></div>
+    <div class="main-title"> <%= @comment.user.username %>'s comment</div>
   </div>
   <!-- empty div to make space-between styling work -->
   <div></div>
@@ -36,7 +36,7 @@
           <% end %>
         </div>
         <!-- Replies within main comment div to make it nest -->
-        <div class="comment-show-page-replies-container" data-comments-target="comments">
+        <div class="comment-replies-container" data-comments-target="comments">
           <% @replies.each do |reply| %>
             <div class="comment reply text-decoration-none" >
               <%= cl_image_tag reply.user.avatar.key, crop: "fill", gravity: "center", aspect_ratio: "1:1", class: "avatar-small"%>

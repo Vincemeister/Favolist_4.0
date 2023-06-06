@@ -2,7 +2,7 @@
 <% referral = defined?(referral) ? referral : 'false' %>
 
 
-<div class="<%= referral == true ? 'product-header-list-view' : 'product-header' %>">
+<div class="<%= referral == true ? 'product-header-referral-card' : 'product-header' %>">
   <% if controller_name == 'products' && action_name == 'show' %>
     <%= link_to :back do %>
       <i class="fa-regular fa-arrow-left"></i>
@@ -12,10 +12,10 @@
   <% end %>
   <div class="<%= referral == true ? 'list-and-title-and-price-referral-card' : 'list-and-title-and-price' %> text-decoration-none">
     <% unless controller_name == 'lists' && action_name == 'show' %>
-      <h6 class="list-name"><%= product.list.name %></h6>
+      <h6 class="overline"><%= product.list.name %></h6>
     <% end %>
     <%= link_to product_path(product) do %>
-      <h5 class="product-title"><%= product.title  %></h5>
+      <div class="product-title"><%= product.title  %></div>
       <div class="price paragraph-small">$<%= product.price.to_i %></div>
     <% end %>
   </div>

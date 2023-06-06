@@ -7,34 +7,7 @@
   gap: 2em;
   isolation: isolate;
   padding-bottom: 1em;
-
-  .list-and-title-and-price {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-
-  .list-name {
-    font-weight: $regular;
-  }
-
-  .product-title {
-    font-weight: $semi-bold;
-    line-height: 1em;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-  }
-
-
-  .price {
-    font-weight: $semi-bold;
-  }
-
 }
-
-
 
 .product-header-show {
   display: flex;
@@ -46,17 +19,39 @@
   }
 
 
-
-.list-and-title-and-price-referral-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    text-align: flex-start;
-  }
-
-.product-header-list-view {
+.product-header-referral-card {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+}
+
+.list-and-title-and-price {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.list-and-title-and-price-referral-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: flex-start;
+}
+
+.list-name {
+  font-weight: $regular;
+}
+
+.product-title {
+  font-weight: $bold;
+  line-height: 1em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.price {
+  font-weight: $medium;
 }

@@ -1,6 +1,7 @@
 <%# Rendered only when a commentform is submitted (and not in the loops rendering the comments/replies of the /product/comments or comments/show page) %>
-<div class="comment text-decoration-none" data-controller="replies-and-comments" >
-  <%= cl_image_tag comment.user.avatar.key, crop: "fill", gravity: "center", aspect_ratio: "1:1", class: "avatar"%>
+<div class="comment text-decoration-none <%= 'reply' if comment.parent_comment.present? %>" data-controller="replies-and-comments" >
+<%= cl_image_tag comment.user.avatar.key, crop: "fill", gravity: "center", aspect_ratio: "1:1", class: "#{comment.parent_comment.present? ? 'avatar-small' : 'avatar'}" %>
+
   <div class="comment-container">
     <div class="comment-content">
       <div class="comment-author">
@@ -19,7 +20,7 @@
     </div>
     <% if context = "comment" %>
       <%= render "comments/direct_reply_form", product: comment.product, parent_comment: comment, reply: Comment.new, remote: true %>
-      <div class="commentlastreplies" data-replies-and-comments-target="commentlastreplies">
+      <div class="comment-replies-container" data-replies-and-comments-target="commentlastreplies">
         <% if comment.replies.any? %>
             <%= render "comments/comment_reply", reply: comment.replies.last, parent_comment: comment, product: comment.product %>
         <% end %>
