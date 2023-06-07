@@ -10,12 +10,18 @@
   <% else %>
     <div></div>
   <% end %>
-  <div class="<%= referral == true ? 'list-and-title-and-price-referral-card' : 'list-and-title-and-price' %> text-decoration-none">
+  <div class="list-and-title-and-price text-decoration-none">
     <% unless controller_name == 'lists' && action_name == 'show' %>
-      <h6 class="overline"><%= product.list.name %></h6>
+      <%= link_to list_path(product.list) do %>
+        <h6 class="overline"><%= product.list.name %></h6>
+      <% end %>
     <% end %>
+    <div class="product-title">
+      <%= product.title  %>
+      <%= link_to product_path(product) do %>
+      <% end %>
+    </div>
     <%= link_to product_path(product) do %>
-      <div class="product-title"><%= product.title  %></div>
       <div class="price paragraph-small">$<%= product.price.to_i %></div>
     <% end %>
   </div>

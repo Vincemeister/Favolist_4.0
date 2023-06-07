@@ -108,10 +108,14 @@ Also, remember that with this solution, any content in the grid needs to have a 
 
   .username {
     font-weight: $semi-bold;
+    font-size: $font-size-paragraph-small;
+    line-height: $line-height-paragraph-small;
   }
 
   .follower-count {
     font-weight: $regular;
+    font-size: $font-size-paragraph-xsmall;
+    line-height: $line-height-paragraph-xsmall;
   }
 
   .product-count-and-list-name {
@@ -128,6 +132,5 @@ Also, remember that with this solution, any content in the grid needs to have a 
 
   .list-name {
     font-weight: $bold;
-    line-height: 1.2em;
   }
 }

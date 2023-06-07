@@ -9,37 +9,6 @@
   padding-bottom: 1em;
 }
 
-.product-header-show {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5em 0px;
-  width: 100%;
-  }
-
-
-.product-header-referral-card {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-}
-
-.list-and-title-and-price {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.list-and-title-and-price-referral-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  text-align: flex-start;
-}
 
 .list-name {
   font-weight: $regular;
@@ -55,3 +24,37 @@
 .price {
   font-weight: $medium;
 }
+
+.list-and-title-and-price {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.product-header-referral-card {
+
+  .list-and-title-and-price {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: start;
+  }
+  .list-name,
+  .product-title,
+  .price {
+    text-align: start;
+  }
+}
+
+
+.product-header-show {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5em 0px;
+  width: 100%;
+  }

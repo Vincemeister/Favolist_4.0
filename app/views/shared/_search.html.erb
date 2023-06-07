@@ -1,12 +1,17 @@
-<%= simple_form_for :search, url: search_path, method: :get do |f| %>
-  <div class="custom-search-form-control form-group search-form">
-    <div class="custom-input-group">
-      <%= f.input :query, label: false, input_html: {class: 'custom-form-control string required', id: 'search_query'} %>
-      <div class="custom-input-group-append">
-        <button name="button" type="submit" class="custom-btn">
-          <i class="fas fa-search"></i>
-        </button>
+<div class="nav-header-search sticky-nav text-decoration-none ">
+  <%= link_to :back do %>
+    <i class="fa-regular fa-arrow-left"></i>
+  <% end %>
+  <%= simple_form_for :search, url: search_path, method: :get do |f| %>
+    <div class="custom-search-form-control form-group search-form">
+      <div class="custom-input-group">
+        <%= f.input :query, label: false, input_html: {class: 'string required', id: 'search_query', style: 'width: 100%;'} %>
+        <div class="custom-input-group-append">
+          <button name="button" type="submit" class="custom-btn">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>
