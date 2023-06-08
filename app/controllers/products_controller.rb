@@ -30,20 +30,24 @@ class ProductsController < ApplicationController
       original_product = Product.find(params[:original_product_id])
       @product.logo.attach(original_product.logo.blob.signed_id) if original_product.logo.attached?
       original_product.photos.each do |photo|
-        @product.photos.attach(photo.blob.signed_id)
+        @product.photos.attach(photo.blob.signed_id) unless photo_already_attached?(photo.blob.signed_id)
       end if original_product.photos.attached?
     else
       @product.logo.attach(params[:product][:logo]) if params[:product][:logo]
-      @product.photos.attach(params[:product][:photos]) if params[:product][:photos]
+      if params[:product][:photos]
+        params[:product][:photos].each do |photo_blob_id|
+          @product.photos.attach(photo_blob_id) unless photo_already_attached?(photo_blob_id)
+        end
+      end
     end
 
     if @product.save
-      redirect_to list_path(@product.list)
+      redirect_to product_path(@product), notice: 'Product was successfully created.'
     else
+      puts @product.errors.full_messages
       render :new
     end
   end
-
 
 
 
@@ -74,10 +78,15 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:title, :price, :review, :description, :url, :list_id, :photos, :logo)
+    params.require(:product).permit(:title, :price, :review, :description, :url, :list_id, :logo, photos: [])
   end
+
 
   def set_product
     @product = Product.find(params[:id])
+  end
+
+  def photo_already_attached?(blob_id)
+    @product.photos.blobs.any? { |blob| blob.signed_id == blob_id }
   end
 end
