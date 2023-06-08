@@ -7,16 +7,19 @@
     <%= f.input :description, required: true %>
     <%= f.association :list, collection: List.where(user: current_user), prompt: 'Select a list', required: true %>
     <%= f.input :logo, as: :file, required: true %>
-    <%= f.input :photos, as: :file, input_html: { multiple: true }, required: true %>
-    <div class="mb-3" data-controller="image" id = "Img">
-        <%=f.label :images, class: "form-label"  %>
-        <%= f.file_field :images, multiple: true, class: "form-control", accept: "image/png, image/jpeg, image/jpg", "data-imageuploader-target": "input", "data-action": "imageuploader#preview" %>
-    </div>
+    <%# <%= f.input :photos, as: :file, input_html: { multiple: true }, required: true %>
 
+    <div class="mb-6">
+      <%= f.label :photos, class: "label" %>
+      <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="1">
+      <%= f.file_field :feature_image, direct_upload: true, data: { target: 'dropzone.input' } %>
+      <div class="dropzone-msg dz-message needsclick text-gray-600">
+        <h3 class="dropzone-msg-title">Drag here to upload or click here to browse</h3>
+        <span class="dropzone-msg-desc text-sm">2 MB file size maximum. Allowed file types png, jpg.</span>
+        </div>
+      </div>
+    </div>
 
     <%= f.button :submit %>
   <% end %>
 </div>
-<!--
-
--->

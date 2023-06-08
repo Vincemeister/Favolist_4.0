@@ -8,6 +8,10 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%# because importing dropzone in the application.scss file doesn't seem to work %>
+    <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
+    <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
+
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
