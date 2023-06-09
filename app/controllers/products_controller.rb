@@ -15,7 +15,6 @@ class ProductsController < ApplicationController
         title: original_product.title,
         price: original_product.price,
         description: original_product.description
-        # Don't assign logo and photos here, do it in the create action
       )
     else
       Product.new

@@ -13,13 +13,6 @@ export default class extends Controller {
     this.hideFileInput()
     this.bindEvents()
     console.log("Dropzone connected")
-
-    // debugging
-    this.form.addEventListener('submit', (event) => {
-      const inputs = event.target.querySelectorAll('input[type=hidden][name^="product[photos]"]');
-      inputs.forEach(input => console.log(input.value));
-    });
-
   }
 
 // Private
@@ -30,13 +23,11 @@ export default class extends Controller {
 
   bindEvents() {
     this.dropZone.on("addedfile", (file) => {
-      console.log(`Added file: ${file.name}`)
 
       setTimeout(() => { file.accepted && createDirectUploadController(this, file).start() }, 500)
     })
 
     this.dropZone.on("removedfile", (file) => {
-      console.log(`Removed file: ${file.name}`);
       file.controller && removeElement(file.controller.hiddenInput)
     })
 
@@ -79,7 +70,6 @@ class DirectUploadController {
   }
 
   start() {
-    console.log(`Starting upload: ${this.file.name}`);
 
     this.file.controller = this
     this.hiddenInput = this.createHiddenInput()
@@ -131,7 +121,6 @@ class DirectUploadController {
   }
 
   emitDropzoneSuccess() {
-    console.log(`Upload successful: ${this.file.name}`);
 
     this.file.status = Dropzone.SUCCESS
     this.source.dropZone.emit("success", this.file)
