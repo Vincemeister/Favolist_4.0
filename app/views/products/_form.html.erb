@@ -11,7 +11,7 @@
 
     <div class="mb-6">
       <%= f.label :photos, class: "label" %>
-      <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="20">
+      <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="20" data-dropzone-photos="<%= @photos.map { |photo| { url: url_for(photo), blob_signed_id: photo.blob.signed_id } }.to_json unless @photos.nil? %>">
       <%= f.file_field :photos, multiple: true, direct_upload: true, data: { target: 'dropzone.input' } %>
       <div class="dropzone-msg dz-message needsclick text-gray-600">
         <h3 class="dropzone-msg-title">Drag here to upload or click here to browse</h3>

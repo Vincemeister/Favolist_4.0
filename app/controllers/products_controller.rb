@@ -11,6 +11,7 @@ class ProductsController < ApplicationController
   def new
     original_product = Product.find(params[:original_product_id]) if params[:original_product_id]
     @product = if original_product
+      @photos = original_product.photos if original_product.photos.attached?
       Product.new(
         title: original_product.title,
         price: original_product.price,
@@ -28,25 +29,24 @@ class ProductsController < ApplicationController
     if params[:original_product_id]
       original_product = Product.find(params[:original_product_id])
       @product.logo.attach(original_product.logo.blob.signed_id) if original_product.logo.attached?
-      original_product.photos.each do |photo|
-        @product.photos.attach(photo.blob.signed_id) unless photo_already_attached?(photo.blob.signed_id)
-      end if original_product.photos.attached?
     else
       @product.logo.attach(params[:product][:logo]) if params[:product][:logo]
-      if params[:product][:photos]
-        params[:product][:photos].each do |photo_blob_id|
-          @product.photos.attach(photo_blob_id) unless photo_already_attached?(photo_blob_id)
-        end
+    end
+
+    if params[:product][:photos]
+      params[:product][:photos].each do |photo_blob_id|
+        @product.photos.attach(photo_blob_id) unless photo_already_attached?(photo_blob_id)
       end
     end
 
     if @product.save
       redirect_to product_path(@product), notice: 'Product was successfully created.'
     else
-      puts @product.errors.full_messages
-      render :new
+      flash[:error] = @product.errors.full_messages
+      redirect_to new_product_path
     end
   end
+
 
 
 

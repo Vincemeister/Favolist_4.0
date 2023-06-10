@@ -5,6 +5,12 @@
   background: transparent;  /* optional: just make scrollbar invisible */
 }
 
+.copied-product-thumbnail .dz-image {
+  background-size: 100% 100%; /* Adjust according to your needs */
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 
 .text-decoration-none a {
   text-decoration: none;

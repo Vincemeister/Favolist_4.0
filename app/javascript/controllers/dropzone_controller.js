@@ -12,8 +12,35 @@ export default class extends Controller {
     this.dropZone = createDropZone(this)
     this.hideFileInput()
     this.bindEvents()
+    this.populateWithExistingImages() // Call the new function here
     console.log("Dropzone connected")
   }
+
+
+  populateWithExistingImages() {
+    let photosData = this.data.get("photos")
+    if (photosData) {
+        let photos = JSON.parse(photosData)
+
+        photos.forEach(photo => {
+            let mockFile = { name: "Filename", size: 12345, status: Dropzone.ADDED, accepted: true, url: photo.url, copiedProduct: true, blobSignedId: photo.blob_signed_id }
+
+            this.dropZone.emit("addedfile", mockFile)
+            this.dropZone.emit("thumbnail", mockFile, photo.url)
+            this.dropZone.emit("complete", mockFile) // Mark the file as uploaded
+            mockFile.status = Dropzone.SUCCESS // Indicate that the file is already uploaded
+
+            // Create a hidden input for each mock file, similar to what's done in DirectUploadController
+            const input = document.createElement("input")
+            input.type = "hidden"
+            input.name = "product[photos][]"
+            input.value = photo.blob_signed_id
+            this.element.appendChild(input)
+        })
+    }
+  }
+
+
 
 // Private
   hideFileInput() {
@@ -23,9 +50,26 @@ export default class extends Controller {
 
   bindEvents() {
     this.dropZone.on("addedfile", (file) => {
-
+    // Exclude mock files from processing
+    if (!file.copiedProduct) {
       setTimeout(() => { file.accepted && createDirectUploadController(this, file).start() }, 500)
+    }
+  })
+
+    this.dropZone.on("thumbnail", (file, dataUrl) => {
+      if (file.copiedProduct) {
+        // Locate the img element within the preview template
+        let imgElement = file.previewElement.querySelector("[data-dz-thumbnail]");
+
+        // Add your styles here
+        imgElement.style.objectFit = "contain";
+        imgElement.style.width = "100%";
+        imgElement.style.height = "100%";
+      }
     })
+
+
+
 
     this.dropZone.on("removedfile", (file) => {
       file.controller && removeElement(file.controller.hiddenInput)
