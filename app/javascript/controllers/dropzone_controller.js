@@ -160,6 +160,8 @@ class DirectUploadController {
 
   emitDropzoneError(error) {
     this.file.status = Dropzone.ERROR
+    console.log(`Error uploading file: ${this.file.name} - ${error}`)
+
     this.source.dropZone.emit("error", this.file, error)
     this.source.dropZone.emit("complete", this.file)
   }
@@ -167,6 +169,7 @@ class DirectUploadController {
   emitDropzoneSuccess() {
 
     this.file.status = Dropzone.SUCCESS
+    console.log(`File uploaded successfully: ${this.file.name}`)
     this.source.dropZone.emit("success", this.file)
     this.source.dropZone.emit("complete", this.file)
   }

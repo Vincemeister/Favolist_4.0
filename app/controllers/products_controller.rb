@@ -17,11 +17,14 @@ class ProductsController < ApplicationController
         price: original_product.price,
         description: original_product.description
       )
+    elsif params[:product]
+      Product.new(product_params)
     else
       Product.new
     end
     @user = current_user
   end
+
 
   def create
     @product = Product.new(product_params)
@@ -33,19 +36,20 @@ class ProductsController < ApplicationController
       @product.logo.attach(params[:product][:logo]) if params[:product][:logo]
     end
 
-    if params[:product][:photos]
-      params[:product][:photos].each do |photo_blob_id|
-        @product.photos.attach(photo_blob_id) unless photo_already_attached?(photo_blob_id)
-      end
-    end
-
     if @product.save
+      if params[:product][:photos]
+        params[:product][:photos].reject(&:blank?).each do |photo_blob_id|
+          @product.photos.attach(photo_blob_id) unless blob_exists?(photo_blob_id)
+        end
+      end
       redirect_to product_path(@product), notice: 'Product was successfully created.'
     else
       flash[:error] = @product.errors.full_messages
-      redirect_to new_product_path
+      redirect_to new_product_path(product: product_params)
     end
   end
+
+
 
 
 
@@ -88,4 +92,9 @@ class ProductsController < ApplicationController
   def photo_already_attached?(blob_id)
     @product.photos.blobs.any? { |blob| blob.signed_id == blob_id }
   end
+
+  def blob_exists?(blob_id)
+    ActiveStorage::Blob.exists?(blob_id)
+  end
+
 end
