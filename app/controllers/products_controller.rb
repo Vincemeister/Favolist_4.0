@@ -25,29 +25,42 @@ class ProductsController < ApplicationController
     @user = current_user
   end
 
+def create
+  @product = Product.new(product_params)
 
-  def create
-    @product = Product.new(product_params)
-
-    if params[:original_product_id]
-      original_product = Product.find(params[:original_product_id])
-      @product.logo.attach(original_product.logo.blob.signed_id) if original_product.logo.attached?
-    else
-      @product.logo.attach(params[:product][:logo]) if params[:product][:logo]
+  if params[:original_product_id]
+    original_product = Product.find(params[:original_product_id])
+    if original_product.logo.attached?
+      @product.logo.attach(original_product.logo.blob.signed_id)
     end
-
-    if @product.save
-      if params[:product][:photos]
-        params[:product][:photos].reject(&:blank?).each do |photo_blob_id|
-          @product.photos.attach(photo_blob_id) unless blob_exists?(photo_blob_id)
-        end
+    # If there are photos to copy, we create new blobs for each of them
+    if original_product.photos.attached?
+      original_product.photos.each do |photo|
+        new_blob = ActiveStorage::Blob.create_after_upload!(
+          io: StringIO.new(photo.download), # we download the old photo to a StringIO object
+          filename: photo.filename, # we keep the old filename
+          content_type: photo.content_type # we keep the old content_type
+        )
+        @product.photos.attach(new_blob.signed_id) # we attach the new blob to the new product
       end
-      redirect_to product_path(@product), notice: 'Product was successfully created.'
-    else
-      flash[:error] = @product.errors.full_messages
-      redirect_to new_product_path(product: product_params)
     end
+  else
+    @product.logo.attach(params[:product][:logo]) if params[:product][:logo]
   end
+
+  if @product.save
+    if params[:product][:photos]
+      params[:product][:photos].reject(&:blank?).each do |photo_blob_id|
+        @product.photos.attach(photo_blob_id) unless blob_exists?(photo_blob_id)
+      end
+    end
+    redirect_to product_path(@product), notice: 'Product was successfully created.'
+  else
+    flash[:error] = @product.errors.full_messages
+    redirect_to new_product_path(product: product_params)
+  end
+end
+
 
 
 

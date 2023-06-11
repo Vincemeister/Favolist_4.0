@@ -18,11 +18,16 @@ export default class extends Controller {
 
 
   populateWithExistingImages() {
+    console.log('populateWithExistingImages called')
+
     let photosData = this.data.get("photos")
     if (photosData) {
         let photos = JSON.parse(photosData)
+        console.log('Parsed photos:', photos)
 
         photos.forEach(photo => {
+          console.log('Processing photo:', photo)
+
             let mockFile = { name: "Filename", size: 12345, status: Dropzone.ADDED, accepted: true, url: photo.url, copiedProduct: true, blobSignedId: photo.blob_signed_id }
 
             this.dropZone.emit("addedfile", mockFile)
@@ -50,11 +55,11 @@ export default class extends Controller {
 
   bindEvents() {
     this.dropZone.on("addedfile", (file) => {
-    // Exclude mock files from processing
-    if (!file.copiedProduct) {
+      console.log('addedfile event triggered with file:', file)
+
       setTimeout(() => { file.accepted && createDirectUploadController(this, file).start() }, 500)
-    }
-  })
+    })
+
 
     this.dropZone.on("thumbnail", (file, dataUrl) => {
       if (file.copiedProduct) {
@@ -72,8 +77,27 @@ export default class extends Controller {
 
 
     this.dropZone.on("removedfile", (file) => {
-      file.controller && removeElement(file.controller.hiddenInput)
+
+      console.log(file);
+      console.log(file.controller);
+      console.log(file.controller ? file.controller.hiddenInput : 'file.controller is undefined');
+
+
+      console.log('removedfile event triggered with file:', file)
+
+      // Check if the file has the blobSignedId property
+      if (file.blobSignedId) {
+        // Find the associated hidden input by its value and remove it
+        let hiddenInput = this.element.querySelector(`input[type="hidden"][value="${file.blobSignedId}"]`)
+        hiddenInput && hiddenInput.remove()
+      } else {
+        // If not, remove the hidden input in the old way
+        file.controller && removeElement(file.controller.hiddenInput)
+      }
+
+      console.log('Hidden inputs after removal:', this.element.querySelectorAll('input[type="hidden"]'))
     })
+
 
     this.dropZone.on("canceled", (file) => {
       file.controller && file.controller.xhr.abort()
@@ -117,6 +141,8 @@ class DirectUploadController {
 
     this.file.controller = this
     this.hiddenInput = this.createHiddenInput()
+
+    console.log(this);
     this.directUpload.create((error, attributes) => {
       if (error) {
         removeElement(this.hiddenInput)
@@ -133,7 +159,9 @@ class DirectUploadController {
     const input = document.createElement("input")
     input.type = "hidden"
     input.name = this.source.inputTarget.name
+
     insertAfter(input, this.source.inputTarget)
+    console.log('Created hidden input with value:', input.value)
     return input
   }
 
@@ -174,6 +202,8 @@ class DirectUploadController {
     this.source.dropZone.emit("complete", this.file)
   }
 }
+
+// -----------------------------------------------------------------------------
 
 // Top level...
 function createDirectUploadController(source, file) {
