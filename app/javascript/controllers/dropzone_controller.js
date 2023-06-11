@@ -12,8 +12,37 @@ export default class extends Controller {
     this.dropZone = createDropZone(this)
     this.hideFileInput()
     this.bindEvents()
+    this.populateWithExistingLogo() // Call the new function here
     this.populateWithExistingImages() // Call the new function here
     console.log("Dropzone connected")
+  }
+
+
+  populateWithExistingLogo() {
+    console.log('populateWithExistingLogo called')
+
+    let logoData = this.data.get("logo")
+    if (logoData) {
+        let logo = JSON.parse(logoData)
+        console.log('Parsed logo:', logo)
+
+      console.log('Processing logo:', logo)
+
+        let mockFile = { name: "Filename", size: 12345, status: Dropzone.ADDED, accepted: true, url: logo.url, copiedProduct: true, blobSignedId: logo.blob_signed_id }
+
+        this.dropZone.emit("addedfile", mockFile)
+        this.dropZone.emit("thumbnail", mockFile, logo.url)
+        this.dropZone.emit("complete", mockFile) // Mark the file as uploaded
+        mockFile.status = Dropzone.SUCCESS // Indicate that the file is already uploaded
+
+        // Create a hidden input for each mock file, similar to what's done in DirectUploadController
+        const input = document.createElement("input")
+        input.type = "hidden"
+        input.name = "product[logo]"
+        input.value = logo.blob_signed_id
+        this.element.appendChild(input)
+
+    }
   }
 
 

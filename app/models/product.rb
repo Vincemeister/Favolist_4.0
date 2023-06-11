@@ -5,9 +5,9 @@ class Product < ApplicationRecord
   has_one :user, through: :list
   has_many :referrals, dependent: :destroy
   has_many :comments, dependent: :destroy
-  
-  has_many_attached :photos, dependent: :destroy
+
   has_one_attached :logo, dependent: :destroy
+  has_many_attached :photos, dependent: :destroy
 
   has_many :bookmarks, dependent: :destroy
   has_many :bookmarked_by, through: :bookmarks, source: :user

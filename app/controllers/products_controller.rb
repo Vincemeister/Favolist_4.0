@@ -11,6 +11,7 @@ class ProductsController < ApplicationController
   def new
     original_product = Product.find(params[:original_product_id]) if params[:original_product_id]
     @product = if original_product
+      @logo = original_product.logo if original_product.logo.attached?
       @photos = original_product.photos if original_product.photos.attached?
       Product.new(
         title: original_product.title,
@@ -31,7 +32,12 @@ def create
   if params[:original_product_id]
     original_product = Product.find(params[:original_product_id])
     if original_product.logo.attached?
-      @product.logo.attach(original_product.logo.blob.signed_id)
+      new_blob = ActiveStorage::Blob.create_after_upload!(
+        io: StringIO.new(original_product.logo.download), # we download the old photo to a StringIO object
+        filename: original_product.logo.filename, # we keep the old filename
+        content_type: original_product.logo.content_type # we keep the old content_type
+      )
+      @product.logo.attach(new_blob.signed_id) # we attach the new blob to the new product
     end
     # If there are photos to copy, we create new blobs for each of them
     if original_product.photos.attached?
@@ -44,11 +50,15 @@ def create
         @product.photos.attach(new_blob.signed_id) # we attach the new blob to the new product
       end
     end
-  else
-    @product.logo.attach(params[:product][:logo]) if params[:product][:logo]
   end
 
   if @product.save
+    
+
+    if params[:product][:logo].present?
+      logo_blob_id = params[:product][:logo]
+      @product.logo.attach(logo_blob_id) unless blob_exists?(logo_blob_id)
+    end
     if params[:product][:photos]
       params[:product][:photos].reject(&:blank?).each do |photo_blob_id|
         @product.photos.attach(photo_blob_id) unless blob_exists?(photo_blob_id)
@@ -59,6 +69,7 @@ def create
     flash[:error] = @product.errors.full_messages
     redirect_to new_product_path(product: product_params)
   end
+
 end
 
 
