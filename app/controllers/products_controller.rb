@@ -103,23 +103,10 @@ class ProductsController < ApplicationController
   def comments
   end
 
-  def search_or_manual_upload
+  def search_or_manual_product_upload
     render 'search_or_manual_product_upload'
   end
 
-
-  def fetch_amazon
-    response = HTTParty.get("https://api.parazun.com/v1/amazon", query: {url: params[:url]})
-    product_info = JSON.parse(response.body)
-
-    @product = Product.new(
-      title: product_info["title"],
-      price: product_info["price"],
-      description: product_info["description"]
-    )
-
-    render 'new', product: @product
-  end
 
 
   private

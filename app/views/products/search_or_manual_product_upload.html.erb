@@ -1,5 +1,5 @@
 <div data-controller="amazon-search-products">
-  <%= form_with url: "/products/fetch_amazon", remote: true, method: :post, html: { class: 'mb-5', data: { amazon_search_products_target: 'form' } } do |f| %>
+  <%= form_with remote: true, method: :post, html: { class: 'mb-5', data: { amazon_search_products_target: 'form' } } do |f| %>
     <%= f.text_field :url,
                      class: "form-control",
                      placeholder: 'Paste Amazon product url',

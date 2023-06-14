@@ -3,35 +3,29 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = [ "urlInput" ]
+  static targets = [ "urlInput", "form" ]
 
   connect() {
     console.log("Hello, Stimulus!", this.element);
-    this.urlInputTarget.addEventListener("submit", event => {
+    console.log(this.urlInputTarget);
+    console.log(this.formTarget);
+    this.formTarget.addEventListener("submit", event => {
       event.preventDefault();
-
-      const url = this.urlInputTarget.value;
-      const request = new Request("/products/fetch_amazon", {
-        method: "POST",
-        body: JSON.stringify({ url: url }),
-        headers: {
-          "X-CSRF-Token": getMetaValue("csrf-token"),
-          "Content-Type": "application/json"
-        },
-        credentials: "same-origin"
-      });
-
-      fetch(request)
-        .then(response => response.json())
-        .then(data => {
-          localStorage.setItem('fetchedProduct', JSON.stringify(data));
-          window.location.href = '/products/new';
-        });
+      this.sendRequest(this.urlInputTarget.value);
     });
   }
-}
 
-function getMetaValue(name) {
-  const element = document.head.querySelector(`meta[name="${name}"]`);
-  return element.getAttribute("content");
+  sendRequest(asin) {
+    fetch(`https://parazun-amazon-data.p.rapidapi.com/product/?asin=${asin}&region=US`,
+    { headers:
+      { accept: "application/json" },
+      'X-RapidAPI-Key': '971b32dc4emshdc908738f2fb7c0p15bcc5jsn4f8c98db4f7d',
+      'X-RapidAPI-Host': 'parazun-amazon-data.p.rapidapi.com'
+      }
+      )
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data)});
+      }
+
 }
