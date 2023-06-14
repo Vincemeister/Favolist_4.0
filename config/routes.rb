@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   get 'pages/search', to: 'pages#search', as: 'search'
   get 'pages/test', to: 'pages#test', as: 'test'
 
+  get '/products/search_or_manual_upload', to: 'products#search_or_manual_upload', as: 'search_or_manual_upload'
+  post '/products/fetch_amazon', to: 'products#fetch_amazon'
+
   resources :products, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
 
     member do
@@ -25,6 +28,8 @@ Rails.application.routes.draw do
       post :bookmark, to: 'bookmarks#bookmark'
       post :unbookmark, to: 'bookmarks#unbookmark'
     end
+
+
   end
 
   resources :bookmarks, only: [:index]

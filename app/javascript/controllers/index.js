@@ -4,6 +4,12 @@
 
 import { application } from "./application"
 
+import AmazonPrefillProductFormController from "./amazon_prefill_product_form_controller"
+application.register("amazon-prefill-product-form", AmazonPrefillProductFormController)
+
+import AmazonSearchProductsController from "./amazon_search_products_controller"
+application.register("amazon-search-products", AmazonSearchProductsController)
+
 import BookmarksController from "./bookmarks_controller"
 application.register("bookmarks", BookmarksController)
 
