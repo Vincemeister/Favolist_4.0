@@ -3,8 +3,8 @@
   <%= simple_form_for @product, url: products_path, method: :post do |f| %>
     <%= f.input :title, required: true, data: { target: "amazon-prefill-product-form.title" } %>
     <%= f.input :price, required: true, data: { target: "amazon-prefill-product-form.price" } %>
-    <%= f.input :review, required: true %>
     <%= f.input :description, required: true, data: { target: "amazon-prefill-product-form.description" } %>
+    <%= f.input :review, required: true %>
     <%= f.association :list, collection: List.where(user: current_user), prompt: 'Select a list', required: true %>
 
 
@@ -21,7 +21,7 @@
 
     <div class="mb-6">
       <%= f.label :photos, class: "label" %>
-      <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="20" data-dropzone-photos="<%= @photos.map { |photo| { url: url_for(photo), blob_signed_id: photo.blob.signed_id } }.to_json unless @photos.nil? %>">
+      <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="20" data-dropzone-photos="<%= @photos.map { |photo| { url: url_for(photo), blob_signed_id: photo.is_a?(ActiveStorage::Attachment) ? photo.blob.signed_id : photo.signed_id } }.to_json unless @photos.nil? %>">
       <%= f.file_field :photos, multiple: true, direct_upload: true, data: { target: 'dropzone.input' } %>
       <div class="dropzone-msg dz-message needsclick text-gray-600">
         <h3 class="dropzone-msg-title">Drag here to upload or click here to browse</h3>

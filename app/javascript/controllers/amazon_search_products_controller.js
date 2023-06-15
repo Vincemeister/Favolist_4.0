@@ -16,16 +16,17 @@ export default class extends Controller {
   }
 
   sendRequest(asin) {
-    fetch(`https://parazun-amazon-data.p.rapidapi.com/product/?asin=${asin}&region=US`,
-    { headers:
-      { accept: "application/json" },
-      'X-RapidAPI-Key': '971b32dc4emshdc908738f2fb7c0p15bcc5jsn4f8c98db4f7d',
-      'X-RapidAPI-Host': 'parazun-amazon-data.p.rapidapi.com'
+    fetch(`https://parazun-amazon-data.p.rapidapi.com/product/?asin=${asin}&region=US`, {
+      headers: {
+        "Accept": "application/json",
+        "X-RapidAPI-Key": "971b32dc4emshdc908738f2fb7c0p15bcc5jsn4f8c98db4f7d",
+        "X-RapidAPI-Host": "parazun-amazon-data.p.rapidapi.com"
       }
-      )
-      .then(response => response.json())
-      .then((data) => {
-        console.log(data)});
+    })
+    .then(response => response.json())
+    .then((data) => {
+      console.log(data)
+    });
       }
 
 }
