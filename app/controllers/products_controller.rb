@@ -1,6 +1,7 @@
 # gem for the fetch_amazon method
 require 'open-uri'
 require 'net/http'
+include CloudinaryHelper
 
 
 
@@ -26,6 +27,7 @@ class ProductsController < ApplicationController
       )
     elsif session[:product_data]
       product_data = session[:product_data]
+      @logo = ActiveStorage::Blob.find_by(filename: 'amazon_logo.png')
       @photos = product_data['images'].map do |image_url|
         # Download the image from the URL
         downloaded_image = URI.open(image_url)
@@ -83,9 +85,10 @@ class ProductsController < ApplicationController
 
     if @product.save
       if params[:product][:logo].present?
-        logo_blob_id = params[:product][:logo]
-        @product.logo.attach(logo_blob_id) unless blob_exists?(logo_blob_id)
+        @product.logo.attach(params[:product][:logo])
       end
+
+
       if params[:product][:photos]
         # adding reverse because the last image uploaded is the first one in the array
         params[:product][:photos].reject(&:blank?).reverse.each do |photo_blob_id|
@@ -143,10 +146,6 @@ class ProductsController < ApplicationController
       redirect_to search_or_manual_product_upload_path
     end
   end
-
-
-
-
 
   private
 

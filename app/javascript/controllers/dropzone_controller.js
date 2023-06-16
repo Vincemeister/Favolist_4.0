@@ -23,17 +23,23 @@ export default class extends Controller {
 
     let logoData = this.data.get("logo")
     if (logoData) {
-        let logo = JSON.parse(logoData)
-        console.log('Parsed logo:', logo)
+      let logo = JSON.parse(logoData)
+      console.log('Parsed logo:', logo)
 
       console.log('Processing logo:', logo)
 
-        let mockFile = { name: "Filename", size: 12345, status: Dropzone.ADDED, accepted: true, url: logo.url, copiedProduct: true, blobSignedId: logo.blob_signed_id }
+      let mockFile = {
+        name: "Filename",
+        size: 12345,
+        status: Dropzone.ADDED,
+        accepted: true,
+        url: logo.url,
+        copiedProduct: true
+      }
 
-        this.dropZone.emit("addedfile", mockFile)
-        this.dropZone.emit("thumbnail", mockFile, logo.url)
-        this.dropZone.emit("complete", mockFile) // Mark the file as uploaded
-        mockFile.status = Dropzone.SUCCESS // Indicate that the file is already uploaded
+      // Check if blob_signed_id exists in the logo hash
+      if (logo.blob_signed_id) {
+        mockFile.blobSignedId = logo.blob_signed_id
 
         // Create a hidden input for each mock file, similar to what's done in DirectUploadController
         const input = document.createElement("input")
@@ -41,7 +47,12 @@ export default class extends Controller {
         input.name = "product[logo]"
         input.value = logo.blob_signed_id
         this.element.appendChild(input)
+      }
 
+      this.dropZone.emit("addedfile", mockFile)
+      this.dropZone.emit("thumbnail", mockFile, logo.url)
+      this.dropZone.emit("complete", mockFile) // Mark the file as uploaded
+      mockFile.status = Dropzone.SUCCESS // Indicate that the file is already uploaded
     }
   }
 
@@ -106,26 +117,22 @@ export default class extends Controller {
 
 
     this.dropZone.on("removedfile", (file) => {
-
-      console.log(file);
-      console.log(file.controller);
-      console.log(file.controller ? file.controller.hiddenInput : 'file.controller is undefined');
-
-
       console.log('removedfile event triggered with file:', file)
 
-      // Check if the file has the blobSignedId property
       if (file.blobSignedId) {
-        // Find the associated hidden input by its value and remove it
+        // This is an Active Storage object. Remove it in the usual way.
         let hiddenInput = this.element.querySelector(`input[type="hidden"][value="${file.blobSignedId}"]`)
         hiddenInput && hiddenInput.remove()
-      } else {
-        // If not, remove the hidden input in the old way
-        file.controller && removeElement(file.controller.hiddenInput)
+      } else if (file.url) {
+        // This is an Amazon logo. Do whatever you need to do here.
+        // If you're adding the Amazon logo URL to a hidden input field, you would remove that field here.
+        // REDUNDANT SINCE I CREATED AND AMAZON LOGO BLOB IN THE SEED?
       }
 
+      file.controller && removeElement(file.controller.hiddenInput)
       console.log('Hidden inputs after removal:', this.element.querySelectorAll('input[type="hidden"]'))
     })
+
 
 
     this.dropZone.on("canceled", (file) => {

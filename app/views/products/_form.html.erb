@@ -10,7 +10,7 @@
 
     <div class="mb-6">
       <%= f.label :logo, class: "label" %>
-     <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="1" data-dropzone-logo="<%= @logo ? { url: url_for(@logo), blob_signed_id: @logo.blob.signed_id }.to_json : '' %>">
+      <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="1" data-dropzone-logo="<%= { url: url_for(@logo), blob_signed_id: @logo.is_a?(ActiveStorage::Blob) ? @logo.signed_id : @logo.blob.signed_id }.to_json unless @logo.nil? %>">
       <%= f.file_field :logo, direct_upload: true, data: { target: 'dropzone.input' } %>
       <div class="dropzone-msg dz-message needsclick text-gray-600">
         <h3 class="dropzone-msg-title">Drag here to upload or click here to browse</h3>
