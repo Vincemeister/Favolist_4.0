@@ -36,6 +36,8 @@ class ScrapeProductsController < ApplicationController
     title = response_body["product"]["title"]
     price = response_body["product"]["variants"][0]["price"]
     description = Nokogiri::HTML(response_body["product"]["body_html"]).text
+    link = url
+
     images = response_body["product"]["images"].map do |image_hash|
       image_hash["src"]
     end
@@ -61,7 +63,7 @@ class ScrapeProductsController < ApplicationController
 
     puts "LOGO RESPONSE: #{logo}"
 
-    product_data = { title: title, price: price, description: description, images: images, logo: logo }
+    product_data = { title: title, price: price, description: description, url: link, images: images, logo: logo }
 
     product_data # return the product data
   end

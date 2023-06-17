@@ -5,6 +5,7 @@
     <%= f.input :price, required: true, data: { target: "amazon-prefill-product-form.price" } %>
     <%= f.input :description, required: true, data: { target: "amazon-prefill-product-form.description" } %>
     <%= f.input :review, required: true %>
+    <%= f.input :url, required: true, data: { target: "amazon-prefill-product-form.url" } %>
     <%= f.association :list, collection: List.where(user: current_user), prompt: 'Select a list', required: true %>
 
 

@@ -24,7 +24,8 @@ class ProductsController < ApplicationController
       Product.new(
         title: original_product.title,
         price: original_product.price,
-        description: original_product.description
+        description: original_product.description,
+        url: original_product.url
       )
     elsif session[:product_data]
       product_data = session[:product_data]
@@ -69,7 +70,8 @@ class ProductsController < ApplicationController
       Product.new(
         title: product_data['title'],
         price: product_data['price'],
-        description: product_data['description']
+        description: product_data['description'],
+        url: product_data['url']
       ).tap do |product|
         product.photos.attach(@photos)
         session.delete(:product_data) # delete the session data here
@@ -208,21 +210,16 @@ class ProductsController < ApplicationController
     title = response_body["title"]
     price = response_body["price"]["amount"]
     description = response_body["description"].join(' ') # join array elements into a single string
+    link = response_body["link"]
     # Extract all high resolution images
     images = response_body["images"].map do |image_hash|
       image_hash["hi_res"]
     end
 
-
-    puts "Title: #{title}"
-    puts "Price: #{price}"
-    puts "Description: #{description}"
-    puts "Images: #{images}"
+    puts "URL: #{link}"
 
     # Here, you can create a new instance of Product, or return these values as a hash
-    product_data = { title: title, price: price, description: description, images: images }
-
-    puts product_data # for debugging purposes
+    product_data = { title: title, price: price, description: description, images: images, url: link }
 
     product_data # return the product data
   end
