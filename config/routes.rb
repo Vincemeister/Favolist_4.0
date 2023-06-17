@@ -10,8 +10,9 @@ Rails.application.routes.draw do
   get 'pages/test', to: 'pages#test', as: 'test'
 
   get '/search_or_manual_product_upload', to: 'products#search_or_manual_product_upload', as: 'search_or_manual_product_upload'
-  post '/products/fetch_amazon_product', to: 'products#fetch_amazon_product', as: 'fetch_amazon_product'
+  post '/fetch_amazon_product', to: 'scrape_products#fetch_amazon_product', as: 'fetch_amazon_product'
   post '/fetch_shopify_product', to: 'scrape_products#fetch_shopify_product', as: 'fetch_shopify_product'
+  post '/fetch_product', to: 'scrape_products#fetch_product', as: 'fetch_product'
 
   resources :products, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
 

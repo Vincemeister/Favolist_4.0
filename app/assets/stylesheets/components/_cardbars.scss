@@ -58,3 +58,13 @@
   }
 
 }
+
+.cardbar-logo-link {
+  display: flex;  /* This makes the a tag behave more like an img tag */
+  align-items: center;
+  padding: 0;  /* Remove padding */
+  margin: 0;
+  border: none;  /* Remove border */
+  background: none;  /* Remove background */
+  text-decoration: none;  /* Remove underline */
+}

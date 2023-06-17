@@ -163,18 +163,6 @@ class ProductsController < ApplicationController
   end
 
 
-  def fetch_amazon_product
-    product_data = fetch_product_from_amazon(params[:asin])
-
-    if product_data.present?
-      session[:product_data] = product_data
-      redirect_to new_product_path
-    else
-      flash[:error] = 'Failed to fetch product data from Amazon.'
-      redirect_to search_or_manual_product_upload_path
-    end
-  end
-
   private
 
   def product_params
@@ -191,37 +179,6 @@ class ProductsController < ApplicationController
 
   def blob_exists?(blob_id)
     ActiveStorage::Blob.exists?(blob_id)
-  end
-
-  def fetch_product_from_amazon(asin)
-    url = URI("https://parazun-amazon-data.p.rapidapi.com/product/?asin=#{asin}&region=US")
-
-    http = Net::HTTP.new(url.host, url.port)
-    http.use_ssl = true
-
-    request = Net::HTTP::Get.new(url)
-    request["X-RapidAPI-Key"] = '971b32dc4emshdc908738f2fb7c0p15bcc5jsn4f8c98db4f7d'
-    request["X-RapidAPI-Host"] = 'parazun-amazon-data.p.rapidapi.com'
-
-    response = http.request(request)
-    response_body = JSON.parse(response.body) # convert the JSON response to a Ruby hash
-
-    # Extracting the title, price, and description
-    title = response_body["title"]
-    price = response_body["price"]["amount"]
-    description = response_body["description"].join(' ') # join array elements into a single string
-    link = response_body["link"]
-    # Extract all high resolution images
-    images = response_body["images"].map do |image_hash|
-      image_hash["hi_res"]
-    end
-
-    puts "URL: #{link}"
-
-    # Here, you can create a new instance of Product, or return these values as a hash
-    product_data = { title: title, price: price, description: description, images: images, url: link }
-
-    product_data # return the product data
   end
 
 end

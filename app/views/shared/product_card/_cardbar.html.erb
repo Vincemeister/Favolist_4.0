@@ -13,7 +13,7 @@
       <% end %>
     </div>
     <% if product.logo.attached? %>
-      <%= link_to product.url, target: "_blank" do %>
+      <%= link_to product.url, class: "cardbar-logo-link", target: "_blank" do %>
         <%= image_tag product.logo, class: "cardbar-logo" %>
       <% end %>
     <% else %>

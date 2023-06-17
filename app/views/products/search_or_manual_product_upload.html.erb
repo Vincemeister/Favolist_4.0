@@ -1,11 +1,6 @@
-<%= form_with url: fetch_amazon_product_path, method: :post, class: 'mb-5' do |f| %>
-  <%= f.text_field :asin, class: "form-control", placeholder: 'Paste Amazon product url' %>
-  <%= f.submit 'Fetch Amazon Product Info' %>
-<% end %>
 
 
-
-<%= form_with url: fetch_shopify_product_path, method: :post, class: 'mb-5' do |f| %>
-  <%= f.text_field :asin, class: "form-control", placeholder: 'Paste Shopify product url' %>
+<%= form_with url: fetch_product_path, method: :post, class: 'mb-5' do |f| %>
+  <%= f.text_field :link, class: "form-control", placeholder: 'Paste Shopify product url' %>
   <%= f.submit 'Fetch Shopfiy Product Info' %>
 <% end %>
