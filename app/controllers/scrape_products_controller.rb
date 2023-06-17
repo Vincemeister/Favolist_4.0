@@ -105,7 +105,7 @@ class ScrapeProductsController < ApplicationController
 
     response = http.request(request)
     response_body = JSON.parse(response.body) # convert the JSON response to a Ruby hash
-    title = response_body["product"]["title"]
+    title = response_body["product"]["vendor"] + " - " + response_body["product"]["title"]
     price = response_body["product"]["variants"][0]["price"]
     description = Nokogiri::HTML(response_body["product"]["body_html"]).text
     link = url
