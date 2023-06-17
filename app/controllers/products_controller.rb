@@ -5,6 +5,7 @@ include CloudinaryHelper
 
 
 
+
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy, :comments, :bookmark, :unbookmark]
 
@@ -27,7 +28,32 @@ class ProductsController < ApplicationController
       )
     elsif session[:product_data]
       product_data = session[:product_data]
+    # Create a new ActiveStorage blob for the logo if it exists
+    if product_data['logo']
+      logo_url = product_data['logo']
+      downloaded_logo = URI.open(logo_url)
+      filename = File.basename(logo_url)
+
+      if filename.ends_with?('.svg')
+        # Upload the SVG to Cloudinary
+        uploaded_image = Cloudinary::Uploader.upload(logo_url)
+
+        # Use Cloudinary's URL-based transformation to change SVG to PNG
+        png_url = Cloudinary::Utils.cloudinary_url(uploaded_image["public_id"], format: "png")
+
+        # Download the PNG image
+        downloaded_logo = URI.open(png_url)
+        filename = filename.gsub('.svg', '.png')  # Change filename extension to .png
+      end
+
+      @logo = ActiveStorage::Blob.create_and_upload!(
+        io: downloaded_logo,
+        filename: filename,
+        content_type: downloaded_logo.content_type
+      )
+    else
       @logo = ActiveStorage::Blob.find_by(filename: 'amazon_logo.png')
+    end
       @photos = product_data['images'].map do |image_url|
         # Download the image from the URL
         downloaded_image = URI.open(image_url)
@@ -202,3 +228,36 @@ class ProductsController < ApplicationController
   end
 
 end
+
+
+
+
+
+
+
+
+
+
+
+
+# -----------------------------------------------------------------------------------------------------------------------
+# fetch_amazon_product:
+# This method is responsible for fetching product data from the Amazon product API. It constructs a URL with the passed in ASIN (Amazon Standard Identification Number) and sends a GET request to this URL. The API's response is expected to be a JSON containing details about the product.
+
+# The response body is parsed into a Ruby hash, and the required details like title, price, description, and images are extracted from it. These details are then stored in the session under the :product_data key. This is done so that the data can be used in the new action to pre-fill the form fields. If the product data is not present, it redirects the user back to the search or manual upload page and displays an error message.
+
+# new:
+# This method is responsible for initializing a new product for creation. It handles different cases based on where the data for the new product is coming from.
+
+# If the product is being duplicated from an existing product (original_product), it initializes a new product with the details of the original product. The logo and photos from the original product are also assigned to instance variables @logo and @photos if they exist, which can be used in the view to display these attachments.
+# If the product data is present in the session (which means it was fetched from Amazon), it initializes a new product with this data. It also downloads the images from the fetched data, creates new ActiveStorage blobs from these images, and assigns these blobs to @photos. The logo is fetched from a previously stored blob with filename 'amazon_logo.png'. These blobs can later be attached to the product in the create action.
+# If neither of the above conditions are met, it simply initializes a new empty product.
+
+# create:
+# This method attempts to create and save a new product from the form data. If the product is a duplicate, it downloads the logo and photos from the original product, creates new blobs from these downloads, and attaches these blobs to the new product. This is done to ensure that each product has its own copies of the attachments and changes to the original product's attachments do not affect the duplicate product.
+
+# If the logo or photos are included in the form data (which could be the case if the product data was fetched from Amazon), these blobs are attached to the product.
+
+# If the product is saved successfully, the user is redirected to the new product's page with a success message. If not, the form is re-rendered with error messages.
+
+# The logic in these methods takes into account different scenarios to ensure that the attachments (logo and photos) are handled properly based on where the product data is coming from. The use of ActiveStorage blobs makes it possible to handle file uploads in a consistent way across these different scenarios.

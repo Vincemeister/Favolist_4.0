@@ -66,6 +66,8 @@ source "https://token:7F03DB71-762E-485E-B73A-A3C88B457C05@dl.fontawesome.com/ba
 end
 gem 'pg_search'
 gem "httparty"
+gem 'nokogiri'
+
 
 
 
