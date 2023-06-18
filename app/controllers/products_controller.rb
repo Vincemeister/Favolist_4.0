@@ -1,10 +1,6 @@
-# gem for the fetch_amazon method
 require 'open-uri'
 require 'net/http'
 include CloudinaryHelper
-
-
-
 
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy, :comments, :bookmark, :unbookmark]
@@ -18,70 +14,10 @@ class ProductsController < ApplicationController
 
   def new
     original_product = Product.find(params[:original_product_id]) if params[:original_product_id]
-    @product = if original_product
-      @logo = original_product.logo if original_product.logo.attached?
-      @photos = original_product.photos if original_product.photos.attached?
-      Product.new(
-        title: original_product.title,
-        price: original_product.price,
-        description: original_product.description,
-        url: original_product.url
-      )
-    elsif session[:product_data]
-      product_data = session[:product_data]
-    # Create a new ActiveStorage blob for the logo if it exists
-    if product_data['logo']
-      logo_url = product_data['logo']
-      downloaded_logo = URI.open(logo_url)
-      filename = File.basename(logo_url)
-
-      if filename.ends_with?('.svg')
-        # Upload the SVG to Cloudinary
-        uploaded_image = Cloudinary::Uploader.upload(logo_url)
-
-        # Use Cloudinary's URL-based transformation to change SVG to PNG
-        png_url = Cloudinary::Utils.cloudinary_url(uploaded_image["public_id"], format: "png")
-
-        # Download the PNG image
-        downloaded_logo = URI.open(png_url)
-        filename = filename.gsub('.svg', '.png')  # Change filename extension to .png
-      end
-
-      @logo = ActiveStorage::Blob.create_and_upload!(
-        io: downloaded_logo,
-        filename: filename,
-        content_type: downloaded_logo.content_type
-      )
-    else
-      @logo = ActiveStorage::Blob.find_by(filename: 'amazon_logo.png')
-    end
-      @photos = product_data['images'].map do |image_url|
-        # Download the image from the URL
-        downloaded_image = URI.open(image_url)
-        # Create a new ActiveStorage blob from the downloaded image
-        blob = ActiveStorage::Blob.create_and_upload!(
-          io: downloaded_image,
-          filename: File.basename(image_url),
-          content_type: downloaded_image.content_type
-        )
-        blob # Return blob here instead of blob.signed_id
-      end
-
-      Product.new(
-        title: product_data['title'],
-        price: product_data['price'],
-        description: product_data['description'],
-        url: product_data['url']
-      ).tap do |product|
-        product.photos.attach(@photos)
-        session.delete(:product_data) # delete the session data here
-      end
-
-    elsif params[:product]
-      Product.new(product_params)
-    else
-      Product.new
-    end
+    @product = initialize_product_from_original(original_product) ||
+               initialize_product_from_session ||
+               initialize_product_from_params ||
+               Product.new
     @user = current_user
   end
 
@@ -92,21 +28,21 @@ class ProductsController < ApplicationController
       original_product = Product.find(params[:original_product_id])
       if original_product.logo.attached?
         new_blob = ActiveStorage::Blob.create_after_upload!(
-          io: StringIO.new(original_product.logo.download), # we download the old photo to a StringIO object
-          filename: original_product.logo.filename, # we keep the old filename
-          content_type: original_product.logo.content_type # we keep the old content_type
+          io: StringIO.new(original_product.logo.download),
+          filename: original_product.logo.filename,
+          content_type: original_product.logo.content_type
         )
-        @product.logo.attach(new_blob.signed_id) # we attach the new blob to the new product
+        @product.logo.attach(new_blob.signed_id)
       end
-      # If there are photos to copy, we create new blobs for each of them
+
       if original_product.photos.attached?
         original_product.photos.each do |photo|
           new_blob = ActiveStorage::Blob.create_after_upload!(
-            io: StringIO.new(photo.download), # we download the old photo to a StringIO object
-            filename: photo.filename, # we keep the old filename
-            content_type: photo.content_type # we keep the old content_type
+            io: StringIO.new(photo.download),
+            filename: photo.filename,
+            content_type: photo.content_type
           )
-          @product.photos.attach(new_blob.signed_id) # we attach the new blob to the new product
+          @product.photos.attach(new_blob.signed_id)
         end
       end
     end
@@ -116,9 +52,7 @@ class ProductsController < ApplicationController
         @product.logo.attach(params[:product][:logo])
       end
 
-
       if params[:product][:photos]
-        # adding reverse because the last image uploaded is the first one in the array
         params[:product][:photos].reject(&:blank?).reverse.each do |photo_blob_id|
           @product.photos.attach(photo_blob_id) unless blob_exists?(photo_blob_id)
         end
@@ -129,9 +63,6 @@ class ProductsController < ApplicationController
       redirect_to new_product_path(product: product_params)
     end
   end
-
-
-
 
   def edit
     render :edit
@@ -153,15 +84,12 @@ class ProductsController < ApplicationController
     end
   end
 
-
-
   def comments
   end
 
   def search_or_manual_product_upload
     render 'search_or_manual_product_upload'
   end
-
 
   private
 
@@ -181,14 +109,73 @@ class ProductsController < ApplicationController
     ActiveStorage::Blob.exists?(blob_id)
   end
 
+  def initialize_product_from_original(original_product)
+    return unless original_product
+
+    @logo = original_product.logo if original_product.logo.attached?
+    @photos = original_product.photos if original_product.photos.attached?
+
+    Product.new(
+      title: original_product.title,
+      price: original_product.price,
+      description: original_product.description,
+      url: original_product.url
+    )
+  end
+
+  def initialize_product_from_session
+    return unless session[:product_data]
+
+    product_data = session[:product_data]
+
+    if product_data['logo']
+      logo_url = product_data['logo']
+      downloaded_logo = URI.open(logo_url)
+      filename = File.basename(logo_url)
+
+      if filename.ends_with?('.svg')
+        uploaded_image = Cloudinary::Uploader.upload(logo_url)
+        png_url = Cloudinary::Utils.cloudinary_url(uploaded_image["public_id"], format: "png")
+        downloaded_logo = URI.open(png_url)
+        filename = filename.gsub('.svg', '.png')
+      end
+
+      @logo = ActiveStorage::Blob.create_and_upload!(
+        io: downloaded_logo,
+        filename: filename,
+        content_type: downloaded_logo.content_type
+      )
+    else
+      @logo = ActiveStorage::Blob.find_by(filename: 'amazon_logo.png')
+    end
+
+    @photos = product_data['images'].map do |image_url|
+      downloaded_image = URI.open(image_url)
+      blob = ActiveStorage::Blob.create_and_upload!(
+        io: downloaded_image,
+        filename: File.basename(image_url),
+        content_type: downloaded_image.content_type
+      )
+      blob
+    end
+
+    Product.new(
+      title: product_data['title'],
+      price: product_data['price'],
+      description: product_data['description'],
+      url: product_data['url']
+    ).tap do |product|
+      product.photos.attach(@photos)
+      session.delete(:product_data)
+    end
+  end
+
+  def initialize_product_from_params
+    return unless params[:product]
+
+    Product.new(product_params)
+  end
 end
-
-
-
-
-
-
-
 
 
 
