@@ -140,7 +140,7 @@ class ScrapeProductsController < ApplicationController
     product_data # return the product data
   end
 end
-
+# CREATE PRODUCT INSTEAD OF PASSING IT THROUGH THE SESSION TBD
 
 # require 'uri'
 # require 'net/http'
