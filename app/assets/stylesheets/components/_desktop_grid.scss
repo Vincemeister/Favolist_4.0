@@ -2,6 +2,10 @@
   .desktop_grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 75vw;
 
     > .navbar-desktop {
       grid-column-start: 1;

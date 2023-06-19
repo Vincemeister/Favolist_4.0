@@ -2,10 +2,10 @@
   <!--RENDERING THE HEADER -->
   <%= render "shared/product_card/product_header", product: product %>
   <% if product.photos.attached? && product.photos.count > 1 %>
-    <div id="carouselExampleIndicators" class="carousel slide product-card-image">
+    <div id="carouselExampleIndicators-<%= product.id %>" class="carousel slide product-card-image">
       <div class="carousel-indicators">
         <% product.photos.each_with_index do |photo, index| %>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<%= index %>" class="<%= 'active' if index.zero? %>" aria-label="Slide <%= index + 1 %>"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators-<%= product.id %>" data-bs-slide-to="<%= index %>" class="<%= 'active' if index.zero? %>" aria-label="Slide <%= index + 1 %>"></button>
         <% end %>
       </div>
       <div class="carousel-inner">
@@ -15,11 +15,11 @@
           </div>
         <% end %>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators-<%= product.id %>" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
       </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators-<%= product.id %>" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </button>

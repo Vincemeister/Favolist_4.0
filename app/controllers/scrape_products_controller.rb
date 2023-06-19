@@ -112,7 +112,7 @@ class ScrapeProductsController < ApplicationController
       image_hash["src"]
     end
 
-    images = images.first(2)
+  images = images.first(4)
 
     # ----------------------------------------------------------------------------
     logo_url = URI("https://brandr.p.rapidapi.com/extract")

@@ -30,7 +30,7 @@ vincent.avatar.attach(io: avatar, filename: 'avatar.jpg', content_type: 'image/j
 vincent.save!
 #----------------RANDOM USERS-------------------------------------------------------------------------------------------
 puts "Creating random users with lists and products..."
-3.times do
+2.times do
   puts "Creating random user..."
   user = User.create!(
     username: Faker::Internet.username,
@@ -47,7 +47,7 @@ puts "Creating random users with lists and products..."
     description: "This is #{user.username}'s list",
     user: user,
   )
-  2.times do
+  1.times do
     product = Product.create!(
       title: Faker::Commerce.product_name,
       price: Faker::Commerce.price,
@@ -65,7 +65,7 @@ puts "Creating random users with lists and products..."
 end
 #----------------MORE RANDOM USERS WITHOUT PRODUCTS---------------------------------------------------------------------
 puts "Creating random users without products..."
-10.times do
+3.times do
   puts "Creating random user..."
   user = User.create!(
     username: Faker::Internet.username,
