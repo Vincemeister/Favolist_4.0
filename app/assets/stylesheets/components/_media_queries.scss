@@ -1,0 +1,24 @@
+@media(max-width: 991px) {
+  .navbar-desktop {
+    display: none;
+  }
+}
+
+
+
+@media(min-width: 992px) {
+  .navbar {
+    display: none;
+  }
+
+  .product-card {
+
+    .product-card-image {
+      img {
+        max-height: 50vh;
+        width: 100%;
+        object-fit: scale-down;
+      }
+    }
+  }
+}

@@ -59,13 +59,13 @@ class ScrapeProductsController < ApplicationController
     response = http.request(request)
     response_body = JSON.parse(response.body) # convert the JSON response to a Ruby hash
 
-          # Print the ASIN and the response body
-  puts "ASIN: #{asin}"
-  puts "Response: #{response.body}"
+    # Print the ASIN and the response body
+    puts "ASIN: #{asin}"
+    puts "Response: #{response.body}"
 
 
     # Extracting the title, price, and description
-    title = response_body["title"]
+    title = response_body["title"].split(/, |- |\| /)[0]
     price = response_body["price"]["amount"]
     description = response_body["description"]&.join(' ') # join array elements into a single string
     link = response_body["link"]
@@ -200,7 +200,7 @@ end
 #     response_body = JSON.parse(response.body) # convert the JSON response to a Ruby hash
 
 #     @product = Product.new(
-#       title: response_body["title"],
+#       title = response_body["title"].split(/, |- |\| /)[0],
 #       price: response_body["price"]["amount"],
 #       description: response_body["description"].join(' '),
 #       url: response_body["link"]

@@ -22,3 +22,25 @@
   }
 
 }
+
+.navbar-desktop {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  background: white;
+  color: $neutral-700;
+  height: 100vh; /* Set the height of your navbar */
+  padding: 0px 1em;
+  border-top: 1px solid $neutral-100;
+  a {
+    text-decoration: none;
+
+    &:hover {
+      color: darken($gray, 10%);
+    }
+  }
+
+}

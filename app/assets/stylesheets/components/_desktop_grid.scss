@@ -1,0 +1,21 @@
+@media(min-width: 992px) {
+  .desktop_grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+
+    > .navbar-desktop {
+      grid-column-start: 1;
+      grid-column-end: 3; // Span 2 columns
+    }
+
+    > .main-section-desktop {
+      grid-column-start: 4; // Starts after 1 column gap
+      grid-column-end: 9; // Span 5 columns
+    }
+
+    > .sidebar {
+      grid-column-start: 10; // Starts after 1 column gap
+      grid-column-end: 13; // Span 3 columns
+    }
+  }
+}
