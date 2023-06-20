@@ -20,7 +20,9 @@
   line-height: $line-height-paragraph-large;
 }
 
-.suggested-lists-container {
+
+
+.suggested-lists-container, .suggested-profiles-container {
   display: flex;
   flex-direction: column;
   gap: 1em;

@@ -4,8 +4,9 @@ class PagesController < ApplicationController
   def home
     @products = Product.all
     @user = current_user
-    @suggested_users = User.all.sample(3)
-    @suggested_lists = List.all.sample(2)
+    @suggested_users = User.all - current_user.followed
+    @suggested_users = @suggested_users.sample(2)
+    @suggested_lists = List.all.sample(1)
   end
 
   def search
