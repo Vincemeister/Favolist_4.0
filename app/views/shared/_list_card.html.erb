@@ -12,8 +12,12 @@
             </div>
           </div>
           <div class="product-count-and-list-name">
-            <div class="list-product-count paragraph-medium"><%= pluralize(list.products.count, 'product') %></div>
-            <h5 class="list-name"><%= list.name %></h5>
+            <div class="list-product-count paragraph-large-semibold"><%= pluralize(list.products.count, 'product') %></div>
+            <% if local_assigns[:sidebar] %>
+              <h5><%= list.name %></h5>
+            <% else %>
+              <h5 class="list-name"><%= list.name %></h5>
+            <% end %>
           </div>
         </div>
 

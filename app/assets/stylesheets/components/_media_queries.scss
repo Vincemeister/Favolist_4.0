@@ -11,6 +11,10 @@
     display: none;
   }
 
+  .nav-header {
+    display: none;
+  }
+
   .product-card {
 
     .product-card-image {
@@ -20,6 +24,13 @@
         object-fit: fill;
         max-height: 60vh;
       }
+    }
+  }
+
+  .suggested-lists-container {
+
+    .list-grid-container {
+      padding: 0%;
     }
   }
 }

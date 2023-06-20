@@ -1,4 +1,23 @@
-
-<div class="sidebar">
-Hello Sidebar
-</div>
+<% if controller_name == "pages" && action_name == "home" %>
+  <div class="sidebar">
+    <p class="suggested-for-you">
+      Suggested for you
+    </p>
+    <div class="suggested-profiles-container">
+      <p class="profiles-x-follows">
+        Profiles
+      </p>
+      <% @suggested_users.each do |user| %>
+        <%= render 'shared/user_card', user: user, sidebar: true %>
+      <% end %>
+    </div>
+    <div class="suggested-lists-container">
+    <p class="profiles-x-follows">
+      Lists
+    </p>
+    <% @suggested_lists.each do |list| %>
+      <%= render 'shared/list_card', list: list, sidebar: true %>
+    <% end %>
+  </div>
+  </div>
+<% end %>

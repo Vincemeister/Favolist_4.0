@@ -1,12 +1,19 @@
-<div class="user-card text-decoration-none">
+
+<div class="user-card user-card-desktop-sidebar text-decoration-none">
   <div class="avatar-and-username-and-follow-counts-and-follow-button">
     <%= link_to user_path(user) do %>
-      <%= image_tag user.avatar, class: 'avatar-xl' %>
+      <%= image_tag user.avatar, class: "#{local_assigns[:sidebar] ? 'avatar-large' : 'avatar-xl'}" %>
     <% end %>
     <div class="username-and-follow-counts">
       <div class="username-and-conditional-follow-button">
         <%= link_to user_path(user) do %>
-          <h5><%= user.username %></h5>
+          <% if local_assigns[:sidebar] %>
+            <div class="username">
+              <%= user.username %>
+            </div>
+          <% else %>
+            <h5><%= user.username %></h5>
+          <% end %>
         <% end %>
         <% if local_assigns[:current_user_followers_tab] && !current_user.is_following?(user) %>
           <%= button_to 'follow', follow_user_path(user), method: :post, class: "small-follow-button" %>
@@ -31,18 +38,21 @@
     <% elsif local_assigns[:current_user_followed_tab] %>
       <%= button_to 'Unfollow', unfollow_user_path(user), method: :post, class: "btn btn-main" %>
     <% elsif current_user.is_following?(user.id) %>
-      <%= button_to 'Followed', unfollow_user_path(user), method: :post, class: "btn btn-main" %>
+      <%= button_to 'Followed', unfollow_user_path(user), method: :post, class: "button button-secondary button-small" %>
     <% elsif user.is_following?(current_user.id) %>
       <%= button_to 'Follow Back', follow_user_path(user), method: :post, class: "btn btn-pink" %>
     <% elsif !user == current_user %>
-      <%= button_to 'Follow', follow_user_path(user), method: :post, class: "btn btn-pink" %>
+      <%= button_to 'Follow', follow_user_path(user), method: :post, class: "button button-link" %>
     <% end %>
   </div>
 
-  <%= link_to user_path(user) do %>
-    <p class="truncate-3-lines content-text">
-      <%= user.bio %>
-    </p>
+  <% unless local_assigns[:sidebar] %>
+    <%= link_to user_path(user) do %>
+      <p class="truncate-3-lines content-text">
+        <%= user.bio %>
+      </p>
+    <% end %>
   <% end %>
+
 
 </div>

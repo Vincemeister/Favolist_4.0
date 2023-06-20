@@ -3,5 +3,5 @@
   <i class="fa-sharp fa-regular fa-bell"></i>
 </div>
 <% @products.each do |product| %>
-  <%= render 'shared/product_card', product: product %>
+  <%= render 'shared/product_card', product: product, suggested_users: @suggested_users %>
 <% end %>

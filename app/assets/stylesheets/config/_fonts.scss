@@ -26,7 +26,7 @@ $letter-spacing-button-large: 0.5px;
 // Button medium
 $font-size-button-medium: 1rem;
 
-
+//
 // Button small
 $font-size-button-small: 0.875rem;
 
@@ -117,3 +117,108 @@ $letter-spacing-heading-6-desktop: -0.02em;
 //        font-url('FontFile.ttf') format('truetype')
 // }
 // $my-font: "Font Name";
+
+
+.paragraph-large-regular {
+  font-size: $font-size-paragraph-large;
+  font-weight: $regular;
+  line-height: $line-height-paragraph-large;
+}
+.paragraph-large-medium {
+  font-size: $font-size-paragraph-large;
+  font-weight: $medium;
+  line-height: $line-height-paragraph-large;
+}
+
+.paragraph-large-semibold {
+  font-size: $font-size-paragraph-large;
+  font-weight: $semi-bold;
+  line-height: $line-height-paragraph-large;
+}
+
+.paragraph-large-bold {
+  font-size: $font-size-paragraph-large;
+  font-weight: $bold;
+  line-height: $line-height-paragraph-large;
+}
+
+.paragraph-small-regular {
+  font-size: $font-size-paragraph-small;
+  font-weight: $regular;
+  line-height: $line-height-paragraph-small;
+}
+
+.paragraph-small-medium {
+  font-size: $font-size-paragraph-small;
+  font-weight: $medium;
+  line-height: $line-height-paragraph-small;
+}
+
+
+.paragraph-small-semibold {
+  font-size: $font-size-paragraph-small;
+  font-weight: $semi-bold;
+  line-height: $line-height-paragraph-small;
+}
+
+.paragraph-small-bold {
+  font-size: $font-size-paragraph-small;
+  font-weight: $bold;
+  line-height: $line-height-paragraph-small;
+}
+
+
+.paragraph-medium-regular {
+  font-size: $font-size-paragraph-medium;
+  font-weight: $regular;
+  line-height: $line-height-paragraph-medium;
+}
+
+.paragraph-medium-medium {
+  font-size: $font-size-paragraph-medium;
+  font-weight: $medium;
+  line-height: $line-height-paragraph-medium;
+}
+
+
+.paragraph-medium-semibold {
+  font-size: $font-size-paragraph-medium;
+  font-weight: $semi-bold;
+  line-height: $line-height-paragraph-medium;
+}
+
+
+.paragraph-medium-bold {
+  font-size: $font-size-paragraph-medium;
+  font-weight: $bold;
+  line-height: $line-height-paragraph-medium;
+}
+
+
+
+.paragraph-xsmall-regular {
+  font-size: $font-size-paragraph-xsmall;
+  font-weight: $regular;
+  line-height: $line-height-paragraph-xsmall;
+}
+
+.paragraph-xsmall-medium {
+  font-size: $font-size-paragraph-xsmall;
+  font-weight: $medium;
+  line-height: $line-height-paragraph-xsmall;
+}
+
+
+.paragraph-xsmall-semibold {
+  font-size: $font-size-paragraph-xsmall;
+  font-weight: $semi-bold;
+  line-height: $line-height-paragraph-xsmall;
+}
+
+
+.paragraph-xsmall-bold {
+  font-size: $font-size-paragraph-xsmall;
+  font-weight: $bold;
+  line-height: $line-height-paragraph-xsmall;
+}
+
