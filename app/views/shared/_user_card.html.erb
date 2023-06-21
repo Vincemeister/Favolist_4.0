@@ -2,7 +2,7 @@
 <div class="user-card user-card-desktop-sidebar text-decoration-none">
   <div class="avatar-and-username-and-follow-counts-and-follow-button">
     <%= link_to user_path(user) do %>
-      <%= image_tag user.avatar, class: "#{local_assigns[:sidebar] ? 'avatar-large' : 'avatar-xl'}" %>
+      <%= image_tag user.avatar, class: "#{local_assigns[:sidebar] ? 'avatar-medium' : 'avatar-xl'}" %>
     <% end %>
     <div class="username-and-follow-counts">
       <div class="username-and-conditional-follow-button">
