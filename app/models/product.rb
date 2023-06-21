@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
   include PgSearch::Model
 
-  belongs_to :list, optional: true
+  belongs_to :list, optional: true, counter_cache: true
   has_one :user, through: :list
   has_many :referrals, dependent: :destroy
   has_many :comments, dependent: :destroy
