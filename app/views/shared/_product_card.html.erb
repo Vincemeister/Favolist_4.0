@@ -11,7 +11,15 @@
       <div class="carousel-inner">
         <% product.photos.each_with_index do |photo, index| %>
           <div class="carousel-item <%= 'active' if index.zero? %>">
-            <%= image_tag photo, class: "d-block" %>
+
+
+
+
+            <div class="image-container">
+              <%= image_tag photo, class: "d-block" %>
+            </div>
+
+
           </div>
         <% end %>
       </div>
@@ -26,7 +34,15 @@
     </div>
   <% elsif product.photos.attached? %>
     <div class="product-card-image">
-      <%= image_tag product.photos.first %>
+
+
+      <div class="image-container">
+        <%= image_tag product.photos.first %>
+      </div>
+
+
+
+
     </div>
   <% else %>
     <p>No image available</p>

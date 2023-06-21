@@ -1,13 +1,22 @@
-@media(min-width: 1600px) {
-  .card-grid-search {
+
+.card-grid-search {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  }
-}
-@media(max-width: 1600px) {
-  .card-grid-search {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+
+  // @media(max-width: 1600px) {
+  //   grid-template-columns: repeat(2, 1fr);
+  // }
+
+  .product-card-image {
+    width: 100%;
+    background-color: grey; /* set the color of the borders here */
+
+    img {
+      width: 100%;
+      object-fit: scale-down;
+      height: 100%;
+      object-fit: contain; /* ensure the image scales while preserving its aspect ratio */
+    }
   }
 
 }
