@@ -23,4 +23,21 @@
       grid-column-end: 13; // Span 3 columns
     }
   }
+
+  .desktop_grid_search {
+
+    .navbar-desktop {
+      grid-column-start: 1;
+      grid-column-end: 3; //
+    }
+
+    .main-section-desktop {
+      grid-column-start: 4;
+      grid-column-end: 13; //
+    }
+
+    .sidebar {
+      display: none;
+    }
+  }
 }
