@@ -3,7 +3,7 @@
 
 
 <div class="<%= referral == true ? 'product-header-referral-card' : 'product-header' %>">
-  <% if controller_name == 'products' && action_name == 'show' %>
+  <% if controller_name == 'products' && action_name == 'show' && !local_assigns[:sidebar] %>
     <%= link_to :back do %>
       <i class="fa-regular fa-arrow-left"></i>
     <% end %>
@@ -26,6 +26,11 @@
     <% end %>
   </div>
   <% unless referral == true %>
-    <i class="fa-sharp fa-regular fa-ellipsis" data-bs-toggle="modal" data-bs-target="#editOrDeleteModal-<%= product.id %>"></i>
+    <% if !local_assigns[:sidebar] %>
+      <i class="fa-sharp fa-regular fa-ellipsis" data-bs-toggle="modal" data-bs-target="#editOrDeleteModal-<%= product.id %>"></i>
+    <% else %>
+      <div></div> <!-- empty div to keep the title centered -->
+    <% end %>
   <% end %>
+
 </div>

@@ -3,6 +3,7 @@ class ListsController < ApplicationController
 
   def show
     @products = @list.products
+    @suggested_lists = List.where(user: @list.user.followed).order(products_count: :desc).limit(3)
   end
 
   def new

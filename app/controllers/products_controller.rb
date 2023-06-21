@@ -10,6 +10,9 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @suggested_products = Product.joins(list: :user)
+                                 .order("users.followers_count DESC")
+                                 .limit(3)
   end
 
   def new

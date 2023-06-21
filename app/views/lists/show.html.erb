@@ -35,18 +35,18 @@
     <% end %>
   </div>
   <div class="tab-pane fade linebreak" id="pills-referrals" role="tabpanel" aria-labelledby="pills-referrals-tab">
-      <% @list.referrals.each do |referral| %>
-        <%= render 'shared/referral_card', referral: referral %>
-      <% end %>
-    </div>
+    <% @list.referrals.each do |referral| %>
+      <%= render 'shared/referral_card', referral: referral %>
+    <% end %>
   </div>
   <div class="tab-pane fade linebreak" id="pills-about" role="tabpanel" aria-labelledby="pills-about-tab">
-   <div class="about-text">
+    <div class="about-text">
       <h6 class="text-center">About</h6>
       <p><%= simple_format(@list.description) %></p>
     </div>
   </div>
 </div>
+
 
 
 

@@ -35,8 +35,8 @@ class UsersController < ApplicationController
   def show
     @lists = @user.lists
     @referrals = @user.products.flat_map(&:referrals)
-    @suggested_users = @user.followed.order(followers_count: :desc)
-    # @suggested_lists = @user.followed.orderlists.order(products_count: :desc)
+    @suggested_users = @user.followed.order(followers_count: :desc).sample(2)
+    @suggested_lists = List.where(user: @user.followed).order(products_count: :desc).limit(2)
   end
 
   def follows
