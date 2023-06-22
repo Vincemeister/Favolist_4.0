@@ -35,8 +35,9 @@ Rails.application.routes.draw do
   end
 
   resources :bookmarks, only: [:index]
-
   resources :comments, only: [:destroy]
+  resources :notifications, only: [:index]
+
 
   resources :users, only: [:index, :show] do
     member do
@@ -49,4 +50,5 @@ Rails.application.routes.draw do
 
   resources :lists, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   resources :referrals, only: [:index]
+  resources :settings, only: [:index]
 end
