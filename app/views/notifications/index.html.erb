@@ -1,18 +1,7 @@
 <h1>Notifications</h1>
 
-<% @notifications.each do |notification| %>
-  <div>
 
-  <% case notification %>
 
-  <% end %>
-
-    <strong><%= link_to notification.actor.username, user_path(notification.actor) %></strong> <%= notification.action %> you
-    <% if notification.read == false %>
-      <span>(unread)</span>
-    <% end %>
-  </div>
-<% end %>
 
 
 
@@ -27,6 +16,15 @@
       <% when 'liked' %>
         <!-- Code for when the action is 'liked' goes here -->
       <% when 'commented' %>
+        <strong><%= link_to notification.actor.username, user_path(notification.actor) %></strong> commented on your product
+        <% if notification.read == false %>
+          <span>(unread)</span>
+        <% end %>
+      <% when 'replied' %>
+      <strong><%= link_to notification.actor.username, user_path(notification.actor) %></strong> replied to your comment
+      <% if notification.read == false %>
+        <span>(unread)</span>
+      <% end %>
         <!-- Code for when the action is 'commented' goes here -->
       <!-- Add more when statements as needed for other actions -->
     <% end %>

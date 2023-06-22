@@ -4,8 +4,6 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: [:replies, :show, :destroy]
   before_action :set_context, only: [:create] # to enable the jbuilder ender logic
 
-  after_create :create_notification
-
 
 
   def create
@@ -61,15 +59,4 @@ class CommentsController < ApplicationController
     @context = params[:comment][:context]
   end
 
-  def create_notification
-    # This assumes that a Product belongs to a User, adjust accordingly if not
-    return if user == product.user
-
-    Notification.create(
-      user: product.user,
-      actor: user,
-      recipient: product.user,
-      action: 'commented'
-    )
-  end
 end
