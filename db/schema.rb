@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_21_043814) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_22_025356) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -81,6 +81,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_043814) do
     t.index ["user_id"], name: "index_lists_on_user_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "message"
+    t.boolean "read"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "title"
     t.float "price"
@@ -126,6 +135,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_043814) do
   add_foreign_key "follows", "users", column: "followed_id"
   add_foreign_key "follows", "users", column: "follower_id"
   add_foreign_key "lists", "users"
+  add_foreign_key "notifications", "users"
   add_foreign_key "products", "lists"
   add_foreign_key "referrals", "products"
 end

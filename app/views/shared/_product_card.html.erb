@@ -11,15 +11,9 @@
       <div class="carousel-inner">
         <% product.photos.each_with_index do |photo, index| %>
           <div class="carousel-item <%= 'active' if index.zero? %>">
-
-
-
-
             <div class="image-container">
               <%= image_tag photo, class: "d-block" %>
             </div>
-
-
           </div>
         <% end %>
       </div>

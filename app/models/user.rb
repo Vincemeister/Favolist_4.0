@@ -5,6 +5,8 @@ class User < ApplicationRecord
   has_many :lists, dependent: :destroy
   has_many :products, through: :lists
   has_many :referrals, through: :products
+  has_many :notifications, dependent: :destroy
+
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
