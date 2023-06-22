@@ -21,7 +21,6 @@ class CommentsController < ApplicationController
         format.json
       end
     end
-    # Rest of the code...
   end
 
 

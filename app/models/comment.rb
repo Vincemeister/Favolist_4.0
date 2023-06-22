@@ -2,9 +2,10 @@ class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :product
   has_many :replies, class_name: 'Comment', foreign_key: 'parent_comment_id', dependent: :destroy
+  has_many :notifications, dependent: :destroy
   belongs_to :parent_comment, class_name: 'Comment', optional: true
 
-  after_create :create_notification
+  after_commit :create_notification, on: :create
 
   private
 
@@ -14,21 +15,21 @@ class Comment < ApplicationRecord
     # If this comment is a reply to another comment
     if parent_comment.present?
       return if user == parent_comment.user  # Don't notify if replying to own comment
-
       Notification.create(
         actor: user,
         recipient: parent_comment.user,  # Notify the user who wrote the parent comment
-        action: 'replied'
+        action: 'replied',
+        comment: self  # Add the comment to the notification
       )
     else  # If this is a new comment, not a reply
       return if user == product.user  # Don't notify if commenting on own product
-
       Notification.create(
         actor: user,
         recipient: product.user,  # Notify the product owner
-        action: 'commented'
+        action: 'commented',
+        comment: self  # Add the comment to the notification
       )
     end
   end
-  
+
 end
