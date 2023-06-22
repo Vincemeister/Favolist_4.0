@@ -1,0 +1,23 @@
+.notification {
+  display: flex;
+  width: 100%;
+  justify-content: baseline;
+  text-decoration: none;
+  padding: 0.5em 1em;
+  gap: 1em;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+
+.notification-unread {
+  background-color: #f5f5f5;
+}
+
+
+.notification-image {
+  width: 3em;
+  height: 3em;
+}

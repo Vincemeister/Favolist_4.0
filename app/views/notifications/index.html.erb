@@ -1,10 +1,5 @@
 <h1>Notifications</h1>
 
-
-
-
-
-
 <% @notifications.each do |notification| %>
   <div>
     <% case notification.action %>
@@ -18,25 +13,32 @@
       <% when 'commented' %>
 
 
-        <%= link_to comment_path(notification.comment) do %>
-          <div class="notification">
-            <strong><%= link_to notification.actor.username, user_path(notification.actor) %></strong> commented on your product
+        <div class="notification">
+          <%= link_to product_comment_path(notification.comment.product, notification.comment), class: "text-decoration-none" do %>
+            <%= image_tag notification.actor.avatar, class: "avatar" %>
+            <strong><%= notification.actor.username %></strong> commented on your product
+
               <% if notification.read == false %>
                 <span>(unread)</span>
               <% end %>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
 
 
       <% when 'replied' %>
-        <%= link_to comment_path(notification.comment) do %>
-          <div class="notification">
-            <strong><%= link_to notification.actor.username, user_path(notification.actor) %></strong> replied to your comment
+          <%= link_to product_comment_path(notification.comment.product, notification.comment), class: "text-decoration-none" do %>
+        <div class="notification">
+
+            <%= image_tag notification.actor.avatar, class: "avatar" %>
+            <div>
+              <strong><%= notification.actor.username %></strong> replied to your comment from <strong><%= notification.comment.product.title %></strong>
+            </div>
+            <%= image_tag notification.comment.product.photos.first, class: "notification-image" %>
             <% if notification.read == false %>
               <span>(unread)</span>
             <% end %>
-          </div>
-        <% end %>
+        </div>
+          <% end %>
     <% end %>
 
   </div>
