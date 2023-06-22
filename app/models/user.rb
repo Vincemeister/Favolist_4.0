@@ -5,7 +5,9 @@ class User < ApplicationRecord
   has_many :lists, dependent: :destroy
   has_many :products, through: :lists
   has_many :referrals, through: :products
-  has_many :notifications, dependent: :destroy
+  has_many :notifications_sent, class_name: 'Notification', foreign_key: 'actor_id'
+  has_many :notifications_received, class_name: 'Notification', foreign_key: 'recipient_id'
+
 
 
   devise :database_authenticatable, :registerable,
