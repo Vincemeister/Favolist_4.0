@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_22_064113) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_22_104650) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -89,7 +89,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_22_064113) do
     t.bigint "recipient_id", null: false
     t.bigint "actor_id", null: false
     t.string "action"
+    t.bigint "comment_id"
     t.index ["actor_id"], name: "index_notifications_on_actor_id"
+    t.index ["comment_id"], name: "index_notifications_on_comment_id"
     t.index ["recipient_id"], name: "index_notifications_on_recipient_id"
   end
 
@@ -138,6 +140,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_22_064113) do
   add_foreign_key "follows", "users", column: "followed_id"
   add_foreign_key "follows", "users", column: "follower_id"
   add_foreign_key "lists", "users"
+  add_foreign_key "notifications", "comments"
   add_foreign_key "notifications", "users", column: "actor_id"
   add_foreign_key "notifications", "users", column: "recipient_id"
   add_foreign_key "products", "lists"
