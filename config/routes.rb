@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'pages/about' => 'pages#about'
   get 'pages/search', to: 'pages#search', as: 'search'
   get 'pages/test', to: 'pages#test', as: 'test'
+  get 'pages/no_permission', to: 'pages#no_permission', as: 'no_permission'
 
   get '/search_or_manual_product_upload', to: 'products#search_or_manual_product_upload', as: 'search_or_manual_product_upload'
   post '/fetch_amazon_product', to: 'scrape_products#fetch_amazon_product', as: 'fetch_amazon_product'

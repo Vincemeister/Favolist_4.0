@@ -1,11 +1,18 @@
 class ListsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update, :destroy, :add_product, :remove_product]
 
-  def show
-    @products = @list.products
-    @suggested_lists = List.where(user: @list.user.followed).order(products_count: :desc).limit(3)
+  def index
+    @lists = List.viewable_by(current_user)
   end
 
+  def show
+    unless @list.viewable_by?(current_user)
+      redirect_to no_permission_path
+    else
+      @products = @list.products
+      @suggested_lists = List.where(user: @list.user.followed).order(products_count: :desc).limit(3)
+    end
+  end
   def new
     @list = List.new
   end

@@ -2,7 +2,14 @@ class ReferralsController < ApplicationController
   before_action :set_referral, only: [:show, :edit, :update, :destroy]
 
   def index
-    @referrals = Referral.all
+    @referrals = Referral.viewable_by(current_user)
+  end
+
+  def show
+    unless @referral.viewable_by?(current_user)
+      flash[:alert] = "You do not have permission to view this referral."
+      redirect_to no_permission_path # or wherever you want
+    end
   end
 
   def new

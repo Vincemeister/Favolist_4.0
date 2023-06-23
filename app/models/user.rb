@@ -1,8 +1,13 @@
 class User < ApplicationRecord
 
   scope :viewable_by, -> (user) {
-    where(privacy: 'public').or(where(id: user.followed.pluck(:id), privacy: 'followers')) if user
+    if user
+      where(privacy: 'public').or(where(id: user.followed.pluck(:id), privacy: 'followers'))
+    else
+      where(privacy: 'public')
+    end
   }
+
 
 
   include PgSearch::Model

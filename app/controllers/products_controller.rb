@@ -6,14 +6,21 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy, :comments, :bookmark, :unbookmark]
 
   def index
-    @products = Product.all
+    @products = Product.viewable_by(current_user)
   end
 
+
   def show
-    @suggested_products = Product.joins(list: :user)
-                                 .order("users.followers_count DESC")
-                                 .limit(3)
+    unless @product.viewable_by?(current_user)
+      flash[:alert] = "You do not have permission to view this product."
+      redirect_to no_permission_path # or wherever you want
+    else
+      @suggested_products = Product.viewable_by(current_user).joins(list: :user)
+                                   .order("users.followers_count DESC")
+                                   .limit(3)
+    end
   end
+
 
   def new
     original_product = Product.find(params[:original_product_id]) if params[:original_product_id]
@@ -93,6 +100,7 @@ class ProductsController < ApplicationController
   def search_or_manual_product_upload
     render 'search_or_manual_product_upload'
   end
+
 
   private
 

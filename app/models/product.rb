@@ -36,7 +36,9 @@ class Product < ApplicationRecord
     bookmarks.where(user_id: user.id).exists?
   end
 
-  
+  def viewable_by?(user)
+    User.viewable_by(user).include?(self.list.user)
+  end
 
 
 end

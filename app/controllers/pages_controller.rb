@@ -28,4 +28,7 @@ class PagesController < ApplicationController
   def test
   end
 
+  def no_permission
+  end
+
 end

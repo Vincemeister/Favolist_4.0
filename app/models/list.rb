@@ -15,6 +15,12 @@ class List < ApplicationRecord
       tsearch: { prefix: true }
   }
 
+  # Define the viewable_by scope
+  scope :viewable_by, -> (user) {
+    joins(:user).where(users: { id: User.viewable_by(user).pluck(:id) })
+  }
+
+  # Define the viewable_by? method
   def viewable_by?(user)
     User.viewable_by(user).include?(self.user)
   end
