@@ -1,45 +1,36 @@
 <h1>Notifications</h1>
 
-<% @notifications.each do |notification| %>
-  <div>
-    <% case notification.action %>
-      <% when 'followed' %>
-        <strong><%= link_to notification.actor.username, user_path(notification.actor) %></strong> now follows you
-        <% if notification.read == false %>
-          <span>(unread)</span>
-        <% end %>
-      <% when 'liked' %>
-        <!-- Code for when the action is 'liked' goes here -->
-      <% when 'commented' %>
-
-
-        <div class="notification">
-          <%= link_to product_comment_path(notification.comment.product, notification.comment), class: "text-decoration-none" do %>
+<div class="notifications-container">
+  <% @notifications.each do |notification| %>
+    <div class="<%= notification.read? ? 'notification' : 'notification-unread' %> ">
+      <% case notification.action %>
+        <% when 'followed' %>
+          <%= link_to user_path(notification.actor), class: "notification text-decoration-none" do %>
             <%= image_tag notification.actor.avatar, class: "avatar" %>
-            <strong><%= notification.actor.username %></strong> commented on your product
-
-              <% if notification.read == false %>
-                <span>(unread)</span>
-              <% end %>
+            <div class="notification-text">
+              <strong><%= notification.actor.username %></strong> now follows you
+            </div>
+            <i class="fa-sharp fa-regular fa-user-plus fa-lg"></i>
           <% end %>
-        </div>
-
-
-      <% when 'replied' %>
-          <%= link_to product_comment_path(notification.comment.product, notification.comment), class: "text-decoration-none" do %>
-        <div class="notification">
-
+        <% when 'liked' %>
+          <!-- Code for when the action is 'liked' goes here -->
+        <% when 'commented' %>
+          <%= link_to product_comment_path(notification.comment.product, notification.comment), class: "notification text-decoration-none" do %>
             <%= image_tag notification.actor.avatar, class: "avatar" %>
-            <div>
-              <strong><%= notification.actor.username %></strong> replied to your comment from <strong><%= notification.comment.product.title %></strong>
+            <div class="notification-text">
+              <strong><%= notification.actor.username %></strong> commented on your product <strong><%= notification.comment.product.title %></strong>
             </div>
             <%= image_tag notification.comment.product.photos.first, class: "notification-image" %>
-            <% if notification.read == false %>
-              <span>(unread)</span>
-            <% end %>
-        </div>
           <% end %>
-    <% end %>
-
-  </div>
-<% end %>
+        <% when 'replied' %>
+          <%= link_to product_comment_path(notification.comment.product, notification.comment), class: "notification text-decoration-none" do %>
+            <%= image_tag notification.actor.avatar, class: "avatar" %>
+            <div class="notification-text">
+              <strong><%= notification.actor.username %></strong> replied to your comment on <strong><%= notification.comment.product.title %></strong>
+            </div>
+            <%= image_tag notification.comment.product.photos.first, class: "notification-image" %>
+          <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
