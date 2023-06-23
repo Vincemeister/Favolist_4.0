@@ -57,5 +57,15 @@ Rails.application.routes.draw do
 
   resources :lists, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   resources :referrals, only: [:index]
-  resources :settings, only: [:index]
+  resources :settings, only: [:index] do
+    collection do
+      get :email_password
+      patch :update_email_password
+      get :profile
+      patch :update_profile
+      get :privacy
+      patch :update_privacy
+    end
+  end
+
 end

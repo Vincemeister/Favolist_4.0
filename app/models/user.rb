@@ -8,6 +8,9 @@ class User < ApplicationRecord
   has_many :notifications_sent, class_name: 'Notification', foreign_key: 'actor_id', dependent: :destroy
   has_many :notifications_received, class_name: 'Notification', foreign_key: 'recipient_id', dependent: :destroy
 
+  validates :password, length: { minimum: 6 }, if: :password_required?
+
+
 
 
   devise :database_authenticatable, :registerable,

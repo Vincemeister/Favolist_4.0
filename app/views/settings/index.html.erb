@@ -1,1 +1,10 @@
+<div class="settings">
+  <h2>Settings</h2>
+
+  <h3><%= link_to 'Email & Password', email_password_settings_path %></h3>
+  <h3><%= link_to 'Profile', profile_settings_path %></h3>
+  <h3><%= link_to 'Privacy', privacy_settings_path %></h3>
+</div>
+
+
 <%= button_to 'Sign out', destroy_user_session_path, method: :delete %>
