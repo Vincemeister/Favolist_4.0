@@ -1,11 +1,14 @@
 <h1>Notifications</h1>
 
 <div class="notifications-container">
+<%= button_to "Clear all notifications", clear_all_notifications_path, method: :post, class: 'btn', data: { confirm: 'Are you sure you want to clear all notifications?' } %>
   <% @notifications.each do |notification| %>
-    <div class="<%= notification.read? ? 'notification' : 'notification-unread' %> ">
+    <div class="<%= notification.read? ? '' : 'notification-unread' %> "
+      data-controller="notification"
+      data-notification-id-value="<%= notification.id %>">
       <% case notification.action %>
         <% when 'followed' %>
-          <%= link_to user_path(notification.actor), class: "notification text-decoration-none" do %>
+          <%= link_to user_path(notification.actor), class: "notification text-decoration-none", data: { notification_target: 'link', action: "click->notification#markAsRead" } do %>
             <%= image_tag notification.actor.avatar, class: "avatar" %>
             <div class="notification-text">
               <strong><%= notification.actor.username %></strong> now follows you
@@ -13,9 +16,9 @@
             <i class="fa-sharp fa-regular fa-user-plus fa-lg"></i>
           <% end %>
         <% when 'liked' %>
-          <!-- Code for when the action is 'liked' goes here -->
+          <!-- Similar changes for 'liked' action -->
         <% when 'commented' %>
-          <%= link_to product_comment_path(notification.comment.product, notification.comment), class: "notification text-decoration-none" do %>
+          <%= link_to product_comment_path(notification.comment.product, notification.comment), class: "notification text-decoration-none", data: { notification_target: 'link', action: "click->notification#markAsRead" } do %>
             <%= image_tag notification.actor.avatar, class: "avatar" %>
             <div class="notification-text">
               <strong><%= notification.actor.username %></strong> commented on your product <strong><%= notification.comment.product.title %></strong>
@@ -23,7 +26,7 @@
             <%= image_tag notification.comment.product.photos.first, class: "notification-image" %>
           <% end %>
         <% when 'replied' %>
-          <%= link_to product_comment_path(notification.comment.product, notification.comment), class: "notification text-decoration-none" do %>
+          <%= link_to product_comment_path(notification.comment.product, notification.comment), class: "notification text-decoration-none", data: { notification_target: 'link', action: "click->notification#markAsRead" } do %>
             <%= image_tag notification.actor.avatar, class: "avatar" %>
             <div class="notification-text">
               <strong><%= notification.actor.username %></strong> replied to your comment on <strong><%= notification.comment.product.title %></strong>

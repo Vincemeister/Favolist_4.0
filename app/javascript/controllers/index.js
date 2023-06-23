@@ -25,6 +25,9 @@ application.register("hello", HelloController)
 import ImageuploaderController from "./imageuploader_controller"
 application.register("imageuploader", ImageuploaderController)
 
+import NotificationController from "./notification_controller"
+application.register("notification", NotificationController)
+
 import RepliesAndCommentsController from "./replies_and_comments_controller"
 application.register("replies-and-comments", RepliesAndCommentsController)
 

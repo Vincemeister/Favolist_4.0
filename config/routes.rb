@@ -36,7 +36,14 @@ Rails.application.routes.draw do
 
   resources :bookmarks, only: [:index]
   resources :comments, only: [:destroy]
-  resources :notifications, only: [:index]
+  resources :notifications, only: [:index] do
+    collection do
+      post :clear_all
+    end
+    member do
+      patch :mark_as_read
+    end
+  end
 
 
   resources :users, only: [:index, :show] do
