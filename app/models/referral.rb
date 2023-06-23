@@ -1,4 +1,10 @@
 class Referral < ApplicationRecord
+
+  scope :viewable_by, -> (user) {
+    joins(product: { list: :user }).where(users: { id: User.viewable_by(user).pluck(:id) })
+  }
+
+
   include PgSearch::Model
 
   belongs_to :product
@@ -29,6 +35,10 @@ class Referral < ApplicationRecord
       OR users.username ILIKE :search
       OR lists.name ILIKE :search",
       { search: search_term }])
+  end
+
+  def viewable_by?(user)
+    User.viewable_by(user).include?(self.product.list.user)
   end
 
 end

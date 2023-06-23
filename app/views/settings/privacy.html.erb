@@ -1,0 +1,7 @@
+<%= form_for @user, url: update_privacy_settings_path, method: :patch do |f| %>
+  <div class="field">
+    <%= f.label :privacy %>
+    <%= f.select :privacy, ['public', 'followers'], prompt: 'Select Privacy' %>
+  </div>
+  <%= f.submit "Update Privacy Settings" %>
+<% end %>

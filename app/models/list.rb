@@ -15,4 +15,9 @@ class List < ApplicationRecord
       tsearch: { prefix: true }
   }
 
+  def viewable_by?(user)
+    User.viewable_by(user).include?(self.user)
+  end
+
+
 end

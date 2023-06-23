@@ -56,6 +56,7 @@ class SettingsController < ApplicationController
   end
 
   def privacy_params
-    params.require(:user).permit(:products_visibility, :lists_visibility)
+    params.require(:user).permit(:privacy)
   end
+
 end

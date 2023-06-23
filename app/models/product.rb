@@ -1,4 +1,9 @@
 class Product < ApplicationRecord
+  scope :viewable_by, -> (user) {
+    joins(list: :user).where(users: { id: User.viewable_by(user).pluck(:id) })
+  }
+
+
   include PgSearch::Model
 
   belongs_to :list, optional: true, counter_cache: true
@@ -30,6 +35,8 @@ class Product < ApplicationRecord
 
     bookmarks.where(user_id: user.id).exists?
   end
+
+  
 
 
 end
