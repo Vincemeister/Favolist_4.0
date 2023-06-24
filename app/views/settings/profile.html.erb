@@ -1,9 +1,5 @@
-<%= form_for @user, url: update_profile_settings_path, method: :patch, html: { multipart: true } do |f| %>
-  <div class="form-group">
-    <%= f.label :username %>
-    <%= f.text_field :username, class: 'form-control' %>
-  </div>
-
+<%= simple_form_for @user, url: update_profile_settings_path, method: :patch, html: { multipart: true } do |f| %>
+  <%= f.input :username, label: 'Username' %>
   <div class="form-group">
     <%= f.label :bio %>
     <%= f.text_area :bio, class: 'form-control' %>
@@ -12,12 +8,11 @@
   <div data-controller="avatar-preview">
     <div class="form-group">
       <p>Current avatar:</p>
-        <% if @user.avatar.attached? %>
-          <%= cl_image_tag @user.avatar.key, gravity: "center", width: 150, height: 150, crop: "thumb", class: 'avatar-xl', id: 'img-preview' %>
-        <% else %>
-          <img id='img-preview' class="avatar-xl" src="#" alt="No image" />
-        <% end %>
-
+      <% if @user.avatar.attached? %>
+        <%= image_tag @user.avatar, class: 'avatar-xxl', id: 'img-preview' %>
+      <% else %>
+        <img id='img-preview' class="avatar-xl" src="#" alt="No image" />
+      <% end %>
     </div>
 
     <div class="form-group">
@@ -26,5 +21,5 @@
     </div>
   </div>
 
-  <%= f.submit 'Update Profile', class: 'btn btn-primary' %>
+  <%= f.button :submit, 'Update Profile', class: 'btn btn-primary' %>
 <% end %>
