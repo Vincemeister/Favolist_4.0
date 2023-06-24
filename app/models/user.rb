@@ -1,12 +1,14 @@
 class User < ApplicationRecord
-
   scope :viewable_by, -> (user) {
     if user
-      where(privacy: 'public').or(where(id: user.followed.pluck(:id), privacy: 'followers'))
+      where(privacy: 'public')
+        .or(where(id: user.followed.pluck(:id), privacy: 'private'))
+        .or(where(id: user.id))
     else
       where(privacy: 'public')
     end
   }
+
 
 
 

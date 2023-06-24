@@ -35,9 +35,9 @@
       <% elsif current_user.is_following?(user.id) %>
         <%= button_to 'Followed', unfollow_user_path(user), method: :post, class: "button button-secondary button-small" %>
       <% elsif user.is_following?(current_user.id) %>
-        <%= button_to 'Follow Back', follow_user_path(user), method: :post, class: "button button-main button-small" %>
+        <%= button_to 'Follow Back', follow_user_path(user), method: :post, class: "button button-primary button-small" %>
       <% elsif user != current_user %>
-        <%= button_to 'Follow', follow_user_path(user), method: :post, class: "button button-main button-small" %>
+        <%= button_to 'Follow', follow_user_path(user), method: :post, class: "button button-primary button-small" %>
       <% else %>
       <div class="bookmarks-button">
         <%= link_to bookmarks_path do%>

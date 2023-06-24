@@ -24,17 +24,15 @@ class Referral < ApplicationRecord
   # then define your search scope
   def self.search_by_product_title_user_username_and_list_name(query)
     search_term = "%#{query}%"
-    find_by_sql(["
-      SELECT referrals.* FROM referrals
-      JOIN products ON referrals.product_id = products.id
-      JOIN lists ON products.list_id = lists.id
-      JOIN users ON lists.user_id = users.id
-      WHERE referrals.code ILIKE :search
-      OR referrals.details ILIKE :search
-      OR products.title ILIKE :search
-      OR users.username ILIKE :search
-      OR lists.name ILIKE :search",
-      { search: search_term }])
+    joins(product: { list: :user })
+      .where(
+        "referrals.code ILIKE :search
+        OR referrals.details ILIKE :search
+        OR products.title ILIKE :search
+        OR users.username ILIKE :search
+        OR lists.name ILIKE :search",
+        { search: search_term }
+      )
   end
 
   def viewable_by?(user)
