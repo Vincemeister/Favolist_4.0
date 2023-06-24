@@ -52,7 +52,7 @@ class SettingsController < ApplicationController
 
 
   def profile_params
-    params.require(:user).permit(:username, :photo)
+    params.require(:user).permit(:username, :avatar, :bio)
   end
 
   def privacy_params

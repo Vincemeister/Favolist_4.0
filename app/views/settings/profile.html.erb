@@ -1,0 +1,29 @@
+<%= form_for @user, url: update_profile_settings_path, method: :patch, html: { multipart: true } do |f| %>
+  <div class="form-group">
+    <%= f.label :username %>
+    <%= f.text_field :username, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :bio %>
+    <%= f.text_area :bio, class: 'form-control' %>
+  </div>
+
+  <div data-controller="avatar-preview">
+    <div class="form-group">
+      <p>Current avatar:</p>
+      <% if @user.avatar.attached? %>
+        <%= image_tag @user.avatar, class: 'avatar-xl', id: 'img-preview' %>
+      <% else %>
+        <img id='img-preview' class="avatar-xl" src="#" alt="No image" />
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :avatar, 'Upload New Avatar' %>
+      <%= f.file_field :avatar, data: { "avatar-preview-target": "input", action: "avatar-preview#preview" } %>
+    </div>
+  </div>
+
+  <%= f.submit 'Update Profile', class: 'btn btn-primary' %>
+<% end %>

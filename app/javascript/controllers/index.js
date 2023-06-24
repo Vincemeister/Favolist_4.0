@@ -10,6 +10,9 @@ application.register("amazon-prefill-product-form", AmazonPrefillProductFormCont
 import AmazonSearchProductsController from "./amazon_search_products_controller"
 application.register("amazon-search-products", AmazonSearchProductsController)
 
+import AvatarPreviewController from "./avatar_preview_controller"
+application.register("avatar-preview", AvatarPreviewController)
+
 import BookmarksController from "./bookmarks_controller"
 application.register("bookmarks", BookmarksController)
 
