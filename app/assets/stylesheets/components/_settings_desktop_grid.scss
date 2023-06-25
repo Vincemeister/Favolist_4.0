@@ -1,0 +1,27 @@
+.settings-desktop-grid {
+  display: flex;
+  flex-direction: column;
+
+  @media(min-width: 992px) {
+    flex-direction: row;
+
+    .settings-menu {
+      flex: 1; // This will make settings-menu take up 1/3 of the row
+    }
+
+    .settings-container {
+      flex: 2; // This will make settings-container take up 2/3 of the row
+    }
+  }
+
+  @media (max-width: 991.99px) {
+    .settings-menu {
+      display: none;
+    }
+
+    .settings-container {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+}
