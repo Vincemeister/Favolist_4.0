@@ -1,7 +1,21 @@
 
-<div class="nav-header-mobile-and-desktop sticky-header text-decoration-none">
+<div class="nav-header-desktop sticky-header text-decoration-none">
   <div class="back-arrow-and-element">
     <%= link_to :back do %>
+      <i class="fa-regular fa-arrow-left"></i>
+    <% end %>
+  </div>
+  <div>
+    <h5 class="main-title">
+      Settings
+    </h5>
+  </div>
+  <div></div>
+</div>
+
+<div class="nav-header sticky-header text-decoration-none">
+  <div class="back-arrow-and-element">
+    <%= link_to settings_path do %>
       <i class="fa-regular fa-arrow-left"></i>
     <% end %>
   </div>
