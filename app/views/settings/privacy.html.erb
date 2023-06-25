@@ -1,12 +1,45 @@
-<div class="settings-desktop-grid">
-  <div class="settings-menu">
-    <%= render 'shared/settings_menu' %>
-  </div>
-  <div class="settings-container">
-    <h2>Privacy</h2>
-    <%= simple_form_for @user, url: update_privacy_settings_path, method: :patch do |f| %>
-      <%= f.input :privacy, as: :radio_buttons, collection: ['public', 'followers'] %>
-      <%= f.button :submit, "Update Privacy Settings", class: "button button-primary" %>
+
+<div class="nav-header-mobile-and-desktop sticky-header text-decoration-none">
+  <div class="back-arrow-and-element">
+    <%= link_to :back do %>
+      <i class="fa-regular fa-arrow-left"></i>
     <% end %>
+  </div>
+  <div>
+    <h5 class="main-title">
+      Settings
+    </h5>
+  </div>
+  <div></div>
+</div>
+
+
+<div class="settings-desktop-grid">
+  <%= render 'shared/settings_menu' %>
+  <div class="settings-container">
+    <h3>Privacy</h3>
+
+
+    <div class="form-container">
+      <%= simple_form_for @user, url: update_privacy_settings_path, class: "form-container", method: :patch do |f| %>
+        <div class="form-check mb-3">
+          <%= f.radio_button :privacy, 'public', class: 'form-check-input' %>
+          <%= f.label :privacy, class: 'form-check-label' do %>
+            Public
+            <div class="subtext">Your lists, products and referrals are visible to everyone</div>
+          <% end %>
+        </div>
+        <div class="form-check mb-3">
+          <%= f.radio_button :privacy, 'private', class: 'form-check-input' %>
+          <%= f.label :privacy, class: 'form-check-label' do %>
+            Private
+            <div class="subtext">Your list, products and referrals are only visible to users who follow you</div>
+          <% end %>
+        </div>
+        <%= f.button :submit, "Update Privacy Settings", class: "button button-primary" %>
+      <% end %>
+    </div>
+
+
   </div>
 </div>

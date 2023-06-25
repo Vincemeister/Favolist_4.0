@@ -1,10 +1,19 @@
-  <h2>Settings</h2>
-
-<div class="settings-container text-decoration-none">
-  <h6><%= link_to 'Email & Password', email_password_settings_path, class: "paragraph-medium" %></h6>
-  <h6><%= link_to 'Profile', profile_settings_path, class: "paragraph-medium" %></h6>
-  <h6><%= link_to 'Privacy', privacy_settings_path, class: "paragraph-medium" %></h6>
+<div class="settings-menu">
+  <div class="settings-container text-decoration-none">
+    <h5>Account</h5>
+    <div><%= link_to 'Email & Password', email_password_settings_path, class: "paragraph-medium" %></div>
+    <div><%= link_to 'Profile', profile_settings_path, class: "paragraph-medium" %></div>
+    <div><%= link_to 'Privacy', privacy_settings_path, class: "paragraph-medium" %></div>
+  </div>
+  <hr>
+  <div class="settings-container text-decoration-none">
+    <h5>More</h5>
+    <div><%= link_to 'About Us', email_password_settings_path, class: "paragraph-medium" %></div>
+    <div><%= link_to 'Privacy Policy', profile_settings_path, class: "paragraph-medium" %></div>
+    <div><%= link_to 'Terms & Conditions', privacy_settings_path, class: "paragraph-medium" %></div>
+  </div>
+  <hr>
+  <div class="settings-container">
+    <%= button_to 'Sign out', destroy_user_session_path, method: :delete, class: "button button-outlined" %>
+  </div>
 </div>
-
-
-<%= button_to 'Sign out', destroy_user_session_path, method: :delete %>

@@ -1,7 +1,7 @@
 .nav-header {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   width: 100%;
   gap: 2em;
@@ -12,6 +12,19 @@
   border-bottom: 1px solid $neutral-100;
 }
 
+.nav-header-mobile-and-desktop {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 2em;
+  padding: 1em;
+  background-color: white;
+  text-decoration: none;
+  color: $neutral-700;
+  border-bottom: 1px solid $neutral-100;
+}
 
 .avatar-and-username-{
   display: flex;
@@ -54,4 +67,14 @@
 
 .favolist-logo {
   height: 1.5em;
+}
+
+
+// optional, like in the settings nav-header
+
+.back-arrow-and-element {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5em;
 }
