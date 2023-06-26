@@ -10,6 +10,11 @@
 
 }
 
+#search_query {
+  border-color: $neutral-100;
+
+}
+
 .custom-input-group-append {
   position: absolute;
   right: 10px;
@@ -33,7 +38,10 @@
   align-items: center;
   gap: 1em;
   padding: 1em;
-  border-bottom: 1px solid $neutral-50;
+  max-width: 480px;
+  width: 100%;
+  justify-content: center;
+
 }
 
 // For some reason I need to manually set w-100 for it to fill the container
@@ -44,4 +52,14 @@
 // For some reason I need to manually set w-100 for it to fill the container
 form.simple_form.search {
   width: 100%;
+}
+
+.search-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid $neutral-100;
+
 }

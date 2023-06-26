@@ -13,9 +13,19 @@ class PagesController < ApplicationController
 
   def search
     if params[:search].present?
-      @products = Product.search_by_title_and_description_and_list_name_and_user_username(params[:search][:query]).viewable_by(current_user)
-      @lists = List.search_by_name_and_description_and_product_title_and_user_username(params[:search][:query]) || []
+      # First execute the pg_search query
+      search_products = Product.search_by_title_and_description_and_list_name_and_user_username(params[:search][:query])
+      search_lists = List.search_by_name_and_description_and_product_title_and_user_username(params[:search][:query])
+
+
+      # Then filter the results with the viewable_by scope
+      @products = Product.where(id: search_products.pluck(:id)).viewable_by(current_user)
+      @lists = List.where(id: search_lists.pluck(:id)).viewable_by(current_user)
+
+      # Different logic for referrals at this time
       @referrals = Referral.search_by_product_title_user_username_and_list_name(params[:search][:query]).viewable_by(current_user)
+
+      # Users can always be found
       @users = User.search_by_user_username_and_bio_and_list_name(params[:search][:query]) || []
     else
       @products = []
@@ -24,6 +34,7 @@ class PagesController < ApplicationController
       @users = []
     end
   end
+
 
   def test
   end
