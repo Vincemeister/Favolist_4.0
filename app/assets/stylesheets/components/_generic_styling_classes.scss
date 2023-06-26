@@ -59,6 +59,11 @@
   overflow: hidden;
   text-overflow: ellipsis;
   line-height: 1.75em;
+  height: 100%;
+  @media(min-width: 768px) {
+    height: 5.25em; /* This is equivalent to three lines of text */
+  }
+
 }
 
 // paragraph classes

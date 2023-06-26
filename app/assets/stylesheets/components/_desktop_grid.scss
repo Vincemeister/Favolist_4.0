@@ -5,7 +5,7 @@
     gap: 24px;
     margin-left: auto;
     margin-right: auto;
-    width: 1600px;
+    width: 1200px;
     max-width: calc(100vw - 32px);
 
     > .navbar-desktop {
@@ -14,13 +14,13 @@
     }
 
     > .main-section-desktop {
-      grid-column-start: 4; // Starts after 1 column gap
-      grid-column-end: 9; // Span 5 columns
+      grid-column-start: 3; // Starts from 3rd column
+      grid-column-end: 11; // Ends on 11th column
     }
 
     > .sidebar {
-      grid-column-start: 10; // Starts after 1 column gap
-      grid-column-end: 13; // Span 3 columns
+      grid-column-start: 11; // Starts from 11th column
+      grid-column-end: 13; // Ends on 13th column, which is effectively the 12th because we have a 12 column grid
     }
   }
 
@@ -32,8 +32,8 @@
     }
 
     .main-section-desktop {
-      grid-column-start: 4;
-      grid-column-end: 11; //
+      grid-column-start: 3;
+      grid-column-end: 13; // Ends on 13th column (which is effectively the 12th because we have a 12 column grid)
     }
 
     .sidebar {

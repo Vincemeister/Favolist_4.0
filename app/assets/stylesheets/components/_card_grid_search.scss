@@ -1,18 +1,28 @@
 
 .card-grid-search {
 
-  @media(min-width: 1200px) {
+  @media(min-width: 500px) {
     gap: 1em;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     align-items: end;
+    padding-top: 2em;
+
+    .product-card {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .list-grid-container {
+      padding: 0%;
+    }
 
   }
 
 
   .product-card-image {
     width: 100%;
-    
+
     img {
       width: 100%;
       object-fit: scale-down;
