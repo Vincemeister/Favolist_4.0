@@ -1,17 +1,18 @@
 
 .card-grid-search {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  align-items: end;
 
-  // @media(max-width: 1600px) {
-  //   grid-template-columns: repeat(2, 1fr);
-  // }
+  @media(min-width: 1200px) {
+    gap: 1em;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: end;
+
+  }
+
 
   .product-card-image {
     width: 100%;
-    background-color: grey; /* set the color of the borders here */
-
+    
     img {
       width: 100%;
       object-fit: scale-down;

@@ -2,18 +2,15 @@
 <div class="user-card user-card-desktop-sidebar text-decoration-none">
   <div class="avatar-and-username-and-follow-counts-and-follow-button">
     <%= link_to user_path(user) do %>
-      <%= image_tag user.avatar, class: "#{local_assigns[:sidebar] ? 'avatar-medium' : 'avatar-xl'}" %>
+      <%= image_tag user.avatar, class: "avatar-medium" %>
     <% end %>
     <div class="username-and-follow-counts">
       <div class="username-and-conditional-follow-button">
         <%= link_to user_path(user) do %>
-          <% if local_assigns[:sidebar] %>
-            <div class="username">
-              <%= user.username %>
-            </div>
-          <% else %>
-            <h5><%= user.username %></h5>
-          <% end %>
+          <div class="username">
+            <%= user.username %>
+          </div>
+
         <% end %>
         <% if local_assigns[:current_user_followers_tab] && !current_user.is_following?(user) || local_assigns[:sidebar] && !current_user.is_following?(user)  %>
           <%= button_to 'follow', follow_user_path(user), method: :post, class: "small-follow-button" %>
@@ -23,11 +20,11 @@
           </div>
         <% end %>
       </div>
-      <div class="user-count">
-        <span class="bold-text"><%= user.lists.count %></span> lists ⸱ <span class="bold-text"><%= user.products.count %></span> products
+      <div class="user-count intro">
+       <span class="bold-text"><%= user.products.count %></span> <i class="fa-sharp fa-regular fa-square"></i> ⸱ <span class="bold-text"><%= user.lists.count %></span> <i class="fa-sharp far fa-table-cells"></i>
       </div>
-      <div class="followers-count">
-        <span class="bold-text"><%= user.followers.count %></span> followers ⸱ <span class="bold-text"><%= user.followed.count %></span> following
+      <div class="followers-count intro">
+        <span class="bold-text"><%= user.followers.count %></span> followers
       </div>
     </div>
     <%# Defining which button to appear (follow, unfollow, remove follower, or followed (the latter serves the same function as remove follower but just discourages the negative action of unfollowing).
@@ -51,9 +48,8 @@
 
   <% unless local_assigns[:sidebar] %>
     <%= link_to user_path(user) do %>
-      <p class="truncate-3-lines content-text">
-        <%= user.bio %>
-      </p>
+      <div class="intro">Entrepreneur & biohacker  | life extension-freak bestselling author. SG resident. Proud Dad of 4. Owner of BioTECH Ltd. in Australia.
+      </div>
     <% end %>
   <% end %>
 

@@ -5,6 +5,7 @@
   padding: 1em;
   gap: 0.5em;
   width: 100%;
+  height: 100%;
   // border-bottom: 1px solid $light-gray;
 }
 
@@ -43,6 +44,234 @@
     line-height: $line-height-paragraph-medium;
     color: $neutral-700;
   }
+}
 
 
+
+
+
+
+
+
+// SEARCH--------------------------------------------------------------------
+
+
+.user-card-search {
+  padding: 1em 1em;
+  gap: 1em;
+  display: flex;
+  flex-direction: column;
+  color: $neutral-700;
+  border-bottom: 1px solid $neutral-100;
+  height: 100%;
+
+
+  // using bootstrap to define a row and have the 3 child elements take up respective space (3 col 6 col 3 col)
+  .avatar-and-username-and-follow-counts-and-follow-or-bookmarks-button {
+    display: flex;
+    align-items: center;
+    padding: 0.5em 0;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .username-and-follow-counts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    color: $body-color;
+  }
+
+  .username {
+    margin-bottom: 0.5em;
+  }
+
+  .follow-counts {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    gap: 0.5em;
+    font-weight: $regular;
+  }
+
+
+  .bold-number {
+    font-weight: $medium;
+  }
+
+
+  .followed-by-count {
+    font-size: 0.875rem;
+    line-height: 0.875rem;
+  }
+
+  .follow-or-bookmarks-button {
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    align-self: stretch;
+  }
+
+
+  .intro {
+    font-size: $font-size-paragraph-small;
+    line-height: $line-height-paragraph-small;
+  }
+
+
+  .followed-by-avatars-and-text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5em;
+  }
+
+  .followed-by-text {
+    font-weight: $regular;
+    color: $neutral-400;
+  }
+
+
+  // Avatar group styling
+
+  .avatar-group {
+    display: inline-flex;
+
+  }
+
+  .avatar-in-group {
+    position: relative;
+    border: 1px solid #fff;
+    overflow: hidden;
+  }
+
+  .avatar-in-group:not(:last-child) {
+    margin-left: -16px;
+  }
+
+  .avatar-in-group img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// SHOW PAGE--------------------------------------------------------------------
+
+.user-card-show-page {
+  padding: 1em 1em;
+  gap: 1em;
+  display: flex;
+  flex-direction: column;
+  color: $neutral-700;
+  border-bottom: 1px solid $neutral-100;
+
+
+  // using bootstrap to define a row and have the 3 child elements take up respective space (3 col 6 col 3 col)
+  .avatar-and-username-and-follow-counts-and-follow-or-bookmarks-button {
+    display: flex;
+    align-items: flex-end;
+    padding: 0.5em 0;
+  }
+
+  .username-and-follow-counts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: $body-color;
+  }
+
+  .username {
+    margin-bottom: 1em;
+  }
+
+  .follow-counts {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+    font-weight: $regular;
+  }
+
+
+  .bold-number {
+    font-weight: $medium;
+  }
+
+
+  .followed-by-count {
+    font-size: 0.875rem;
+    line-height: 0.875rem;
+  }
+
+  .follow-or-bookmarks-button {
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    align-self: stretch;
+  }
+
+
+  .intro {
+    font-size: $font-size-paragraph-small;
+    line-height: $line-height-paragraph-small;
+  }
+
+
+  .followed-by-avatars-and-text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5em;
+  }
+
+  .followed-by-text {
+    font-weight: $regular;
+    color: $neutral-400;
+  }
+
+
+  // Avatar group styling
+
+  .avatar-group {
+    display: inline-flex;
+
+  }
+
+  .avatar-in-group {
+    position: relative;
+    border: 1px solid #fff;
+    overflow: hidden;
+  }
+
+  .avatar-in-group:not(:last-child) {
+    margin-left: -16px;
+  }
+
+  .avatar-in-group img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
 }
