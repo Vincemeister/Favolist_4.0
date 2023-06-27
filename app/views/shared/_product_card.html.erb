@@ -1,7 +1,7 @@
 <div class="product-card">
   <!--RENDERING THE HEADER -->
   <%= render "shared/product_card/product_header", product: product, sidebar: (local_assigns[:sidebar] if local_assigns.has_key?(:sidebar)) %>
-  
+
   <% if product.photos.attached? && product.photos.count > 1 %>
     <div id="carouselExampleIndicators-<%= product.id %>" class="carousel slide product-card-image">
       <div class="carousel-indicators">
@@ -36,7 +36,7 @@
   <% else %>
     <div class="product-card-image">
       <div class="image-container">
-        <%= image_tag "https://res.cloudinary.com/dncij7vr6/image/upload/v1687784465/Favolist%204.0/app%20assets/gray_square_o5xwdk.png" %>
+        <%= image_tag "https://res.cloudinary.com/dncij7vr6/image/upload/v1687825911/Favolist%204.0/app%20assets/grey_rectangle_byagze.png" %>
       </div>
     </div>
   <% end %>

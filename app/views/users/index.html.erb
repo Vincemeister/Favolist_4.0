@@ -2,5 +2,5 @@ user index
 
 <%= render "shared/search", url: users_path %>
 <% @users.each do |user| %>
-  <%= render 'shared/user_card', user: user %>
+  <%= render 'users/user_card_search', user: user %>
 <% end %>

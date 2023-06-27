@@ -1,29 +1,30 @@
 <div class="user-card-search text-decoration-none">
   <!-- using bootstrap grid -->
-  <div class="avatar-and-username-and-follow-counts-and-follow-or-bookmarks-button">
-    <%= link_to user_path(user), class: "col-3" do %>
-      <%= image_tag user.avatar, class: "#{controller_path == 'users' && action_name == 'show' ? 'avatar-xl' : 'avatar-large'}" %>
-    <% end %>
-    <div class="username-and-follow-counts col-6">
+  <div class="usercard-search-main-section">
+    <div class="avatar-and-product-list-follow-counts col-3">
+      <%= link_to user_path(user), class: "" do %>
+        <%= image_tag user.avatar, class: "avatar-large" %>
+      <% end %>
+      <div class="product-list-follow-counts">
+        <div class="counts">
+          <div class="paragraph-small"><span class="bold-text"><%= user.products.count %></span> <i class="fa-sharp fa-regular fa-square"></i></div>
+          <div class="paragraph-small"><span class="bold-text"><%= user.lists.count %></span> <i class="fa-sharp far fa-table-cells"></i></div>
+        </div>
+        <div class="follow-counts">
+          <div class="paragraph-small"><span class="bold-text"><%= user.followers.count %></span> followers</div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="username-and-intro col-6">
       <div class="username-and-conditional-follow-button">
         <%= link_to user_path(user) do %>
           <div class="paragraph-medium-semibold username"><%= user.username %></div>
         <% end %>
-        <%# small follow button appearing only in the follows page %>
-        <% if local_assigns[:current_user_followers_tab] && !current_user.is_following?(user) %>
-          <%= button_to 'follow', follow_user_path(user), method: :post, class: "small-follow-button" %>
-        <% elsif local_assigns[:current_user_followed_tab] && user.is_following?(current_user) %>
-          <div class="small-follow-button">
-            follows you
-          </div>
-        <% end %>
       </div>
-      <div class="follow-counts">
-        <div class="followers-count paragraph-small"><span class="bold-text"><%= user.products.count %></span> <i class="fa-sharp fa-regular fa-square"></i></div>
-        <div class="following-count paragraph-small"><span class="bold-text"><%= user.lists.count %></span> <i class="fa-sharp far fa-table-cells"></i></div>
-      </div>
-      <div class="follow-counts">
-        <div class="followers-count paragraph-small"><span class="bold-text"><%= user.followers.count %></span> followers</div>
+      <div class="intro">Entrepreneur & biohacker  | life extension-freak bestselling author. SG resident. Proud Dad of 4. Owner of BioTECH Ltd. in Australia.
       </div>
     </div>
 
@@ -55,8 +56,6 @@
 
 
   <!-- End of bootstrap grid -->
-  <div class="intro">Entrepreneur & biohacker  | life extension-freak bestselling author. SG resident. Proud Dad of 4. Owner of BioTECH Ltd. in Australia.
-  </div>
 
 
 

@@ -15,7 +15,7 @@
   </div>
   <div class="tab-pane fade linebreak" id="pills-followed" role="tabpanel" aria-labelledby="pills-followed-tab">
     <% @followed.each do |followed| %>
-      <%= render 'shared/user_card', user: followed, current_user_followed_tab: (@user == current_user) %>
+      <%= render 'users/user_card_search', user: followed, current_user_followed_tab: (@user == current_user) %>
     <% end %>
   </div>
 </div>
