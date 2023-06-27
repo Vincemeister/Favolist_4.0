@@ -3,6 +3,7 @@ require 'net/http'
 include CloudinaryHelper
 
 class ProductsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [ :show, :index, :comments ]
   before_action :set_product, only: [:show, :edit, :update, :destroy, :comments, :bookmark, :unbookmark]
 
   def index

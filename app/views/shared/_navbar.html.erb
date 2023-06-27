@@ -13,11 +13,15 @@
   <%= link_to root_path do %>
     <i class="fa-sharp fa-solid fa-house"></i>
   <% end %>
-  <%= link_to settings_path do %>
-    <i class="fa-sharp fa-solid fa-gear"></i>
+  <% if user_signed_in? %>
+    <%= link_to settings_path do %>
+      <i class="fa-sharp fa-solid fa-gear"></i>
+    <% end %>
   <% end %>
-  <i class="fa-sharp fa-solid fa-square-plus" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
-</div>
+  <% if user_signed_in? %>
+    <i class="fa-sharp fa-solid fa-square-plus" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+  <% end %>
+  </div>
 
 
 <!-- Modal -->

@@ -10,14 +10,6 @@
         <%= link_to user_path(user) do %>
           <h5 class="username"><%= user.username %></h5>
         <% end %>
-        <%# small follow button appearing only in the follows page %>
-        <% if local_assigns[:current_user_followers_tab] && !current_user.is_following?(user) %>
-          <%= button_to 'follow', follow_user_path(user), method: :post, class: "small-follow-button" %>
-        <% elsif local_assigns[:current_user_followed_tab] && user.is_following?(current_user) %>
-          <div class="small-follow-button">
-            follows you
-          </div>
-        <% end %>
       </div>
       <div class="follow-counts">
         <div class="followers-count paragraph-small"><span class="bold-text"><%= user.followers.count %></span> followers</div>
@@ -28,7 +20,9 @@
     <%# Defining which button to appear (follow, unfollow, remove follower, or followed (the latter serves the same function as remove follower but just discourages the negative action of unfollowing).
     The unfollow nad remove follow buttons only appear on the follow page of current_user, in the followed and following tabs respectively%>
     <div class="follow-or-bookmarks-button col-3">
-      <% if local_assigns[:current_user_followers_tab] %>
+      <% if !user_signed_in?%>
+        <%= button_to 'Follow', follow_user_path(user), method: :post, class: "button button-primary button-small" %>
+      <% elsif local_assigns[:current_user_followers_tab] %>
         <%= button_to 'Remove', remove_follower_user_path(user), method: :post, class: "btn btn-main" %>
       <% elsif local_assigns[:current_user_followed_tab] %>
         <%= button_to 'Unfollow', unfollow_user_path(user), method: :post, class: "btn btn-main" %>
@@ -57,32 +51,36 @@
 
 
 
-
-  <% mutual_followers = current_user.mutual_follows_with(user) %>
-  <% mutual_followers_first_3 = mutual_followers.first(3) %>
+  <% if user_signed_in? %>
+    <% mutual_followers = current_user.mutual_follows_with(user) %>
+    <% mutual_followers_first_3 = mutual_followers.first(3) %>
 
     <% if mutual_followers_first_3.any? %>
-    <div class="followed-by-avatars-and-text">
-      <div class="avatar-group">
-        <% mutual_followers_first_3.each do |follower| %>
-          <span class="avatar-xs avatar-in-group">
-            <%= cl_image_tag follower.avatar.key, alt: follower.username %>
-          </span>
-        <% end %>
+      <div class="followed-by-avatars-and-text">
+        <div class="avatar-group">
+          <% mutual_followers_first_3.each do |follower| %>
+            <span class="avatar-xs avatar-in-group">
+              <%= cl_image_tag follower.avatar.key, alt: follower.username %>
+            </span>
+          <% end %>
+        </div>
+        <div class="followed-by-text paragraph-small">
+          Followed by
+          <% case mutual_followers_first_3.size
+            when 1 %>
+            <%= mutual_followers_first_3.first.username %>
+          <% when 2 %>
+            <%= mutual_followers_first_3.first.username %> and <%= mutual_followers_first_3.last.username %>
+          <% else %>
+            <%= mutual_followers_first_3[0].username %>, <%= mutual_followers_first_3[1].username %>, and <%= pluralize(mutual_followers.size - 2, 'other') %> you follow
+          <% end %>
+        </div>
       </div>
-      <div class="followed-by-text paragraph-small">
-        Followed by
-        <% case mutual_followers_first_3.size
-          when 1 %>
-          <%= mutual_followers_first_3.first.username %>
-        <% when 2 %>
-          <%= mutual_followers_first_3.first.username %> and <%= mutual_followers_first_3.last.username %>
-        <% else %>
-          <%= mutual_followers_first_3[0].username %>, <%= mutual_followers_first_3[1].username %>, and <%= pluralize(mutual_followers.size - 2, 'other') %> you follow
-        <% end %>
-      </div>
-    </div>
+    <% end %>
+
+    
   <% end %>
+
 
 
 

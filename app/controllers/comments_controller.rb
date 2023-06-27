@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!
+  skip_before_action :authenticate_user!, only: [ :show, :replies ]
   before_action :set_product, only: [:index, :create, :show]
   before_action :set_comment, only: [:replies, :show, :destroy]
   before_action :set_context, only: [:create] # to enable the jbuilder ender logic

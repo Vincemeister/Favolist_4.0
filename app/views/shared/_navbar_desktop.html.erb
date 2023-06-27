@@ -17,16 +17,21 @@
       <i class="fa-sharp fa-solid fa-house"></i>
       <div>Home</div>
     <% end %>
+
     <% if user_signed_in? %>
       <%= link_to profile_settings_path, class: "side-nav-item" do %>
       <i class="fa-sharp fa-solid fa-gear"></i>
         <div>Settings</div>
       <% end %>
     <% end %>
-    <div class="side-nav-item" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      <i class="fa-sharp fa-solid fa-square-plus"></i>
-      <div>Add</div>
-    </div>
+
+    <% if user_signed_in? %>
+      <div class="side-nav-item" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <i class="fa-sharp fa-solid fa-square-plus"></i>
+        <div>Add</div>
+      </div>
+    <% end %>
+
 
     <% if user_signed_in? %>
       <%= link_to notifications_path, class: "side-nav-item" do %>
