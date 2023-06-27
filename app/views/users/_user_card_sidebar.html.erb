@@ -1,0 +1,15 @@
+<div class="user-card-sidebar">
+  <%= image_tag user.avatar, class: "avatar" %>
+  <div class="username-and-product-list-follow-counts">
+    <%= user.username %>
+    <div class="product-list-follow-counts">
+      <div class="counts">
+        <div class="paragraph-small"><span class="bold-text"><%= user.products.count %></span> <i class="fa-sharp fa-regular fa-square"></i></div>
+        <div class="paragraph-small"><span class="bold-text"><%= user.lists.count %></span> <i class="fa-sharp far fa-table-cells"></i></div>
+      </div>
+      <div class="follow-counts">
+        <div class="paragraph-small"><span class="bold-text"><%= user.followers.count %></span> followers</div>
+      </div>
+    </div>
+  </div>
+</div>

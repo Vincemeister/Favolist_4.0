@@ -1,9 +1,14 @@
+// SEARCH-----------------------------------------------------------------------
+.user-card-sidebar {
+  .username-and-product-list-follow-counts {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+  }
 
+}
 
-
-// SEARCH--------------------------------------------------------------------
-
-
+// SEARCH-----------------------------------------------------------------------
 .user-card-search {
   padding: 1em 1em;
   display: flex;
@@ -18,18 +23,34 @@
     padding: 0.5em 0;
     flex-direction: row;
     justify-content: space-between;
+    gap: 1em;
   }
 
   // 1/3
+
+  .avatar-and-product-list-follow-counts-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+  }
   .avatar-and-product-list-follow-counts {
     display: flex;
     flex-direction: column;
     gap: 1em;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .avatar-user-card-search {
+    height: 42px;
+    width: 42px;
+    border-radius: 50%;
   }
 
   .product-list-follow-counts {
     display: flex;
     flex-direction: column;
+    color: $neutral-700;
   }
 
   .counts {
@@ -42,13 +63,28 @@
   }
 
   // 2/3
+
+  .avatar-and-username {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    align-items: start;
+  }
   .username-and-intro {
     display: flex;
     flex-direction: column;
+    gap: 1em;
   }
 
+  .username-and-conditional-follow-button {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+
   .username {
-    margin-bottom: 0.5em;
   }
 
   .intro {
@@ -102,22 +138,7 @@
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // SHOW PAGE--------------------------------------------------------------------
-
 .user-card-show-page {
   padding: 1em 1em;
   gap: 1em;
@@ -173,9 +194,6 @@
     font-size: $font-size-paragraph-small;
     line-height: $line-height-paragraph-small;
   }
-
-
-
 
   // Avatar group styling
   .followed-by-avatars-and-text {

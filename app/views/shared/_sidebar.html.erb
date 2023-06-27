@@ -9,7 +9,7 @@
           Profiles
         </div>
         <% @suggested_users.each do |user| %>
-          <%= render 'users/user_card_search', user: user, sidebar: true %>
+          <%= render 'users/user_card_sidebar', user: user %>
         <% end %>
       </div>
     <% end %>
