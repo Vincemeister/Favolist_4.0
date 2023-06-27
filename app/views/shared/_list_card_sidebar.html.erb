@@ -8,16 +8,14 @@
             <%= image_tag list.user.avatar, class: "avatar-small" %>
             <div class="user-text paragraph-small">
               <div class="username"><%= list.user.username %></div>
-              <div class="paragraph-small-regular"><%= list.user.followers_count %> followers</div>
+              <div class="follower-count"><%= list.user.followers_count %> followers</div>
             </div>
           </div>
           <div class="product-count-and-list-name">
-            <div class="list-product-count paragraph-large-semibold"><%= pluralize(list.products_count, 'product') %></div>
-            <% if local_assigns[:sidebar] %>
-              <h5><%= list.name %></h5>
-            <% else %>
-              <h5 class="list-name"><%= list.name %></h5>
-            <% end %>
+            <div class="list-product-count paragraph-regular-semibold">
+              <%= pluralize(list.products_count, 'product') %>
+            </div>
+            <h6 class="list-name"><%= list.name %></h6>
           </div>
         </div>
 

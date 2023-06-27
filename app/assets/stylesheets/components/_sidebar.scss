@@ -12,6 +12,68 @@
   gap: 3em;
   border-left: 1px solid $neutral-100;
 
+
+
+
+    .grid-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center;
+
+      .user-info {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+      }
+
+      .user-text {
+        margin-left: 10px;
+        text-align: left;
+      }
+
+      .username {
+        font-weight: $semi-bold;
+        font-size: $font-size-paragraph-small;
+        line-height: $line-height-paragraph-small;
+      }
+
+      .follower-count {
+        font-weight: $regular;
+        font-size: $font-size-paragraph-xsmall;
+        line-height: $line-height-paragraph-xsmall;
+      }
+
+      .product-count-and-list-name {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 2em;
+      }
+
+      .list-product-count {
+        font-weight: $medium;
+      }
+
+      .list-name {
+        font-weight: $bold;
+      }
+    }
+
+
+
 }
 
 .suggested-for-you {

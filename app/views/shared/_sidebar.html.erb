@@ -19,7 +19,7 @@
           Lists
         </div>
         <% @suggested_lists.each do |list| %>
-          <%= render 'shared/list_card', list: list, sidebar: true %>
+          <%= render 'shared/list_card_sidebar', list: list, sidebar: true %>
         <% end %>
       </div>
     <% end %>

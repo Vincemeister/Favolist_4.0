@@ -1,15 +1,96 @@
-<div class="user-card-sidebar">
-  <%= image_tag user.avatar, class: "avatar" %>
-  <div class="username-and-product-list-follow-counts">
-    <%= user.username %>
-    <div class="product-list-follow-counts">
-      <div class="counts">
-        <div class="paragraph-small"><span class="bold-text"><%= user.products.count %></span> <i class="fa-sharp fa-regular fa-square"></i></div>
-        <div class="paragraph-small"><span class="bold-text"><%= user.lists.count %></span> <i class="fa-sharp far fa-table-cells"></i></div>
+<div class="user-card-search user-card-sidebar text-decoration-none">
+  <!-- using bootstrap grid -->
+  <div class="usercard-search-main-section">
+
+
+
+
+
+    <div class="username-and-intro">
+      <div class="username-and-conditional-follow-button">
+        <div class="avatar-and-username">
+          <div class="avatar-and-product-list-follow-counts-wrapper">
+            <div class="avatar-and-product-list-follow-counts">
+              <%= link_to user_path(user), class: "" do %>
+                <%= image_tag user.avatar, class: "avatar-small" %>
+              <% end %>
+            </div>
+          </div>
+          <%= link_to user_path(user) do %>
+            <div class="paragraph-medium-semibold username"><%= user.username %></div>
+            <div class="product-list-follow-counts">
+              <div class="counts">
+                <div class="paragraph-small-regular"><span class="bold-text"><%= user.products.count %></span> <i class="fa-sharp fa-regular fa-square"></i></div>
+                <div class="paragraph-small-regular"><span class="bold-text"><%= user.lists.count %></span> <i class="fa-sharp far fa-table-cells"></i></div>
+              </div>
+              <div class="counts">
+                <div class="paragraph-small-regular"><span class="bold-text"><%= user.followers.count %></span> followers</div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="follow-or-bookmarks-button">
+          <% if local_assigns[:current_user_followers_tab] %>
+            <%= button_to 'Remove', remove_follower_user_path(user), method: :post, class: "btn btn-main" %>
+          <% elsif local_assigns[:current_user_followed_tab] %>
+            <%= button_to 'Unfollow', unfollow_user_path(user), method: :post, class: "btn btn-main" %>
+          <% elsif current_user.is_following?(user.id) %>
+            <%= button_to 'Followed', unfollow_user_path(user), method: :post, class: "button small-follow-button" %>
+          <% elsif user.is_following?(current_user.id) %>
+            <%= button_to 'Follow Back', follow_user_path(user), method: :post, class: "button small-follow-button" %>
+          <% elsif user != current_user %>
+            <%= button_to 'Follow', follow_user_path(user), method: :post, class: "button small-follow-button" %>
+          <% else %>
+            <div class="bookmarks-button">
+              <%= link_to bookmarks_path do%>
+                <i class="fa-sharp fa-light fa-book-bookmark fa-2xl"></i>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
       </div>
-      <div class="follow-counts">
-        <div class="paragraph-small"><span class="bold-text"><%= user.followers.count %></span> followers</div>
-      </div>
+      <% mutual_followers = current_user.mutual_follows_with(user) %>
+      <% mutual_followers_first_3 = mutual_followers.first(3) %>
+
+        <% if mutual_followers_first_3.any? %>
+        <div class="followed-by-avatars-and-text">
+          <div class="avatar-group">
+            <% mutual_followers_first_3.each do |follower| %>
+              <span class="avatar-xs avatar-in-group">
+                <%= cl_image_tag follower.avatar.key, alt: follower.username %>
+              </span>
+            <% end %>
+          </div>
+          <div class="followed-by-text paragraph-small">
+            Followed by
+            <% case mutual_followers_first_3.size
+              when 1 %>
+              <%= mutual_followers_first_3.first.username %>
+            <% when 2 %>
+              <%= mutual_followers_first_3.first.username %> and <%= mutual_followers_first_3.last.username %>
+            <% else %>
+              <%= mutual_followers_first_3[0].username %>, <%= mutual_followers_first_3[1].username %>, and <%= pluralize(mutual_followers.size - 2, 'other') %> you follow
+            <% end %>
+          </div>
+        </div>
+      <% end %>
     </div>
+
+    <%# Defining which button to appear (follow, unfollow, remove follower, or followed (the latter serves the same function as remove follower but just discourages the negative action of unfollowing).
+    The unfollow nad remove follow buttons only appear on the follow page of current_user, in the followed and following tabs respectively%>
+
   </div>
+
+
+  <!-- End of bootstrap grid -->
+
+
+
+
+
+
+
+
+
+
 </div>

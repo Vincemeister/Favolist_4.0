@@ -1,7 +1,7 @@
 @media(min-width: 992px) {
   .desktop_grid {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(13, 1fr);
     gap: 24px;
     margin-left: auto;
     margin-right: auto;
@@ -20,7 +20,7 @@
 
     > .sidebar {
       grid-column-start: 11; // Starts from 11th column
-      grid-column-end: 13; // Ends on 13th column, which is effectively the 12th because we have a 12 column grid
+      grid-column-end: 14; // Ends on 13th column, which is effectively the 12th because we have a 12 column grid
     }
   }
 
