@@ -7,10 +7,16 @@
   /* Auto layout */
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: start;
   padding-left: 1em;
   gap: 3em;
   border-left: 1px solid $neutral-100;
+  
+
+  .user-card {
+    padding: 1em 0em;
+
+  }
 
 
 

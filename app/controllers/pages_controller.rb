@@ -6,7 +6,7 @@ class PagesController < ApplicationController
     if current_user
       @user = current_user
       @suggested_users = User.all - current_user.followed
-      @suggested_users = @suggested_users.sample(2)
+      @suggested_users = @suggested_users.sample(1)
     end
     @suggested_lists = List.all.sample(1)
   end
