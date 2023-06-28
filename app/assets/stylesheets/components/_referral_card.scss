@@ -10,6 +10,10 @@
   height: 100%;
   box-shadow: 0 4px 1px -1px rgba($neutral-100, 0.5);
 
+  .cardbar {
+    padding: 0;
+  }
+
   .product-header-and-image {
     display: flex;
     flex-direction: row;

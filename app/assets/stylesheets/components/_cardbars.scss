@@ -1,38 +1,35 @@
+.cardbar-wrapper {
+  padding: 1em 0em;
+}
 .cardbar {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 1em 0;
   width: 100%;
-  position: relative;
-  gap: 1em;
+  padding: 1em 0em;
 
   .cardbar-left {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    margin-right: 0.5em;
     height: 100%;
-
-
+    gap: 0.5em;
   }
-  .avatar-small {
-    margin-right: 0.5em;
-  }
+
 
   .username {
     font-weight: $semi-bold;
   }
 
+
+
+
   .cardbar-logo {
     object-fit: contain;
     max-width: 5em;
     max-height: 2em;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
   }
 
 
@@ -46,15 +43,16 @@
   .cardbar-iconbox {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    font-size: 1.2rem;
     margin-left: 0.5em;
+    height: 2em;
   }
 
 
   .iconbox-text {
-    display: block;
+    // display: block;
+    line-height: 1;
   }
 
 }
@@ -67,4 +65,5 @@
   border: none;  /* Remove border */
   background: none;  /* Remove background */
   text-decoration: none;  /* Remove underline */
+  justify-content: center;
 }

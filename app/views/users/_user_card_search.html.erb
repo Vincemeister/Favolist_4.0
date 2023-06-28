@@ -5,7 +5,7 @@
       <%# <%= image_tag user.avatar, class: local_assigns[:sidebar] ? "avatar-small" : "avatar" %>
       <div class="username-and-product-list-follow-counts">
         <div class="username-and-conditional-follow-button">
-          <div class="paragraph-medium-semibold"><%= user.username %></div>
+          <div class="paragraph-regular-semibold"><%= user.username %></div>
           <% if local_assigns[:sidebar] %>
             <div class="follow-button">
               <%= button_to "Follow", follow_user_path(user), method: :post, class: "button button-link" %>

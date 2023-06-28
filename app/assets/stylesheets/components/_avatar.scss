@@ -19,6 +19,15 @@
   object-fit: cover;
 }
 
+
+// Need to decide whether to adjust the padding of buttons (seems a little to tall atm - would need to adjust this back to regular avatar)
+.avatar-cardbar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .avatar-usercard {
   width: 42px;
   height: 42px;

@@ -2,7 +2,7 @@
 <% referral = defined?(referral) ? referral : 'false' %>
 
   <div class="cardbar text-decoration-none">
-    <div class="cardbar-left">
+    <div class="cardbar-left col-4">
       <%= link_to user_path(product.user) do %>
         <%= image_tag product.user.avatar, class: 'avatar-small' %>
       <% end %>
@@ -13,7 +13,7 @@
       <% end %>
     </div>
     <% if product.logo.attached? %>
-      <%= link_to product.url, class: "cardbar-logo-link", target: "_blank" do %>
+      <%= link_to product.url, class: "cardbar-logo-link col-4", target: "_blank" do %>
         <%= image_tag product.logo, class: "cardbar-logo" %>
       <% end %>
     <% else %>
@@ -21,33 +21,33 @@
     <% end %>
 
 
-    <div class="cardbar-right">
+    <div class="cardbar-right col-4">
       <% if referral == true %>
         <%= link_to "View product", product_path(product), class: "button button-link" %>
       <% else %>
         <% if product.bookmarked_by?(current_user) %>
           <%= link_to unbookmark_product_path(product), method: :post, data: { controller: 'bookmarks', action: 'click->bookmarks#toggle', bookmarks_target: 'bookmarkbutton' } do %>
             <div class="cardbar-iconbox">
-              <i class="fa-solid fa-circle-bookmark"></i>
+              <i class="fa-solid fa-circle-bookmark iconbox-text paragraph-large-regular"></i>
               <div class="iconbox-text paragraph-xsmall"><%= product.bookmarks.count %></div>
             </div>
           <% end %>
         <% else %>
           <%= link_to bookmark_product_path(product), method: :post, data: { controller: 'bookmarks', action: 'click->bookmarks#toggle', bookmarks_target: 'bookmarkbutton' } do %>
             <div class="cardbar-iconbox">
-              <i class="fa-light fa-circle-bookmark"></i>
-              <div class="iconbox-text paragraph-xsmall"><%= product.bookmarks.count %></div>
+              <i class="fa-light fa-circle-bookmark iconbox-text paragraph-large-regular"></i>
+              <div class="iconbox-text paragraph-xsmall-medium"><%= product.bookmarks.count %></div>
             </div>
           <% end %>
         <% end %>
         <%= link_to new_product_path(original_product_id: product.id), class: "cardbar-iconbox" do %>
-          <i class="fa-light fa-circle-plus"></i>
-          <div class="iconbox-text paragraph-xsmall">30</div>
+          <i class="fa-light fa-circle-plus iconbox-text paragraph-large-regular"></i>
+          <div class="iconbox-text paragraph-xsmall-medium">30</div>
         <% end %>
         <%= link_to product_comments_path(product) do %>
           <div class="cardbar-iconbox">
-            <i class="fa-light fa-comment"></i>
-            <div class="iconbox-text paragraph-xsmall"><%= product.comments.count %></div>
+            <i class="fa-light fa-comment iconbox-text paragraph-large-regular"></i>
+            <div class="iconbox-text paragraph-xsmall-medium"><%= product.comments.count %></div>
           </div>
         <% end %>
       <% end %>

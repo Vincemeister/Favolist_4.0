@@ -2,20 +2,22 @@
 .card-grid-search {
 
   @media(min-width: 500px) {
-    gap: 0em 1em;
+    gap: 0em 2em;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     align-items: end;
     padding-top: 1em;
 
     .product-card {
-      padding-left: 0;
-      padding-right: 0;
+      padding: 2em 0em;
     }
 
     .user-card {
-      padding-left: 0;
-      padding-right: 0;
+      padding: 2em 0em;
+    }
+
+    .referral-card {
+      padding: 2em 0em;
     }
 
     .list-grid-container {
