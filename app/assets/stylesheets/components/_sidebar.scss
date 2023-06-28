@@ -3,6 +3,7 @@
   top: 0;
   height: 100vh;
   width: 100%;
+  padding-top: 1em;
 
   /* Auto layout */
   display: flex;
@@ -11,7 +12,7 @@
   padding-left: 1em;
   gap: 3em;
   border-left: 1px solid $neutral-100;
-  
+
 
   .user-card {
     padding: 1em 0em;

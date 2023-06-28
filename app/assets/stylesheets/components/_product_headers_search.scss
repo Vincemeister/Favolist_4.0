@@ -1,0 +1,61 @@
+.product-header-search {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  gap: 2em;
+  isolation: isolate;
+  padding-bottom: 1em;
+  height: 100%;
+
+
+  .list-name {
+    font-weight: $regular;
+  }
+
+  .product-title {
+    font-weight: $bold;
+    line-height: 1em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+
+  .price {
+    font-weight: $medium;
+  }
+
+  .list-and-title-and-price {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    text-align: start;
+  }
+
+  .product-header-referral-card {
+
+    .list-and-title-and-price {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      text-align: start;
+    }
+    .list-name,
+    .product-title,
+    .price {
+      text-align: start;
+    }
+  }
+
+
+  .product-header-show {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5em 0px;
+    width: 100%;
+    }
+}

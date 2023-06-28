@@ -58,6 +58,11 @@
   </div>
 
 
+  <div class="intro">
+    Entrepreneur & biohacker  | life extension-freak bestselling author. SG resident. Proud Dad of 4. Owner of BioTECH Ltd. in Australia.
+  </div>
+
+
   <% if user_signed_in? %>
     <% mutual_followers = current_user.mutual_follows_with(user) %>
     <% mutual_followers_first_3 = mutual_followers.first(3) %>
@@ -85,10 +90,5 @@
       </div>
     <% end %>
   <% end %>
-
-  <div class="intro">
-    Entrepreneur & biohacker  | life extension-freak bestselling author. SG resident. Proud Dad of 4. Owner of BioTECH Ltd. in Australia.
-  </div>
-
 
 </div>
