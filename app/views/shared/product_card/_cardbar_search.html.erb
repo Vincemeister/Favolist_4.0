@@ -1,0 +1,42 @@
+<%# so referral local doesn't need to manually be set to false when not rendered for referral card  %>
+<% referral = defined?(referral) ? referral : 'false' %>
+
+  <div class="cardbar text-decoration-none">
+    <div class="list-name-and-product-title-and-price">
+      <div class="paragraph-small-regular"><%= product.list.name %></div>
+      <div class="paragraph-small-bold"><%= product.title  %></div>
+      <div class="price paragraph-small">$<%= product.price.to_i %></div>
+    </div>
+
+    <div class="cardbar-right col-4">
+      <% if referral == true %>
+        <%= link_to "View product", product_path(product), class: "button button-link" %>
+      <% else %>
+        <% if product.bookmarked_by?(current_user) %>
+          <%= link_to unbookmark_product_path(product), method: :post, data: { controller: 'bookmarks', action: 'click->bookmarks#toggle', bookmarks_target: 'bookmarkbutton' } do %>
+            <div class="cardbar-iconbox">
+              <i class="fa-solid fa-circle-bookmark iconbox-text paragraph-large-regular"></i>
+              <div class="iconbox-text paragraph-xsmall"><%= product.bookmarks.count %></div>
+            </div>
+          <% end %>
+        <% else %>
+          <%= link_to bookmark_product_path(product), method: :post, data: { controller: 'bookmarks', action: 'click->bookmarks#toggle', bookmarks_target: 'bookmarkbutton' } do %>
+            <div class="cardbar-iconbox">
+              <i class="fa-light fa-circle-bookmark iconbox-text paragraph-large-regular"></i>
+              <div class="iconbox-text paragraph-xsmall-medium"><%= product.bookmarks.count %></div>
+            </div>
+          <% end %>
+        <% end %>
+        <%= link_to new_product_path(original_product_id: product.id), class: "cardbar-iconbox" do %>
+          <i class="fa-light fa-circle-plus iconbox-text paragraph-large-regular"></i>
+          <div class="iconbox-text paragraph-xsmall-medium">30</div>
+        <% end %>
+        <%= link_to product_comments_path(product) do %>
+          <div class="cardbar-iconbox">
+            <i class="fa-light fa-comment iconbox-text paragraph-large-regular"></i>
+            <div class="iconbox-text paragraph-xsmall-medium"><%= product.comments.count %></div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>

@@ -1,6 +1,14 @@
 <div class="product-card">
-  <!--RENDERING THE HEADER -->
-  <%= render "shared/product_card/product_header_search", product: product, sidebar: (local_assigns[:sidebar] if local_assigns.has_key?(:sidebar)) %>
+  <div class="avatar-and-username">
+    <%= link_to user_path(product.user) do %>
+      <%= image_tag product.user.avatar, class: 'avatar-small' %>
+    <% end %>
+    <%= link_to user_path(product.user) do %>
+      <div class="username paragraph-small">
+        <%= product.user.username %>
+      </div>
+    <% end %>
+  </div>
 
   <% if product.photos.attached? && product.photos.count > 1 %>
     <div id="carouselExampleIndicators-<%= product.id %>" class="carousel slide product-card-image">
@@ -42,7 +50,7 @@
   <% end %>
   <div class="cardbar-and-text-container">
     <!--RENDERING THE CARDBAR -->
-    <%= render "shared/product_card/cardbar", product: product %>
+    <%= render "shared/product_card/cardbar_search", product: product %>
     <!--RENDERING THE PRODUCT SHOW TABS OR THE PARTIAL REVIEW OF THE PRODUCT CARD N THE FEED -->
     <% if controller_name == 'products' && action_name == 'show' && !local_assigns[:sidebar] %>
       <%= render "shared/product_card/product_show_tabs", product: product %>

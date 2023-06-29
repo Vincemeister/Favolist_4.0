@@ -8,12 +8,4 @@
     <div class="paragraph-small-bold"><%= product.title  %></div>
     <div class="price paragraph-small">$<%= product.price.to_i %></div>
   </div>
-  <% unless referral == true %>
-    <% if !local_assigns[:sidebar] %>
-      <i class="fa-sharp fa-regular fa-ellipsis" data-bs-toggle="modal" data-bs-target="#editOrDeleteModal-<%= product.id %>"></i>
-    <% else %>
-      <div></div> <!-- empty div to keep the title centered -->
-    <% end %>
-  <% end %>
-
 </div>
