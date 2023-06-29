@@ -9,7 +9,7 @@
           Profiles
         </div>
         <% @suggested_users.each do |user| %>
-          <%= render 'users/user_card_search', user: user, sidebar: true %>
+          <%= render 'users/user_card_search', user: user, iterating_for: "sidebar" %>
         <% end %>
       </div>
     <% end %>
@@ -19,7 +19,7 @@
           Lists
         </div>
         <% @suggested_lists.each do |list| %>
-          <%= render 'shared/list_card_sidebar', list: list, sidebar: true %>
+          <%= render 'shared/list_card_sidebar', list: list %>
         <% end %>
       </div>
     <% end %>
@@ -29,7 +29,7 @@
           Similar listings
         </div>
         <% @suggested_products.each do |product| %>
-          <%= render 'shared/product_card_search', product: product, sidebar: true %>
+          <%= render 'shared/product_card_search', product: product, iterating_for: "sidebar" %>
         <% end %>
       </div>
     <% end %>
