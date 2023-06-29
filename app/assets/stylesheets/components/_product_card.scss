@@ -62,4 +62,21 @@
   }
 
 
+  .nav-pills-product-show {
+    padding-top: 0.5em;
+    border-top: 1px solid $neutral-100;
+  }
+
+  .tab-content-product-show {
+    padding-top: 1em;
+  }
+
+  p {
+    line-height: 1.75em;
+    color: $neutral-700;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
 }
