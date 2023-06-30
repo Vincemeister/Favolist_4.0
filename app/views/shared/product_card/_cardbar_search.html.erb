@@ -6,18 +6,6 @@
       <div class="paragraph-small-bold"><%= product.title  %></div>
       <div class="price paragraph-small">$<%= product.price.to_i %></div>
     </div>
-
-    <% if local_assigns[:iterating_for] == "product_show_page" %>
-      <% if product.logo.attached? %>
-        <%= link_to product.url, class: "cardbar-logo-link col-4", target: "_blank" do %>
-          <%= image_tag product.logo, class: "cardbar-logo" %>
-        <% end %>
-      <% else %>
-        No image available
-      <% end %>
-    <% end %>
-
-
     <div class="cardbar-right col-4">
       <% if referral == true %>
         <%= link_to "View product", product_path(product), class: "button button-link" %>
