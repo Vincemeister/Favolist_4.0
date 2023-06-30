@@ -1,3 +1,13 @@
+.avatar-and-username {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5em;
+  width: 100%;
+}
+
+
 .product-card {
 
   /* Auto layout */
@@ -10,14 +20,6 @@
   width: 100%;
   box-shadow: 0 4px 1px -1px rgba($neutral-100, 0.5);
 
-  .avatar-and-username {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 0.5em;
-    width: 100%;
-  }
 
   a {
     color: $body-color;
@@ -25,15 +27,15 @@
   }
 
 
-  // ---------------------------------------------------------------------------
-    .product-card-image {
-      width: 100%;
-      img {
-        width: 100vw;
-        object-fit: scale-down;
-        max-height: 100vw;
-      }
-    
+// ---------------------------------------------------------------------------
+  .product-card-image {
+    width: 100%;
+    img {
+      width: 100vw;
+      object-fit: scale-down;
+      max-height: 100vw;
+    }
+
 
     .image-container {
       width: 100%;
@@ -118,3 +120,5 @@
   max-height: 32px;
   object-fit: contain;
 }
+
+// LEGACY CODE STILL NEEDS TO BE CLEARED UP

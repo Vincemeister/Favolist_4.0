@@ -1,0 +1,25 @@
+<% if !local_assigns[:sidebar] %>
+      <i class="fa-sharp fa-regular fa-ellipsis" data-bs-toggle="modal" data-bs-target="#editOrDeleteModal-<%= product.id %>"></i>
+    <% else %>
+      <div></div> <!-- empty div to keep the title centered -->
+<% end %>
+
+
+
+
+<div class="nav-header sticky-header text-decoration-none">
+  <%= link_to :back do %>
+    <i class="fa-regular fa-arrow-left"></i>
+  <% end %>
+  <div class="titles">
+    <div class="subtitle">
+      <%= image_tag @list.user.avatar, class: 'avatar-xs' %>
+      <%= @list.user.username %>
+    </div>
+    <h5 class="main-title">
+      <%= @list.name %>
+    </h5>
+  </div>
+  <i class="fa-sharp fa-regular fa-ellipsis" data-bs-toggle="modal" data-bs-target="#editOrDeleteModal-<%= @list.id %>"> </i>
+</div>
+

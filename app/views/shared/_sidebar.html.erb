@@ -29,7 +29,7 @@
           Similar listings
         </div>
         <% @suggested_products.each do |product| %>
-          <%= render 'shared/product_card_search', product: product, iterating_for: "sidebar" %>
+          <%= render 'shared/product_card', product: product, iterating_for: "sidebar" %>
         <% end %>
       </div>
     <% end %>

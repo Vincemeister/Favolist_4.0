@@ -20,7 +20,7 @@
   <div class="tab-pane fade show active linebreak" id="pills-products" role="tabpanel" aria-labelledby="pills-products-tab">
     <div class="card-grid-search">
       <% @products.each do |product| %>
-        <%= render 'shared/product_card_search', product: product %>
+        <%= render 'shared/product_card', product: product %>
       <% end %>
     </div>
   </div>
