@@ -2,19 +2,22 @@
 <% referral = defined?(referral) ? referral : 'false' %>
 
   <div class="cardbar text-decoration-none">
-    <div class="list-name-and-product-title-and-price">
-      <div class="paragraph-small-bold"><%= product.title  %></div>
-      <div class="price paragraph-small">$<%= product.price.to_i %></div>
-    </div>
-
-    <% if local_assigns[:iterating_for] == "product_show_page" %>
-      <% if product.logo.attached? %>
-        <%= link_to product.url, class: "cardbar-logo-link col-4", target: "_blank" do %>
-          <%= image_tag product.logo, class: "cardbar-logo" %>
-        <% end %>
-      <% else %>
-        No image available
+    <div class="cardbar-left col-4">
+      <%= link_to user_path(product.user) do %>
+        <%= image_tag product.user.avatar, class: 'avatar-small' %>
       <% end %>
+      <%= link_to user_path(product.user) do %>
+        <div class="username paragraph-small">
+          <%= product.user.username %>
+        </div>
+      <% end %>
+    </div>
+    <% if product.logo.attached? %>
+      <%= link_to product.url, class: "cardbar-logo-link col-4", target: "_blank" do %>
+        <%= image_tag product.logo, class: "cardbar-logo" %>
+      <% end %>
+    <% else %>
+      No image available
     <% end %>
 
 

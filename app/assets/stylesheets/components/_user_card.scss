@@ -65,6 +65,8 @@
     color: $neutral-700;
   }
 
+
+
   .follow-or-bookmarks-button {
     height: 100%;
     display: flex;
@@ -74,6 +76,14 @@
   }
 
   // Avatar group styling
+  .follow-count-and-followed-by-avatars-and-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+  }
+
+
   .followed-by-avatars-and-text {
     display: flex;
     flex-direction: row;

@@ -12,13 +12,13 @@
 </ul>
 <div class="tab-content tab-content-product-show product-content" id="pills-tabContent">
   <div class="tab-pane fade show active linebreak" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
-    <div class="content-text text-start"><%= simple_format(@product.review) %></div>
+    <div class="content-text text-start"><%= simple_format(product.review) %></div>
   </div>
   <div class="tab-pane fade linebreak" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
-    <div class="content-text text-start"><%= simple_format(@product.description) %></div>
+    <div class="content-text text-start"><%= simple_format(product.description) %></div>
   </div>
   <div class="tab-pane fade linebreak" id="pills-referrals" role="tabpanel" aria-labelledby="pills-referrals-tab">
-    <% if @product.referrals.any? %>
+    <% if product.referrals.any? %>
       <% product.referrals.each do |referral| %>
       <%# applying the referral card but only adjusting the referral details and code frame witb bootstrap padding px-0 %>
         <div class="referral-card px-0">

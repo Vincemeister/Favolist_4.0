@@ -6,6 +6,10 @@
   .nav-header-desktop {
     display: none;
   }
+
+  .product-card-show {
+    width: 100%;
+  }
 }
 
 
@@ -22,6 +26,11 @@
   .product-card {
     padding: 1em 0em;
   }
+
+  .product-card-show {
+    width: 75%;
+  }
+
   .suggested-lists-container {
     .list-grid-container {
       padding: 0%;

@@ -1,21 +1,38 @@
-<div class="product-card">
-  <% unless local_assigns[:iterating_for] == "user_show_page" %>
+<div class="product-card <%= local_assigns[:iterating_for] == "product_show_page" ? 'product-card-show' : ''  %> ">
+  <% unless local_assigns[:iterating_for] == "list_show_page" %>
+
+
     <div class="avatar-and-username">
-      <%= link_to user_path(product.user) do %>
-        <%= image_tag product.user.avatar, class: 'avatar-small' %>
+      <div class="avatar-and-username">
+        <%= link_to user_path(product.user) do %>
+          <%= image_tag product.user.avatar, class: 'avatar-small' %>
+        <% end %>
+        <%= link_to user_path(product.user) do %>
+          <div class="username paragraph-small-medium">
+            <%= product.user.username %>
+          </div>
+          <div class="paragraph-small-regular">
+            <%= product.list.name %>
+          </div>
+        <% end %>
+      </div>
+
+
+      <% if product.logo.attached? %>
+        <%= link_to product.url, target: "_blank" do %>
+          <%= image_tag product.logo, class: "logo" %>
+        <% end %>
+      <% else %>
+        Go to website
       <% end %>
-      <%= link_to user_path(product.user) do %>
-        <div class="username paragraph-small">
-          <%= product.user.username %>
-        </div>
-      <% end %>
+
+
     </div>
   <% end %>
 
 
-
   <% if product.photos.attached? && product.photos.count > 1 %>
-    <div id="carouselExampleIndicators-<%= product.id %>" class="carousel slide <%= local_assigns[:iterating_for] == "product_show_page" ? 'product-card-image-show-page' : 'product-card-image' %>">
+    <div id="carouselExampleIndicators-<%= product.id %>" class="carousel slide product-card-image">
       <div class="carousel-indicators">
         <% product.photos.each_with_index do |photo, index| %>
           <button type="button" data-bs-target="#carouselExampleIndicators-<%= product.id %>" data-bs-slide-to="<%= index %>" class="<%= 'active' if index.zero? %>" aria-label="Slide <%= index + 1 %>"></button>
@@ -40,23 +57,22 @@
       </button>
     </div>
   <% elsif product.photos.attached? %>
-    <div class="<%= local_assigns[:iterating_for] == "product_show_page" ? 'product-card-image-show-page' : 'product-card-image' %>">
+    <div class="product-card-image">
       <div class="image-container">
         <%= image_tag product.photos.first %>
       </div>
     </div>
   <% else %>
-    <div class="<%= local_assigns[:iterating_for] == "product_show_page" ? 'product-card-image-show-page' : 'product-card-image' %>">
+    <div class="product-card-image">
       <div class="image-container">
         <%= image_tag "https://res.cloudinary.com/dncij7vr6/image/upload/v1687825911/Favolist%204.0/app%20assets/grey_rectangle_byagze.png" %>
       </div>
     </div>
   <% end %>
   <div class="cardbar-and-text-container">
-    <!--RENDERING THE CARDBAR -->
-    <%= render "shared/product_card/cardbar_search", product: product %>
+    <%= render "shared/product_card/cardbar_search", product: product, iterating_for: (local_assigns[:iterating_for] == "product_show_page" ? "product_show_page" : "")  %>
     <!--RENDERING THE PRODUCT SHOW TABS OR THE PARTIAL REVIEW OF THE PRODUCT CARD N THE FEED -->
-    <% if local_assigns[:iterating_for] == "user_show_page" %>
+    <% if local_assigns[:iterating_for] == "product_show_page" %>
       <%= render "shared/product_card/product_show_tabs", product: product %>
     <% else %>
       <% unless local_assigns[:iterating_for] == "sidebar" %>
@@ -91,7 +107,7 @@
         <%= button_to edit_product_path(product), class: "button button-primary w-100 mb-3" do %>
           Edit
         <% end %>
-        <div class="button button-danger w-100" data-bs-target="#deleteModal-<%= product.id %>" data-bs-toggle="modal" data-bs-dismiss="modal" %>Delete</div>
+        <div class="button button-danger w-100" data-bs-target="#deleteModal-<%= product.id %>" data-bs-toggle="modal" data-bs-dismiss="modal"> Delete</div>
       </div>
     </div>
   </div>

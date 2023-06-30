@@ -17,13 +17,7 @@
           <div class="counts">
             <div class="paragraph-small-medium"><span class="bold-text"><%= user.products.count %></span> <i class="fa-sharp fa-regular fa-square"></i></div>
             <div class="paragraph-small-medium"><span class="bold-text"><%= user.lists.count %></span> <i class="fa-sharp far fa-table-cells"></i></div>
-            <% unless local_assigns[:iterating_for] == "sidebar" %>
-              <div class="paragraph-small-medium"><span class="bold-text"><%= user.followers.count %></span> followers</div>
-            <% end %>
           </div>
-          <% if local_assigns[:iterating_for] == "sidebar" %>
-            <div class="paragraph-small-medium"><span class="bold-text"><%= user.followers.count %></span> followers</div>
-          <% end %>
         </div>
       </div>
     </div>
@@ -61,34 +55,35 @@
   <div class="intro">
     Entrepreneur & biohacker  | life extension-freak bestselling author. SG resident. Proud Dad of 4. Owner of BioTECH Ltd. in Australia.
   </div>
+  <div class="follower-count-and-followed-by-avatars-and-text">
+    <div class="paragraph-small-medium"><span class="bold-text"><%= user.followers.count %></span> followers</div>
+    <% if user_signed_in? %>
+      <% mutual_followers = current_user.mutual_follows_with(user) %>
+      <% mutual_followers_first_3 = mutual_followers.first(3) %>
 
-
-  <% if user_signed_in? %>
-    <% mutual_followers = current_user.mutual_follows_with(user) %>
-    <% mutual_followers_first_3 = mutual_followers.first(3) %>
-
-    <% if mutual_followers_first_3.any? %>
-      <div class="followed-by-avatars-and-text">
-        <div class="avatar-group">
-          <% mutual_followers_first_3.each do |follower| %>
-            <span class="avatar-xs avatar-in-group">
-              <%= cl_image_tag follower.avatar.key, alt: follower.username %>
-            </span>
-          <% end %>
+      <% if mutual_followers_first_3.any? %>
+        <div class="followed-by-avatars-and-text">
+          <div class="avatar-group">
+            <% mutual_followers_first_3.each do |follower| %>
+              <span class="avatar-xs avatar-in-group">
+                <%= cl_image_tag follower.avatar.key, alt: follower.username %>
+              </span>
+            <% end %>
+          </div>
+          <div class="followed-by-text paragraph-small">
+            followed by
+            <% case mutual_followers_first_3.size
+              when 1 %>
+              <%= mutual_followers_first_3.first.username %>
+            <% when 2 %>
+              <%= mutual_followers_first_3.first.username %> and <%= mutual_followers_first_3.last.username %>
+            <% else %>
+              <%= mutual_followers_first_3[0].username %>, <%= mutual_followers_first_3[1].username %>, and <%= pluralize(mutual_followers.size - 2, 'other') %> you follow
+            <% end %>
+          </div>
         </div>
-        <div class="followed-by-text paragraph-small">
-          Followed by
-          <% case mutual_followers_first_3.size
-            when 1 %>
-            <%= mutual_followers_first_3.first.username %>
-          <% when 2 %>
-            <%= mutual_followers_first_3.first.username %> and <%= mutual_followers_first_3.last.username %>
-          <% else %>
-            <%= mutual_followers_first_3[0].username %>, <%= mutual_followers_first_3[1].username %>, and <%= pluralize(mutual_followers.size - 2, 'other') %> you follow
-          <% end %>
-        </div>
-      </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 
 </div>
