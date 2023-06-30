@@ -1,13 +1,3 @@
-.avatar-and-username {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 0.5em;
-  width: 100%;
-}
-
-
 .product-card {
 
   /* Auto layout */
@@ -25,6 +15,15 @@
     color: $body-color;
     text-decoration: none;
   }
+  .avatar-and-username {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5em;
+    width: 100%;
+  }
+
 
 
 // ---------------------------------------------------------------------------

@@ -2,29 +2,12 @@
 
 <div class="cardbar text-decoration-none">
 
-  <% if local_assigns[:iterating_for] == "referral_card" %>
-    <div class="avatar-and-username-and-logo">
-      <div class="avatar-and-username">
-        <%= link_to user_path(product.user) do %>
-          <%= image_tag product.user.avatar, class: 'avatar-small' %>
-        <% end %>
-        <%= link_to user_path(product.user) do %>
-          <div class="username paragraph-small-medium">
-            <%= product.user.username %>
-          </div>
-          <div class="paragraph-small-regular">
-            <%= product.list.name %>
-          </div>
-        <% end %>
-      </div>
-    </div>
 
-  <% else %>
     <div class="list-name-and-product-title-and-price">
       <div class="paragraph-small-bold"><%= product.title  %></div>
       <div class="price paragraph-small">$<%= product.price.to_i %></div>
     </div>
-  <% end %>
+
 
 
 
