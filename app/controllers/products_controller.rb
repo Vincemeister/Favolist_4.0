@@ -18,7 +18,7 @@ class ProductsController < ApplicationController
     else
       @suggested_products = Product.viewable_by(current_user).joins(list: :user)
                                    .order("users.followers_count DESC")
-                                   .limit(3)
+                                   .limit(2)
     end
   end
 

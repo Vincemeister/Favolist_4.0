@@ -6,13 +6,13 @@
         <div class="grid-text <%= local_assigns[:iterating_for] == "sidebar" ? "grid-text-sidebar" : "" %> ">
           <div class="user-info">
             <%= image_tag list.user.avatar, class: "avatar-small" %>
-            <div class="user-text paragraph-small">
-              <div class="paragraph-small-semibold"><%= list.user.username %></div>
-              <div class="paragraph-small-regular"><%= list.user.followers_count %> followers</div>
+            <div class="user-text">
+              <div class="<%= local_assigns[:iterating_for] == "sidebar" ? "paragraph-xsmall-semibold" : "paragraph-small-semibold" %>"><%= list.user.username %></div>
+              <div class="<%= local_assigns[:iterating_for] == "sidebar" ? "paragraph-xsmall-regular" : "paragraph-small-regular" %>"><%= list.user.followers_count %> followers</div>
             </div>
           </div>
           <div class="product-count-and-list-name">
-            <div class="<%= local_assigns[:iterating_for] == "sidebar" ? "paragraph-regular-regular" : "paragraph-large-regular" %>">
+            <div class="<%= local_assigns[:iterating_for] == "sidebar" ? "paragraph-small-regular" : "paragraph-large-regular" %>">
 
               <span class="semi-bold"><%= list.products.count %></span>
               <%# <i class="fa-sharp fa-regular fa-square"> </i> %>
@@ -20,9 +20,9 @@
             </div>
             <hr>
             <% if local_assigns[:iterating_for] == "sidebar" %>
-              <div class="paragraph-large-bold"><%= list.name %><div>
+              <div class="paragraph-large-medium"><%= list.name %><div>
             <% else %>
-              <h4 class="list-name bold"><%= list.name %></h4>
+              <h4 class="list-name medium"><%= list.name %></h4>
             <% end %>
           </div>
         </div>
