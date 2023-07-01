@@ -12,34 +12,31 @@
 
 
   <div class="cardbar-right col-4">
-    <% if local_assigns[:iterating_for] == "referral_card" %>
-      <%= link_to "View product", product_path(product), class: "button button-link" %>
-    <% else %>
-      <% if product.bookmarked_by?(current_user) %>
-        <%= link_to unbookmark_product_path(product), method: :post, data: { controller: 'bookmarks', action: 'click->bookmarks#toggle', bookmarks_target: 'bookmarkbutton' } do %>
-          <div class="cardbar-iconbox">
-            <i class="fa-solid fa-circle-bookmark iconbox-text paragraph-large-regular"></i>
-            <div class="iconbox-text paragraph-xsmall"><%= product.bookmarks.count %></div>
-          </div>
-        <% end %>
-      <% else %>
-        <%= link_to bookmark_product_path(product), method: :post, data: { controller: 'bookmarks', action: 'click->bookmarks#toggle', bookmarks_target: 'bookmarkbutton' } do %>
-          <div class="cardbar-iconbox">
-            <i class="fa-light fa-circle-bookmark iconbox-text paragraph-large-regular"></i>
-            <div class="iconbox-text paragraph-xsmall-medium"><%= product.bookmarks.count %></div>
-          </div>
-        <% end %>
-      <% end %>
-      <%= link_to new_product_path(original_product_id: product.id), class: "cardbar-iconbox" do %>
-        <i class="fa-light fa-circle-plus iconbox-text paragraph-large-regular"></i>
-        <div class="iconbox-text paragraph-xsmall-medium">30</div>
-      <% end %>
-      <%= link_to product_comments_path(product) do %>
+
+    <% if product.bookmarked_by?(current_user) %>
+      <%= link_to unbookmark_product_path(product), method: :post, data: { controller: 'bookmarks', action: 'click->bookmarks#toggle', bookmarks_target: 'bookmarkbutton' } do %>
         <div class="cardbar-iconbox">
-          <i class="fa-light fa-comment iconbox-text paragraph-large-regular"></i>
-          <div class="iconbox-text paragraph-xsmall-medium"><%= product.comments.count %></div>
+          <i class="fa-solid fa-circle-bookmark iconbox-text paragraph-large-regular"></i>
+          <div class="iconbox-text paragraph-xsmall"><%= product.bookmarks.count %></div>
         </div>
       <% end %>
+    <% else %>
+      <%= link_to bookmark_product_path(product), method: :post, data: { controller: 'bookmarks', action: 'click->bookmarks#toggle', bookmarks_target: 'bookmarkbutton' } do %>
+        <div class="cardbar-iconbox">
+          <i class="fa-light fa-circle-bookmark iconbox-text paragraph-large-regular"></i>
+          <div class="iconbox-text paragraph-xsmall-medium"><%= product.bookmarks.count %></div>
+        </div>
+      <% end %>
+    <% end %>
+    <%= link_to new_product_path(original_product_id: product.id), class: "cardbar-iconbox" do %>
+      <i class="fa-light fa-circle-plus iconbox-text paragraph-large-regular"></i>
+      <div class="iconbox-text paragraph-xsmall-medium">30</div>
+    <% end %>
+    <%= link_to product_comments_path(product) do %>
+      <div class="cardbar-iconbox">
+        <i class="fa-light fa-comment iconbox-text paragraph-large-regular"></i>
+        <div class="iconbox-text paragraph-xsmall-medium"><%= product.comments.count %></div>
+      </div>
     <% end %>
   </div>
 </div>

@@ -2,7 +2,7 @@
 .card-grid-search {
 
   @media(min-width: 500px) {
-    gap: 0em 1em;
+    gap: 0em 2em;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     align-items: end;
