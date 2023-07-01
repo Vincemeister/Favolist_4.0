@@ -23,7 +23,7 @@
   align-items: center;
   font-weight: $medium;
   padding: 0.75em 1.25em;
-  border-radius: 6px;
+  border-radius: none;
   text-decoration: none;
   border: none;
   font-size: $font-size-button-small;
@@ -45,6 +45,10 @@
   background-color: transparent;
   color: $neutral-700;
   border: 1px solid $neutral-200;
+
+  &:hover {
+    background-color: $neutral-50;
+  }
 }
 
 .button-outlined {

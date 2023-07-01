@@ -37,7 +37,16 @@
         <%= link_to new_product_path, class: "button button-primary w-100 mb-3" do %>
           <i class="fa-sharp fa-light fa-square"></i>Product
         <% end %>
-        <%= button_to new_list_path, class: "button button-primary w-100" do %>
+        <%= button_to new_list_path, class: "button button-secondary w-100" do %>
+          <i class="fa-sharp fa-light fa-table-cells"></i>List
+        <% end %>
+        <%= button_to new_list_path, class: "button button-tertiary w-100" do %>
+          <i class="fa-sharp fa-light fa-table-cells"></i>List
+        <% end %>
+        <%= button_to new_list_path, class: "button button-outlined  w-100" do %>
+          <i class="fa-sharp fa-light fa-table-cells"></i>List
+        <% end %>
+        <%= button_to new_list_path, class: "button button-danger w-100" do %>
           <i class="fa-sharp fa-light fa-table-cells"></i>List
         <% end %>
       </div>

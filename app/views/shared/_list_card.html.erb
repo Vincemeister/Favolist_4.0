@@ -3,20 +3,26 @@
       <% tiles, grid_class = generate_tiled_background(list) %>
       <div class="<%= grid_class %>">
         <%= tiles.html_safe %>
-        <div class="grid-text">
+        <div class="grid-text <%= local_assigns[:iterating_for] == "sidebar" ? "grid-text-sidebar" : "" %> ">
           <div class="user-info">
             <%= image_tag list.user.avatar, class: "avatar-small" %>
             <div class="user-text paragraph-small">
-              <div class="username"><%= list.user.username %></div>
+              <div class="paragraph-small-semibold"><%= list.user.username %></div>
               <div class="paragraph-small-regular"><%= list.user.followers_count %> followers</div>
             </div>
           </div>
           <div class="product-count-and-list-name">
-            <div class="list-product-count paragraph-large-semibold"><%= pluralize(list.products_count, 'product') %></div>
-            <% if local_assigns[:sidebar] %>
-              <h5><%= list.name %></h5>
+            <div class="<%= local_assigns[:iterating_for] == "sidebar" ? "paragraph-regular-regular" : "paragraph-large-regular" %>">
+
+              <span class="semi-bold"><%= list.products.count %></span>
+              <%# <i class="fa-sharp fa-regular fa-square"> </i> %>
+              <%= "products".pluralize(list.products.count) %>
+            </div>
+            <hr>
+            <% if local_assigns[:iterating_for] == "sidebar" %>
+              <div class="paragraph-large-bold"><%= list.name %><div>
             <% else %>
-              <h5 class="list-name"><%= list.name %></h5>
+              <h4 class="list-name bold"><%= list.name %></h4>
             <% end %>
           </div>
         </div>

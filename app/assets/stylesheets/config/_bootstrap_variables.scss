@@ -12,7 +12,7 @@ $font-size-base:         1rem;
 
 // Colors
 $body-color: $neutral-900;
-$primary:    $primary-pink;
+$primary:    $primary;
 $success:    $green;
 $info:       $yellow;
 $danger:     $red;
@@ -27,5 +27,232 @@ $border-radius-sm: 2px;
 $carousel-transition-duration: .2s;
 
 
-// Defined after template
-$small-text-font-size: 0.8rem;
+
+.paragraph-large-regular {
+  font-size: $font-size-paragraph-large;
+  font-weight: $regular;
+  line-height: $line-height-paragraph-large;
+}
+.paragraph-large-medium {
+  font-size: $font-size-paragraph-large;
+  font-weight: $medium;
+  line-height: $line-height-paragraph-large;
+}
+
+.paragraph-large-semibold {
+  font-size: $font-size-paragraph-large;
+  font-weight: $semi-bold;
+  line-height: $line-height-paragraph-large;
+}
+
+.paragraph-large-bold {
+  font-size: $font-size-paragraph-large;
+  font-weight: $bold;
+  line-height: $line-height-paragraph-large;
+}
+
+.paragraph-small-regular {
+  font-size: $font-size-paragraph-small;
+  font-weight: $regular;
+  line-height: $line-height-paragraph-small;
+}
+
+.paragraph-small-medium {
+  font-size: $font-size-paragraph-small;
+  font-weight: $medium;
+  line-height: $line-height-paragraph-small;
+}
+
+
+.paragraph-small-semibold {
+  font-size: $font-size-paragraph-small;
+  font-weight: $semi-bold;
+  line-height: $line-height-paragraph-small;
+}
+
+.paragraph-small-bold {
+  font-size: $font-size-paragraph-small;
+  font-weight: $bold;
+  line-height: $line-height-paragraph-small;
+}
+
+
+.paragraph-medium-regular {
+  font-size: $font-size-paragraph-medium;
+  font-weight: $regular;
+  line-height: $line-height-paragraph-medium;
+}
+
+.paragraph-medium-medium {
+  font-size: $font-size-paragraph-medium;
+  font-weight: $medium;
+  line-height: $line-height-paragraph-medium;
+}
+
+
+.paragraph-medium-semibold {
+  font-size: $font-size-paragraph-medium;
+  font-weight: $semi-bold;
+  line-height: $line-height-paragraph-medium;
+}
+
+
+.paragraph-medium-bold {
+  font-size: $font-size-paragraph-medium;
+  font-weight: $bold;
+  line-height: $line-height-paragraph-medium;
+}
+
+
+
+.paragraph-xsmall-regular {
+  font-size: $font-size-paragraph-xsmall;
+  font-weight: $regular;
+  line-height: $line-height-paragraph-xsmall;
+}
+
+.paragraph-xsmall-medium {
+  font-size: $font-size-paragraph-xsmall;
+  font-weight: $medium;
+  line-height: $line-height-paragraph-xsmall;
+}
+
+
+.paragraph-xsmall-semibold {
+  font-size: $font-size-paragraph-xsmall;
+  font-weight: $semi-bold;
+  line-height: $line-height-paragraph-xsmall;
+}
+
+
+.paragraph-xsmall-bold {
+  font-size: $font-size-paragraph-xsmall;
+  font-weight: $bold;
+  line-height: $line-height-paragraph-xsmall;
+}
+
+
+
+
+// Mobile Heading Styles
+h1 {
+  font-size: $font-size-heading-1-mobile;
+  line-height: $line-height-heading-1-mobile;
+  letter-spacing: $letter-spacing-heading-1-mobile;
+  margin-bottom: 0;
+}
+
+h2 {
+  font-size: $font-size-heading-2-mobile;
+  line-height: $line-height-heading-2-mobile;
+  letter-spacing: $letter-spacing-heading-2-mobile;
+  margin-bottom: 0;
+}
+
+h3 {
+  font-size: $font-size-heading-3-mobile;
+  line-height: $line-height-heading-3-mobile;
+  letter-spacing: $letter-spacing-heading-3-mobile;
+  margin-bottom: 0;
+}
+
+h4 {
+  font-size: $font-size-heading-4-mobile;
+  line-height: $line-height-heading-4-mobile;
+  letter-spacing: $letter-spacing-heading-4-mobile;
+  margin-bottom: 0;
+}
+
+h5 {
+  font-size: $font-size-heading-5-mobile;
+  line-height: $line-height-heading-5-mobile;
+  letter-spacing: $letter-spacing-heading-5-mobile;
+  margin-bottom: 0;
+}
+
+h6 {
+  font-size: $font-size-heading-6-mobile;
+  line-height: $line-height-heading-6-mobile;
+  letter-spacing: $letter-spacing-heading-6-mobile;
+  margin-bottom: 0;
+}
+
+// Desktop Heading Styles
+@media (min-width: 768px) {
+  h1 {
+    font-size: $font-size-heading-1-desktop;
+    line-height: $line-height-heading-1-desktop;
+    letter-spacing: $letter-spacing-heading-1-desktop;
+    margin-bottom: 0;
+  }
+
+  h2 {
+    font-size: $font-size-heading-2-desktop;
+    line-height: $line-height-heading-2-desktop;
+    letter-spacing: $letter-spacing-heading-2-desktop;
+    margin-bottom: 0;
+  }
+
+  h3 {
+    font-size: $font-size-heading-3-desktop;
+    line-height: $line-height-heading-3-desktop;
+    letter-spacing: $letter-spacing-heading-3-desktop;
+    margin-bottom: 0;
+  }
+
+  h4 {
+    font-size: $font-size-heading-4-desktop;
+    line-height: $line-height-heading-4-desktop;
+    letter-spacing: $letter-spacing-heading-4-desktop;
+    margin-bottom: 0;
+  }
+
+  h5 {
+    font-size: $font-size-heading-5-desktop;
+    line-height: $line-height-heading-5-desktop;
+    letter-spacing: $letter-spacing-heading-5-desktop;
+    margin-bottom: 0;
+  }
+
+  h6 {
+    font-size: $font-size-heading-6-desktop;
+    line-height: $line-height-heading-6-desktop;
+    letter-spacing: $letter-spacing-heading-6-desktop;
+    margin-bottom: 0;
+  }
+
+  .overline {
+    font-size: $font-size-paragraph-medium;
+    line-height: $line-height-paragraph-medium;
+    letter-spacing: 0.02em;
+    color: $neutral-700;
+    margin-bottom: 0;
+  }
+}
+
+// for tabs
+.overline {
+  font-size: $font-size-paragraph-small;
+  line-height: $line-height-paragraph-small;
+  font-weight: $medium;
+  letter-spacing: 0.02em;
+  color: $neutral-700;
+  margin-bottom: 0;
+}
+
+
+.regular {
+  font-weight: $regular;
+}
+
+.medium {
+  font-weight: $medium;
+}
+
+.semi-bold {
+  font-weight: $semi-bold;
+}
+
+.bold {
+  font-weight: $bold;
+}

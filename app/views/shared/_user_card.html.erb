@@ -21,10 +21,10 @@
         <% end %>
       </div>
       <div class="followers-count intro">
-        <span class="bold-text"><%= user.followers.count %></span> followers
+        <span class="bold"><%= user.followers.count %></span> followers
       </div>
       <div class="user-count intro">
-       <span class="bold-text"><%= user.products.count %></span> <i class="fa-sharp fa-regular fa-square"></i> ⸱ <span class="bold-text"><%= user.lists.count %></span> <i class="fa-sharp far fa-table-cells"></i>
+       <span class=""><%= user.products.count %></span> <i class="fa-sharp fa-regular fa-square"></i> ⸱ <span class=""><%= user.lists.count %></span> <i class="fa-sharp far fa-table-cells"></i>
       </div>
     </div>
     <%# Defining which button to appear (follow, unfollow, remove follower, or followed (the latter serves the same function as remove follower but just discourages the negative action of unfollowing).

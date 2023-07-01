@@ -17,6 +17,8 @@
         <% end %>
       </div>
 
+      <i class="fa-sharp fa-regular fa-ellipsis" data-bs-toggle="modal" data-bs-target="#editOrDeleteModal-<%= product.id %>"> </i>
+
       <% if local_assigns[:iterating_for] == "product_show_page" %>
         <%= link_to product_path(product) do %>
           <%= image_tag product.logo, class: 'logo' %>
@@ -101,7 +103,7 @@
       </div>
       <div class="modal-body custom-modal-body ">
         <%# // to achieve a gap between the buttons on the modal I set a mb-1 %>
-        <%= button_to edit_product_path(product), class: "button button-primary w-100 mb-3" do %>
+        <%= button_to edit_product_path(product), class: "button button-tertiary w-100 mb-3" do %>
           Edit
         <% end %>
         <div class="button button-danger w-100" data-bs-target="#deleteModal-<%= product.id %>" data-bs-toggle="modal" data-bs-dismiss="modal"> Delete</div>
@@ -124,7 +126,7 @@
       <div class="modal-body custom-modal">
         <h5>Are you sure you want to delete this listing?</h5>
         <p>All related data including comments will be permanently deleted.</p>
-        <button type="button w-100" class="button button-outlined w-100" data-bs-dismiss="modal">No, I want to keep this listing.</button>
+        <button type="button w-100" class="button button-tertiary w-100" data-bs-dismiss="modal">No, I want to keep this listing.</button>
         <%= link_to 'Yes, please delete', product_path(product),  data: {turbo_method: :delete}, class: "button button-danger w-100" %>
       </div>
     </div>

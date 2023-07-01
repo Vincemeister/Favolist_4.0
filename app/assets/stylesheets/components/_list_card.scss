@@ -1,5 +1,4 @@
 .list-grid-container {
-  padding: 1rem;
   width: 100%;
   aspect-ratio: 1 / 1;
 }
@@ -88,50 +87,56 @@ Also, remember that with this solution, any content in the grid needs to have a 
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   color: #fff;
-  text-align: center;
+  text-align: start;
+  padding: 1em;
 
   .user-info {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-  }
-
-  .user-text {
-    margin-left: 10px;
-    text-align: left;
-  }
-
-  .username {
-    font-weight: $semi-bold;
-    font-size: $font-size-paragraph-small;
-    line-height: $line-height-paragraph-small;
-  }
-
-  .follower-count {
-    font-weight: $regular;
-    font-size: $font-size-paragraph-xsmall;
-    line-height: $line-height-paragraph-xsmall;
+    gap: 0.5em;
   }
 
   .product-count-and-list-name {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 2em;
+    align-items: start;
+    justify-content: start;
+    height: 100%;
+    margin-top: 4em;
   }
 
-  .list-product-count {
-    font-weight: $medium;
+  hr {
+    width: 6em;
+    margin: 1em 0;
+    color: white;
+    border: none; /* This is to get rid of the default border */
+    height: 2px; /* This is your thickness */
+    background: white; /* This is your color */
+    opacity: 1; /* Reset opacity */
+
   }
 
   .list-name {
-    font-weight: $bold;
     line-height: 1;
+    // text-decoration: underline;
   }
+
+}
+
+.grid-text-sidebar {
+
+  .product-count-and-list-name {
+    margin-top: 2em;
+  }
+
+  hr {
+    width: 5em;
+    height: 1px;
+    margin: 0.5em 0;
+  }
+
+
 }

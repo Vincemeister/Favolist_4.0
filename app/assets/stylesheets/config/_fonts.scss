@@ -10,7 +10,6 @@ $headers-font: "Outfit", "sans-serif";
 $small-text-font-size: 0.8rem;
 
 // Font weights
-
 $regular: 400;
 $medium: 500;
 $semi-bold: 600;
@@ -22,7 +21,6 @@ $font-size-button-large: 1rem;
 $line-height-button-large: 1.5;
 $letter-spacing-button-large: 0.5px;
 
-
 // Button medium
 $font-size-button-medium: 1rem;
 
@@ -32,9 +30,6 @@ $font-size-button-small: 0.875rem;
 
 // Button extra small
 $font-size-button-xsmall: 0.75rem;
-
-
-
 
 // Paragraph large
 $font-size-paragraph-large: 1.125rem;
@@ -102,123 +97,4 @@ $letter-spacing-heading-5-desktop: -0.02em;
 $font-size-heading-6-desktop: 1.25rem;
 $line-height-heading-6-desktop: 1.75;
 $letter-spacing-heading-6-desktop: -0.02em;
-
-
-
-
-
-
-// To use a font file (.woff) uncomment following lines
-// @font-face {
-//   font-family: "Font Name";
-//   src: font-url('FontFile.eot');
-//   src: font-url('FontFile.eot?#iefix') format('embedded-opentype'),
-//        font-url('FontFile.woff') format('woff'),
-//        font-url('FontFile.ttf') format('truetype')
-// }
-// $my-font: "Font Name";
-
-
-.paragraph-large-regular {
-  font-size: $font-size-paragraph-large;
-  font-weight: $regular;
-  line-height: $line-height-paragraph-large;
-}
-.paragraph-large-medium {
-  font-size: $font-size-paragraph-large;
-  font-weight: $medium;
-  line-height: $line-height-paragraph-large;
-}
-
-.paragraph-large-semibold {
-  font-size: $font-size-paragraph-large;
-  font-weight: $semi-bold;
-  line-height: $line-height-paragraph-large;
-}
-
-.paragraph-large-bold {
-  font-size: $font-size-paragraph-large;
-  font-weight: $bold;
-  line-height: $line-height-paragraph-large;
-}
-
-.paragraph-small-regular {
-  font-size: $font-size-paragraph-small;
-  font-weight: $regular;
-  line-height: $line-height-paragraph-small;
-}
-
-.paragraph-small-medium {
-  font-size: $font-size-paragraph-small;
-  font-weight: $medium;
-  line-height: $line-height-paragraph-small;
-}
-
-
-.paragraph-small-semibold {
-  font-size: $font-size-paragraph-small;
-  font-weight: $semi-bold;
-  line-height: $line-height-paragraph-small;
-}
-
-.paragraph-small-bold {
-  font-size: $font-size-paragraph-small;
-  font-weight: $bold;
-  line-height: $line-height-paragraph-small;
-}
-
-
-.paragraph-medium-regular {
-  font-size: $font-size-paragraph-medium;
-  font-weight: $regular;
-  line-height: $line-height-paragraph-medium;
-}
-
-.paragraph-medium-medium {
-  font-size: $font-size-paragraph-medium;
-  font-weight: $medium;
-  line-height: $line-height-paragraph-medium;
-}
-
-
-.paragraph-medium-semibold {
-  font-size: $font-size-paragraph-medium;
-  font-weight: $semi-bold;
-  line-height: $line-height-paragraph-medium;
-}
-
-
-.paragraph-medium-bold {
-  font-size: $font-size-paragraph-medium;
-  font-weight: $bold;
-  line-height: $line-height-paragraph-medium;
-}
-
-
-
-.paragraph-xsmall-regular {
-  font-size: $font-size-paragraph-xsmall;
-  font-weight: $regular;
-  line-height: $line-height-paragraph-xsmall;
-}
-
-.paragraph-xsmall-medium {
-  font-size: $font-size-paragraph-xsmall;
-  font-weight: $medium;
-  line-height: $line-height-paragraph-xsmall;
-}
-
-
-.paragraph-xsmall-semibold {
-  font-size: $font-size-paragraph-xsmall;
-  font-weight: $semi-bold;
-  line-height: $line-height-paragraph-xsmall;
-}
-
-
-.paragraph-xsmall-bold {
-  font-size: $font-size-paragraph-xsmall;
-  font-weight: $bold;
-  line-height: $line-height-paragraph-xsmall;
-}
 
