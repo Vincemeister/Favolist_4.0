@@ -2,40 +2,23 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1em 1em 0em 1em;
+  padding: 1em 1em 1em 1em;
   position: relative;
   height: 100%;
   width: 100%;
+  gap: 1em;
   box-shadow: 0 4px 1px -1px rgba($neutral-100, 0.5);
 
-    .avatar-and-username-and-list-name-and-code-frame-and-image {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: end;
-      width: 100%;
-    }
-
-    .avatar-and-username-and-list-name-and-code-frame {
-      display: flex;
-      flex-direction: column;
-      align-items: start;
-      justify-content: space-between;
-      width: 100%;
-      height: 100%;
-      gap: 1em;
-      padding-right: 1em;
-    }
 
 
-    .avatar-and-username {
+
+    .avatar-and-username-and-list-name {
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: flex-start;
       gap: 0.5em;
       width: 100%;
-      padding-bottom: 1em;
     }
 
     .button {
@@ -44,44 +27,31 @@
       justify-content: end;
     }
 
-    .list-name-and-product-title-and-price {
+    .product-title-and-price {
       width: 100%;
-      padding-top: 1em;
       flex-grow: 1;
     }
-  }
 
+      .code-frame {
+        width: 100%;
+        border-style: dashed;
+        border-color: $neutral-200;
+        padding: 0.5em 1em;
+        margin-top: 1em;
+        color: $neutral-400;
+        word-break: break-all;
+      }
 
-  .product-title-and-price-and-button {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-  }
+    .product-title-and-price-and-button {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+    }
 
-
-
-
-  .referral-details {
-    width: 100%;
-    height: 100%;
-    padding: 1em 0;
-    gap: 1em;
-  }
-
-  .code-frame {
-    width: 100%;
-    border-style: dashed;
-    border-color: $neutral-200;
-    padding: 0.5em 1em;
-    margin-top: 1em;
-    color: $neutral-400;
-    word-break: break-all;
-  }
-
-  .cardbar-referral {
-    width: 100%;
-    justify-content: end;
-    display: flex;
-    padding-bottom: 1em;
+    .referral-details {
+      width: 100%;
+      height: 100%;
+      gap: 1em;
+    }
   }
