@@ -11,6 +11,7 @@
 
     .settings-container {
       flex: 2; // This will make settings-container take up 2/3 of the row
+      padding-top: 1em;
     }
   }
 
@@ -24,6 +25,6 @@
       max-width: 100%;
     }
 
-    
+
   }
 }
