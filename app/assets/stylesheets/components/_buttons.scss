@@ -47,7 +47,8 @@
   border: 1px solid $neutral-200;
 
   &:hover {
-    background-color: $neutral-50;
+    // background-color: $neutral-50;
+    background-color: darken(white, 1%);
   }
 }
 
@@ -70,6 +71,10 @@ a.button.button-link {
 .button-danger {
   background-color: $danger;
   color: white;
+
+  &:hover {
+    background-color: darken($danger, 10%);
+  }
 }
 
 // .btn-list-category {

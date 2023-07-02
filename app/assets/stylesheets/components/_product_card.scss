@@ -25,6 +25,19 @@
   }
 }
 
+.back-arrow-show-page {
+  top: 1.25em;
+  z-index: 100;
+  color: $neutral-700;
+  text-decoration: none;
+  margin-right: 1.5em;
+  &:hover {
+    color: $neutral-900;
+    box-shadow: 0 4px 1px -1px rgba($neutral-100, 0.5);
+    transform: scale(1.1);
+  }
+}
+
 .product-card {
 
   /* Auto layout */
