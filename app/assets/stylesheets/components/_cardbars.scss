@@ -40,10 +40,10 @@
   .cardbar-iconbox {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: start;
     align-items: center;
     margin-left: 0.5em;
-    height: 2em;
+    gap: 0.25em;
   }
 
 

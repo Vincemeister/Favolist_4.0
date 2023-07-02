@@ -17,12 +17,13 @@
         <% end %>
       </div>
 
-      <i class="fa-sharp fa-regular fa-ellipsis" data-bs-toggle="modal" data-bs-target="#editOrDeleteModal-<%= product.id %>"> </i>
-
       <% if local_assigns[:iterating_for] == "product_show_page" %>
         <%= link_to product_path(product) do %>
           <%= image_tag product.logo, class: 'logo' %>
         <% end %>
+      <% elsif local_assigns[:iterating_for] == "sidebar" %>
+      <% else %>
+        <i class="fa-sharp fa-regular fa-ellipsis" data-bs-toggle="modal" data-bs-target="#editOrDeleteModal-<%= product.id %>"></i>
       <% end %>
 
 

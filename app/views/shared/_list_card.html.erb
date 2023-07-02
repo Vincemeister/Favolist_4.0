@@ -20,14 +20,12 @@
             </div>
             <hr>
             <% if local_assigns[:iterating_for] == "sidebar" %>
-              <div class="paragraph-large-medium"><%= list.name %><div>
+              <div class="paragraph-large-medium line-height-1-25"><%= list.name %><div>
             <% else %>
-              <h4 class="list-name medium"><%= list.name %></h4>
+              <h4 class="list-name medium line-height-1-25"><%= list.name %></h4>
             <% end %>
           </div>
         </div>
-
-        <!-- remaining code -->
       </div>
     </div>
 <% end %>
