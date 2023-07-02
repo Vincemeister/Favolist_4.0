@@ -11,6 +11,30 @@
     width: 100%;
   }
 
+  .settings-container {
+    padding-top: 2em;
+    padding-right: 0em;
+    padding-left: 0em;
+  }
+
+  .subpage-settings-container {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 1em;
+
+  }
+
+  .settings-menu {
+    padding-top: 0em
+  }
+
+  .new-product-container {
+    width: 100%;
+    padding: 1em;
+  }
+
 }
 
 
@@ -40,5 +64,9 @@
 
   .user-card-show-page {
     padding: 1em 0em;
+  }
+
+  .settings-menu {
+    padding: 0em 1em 2em 0em;
   }
 }

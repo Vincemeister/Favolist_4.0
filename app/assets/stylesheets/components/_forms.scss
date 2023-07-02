@@ -35,4 +35,40 @@
 
 }
 
+// Overkill required otherwise simple-form overides
+#long-text-area.long-text-area {
+  min-height: 180px;
+}
 
+
+.title-and-price-input {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) { /* adjust as needed for your definition of "desktop" */
+  .title-and-price-input {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1em;
+  }
+  .title-and-price-input .simple_form input {
+  }
+}
+
+
+.new-product-container {
+  width: 75%;
+  padding-top: 1em;
+  gap: 1em;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+
+
+#dropzone {
+  border: 1px solid #ced4da;
+  color: $neutral-300;
+}

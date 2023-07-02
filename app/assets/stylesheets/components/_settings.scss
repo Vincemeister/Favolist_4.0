@@ -7,6 +7,18 @@
   display: flex;
   flex-direction: column;
   gap: 1em;
+  padding-bottom: 2em;
+  padding-top: 2em;
+}
+
+.subpage-settings-container {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding-bottom: 2em;
+  padding-top: 2em;
+
 }
 
 
@@ -14,11 +26,15 @@
   text-decoration: none;
   height: 100%;
   border-right: 1px solid $neutral-50;
-  padding: 1em 1em;
+  padding: 1em 1em 2em 1em;
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1em;
+
+  hr {
+    border-color: $neutral-300;
+    margin: 0em;
+  }
 }
 
 
@@ -29,7 +45,12 @@
 
 // for the settings forms
 .form-group-container {
-  padding-bottom: 1em;
+  margin-bottom: 1em;
+
+  .bio {
+    min-height: calc(1.5em*4 + 0.75rem + 2px);
+  }
+
 }
 
 

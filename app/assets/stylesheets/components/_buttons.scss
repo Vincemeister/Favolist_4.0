@@ -28,17 +28,29 @@
   border: none;
   font-size: $font-size-button-small;
   gap: 0.5em;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .button-primary {
   background-color: $primary;
   color: white;
+
+  &:hover {
+    color: white;
+    background-color: darken($primary, 5%);
+  }
 }
 
 .button-secondary {
   background-color: lighten($primary, 45%);
-  // background-color: $primary-50;
   color: $primary;
+  &:hover {
+    color: $primary;
+    background-color: lighten($primary, 40%);
+  }
 }
 
 .button-tertiary {
@@ -61,10 +73,15 @@
 .button-link {
   background-color: transparent;
   color: $primary;
+  &:hover {
+    // background-color: $neutral-50;
+    color: $primary-700;
+  }
 }
 
 a.button.button-link {
   color: $primary;
+
 }
 
 

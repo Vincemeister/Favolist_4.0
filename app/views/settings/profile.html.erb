@@ -30,7 +30,7 @@
 
 <div class="settings-desktop-grid">
   <%= render 'shared/settings_menu' %>
-  <div class="settings-container">
+  <div class="settings-container subpage-settings-container">
     <h3>Profile</h3>
     <div class="form-container">
       <%= simple_form_for @user, url: update_profile_settings_path, method: :patch, html: { multipart: true, class: 'settings-form' } do |f| %>
@@ -50,10 +50,10 @@
         <%= f.input :username, label: 'Username' %>
         <div class="form-group form-group-container">
           <%= f.label :bio %>
-          <%= f.text_area :bio, class: 'form-control' %>
+          <%= f.text_area :bio, class: 'form-control bio' %>
         </div>
 
-        <%= f.button :submit, 'Update Profile', class: 'button button-primary' %>
+        <%= f.button :submit, 'Update profile', class: 'button button-primary' %>
       <% end %>
     </div>
   </div>
