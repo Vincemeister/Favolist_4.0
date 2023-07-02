@@ -10,8 +10,7 @@ class PagesController < ApplicationController
     end
     @suggested_lists = List.all.first
     # @suggested_lists = List.all.sample(1)
-    @suggested_lists = User.first.lists
-
+    @suggested_lists = [User.first.lists.sample]
   end
 
   def search

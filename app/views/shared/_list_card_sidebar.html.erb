@@ -3,7 +3,8 @@
       <% tiles, grid_class = generate_tiled_background(list) %>
       <div class="<%= grid_class %>">
         <%= tiles.html_safe %>
-        <div class="grid-text">
+        <div class="grid-text <%= local_assigns[:iterating_for] == "sidebar" ? "grid-text-sidebar" : "" %> ">
+
           <div class="user-info">
             <%= image_tag list.user.avatar, class: "avatar-small" %>
             <div class="user-text">

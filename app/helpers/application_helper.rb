@@ -1,7 +1,7 @@
 module ApplicationHelper
   include CloudinaryHelper
 
-  def generate_tiled_background(list, default_color = "gray")
+  def generate_tiled_background(list, default_color = "$neutral-300")
     products = list.products
     tiles = []
     number_of_tiles = if products.count.between?(1, 3)

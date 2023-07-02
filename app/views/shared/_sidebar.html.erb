@@ -1,11 +1,11 @@
 <% if controller_name == "pages" && action_name == "home" || controller_name == "users" && action_name == "show" || controller_name == "lists" && action_name == "show" || controller_name == "products"  && action_name == "show"%>
   <div class="sidebar">
-    <div class="suggested-for-you">
-      Suggested for you
-    </div>
+    <%# <div class="paragraph-large-medium">Suggested for you</div> %>
+    <h5>Suggested for you</h5>
+
     <% unless @suggested_users.nil?  %>
       <div class="suggested-profiles-container">
-        <div class="profiles-x-follows">
+        <div class="paragraph-large-regular">
           Profiles
         </div>
         <% @suggested_users.each do |user| %>
@@ -15,17 +15,17 @@
     <% end %>
     <% unless @suggested_lists.nil? %>
       <div class="suggested-lists-container">
-        <div class="profiles-x-follows">
+        <div class="paragraph-large-regular">
           Lists
         </div>
         <% @suggested_lists.each do |list| %>
-          <%= render 'shared/list_card', list: list, iterating_for: "sidebar" %>
+          <%= render 'shared/list_card_sidebar', list: list, iterating_for: "sidebar" %>
         <% end %>
       </div>
     <% end %>
     <% unless @suggested_products.nil? %>
       <div class="suggested-lists-container">
-        <div class="profiles-x-follows">
+        <div class="paragraph-large-regular">
           Similar listings
         </div>
         <% @suggested_products.each do |product| %>

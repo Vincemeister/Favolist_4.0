@@ -15,6 +15,23 @@
 </div>
 
 
+<div class="nav-header-desktop sticky-header text-decoration-none">
+  <%= link_to :back do %>
+    <i class="fa-regular fa-arrow-left"></i>
+  <% end %>
+  <div class="titles">
+    <div class="subtitle">
+      <%= image_tag @list.user.avatar, class: 'avatar-xs' %>
+      <%= @list.user.username %>
+    </div>
+    <h5 class="main-title">
+      <%= @list.name %>
+    </h5>
+  </div>
+  <i class="fa-sharp fa-regular fa-ellipsis" data-bs-toggle="modal" data-bs-target="#editOrDeleteModal-<%= @list.id %>"> </i>
+</div>
+
+
 <ul class="nav custom-nav nav-pills nav-justified text-decoration-none" id="pills-tab" role="tablist">
   <li class="nav-item" role="presentation">
     <button class="nav-link custom-nav-link active product-tabs overline" id="pills-products-tab" data-bs-toggle="pill" data-bs-target="#pills-products" type="button" role="tab" aria-controls="pills-products" aria-selected="true"><i class="fa-sharp fa-light fa-square"></i><div><span class="custom-nav-link-count"><%= @list.products.count %></span> Products</div></button>
@@ -30,14 +47,20 @@
 
 <div class="tab-content product-content" id="pills-tabContent">
   <div class="tab-pane fade show active linebreak" id="pills-products" role="tabpanel" aria-labelledby="pills-products-tab">
-    <% @list.products.each do |product| %>
-      <%= render 'shared/product_card', product: product %>
-    <% end %>
+    <div class="card-grid-search">
+      <% @list.products.each do |product| %>
+        <%= render 'shared/product_card', product: product, iterating_for: "list_show_page" %>
+      <% end %>
+    </div>
   </div>
+
   <div class="tab-pane fade linebreak" id="pills-referrals" role="tabpanel" aria-labelledby="pills-referrals-tab">
-    <% @list.referrals.each do |referral| %>
-      <%= render 'shared/referral_card', referral: referral %>
-    <% end %>
+    <div class="card-grid-search">
+      <% @list.referrals.each do |referral| %>
+        <%= render 'shared/referral_card', referral: referral %>
+      <% end %>
+    </div>
+
   </div>
   <div class="tab-pane fade linebreak" id="pills-about" role="tabpanel" aria-labelledby="pills-about-tab">
     <div class="about-text">
