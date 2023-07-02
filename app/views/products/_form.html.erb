@@ -20,8 +20,8 @@
 
 
     <div>
-      <%= f.label :logo, class: "label" %>
-      <div id="dropzone" class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="1" data-dropzone-logo="<%= { url: url_for(@logo), blob_signed_id: @logo.is_a?(ActiveStorage::Blob) ? @logo.signed_id : @logo.blob.signed_id }.to_json unless @logo.nil? %>">
+      <%= f.label :logo, class: "label mb-2" %>
+      <div id="dropzone" class="dropzone dropzone-default dz-clickable mb-3" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="1" data-dropzone-logo="<%= { url: url_for(@logo), blob_signed_id: @logo.is_a?(ActiveStorage::Blob) ? @logo.signed_id : @logo.blob.signed_id }.to_json unless @logo.nil? %>">
       <%= f.file_field :logo, direct_upload: true, data: { target: 'dropzone.input' } %>
       <div class="dropzone-msg dz-message needsclick text-gray-600">
         <h3 class="dropzone-msg-title">Drag or click here to upload</h3>
@@ -31,8 +31,8 @@
     </div>
 
     <div>
-      <%= f.label :photos, class: "label" %>
-      <div id="dropzone" class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="20" data-dropzone-photos="<%= @photos.map { |photo| { url: url_for(photo), blob_signed_id: photo.is_a?(ActiveStorage::Attachment) ? photo.blob.signed_id : photo.signed_id } }.to_json unless @photos.nil? %>">
+      <%= f.label :photos, class: "label mb-2" %>
+      <div id="dropzone" class="dropzone dropzone-default dz-clickable mb-3" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="20" data-dropzone-photos="<%= @photos.map { |photo| { url: url_for(photo), blob_signed_id: photo.is_a?(ActiveStorage::Attachment) ? photo.blob.signed_id : photo.signed_id } }.to_json unless @photos.nil? %>">
       <%= f.file_field :photos, multiple: true, direct_upload: true, data: { target: 'dropzone.input' } %>
       <div class="dropzone-msg dz-message needsclick text-gray-600">
         <h3 class="dropzone-msg-title">Drag or click here to upload</h3>
@@ -41,6 +41,6 @@
       </div>
     </div>
 
-    <%= f.button :submit %>
+    <%= f.button :submit, class: "w-100 button button-primary" %>
   <% end %>
 </div>

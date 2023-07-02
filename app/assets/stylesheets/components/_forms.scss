@@ -46,15 +46,13 @@
   flex-direction: column;
 }
 
-@media (min-width: 768px) { /* adjust as needed for your definition of "desktop" */
-  .title-and-price-input {
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 1em;
-  }
-  .title-and-price-input .simple_form input {
-  }
+.title-and-price-input {
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1em;
 }
+
+
 
 
 .new-product-container {
