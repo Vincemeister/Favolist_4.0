@@ -13,9 +13,7 @@
           </div>
           <div class="product-count-and-list-name">
             <div class="<%= local_assigns[:iterating_for] == "sidebar" ? "paragraph-small-regular" : "paragraph-large-regular" %>">
-
               <span class="semi-bold"><%= list.products.count %></span>
-              <%# <i class="fa-sharp fa-regular fa-square"> </i> %>
               <%= "products".pluralize(list.products.count) %>
             </div>
             <hr>

@@ -8,7 +8,10 @@ class PagesController < ApplicationController
       @suggested_users = User.all - current_user.followed
       @suggested_users = @suggested_users.sample(1)
     end
-    @suggested_lists = List.all.sample(1)
+    @suggested_lists = List.all.first
+    # @suggested_lists = List.all.sample(1)
+    @suggested_lists = User.first.lists
+
   end
 
   def search

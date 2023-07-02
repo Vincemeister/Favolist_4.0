@@ -6,16 +6,18 @@
         <div class="grid-text">
           <div class="user-info">
             <%= image_tag list.user.avatar, class: "avatar-small" %>
-            <div class="user-text paragraph-small">
-              <div class="username"><%= list.user.username %></div>
-              <div class="follower-count"><%= list.user.followers_count %> followers</div>
+            <div class="user-text">
+              <div class="paragraph-xsmall-semibold"><%= list.user.username %></div>
+              <div class="paragraph-xsmall-regular"><%= list.user.followers_count %> followers</div>
             </div>
           </div>
           <div class="product-count-and-list-name">
-            <div class="list-product-count paragraph-small-semibold">
-              <%= pluralize(list.products_count, 'product') %>
+            <div class="paragraph-small-regular">
+              <span class="semi-bold"><%= list.products.count %></span>
+              <%= "products".pluralize(list.products.count) %>
             </div>
-            <h6 class="list-name"><%= list.name %></h6>
+            <hr>
+            <h6><%= list.name %></h6>
           </div>
         </div>
       </div>
