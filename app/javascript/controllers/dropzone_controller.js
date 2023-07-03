@@ -9,6 +9,8 @@ export default class extends Controller {
   static targets = [ "input" ]
 
   connect() {
+    console.log("Dropzone: ", this)
+    console.log("Classlist: ", this.element.classList)
     this.dropZone = createDropZone(this)
     this.hideFileInput()
     this.bindEvents()
@@ -97,13 +99,14 @@ export default class extends Controller {
     this.dropZone.on("addedfile", (file) => {
       console.log('addedfile event triggered with file:', file)
 
-
-      // for the form_validation controller
-      document.getElementById('logoBlob').value = file.name;
-      let photosBlobs = document.getElementById('photosBlobs').value;
-      photosBlobs = photosBlobs ? photosBlobs.split(',') : [];
-      photosBlobs.push(file.name);
-      document.getElementById('photosBlobs').value = photosBlobs.join(',');
+      if (this.element.classList.contains("dropzone-logo")) {
+        document.getElementById('logoBlob').value = file.name;
+      } else {
+        let photosBlobs = document.getElementById('photosBlobs').value;
+        photosBlobs = photosBlobs ? photosBlobs.split(',') : [];
+        photosBlobs.push(file.name);
+        document.getElementById('photosBlobs').value = photosBlobs.join(',');
+      }
 
       setTimeout(() => { file.accepted && createDirectUploadController(this, file).start() }, 500)
     })
@@ -127,14 +130,15 @@ export default class extends Controller {
     this.dropZone.on("removedfile", (file) => {
       console.log('removedfile event triggered with file:', file)
 
-      // for the form_validation controller
-      document.getElementById('logoBlob').value = "";
-      let photosBlobs = document.getElementById('photosBlobs').value;
-      photosBlobs = photosBlobs ? photosBlobs.split(',') : [];
-      photosBlobs = photosBlobs.filter(blob => blob !== file.name); // or some other identifier
-      document.getElementById('photosBlobs').value = photosBlobs.join(',');
-
-
+      if (this.element.classList.contains("dropzone-logo")) {
+        // if the removed file is a logo, just clear the input field
+        document.getElementById('logoBlob').value = "";
+      } else {
+        let photosBlobs = document.getElementById('photosBlobs').value;
+        photosBlobs = photosBlobs ? photosBlobs.split(',') : [];
+        photosBlobs = photosBlobs.filter(blob => blob !== file.name); // remove the file from the list
+        document.getElementById('photosBlobs').value = photosBlobs.join(',');
+      }
 
       if (file.blobSignedId) {
         // This is an Active Storage object. Remove it in the usual way.

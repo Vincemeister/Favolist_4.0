@@ -34,7 +34,9 @@
 
     <div class="form-input-wrapper">
       <%= f.label :logo, class: "label mb-2" %>
-      <div id="dropzone" class="dropzone dropzone-default dz-clickable mb-3" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="1" data-dropzone-logo="<%= { url: url_for(@logo), blob_signed_id: @logo.is_a?(ActiveStorage::Blob) ? @logo.signed_id : @logo.blob.signed_id }.to_json unless @logo.nil? %>">
+
+      <%# extremely custom logic so that the form_validation controller works in tandem with the dropzone controller. Hence need to append the dropzone-logo class (see dropzone controller addedFile bind event%>
+      <div id="dropzone" class="dropzone dropzone-default dz-clickable mb-3 dropzone-logo" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="1" data-dropzone-logo="<%= { url: url_for(@logo), blob_signed_id: @logo.is_a?(ActiveStorage::Blob) ? @logo.signed_id : @logo.blob.signed_id }.to_json unless @logo.nil? %>">
       <%= f.file_field :logo, direct_upload: true, data: { target: 'dropzone.input', form_validation_target: "logo-blob" } %>
       <div class="dropzone-msg dz-message needsclick text-gray-600">
         <h3 class="dropzone-msg-title">Drag or click here to upload</h3>
@@ -60,8 +62,8 @@
 
     <%# extremely custom logic so that the form_validation controller works for these fields. still involves the dropzone controller as well as the form_validation controller %>
 <%# extremely custom logic so that the form_validation controller works for these fields. still involves the dropzone controller as well as the form_validation controller %>
-<input type="hidden" id="logoBlob" name="product[logoBlob]" value="" data-form-validation-target="logoBlob">
-<input type="hidden" id="photosBlobs" name="product[photosBlobs]" value="" data-form-validation-target="photosBlobs">
+    <input type="hidden" id="logoBlob" name="product[logoBlob]" value="" data-form-validation-target="logoBlob">
+    <input type="hidden" id="photosBlobs" name="product[photosBlobs]" value="" data-form-validation-target="photosBlobs">
 
 
   <% end %>
