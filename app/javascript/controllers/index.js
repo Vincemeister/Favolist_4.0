@@ -4,9 +4,6 @@
 
 import { application } from "./application"
 
-import AmazonPrefillProductFormController from "./amazon_prefill_product_form_controller"
-application.register("amazon-prefill-product-form", AmazonPrefillProductFormController)
-
 import AmazonSearchProductsController from "./amazon_search_products_controller"
 application.register("amazon-search-products", AmazonSearchProductsController)
 
@@ -22,11 +19,11 @@ application.register("comments", CommentsController)
 import DropzoneController from "./dropzone_controller"
 application.register("dropzone", DropzoneController)
 
+import FormValidationController from "./form_validation_controller"
+application.register("form-validation", FormValidationController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
-
-import ImageuploaderController from "./imageuploader_controller"
-application.register("imageuploader", ImageuploaderController)
 
 import NotificationController from "./notification_controller"
 application.register("notification", NotificationController)

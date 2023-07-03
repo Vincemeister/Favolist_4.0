@@ -17,6 +17,8 @@ class Product < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   has_many :bookmarked_by, through: :bookmarks, source: :user
 
+  validates :review, presence: true
+  validates :description, presence: true
 
 
   pg_search_scope :search_by_title_and_description_and_list_name_and_user_username,

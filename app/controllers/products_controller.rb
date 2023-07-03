@@ -31,7 +31,7 @@ class ProductsController < ApplicationController
                Product.new
     @user = current_user
   end
-
+  
   def create
     @product = Product.new(product_params)
 
@@ -74,6 +74,21 @@ class ProductsController < ApplicationController
       redirect_to new_product_path(product: product_params)
     end
   end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   def edit
     render :edit
