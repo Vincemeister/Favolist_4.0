@@ -1,43 +1,42 @@
 <div class="product-card <%= local_assigns[:iterating_for] == "product_show_page" ? 'product-card-show' : ''  %> ">
-
-
-    <div class="avatar-and-username-and-logo">
-
-
-      <% unless local_assigns[:iterating_for] == "list_show_page" %>
-        <% if local_assigns[:iterating_for] == "product_show_page" %>
-          <%= link_to :back, class: "back-arrow-show-page" do %>
-            <i class="fa-regular fa-arrow-left"></i>
-          <% end %>
-        <% end %>
-        <div class="avatar-and-username">
-          <%= link_to user_path(product.user) do %>
-            <%= image_tag product.user.avatar, class: 'avatar-small' %>
-          <% end %>
-          <%= link_to user_path(product.user) do %>
-            <div class="username paragraph-small-medium">
-              <%= product.user.username %>
-            </div>
-            <div class="paragraph-small-regular">
-              <%= product.list.name %>
-            </div>
-          <% end %>
-        </div>
-      <% else %>
-        <div></div>
-      <% end %>
-
+  <div class="avatar-and-username-and-logo">
+    <% unless local_assigns[:iterating_for] == "list_show_page" %>
       <% if local_assigns[:iterating_for] == "product_show_page" %>
+        <%= link_to :back, class: "back-arrow-show-page" do %>
+          <i class="fa-regular fa-arrow-left"></i>
+        <% end %>
+      <% end %>
+      <div class="avatar-and-username">
+        <%= link_to user_path(product.user) do %>
+          <%= image_tag product.user.avatar, class: 'avatar-small' %>
+        <% end %>
+        <%= link_to user_path(product.user) do %>
+          <div class="username paragraph-small-medium">
+            <%= product.user.username %>
+          </div>
+          <div class="paragraph-small-regular">
+            <%= product.list.name %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div></div>
+    <% end %>
+
+    <% if local_assigns[:iterating_for] == "product_show_page" %>
+      <% if product.logo.present? %>
         <%= link_to product_path(product) do %>
           <%= image_tag product.logo, class: 'logo' %>
         <% end %>
-      <% elsif local_assigns[:iterating_for] == "sidebar" %>
-      <% else %>
-        <i class="fa-sharp fa-regular fa-ellipsis" data-bs-toggle="modal" data-bs-target="#editOrDeleteModal-<%= product.id %>"></i>
       <% end %>
 
+    <% elsif local_assigns[:iterating_for] == "sidebar" %>
+    <% else %>
+      <i class="fa-sharp fa-regular fa-ellipsis" data-bs-toggle="modal" data-bs-target="#editOrDeleteModal-<%= product.id %>"></i>
+    <% end %>
 
-    </div>
+
+  </div>
 
 
   <% if product.photos.attached? && product.photos.count > 1 %>

@@ -97,6 +97,14 @@ export default class extends Controller {
     this.dropZone.on("addedfile", (file) => {
       console.log('addedfile event triggered with file:', file)
 
+
+      // for the form_validation controller
+      document.getElementById('logoBlob').value = file.name;
+      let photosBlobs = document.getElementById('photosBlobs').value;
+      photosBlobs = photosBlobs ? photosBlobs.split(',') : [];
+      photosBlobs.push(file.name);
+      document.getElementById('photosBlobs').value = photosBlobs.join(',');
+
       setTimeout(() => { file.accepted && createDirectUploadController(this, file).start() }, 500)
     })
 
@@ -118,6 +126,15 @@ export default class extends Controller {
 
     this.dropZone.on("removedfile", (file) => {
       console.log('removedfile event triggered with file:', file)
+
+      // for the form_validation controller
+      document.getElementById('logoBlob').value = "";
+      let photosBlobs = document.getElementById('photosBlobs').value;
+      photosBlobs = photosBlobs ? photosBlobs.split(',') : [];
+      photosBlobs = photosBlobs.filter(blob => blob !== file.name); // or some other identifier
+      document.getElementById('photosBlobs').value = photosBlobs.join(',');
+
+
 
       if (file.blobSignedId) {
         // This is an Active Storage object. Remove it in the usual way.
@@ -141,11 +158,20 @@ export default class extends Controller {
 
     this.dropZone.on("processing", (file) => {
       this.submitButton.disabled = true
+      console.log(`Processing file: ${file.name}`);
+
     })
 
     this.dropZone.on("queuecomplete", (file) => {
       this.submitButton.disabled = false
+      console.log("All files have been uploaded.");
+
     })
+
+    this.dropZone.on("error", (file, error) => {
+      console.log(`Error uploading file: ${file.name} - ${error}`);
+    })
+
   }
 
   get headers() { return { "X-CSRF-Token": getMetaValue("csrf-token") } }
