@@ -3,11 +3,12 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="form-validation"
 export default class extends Controller {
 
-  static targets = ["title", "price", "listId", "description", "review", "url", "logoBlob", "photosBlobs", "titleError", "priceError", "descriptionError", "reviewError", "urlError", "logoError", "photosError"]
+  static targets = ["title", "price", "list", "description", "review", "url", "logoBlob", "photosBlobs", "titleError", "priceError", "listError", "descriptionError", "reviewError", "urlError", "logoError", "photosError"]
 
   connect() {
     console.log("Form validation controller connected")
-    console.log("photos: ", this.photosTarget)
+    console.log("photos: ", this.photosBlobsTarget)
+    console.log("List ID: ", this.listTarget);
     console.log("Logo Error Target: ", this.logoErrorTarget);
     console.log("Photos Error Target: ", this.photosErrorTarget);
   }
@@ -49,6 +50,15 @@ export default class extends Controller {
       this.priceTarget.scrollIntoView({behavior: "smooth"})
     } else {
       this.priceErrorTarget.textContent = ''
+    }
+
+    // Check if price is not empty
+    if (this.listTarget.value === "") {
+      isValid = false
+      this.listErrorTarget.textContent = 'list cannot be empty'
+      this.listTarget.scrollIntoView({behavior: "smooth"})
+    } else {
+      this.listErrorTarget.textContent = ''
     }
 
     // Check if description is not empty
