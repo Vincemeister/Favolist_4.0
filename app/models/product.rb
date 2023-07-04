@@ -9,8 +9,8 @@ class Product < ApplicationRecord
   belongs_to :list, optional: true, counter_cache: true
   has_one :user, through: :list
 
-  has_many :referrals, dependent: :destroy
-  accepts_nested_attributes_for :referrals
+  has_one :referral, dependent: :destroy
+  accepts_nested_attributes_for :referral
 
 
   has_many :comments, dependent: :destroy
