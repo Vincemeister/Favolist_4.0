@@ -58,13 +58,28 @@
       <span class="error-message paragraph-xsmall-regular" data-target="form-validation.photosError"></span>
     </div>
 
+    <div id="referral-form" style="display: none;">
+      <h6>Referral Details</h6>
+      <%= f.simple_fields_for :referrals, @product.referrals.build, child_index: nil do |referral| %>
+        <div class="form-input-wrapper">
+          <%= referral.input :code, required: true, input_html: {data: {form_validation_target: "referral_code"}} %>
+          <span class="error-message paragraph-xsmall-regular" data-target="form-validation.referralCodeError"></span>
+        </div>
+        <div class="form-input-wrapper">
+          <%= referral.input :details, required: true, input_html: {data: {form_validation_target: "referral_details"}} %>
+          <span class="error-message paragraph-xsmall-regular" data-target="form-validation.referralDetailsError"></span>
+        </div>
+      <% end %>
+    </div>
+
+    <button id="add-referral-button" class="w-100 button button-tertiary" type="button" onclick="document.getElementById('referral-form').style.display = 'block'; this.style.display = 'none'">Add Referral</button>
+
+
     <%= f.button :submit, class: "w-100 button button-primary" %>
 
     <%# extremely custom logic so that the form_validation controller works for these fields. still involves the dropzone controller as well as the form_validation controller %>
-<%# extremely custom logic so that the form_validation controller works for these fields. still involves the dropzone controller as well as the form_validation controller %>
+    <%# extremely custom logic so that the form_validation controller works for these fields. still involves the dropzone controller as well as the form_validation controller %>
     <input type="hidden" id="logoBlob" name="product[logoBlob]" value="" data-form-validation-target="logoBlob">
     <input type="hidden" id="photosBlobs" name="product[photosBlobs]" value="" data-form-validation-target="photosBlobs">
-
-
   <% end %>
 </div>

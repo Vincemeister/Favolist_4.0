@@ -8,8 +8,14 @@ class Product < ApplicationRecord
 
   belongs_to :list, optional: true, counter_cache: true
   has_one :user, through: :list
+
   has_many :referrals, dependent: :destroy
+  accepts_nested_attributes_for :referrals
+
+
   has_many :comments, dependent: :destroy
+
+
 
   has_one_attached :logo, dependent: :destroy
   has_many_attached :photos, dependent: :destroy

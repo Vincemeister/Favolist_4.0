@@ -31,7 +31,7 @@ class ProductsController < ApplicationController
                Product.new
     @user = current_user
   end
-  
+
   def create
     @product = Product.new(product_params)
 
@@ -121,7 +121,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:title, :price, :review, :description, :url, :list_id, :logo, photos: [])
+    params.require(:product).permit(:title, :price, :review, :description, :url, :list_id, :logo, photos: [], referrals_attributes: [:code, :details])
   end
 
   def set_product

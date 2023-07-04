@@ -21,13 +21,11 @@
     <% if product.referrals.any? %>
       <% product.referrals.each do |referral| %>
       <%# applying the referral card but only adjusting the referral details and code frame witb bootstrap padding px-0 %>
-        <div class="referral-card px-0">
-          <div class="referral-details content-text ">
-            <%= referral.details %>
-          </div>
-          <div class="code-frame">
-            <%= referral.code %>
-          </div>
+        <div class="code-frame">
+          <%= referral.code %>
+        </div>
+        <div class="referral-details content-text ">
+          <%= referral.details %>
         </div>
       <% end %>
     <% else %>
