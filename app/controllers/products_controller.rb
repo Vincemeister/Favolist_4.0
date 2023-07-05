@@ -75,23 +75,7 @@ class ProductsController < ApplicationController
     end
   end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   def edit
-    render :edit
   end
 
   def update

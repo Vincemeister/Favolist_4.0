@@ -491,6 +491,7 @@ product = Product.create!(
   BAOBAB QUEEN OF SUPERFRUITS: Baobab powder comes from dried baobab fruit. Baobab is 50% dietary fiber, of which 75% is soluble prebiotic dietary fiber; supports healthy blood glucose levels, & contains adaptogens, which help the body respond to stressors.
   QUALITY AFRICAN BAOBAB FRUIT POWDER: At the heart of all our products is quality baobab powder. You'll love Baobest if you've enjoyed products from Trim Healthy Mama (THM), LivFIt, Better Body Foods, Aduna, Terrasoul Superfoods, Amina Baobab & Alaffia.
   ",
+  description: "Baobab is a super fruit packed with prebiotic fiber, electrolytes and antioxidants which supports a healthy gut and immune system. Mix with water or juice or add to smoothies, yogurt, & oatmeal.",
   list: health_hacks,
   url: "https://www.amazon.com/gp/product/B00B93GV6Y/ref=as_li_ss_tl?ie=UTF8&th=1&linkCode=sl1&tag=offsitoftimfe-20&linkId=b1cb8e06d30a55b83476df2825390722"
 )
