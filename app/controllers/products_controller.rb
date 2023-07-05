@@ -76,12 +76,14 @@ class ProductsController < ApplicationController
   end
 
   def edit
+    @logo = @product.logo if @product.logo.attached?
+    @photos = @product.photos if @product.photos.attached?
     render :edit
   end
 
   def update
     if @product.update(product_params)
-      redirect_to list_path(@product.list), notice: 'Product was successfully updated.'
+      redirect_to product_path(@product), notice: 'Product was successfully updated.'
     else
       render :edit
     end

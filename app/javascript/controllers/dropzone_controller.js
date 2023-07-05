@@ -7,6 +7,7 @@ Dropzone.autoDiscover = false
 
 export default class extends Controller {
   static targets = [ "input" ]
+  static values = [ "logo-for-edit", "photos-for-edit"]
 
   connect() {
     console.log("Dropzone: ", this)
@@ -107,6 +108,53 @@ export default class extends Controller {
         photosBlobs.push(file.name);
         document.getElementById('photosBlobs').value = photosBlobs.join(',');
       }
+
+
+      // -----------------FOR THE EDIT FORM-----------------------------------------------------------------------------------
+      const logoDataElement = this.logoForEditValue;
+      const photosDataElement = this.photosForEditValue;
+
+      if (logoDataElement) {
+          // Parse logo data
+          let logoData = JSON.parse(logoDataElement.getAttribute.this.logoForEditValue);
+
+          // Create a mock file with server-side data
+          let mockFile = { name: logoData.name, size: logoData.size, type: logoData.type };
+
+          // Call the default addedfile event handler
+          this.emit("addedfile", mockFile);
+
+          // And optionally show the thumbnail of the file
+          this.emit("thumbnail", mockFile, logoData.url);
+
+          // If you use the maxFiles option, make sure to adjust it as well
+          this.options.maxFiles = this.options.maxFiles - 1;
+      }
+
+      if (photosDataElement) {
+          // Parse photos data
+          let photosData = JSON.parse(photosDataElement.getAttribute(getAttribute.this.logoForEditValue));
+
+          // Handle each photo
+          photosData.forEach(photoData => {
+              // Create a mock file with server-side data
+              let mockFile = { name: photoData.name, size: photoData.size, type: photoData.type };
+
+              // Call the default addedfile event handler
+              this.emit("addedfile", mockFile);
+
+              // And optionally show the thumbnail of the file
+              this.emit("thumbnail", mockFile, photoData.url);
+
+              // If you use the maxFiles option, make sure to adjust it as well
+              this.options.maxFiles = this.options.maxFiles - 1;
+          });
+      }
+// ---------------------------------------------------------------------------------------------------------------------
+
+
+
+
 
       setTimeout(() => { file.accepted && createDirectUploadController(this, file).start() }, 500)
     })

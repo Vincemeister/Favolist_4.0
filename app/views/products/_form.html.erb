@@ -1,6 +1,6 @@
 <div class="new-product-container">
   <h3>Share a favorite product</h3>
-  <%= simple_form_for @product, url: products_path, method: :post, html: { data: { controller: "form-validation", action: "submit->form-validation#submit" } } do |f| %>
+  <%= simple_form_for @product, html: { data: { controller: "form-validation", action: "submit->form-validation#submit" } } do |f| %>
 
     <div class="title-and-price-input">
       <div class="form-input-wrapper">
@@ -36,8 +36,9 @@
     <div class="form-input-wrapper">
       <%= f.label :logo, class: "label mb-2" %>
 
-      <%# extremely custom logic so that the form_validation controller works in tandem with the dropzone controller. Hence need to append the dropzone-logo class (see dropzone controller addedFile bind event%>
-      <div id="dropzone" class="dropzone dropzone-default dz-clickable mb-3 dropzone-logo" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="1" data-dropzone-logo="<%= { url: url_for(@logo), blob_signed_id: @logo.is_a?(ActiveStorage::Blob) ? @logo.signed_id : @logo.blob.signed_id }.to_json unless @logo.nil? %>">
+      <%# extremely custom logic so that the form_validation controller works in tandem with the dropzone controller. Hence need to append the dropzone-logo class (see dropzone controller addedFile bind event  ALSO the data-dropzone-logo-VALUE is only for the edit functionality to work with dropzone%>
+      <div id="dropzone" class="dropzone dropzone-default dz-clickable mb-3 dropzone-logo" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="1" data-dropzone-logo="<%= { url: url_for(@logo), blob_signed_id: @logo.is_a?(ActiveStorage::Blob) ? @logo.signed_id : @logo.blob.signed_id }.to_json unless @logo.nil? %>"        data-dropzone-for-edit-logo-value='<%= @logo.to_json unless @logo.nil? %>'> <!-- Add this line -->
+
       <%= f.file_field :logo, direct_upload: true, data: { target: 'dropzone.input', form_validation_target: "logo-blob" } %>
       <div class="dropzone-msg dz-message needsclick text-gray-600">
         <h3 class="dropzone-msg-title">Drag or click here to upload</h3>
@@ -49,7 +50,7 @@
 
     <div class="form-input-wrapper">
       <%= f.label :photos, class: "label mb-2" %>
-      <div id="dropzone" class="dropzone dropzone-default dz-clickable mb-3" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="20" data-dropzone-photos="<%= @photos.map { |photo| { url: url_for(photo), blob_signed_id: photo.is_a?(ActiveStorage::Attachment) ? photo.blob.signed_id : photo.signed_id } }.to_json unless @photos.nil? %>">
+      <div id="dropzone" class="dropzone dropzone-default dz-clickable mb-3" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="20" data-dropzone-photos="<%= @photos.map { |photo| { url: url_for(photo), blob_signed_id: photo.is_a?(ActiveStorage::Attachment) ? photo.blob.signed_id : photo.signed_id } }.to_json unless @photos.nil? %>"      data-dropzone-photos-for-edit-value='<%= @photos.to_json unless @photos.nil? %>'> <!-- Add this line -->
       <%= f.file_field :photos, multiple: true, direct_upload: true, data: { target: 'dropzone.input', form_validation_target: "photos-blobs" } %>
       <div class="dropzone-msg dz-message needsclick text-gray-600">
         <h3 class="dropzone-msg-title">Drag or click here to upload</h3>
