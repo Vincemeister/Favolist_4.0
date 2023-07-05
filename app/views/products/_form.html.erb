@@ -58,21 +58,38 @@
       <span class="error-message paragraph-xsmall-regular" data-target="form-validation.photosError"></span>
     </div>
 
-    <div id="referral-form" style="display: none;">
-      <h6>Referral Details</h6>
-      <%= f.simple_fields_for :referrals, @product.referrals.build, child_index: nil do |referral| %>
-        <div class="form-input-wrapper">
-          <%= referral.input :code, required: true, input_html: {data: {form_validation_target: "referral_code"}} %>
-          <span class="error-message paragraph-xsmall-regular" data-target="form-validation.referralCodeError"></span>
-        </div>
-        <div class="form-input-wrapper">
-          <%= referral.input :details, required: true, input_html: {data: {form_validation_target: "referral_details"}} %>
-          <span class="error-message paragraph-xsmall-regular" data-target="form-validation.referralDetailsError"></span>
-        </div>
-      <% end %>
-    </div>
 
-    <button id="add-referral-button" class="w-100 button button-tertiary" type="button" onclick="document.getElementById('referral-form').style.display = 'block'; this.style.display = 'none'">Add Referral</button>
+    <div class="form-add-referral-section" data-controller="addreferral">
+      <div id="referral-form" data-addreferral-target="form" style="display: none;">
+        <h6>Referral Details</h6>
+          <%= f.simple_fields_for :referral, (@product.referral || @product.build_referral), child_index: nil do |referral| %>
+          <div class="form-input-wrapper">
+            <%= referral.input :code, required: true, input_html: {data: {form_validation_target: "referral_code"}} %>
+            <span class="error-message paragraph-xsmall-regular" data-target="form-validation.referralCodeError"></span>
+          </div>
+          <div class="form-input-wrapper">
+            <%= referral.input :details, required: true, input_html: {data: {form_validation_target: "referral_details"}} %>
+            <span class="error-message paragraph-xsmall-regular" data-target="form-validation.referralDetailsError"></span>
+          </div>
+        <% end %>
+      </div>
+      <button id="add-referral-button"
+        class="button button-tertiary"
+        type="button"
+        data-action="click->addreferral#addReferral"
+        data-addreferral-target="addButton">
+        <i class="fa-sharp fa-light fa-tag"></i> Add referral
+      </button>
+
+      <button id="cancel-referral-button"
+              class="button button-tertiary"
+              type="button"
+              data-action="click->addreferral#cancelReferral"
+              data-addreferral-target="cancelButton"
+              style="display: none;">
+        Cancel referral
+      </button>
+    </div>
 
 
     <%= f.button :submit, class: "w-100 button button-primary" %>

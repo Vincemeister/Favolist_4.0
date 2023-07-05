@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import AddreferralController from "./addreferral_controller"
+application.register("addreferral", AddreferralController)
+
 import AmazonSearchProductsController from "./amazon_search_products_controller"
 application.register("amazon-search-products", AmazonSearchProductsController)
 
