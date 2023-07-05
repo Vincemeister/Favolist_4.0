@@ -1,6 +1,7 @@
 <div class="new-product-container">
   <h3>Share a favorite product</h3>
   <%= simple_form_for @product, url: products_path, method: :post, html: { data: { controller: "form-validation", action: "submit->form-validation#submit" } } do |f| %>
+
     <div class="title-and-price-input">
       <div class="form-input-wrapper">
         <%= f.input :title, required: true, input_html: {data: {form_validation_target: "title"}} %>

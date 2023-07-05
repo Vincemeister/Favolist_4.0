@@ -112,7 +112,7 @@
       </div>
       <div class="modal-body custom-modal-body ">
         <%# // to achieve a gap between the buttons on the modal I set a mb-1 %>
-        <%= button_to edit_product_path(product), class: "button button-tertiary w-100 mb-3" do %>
+        <%= link_to edit_product_path(product), class: "button button-tertiary w-100 mb-3" do %>
           Edit
         <% end %>
         <div class="button button-danger w-100" data-bs-target="#deleteModal-<%= product.id %>" data-bs-toggle="modal" data-bs-dismiss="modal"> Delete</div>
