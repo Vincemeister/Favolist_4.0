@@ -129,12 +129,22 @@ class ProductsController < ApplicationController
     @logo = original_product.logo if original_product.logo.attached?
     @photos = original_product.photos if original_product.photos.attached?
 
-    Product.new(
+    new_product = Product.new(
       title: original_product.title,
       price: original_product.price,
       description: original_product.description,
       url: original_product.url
     )
+
+    if original_product.referral
+      new_product.build_referral(
+        code: original_product.referral.code,
+        details: original_product.referral.details
+      )
+    end
+
+    new_product
+
   end
 
   def initialize_product_from_session
