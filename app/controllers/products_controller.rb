@@ -63,6 +63,10 @@ class ProductsController < ApplicationController
     end
 
     if @product.save
+      if params[:product][:referral_attributes][:code] == "" && params[:product][:referral_attributes][:details] == ""
+        @product.referral.destroy
+      end
+
       if params[:product][:logo].present?
         @product.logo.attach(params[:product][:logo])
       end
@@ -82,11 +86,15 @@ class ProductsController < ApplicationController
   def edit
     @logo = @product.logo if @product.logo.attached?
     @photos = @product.photos if @product.photos.attached?
+    @referral = @product.referral if @product.referral
     render :edit
   end
 
   def update
     if @product.update(product_params)
+      if params[:product][:referral_attributes][:code] == "" && params[:product][:referral_attributes][:details] == ""
+        @product.referral.destroy
+      end
       redirect_to product_path(@product), notice: 'Product was successfully updated.'
     else
       render :edit

@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="addreferral"
 export default class extends Controller {
-  static targets = ["form", "addButton", "cancelButton"]
+  static targets = ["form", "addButton", "cancelButton", "code", "details"]
 
   connect() {
     if (this.element.dataset.hasReferral == "true") {
@@ -10,15 +10,25 @@ export default class extends Controller {
     } else {
       this.hideForm();
     }
+    console.log("ADDREFERRALLLLLLLLLL_controller connected")
+    console.log("code: " + this.codeTarget.value)
+    console.log("details: " + this.detailsTarget.value)
   }
 
   addReferral() {
+    document.getElementById('referral-form').style.display = 'block';
     this.showForm();
   }
 
   cancelReferral() {
+    document.getElementById('referral-form').style.display = 'none';
     this.hideForm();
+    this.codeTarget.value = "";
+    this.detailsTarget.value = "";
   }
+
+
+
 
   showForm() {
     this.formTarget.style.display = 'block';
