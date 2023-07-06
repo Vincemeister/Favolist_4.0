@@ -30,6 +30,10 @@ class ProductsController < ApplicationController
                initialize_product_from_params ||
                Product.new
     @user = current_user
+
+    puts "@product: #{ @product.inspect }"
+    puts "@product.referral: #{ @product.referral.inspect }"
+
   end
 
   def create
@@ -146,6 +150,7 @@ class ProductsController < ApplicationController
     new_product
 
   end
+
 
   def initialize_product_from_session
     return unless session[:product_data]

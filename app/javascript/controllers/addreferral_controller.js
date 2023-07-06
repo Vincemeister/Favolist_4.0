@@ -5,18 +5,25 @@ export default class extends Controller {
   static targets = ["form", "addButton", "cancelButton"]
 
   connect() {
-    this.hideForm()
-    console.log("Hello from addreferral_controller.js")
+    if (this.element.dataset.hasReferral == "true") {
+      this.showForm();
+    } else {
+      this.hideForm();
+    }
   }
 
   addReferral() {
-    this.formTarget.style.display = 'block';
-    this.addButtonTarget.style.display = 'none';
-    this.cancelButtonTarget.style.display = 'block';
+    this.showForm();
   }
 
   cancelReferral() {
-    this.hideForm()
+    this.hideForm();
+  }
+
+  showForm() {
+    this.formTarget.style.display = 'block';
+    this.addButtonTarget.style.display = 'none';
+    this.cancelButtonTarget.style.display = 'block';
   }
 
   hideForm() {
