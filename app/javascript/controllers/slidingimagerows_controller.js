@@ -17,19 +17,13 @@ export default class extends Controller {
   }
 
   handleImages(rows) {
-    // Your code here to populate the sliding image rows
     rows.forEach((images, index) => {
-      // Grab the corresponding row
       const row = this.rowTargets[index]
-
-      // If row does not exist, return and continue with next iteration
       if (!row) return;
 
-      // Add a 'uniform' class to the image element
-      const imageElements = images.map(imageUrl => `<img class="uniform" src="${imageUrl}" />`).join('')
-      row.innerHTML = imageElements
+      const imageElements = images.map(imageUrl => `<img class="uniform" style="width: ${100/images.length}%" src="${imageUrl}" />`).join('')
+
+      row.innerHTML = `<div class="sliding-row-content">${imageElements + imageElements}</div>`
     })
   }
-
-
 }

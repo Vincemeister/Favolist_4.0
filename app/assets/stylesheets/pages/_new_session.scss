@@ -1,50 +1,46 @@
-.new-session-container {
-  width: 30%;
-  margin: auto;
+#fullscreen-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  padding: 1em;
 }
 
-.product-image-new-session-background {
-  opacity: 1;
-  transition: opacity 2s;
+[data-slidingimagerows-target="row"] {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  display: flex;
 }
 
-.product-image-new-session-background.fade {
-  opacity: 0;
+[data-slidingimagerows-target="row"]:nth-child(even) .sliding-row-content {
+  animation-direction: reverse;
+}
+
+.sliding-row-content {
+  display: flex;
+  animation: slide 30s linear infinite;
+  will-change: transform;
+}
+
+@keyframes slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
 }
 
 img.uniform {
   width: 100%;
-  height: 100%;
-  object-fit: cover; /* This line ensures the aspect ratio of the images is preserved */
-}
-
-
-#fullscreen-bg {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-}
-
-.sliding-images-container {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
+  height: auto;
+  object-fit: contain;
 }
 
 #centered-form {
   position: absolute;
-  width: 100%; /* Or the width you prefer */
-  max-width: 600px; /* Or the max-width you prefer */
-  background: rgba(255, 255, 255, 0.8);
-  padding: 20px;
-  border-radius: 10px;
-  z-index: 2; /* make sure this is higher than the z-index of .sliding-images-container */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 10;
 }
