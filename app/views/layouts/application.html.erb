@@ -17,15 +17,21 @@
 
   <body>
     <%= render "shared/flashes" %>
-    <div class="<%= 'desktop_grid' + (controller_name == 'pages' && action_name == 'search' ? ' desktop_grid_search' : '') %>">
-      <%= render "shared/navbar_desktop" %>
-      <div class="main-section-desktop">
-        <%= yield %>
+    <% unless controller_name == 'sessions' && action_name == 'new' %>
+
+      <div class="<%= 'desktop_grid' + (controller_name == 'pages' && action_name == 'search' ? ' desktop_grid_search' : '') %>">
+        <%= render "shared/navbar_desktop" %>
+        <div class="main-section-desktop">
+          <%= yield %>
+        </div>
+        <% unless controller_name == 'pages' && action_name == 'search' %>
+          <%= render "shared/sidebar" %>
+        <% end %>
       </div>
-      <% unless controller_name == 'pages' && action_name == 'search' %>
-        <%= render "shared/sidebar" %>
-      <% end %>
-    </div>
-    <%= render "shared/navbar" %>
+      <%= render "shared/navbar" %>
+
+    <% else %>
+      <%= yield %>
+    <% end %>
   </body>
 </html>

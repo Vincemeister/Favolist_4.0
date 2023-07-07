@@ -36,3 +36,6 @@ application.register("replies-and-comments", RepliesAndCommentsController)
 
 import RepliesController from "./replies_controller"
 application.register("replies", RepliesController)
+
+import SlidingimagerowsController from "./slidingimagerows_controller"
+application.register("slidingimagerows", SlidingimagerowsController)
