@@ -9,6 +9,17 @@
   flex-direction: column;
 }
 
+#fullscreen-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Change the last value to adjust the darkness */
+  z-index: 1;
+}
+
 [data-slidingimagerows-target="row"] {
   flex: 1;
   overflow: hidden;
@@ -22,14 +33,29 @@
 
 .sliding-row-content {
   display: flex;
-  animation: slide 30s linear infinite;
   will-change: transform;
 }
 
-@keyframes slide {
-  from { transform: translateX(0); }
-  to { transform: translateX(-100%); }
+@keyframes slide1 {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
 }
+
+@keyframes slide2 {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes slide3 {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes slide4 {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
 
 img.uniform {
   width: 100%;
@@ -43,4 +69,5 @@ img.uniform {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
+  background-color: white;
 }

@@ -123,12 +123,9 @@ class ProductsController < ApplicationController
       'https://res.cloudinary.com/dncij7vr6/image/upload/v1688718049/Favolist%204.0/app%20assets/new_session_background/MS_VARIETY_4PACK-434857_wfkgme.avif',
       'https://res.cloudinary.com/dncij7vr6/image/upload/v1688718049/Favolist%204.0/app%20assets/new_session_background/apple_air_tag_fvhz4f.jpg',
       'https://res.cloudinary.com/dncij7vr6/image/upload/v1688718049/Favolist%204.0/app%20assets/new_session_background/pic-5_c2b5ab76-7716-4743-bca9-94aa7fd6d744_1220x1220_crop_center.jpg_jpyxbl.webp',
-      'https://res.cloudinary.com/dncij7vr6/image/upload/v1688718049/Favolist%204.0/app%20assets/new_session_background/apple_air_tag_fvhz4f.jpg',
-      'https://res.cloudinary.com/dncij7vr6/image/upload/v1688718049/Favolist%204.0/app%20assets/new_session_background/pym_cgmj0d.jpg',
       'https://res.cloudinary.com/dncij7vr6/image/upload/v1688718049/Favolist%204.0/app%20assets/new_session_background/cybertruck-tesla-elon-musk-steel-electric-vehicle-car-truck-_dezeen_2364_sq-300x300_tjn9kz.webp',
       'https://res.cloudinary.com/dncij7vr6/image/upload/v1688718048/Favolist%204.0/app%20assets/new_session_background/666a1497-7321-41a2-acb7-dacaf35df29e_bblue1.jpg',
       'https://res.cloudinary.com/dncij7vr6/image/upload/v1688718048/Favolist%204.0/app%20assets/new_session_background/Theragun-PRO-Carousel-06_gwrzgh.webp',
-      'https://res.cloudinary.com/dncij7vr6/image/upload/v1688718048/Favolist%204.0/app%20assets/new_session_background/Theragun-PRO-Carousel-03_o2datd.webp',
       'https://res.cloudinary.com/dncij7vr6/image/upload/v1688718047/Favolist%204.0/app%20assets/new_session_background/0730852149519_2_huplqo.webp',
       'https://res.cloudinary.com/dncij7vr6/image/upload/v1688718047/Favolist%204.0/app%20assets/new_session_background/5-8-cbc-sushi-foam-surfboard-foam-surfboard-7-keeper-sports-28415030034617_grande_rjusdg.webp',
       'https://res.cloudinary.com/dncij7vr6/image/upload/v1688717656/Favolist%204.0/app%20assets/new_session_background/Whole_Bean_Coffee_Blends_owgttm_mdtrsx.jpg',
@@ -138,7 +135,18 @@ class ProductsController < ApplicationController
       'https://res.cloudinary.com/dncij7vr6/image/upload/v1688717612/Favolist%204.0/app%20assets/new_session_background/image_3_kvhegd.png',
       'https://res.cloudinary.com/dncij7vr6/image/upload/v1688717612/Favolist%204.0/app%20assets/new_session_background/b4bdf9f6-0a42-40c9-8931-05582090db48_1_r1zhxo.png',
       'https://res.cloudinary.com/dncij7vr6/image/upload/v1688717612/Favolist%204.0/app%20assets/new_session_background/image_11_cs1hgo.png',
-      'https://res.cloudinary.com/dncij7vr6/image/upload/v1688717611/Favolist%204.0/app%20assets/new_session_background/image_4_zczom4.png'
+      'https://res.cloudinary.com/dncij7vr6/image/upload/v1688717611/Favolist%204.0/app%20assets/new_session_background/image_4_zczom4.png',
+      'https://res.cloudinary.com/dncij7vr6/image/upload/v1688717654/Favolist%204.0/app%20assets/new_session_background/Plant_Protein-4_rxlltf_ygwixf.jpg',
+      'https://res.cloudinary.com/dncij7vr6/image/upload/v1688717654/Favolist%204.0/app%20assets/new_session_background/AeroPresss_rbagzs.jpg',
+      'https://res.cloudinary.com/dncij7vr6/image/upload/v1688717654/Favolist%204.0/app%20assets/new_session_background/Macadamia_Nuts-2_aybt98_ikcwm7.jpg',
+      'https://res.cloudinary.com/dncij7vr6/image/upload/v1688718047/Favolist%204.0/app%20assets/new_session_background/61r6_ihVAKL._AC_UL1000__q9lwbl.jpg',
+      'https://res.cloudinary.com/dncij7vr6/image/upload/v1688718048/Favolist%204.0/app%20assets/new_session_background/Theragun-PRO-Carousel-03_o2datd.webp',
+      'https://res.cloudinary.com/dncij7vr6/image/upload/v1688718049/Favolist%204.0/app%20assets/new_session_background/pym_cgmj0d.jpg',
+      'https://res.cloudinary.com/dncij7vr6/image/upload/v1688717654/Favolist%204.0/app%20assets/new_session_background/Four_Sigmatic_d05vjh_qqjuk6.jpg',
+      'https://res.cloudinary.com/dncij7vr6/image/upload/v1688717612/Favolist%204.0/app%20assets/new_session_background/image_3_kvhegd.png',
+      'https://res.cloudinary.com/dncij7vr6/image/upload/v1688717654/Favolist%204.0/app%20assets/new_session_background/AeroPresss_rbagzs.jpg',
+      'https://res.cloudinary.com/dncij7vr6/image/upload/v1688718051/Favolist%204.0/app%20assets/new_session_background/9735ca4df2851fb084a1fae7ec09deebf391e45c-2560x2560_thssbz.webp'
+
   ]
     # Slice the array into chunks to simulate rows
     rows = photo_urls.each_slice((photo_urls.size / 4.0).ceil).to_a
