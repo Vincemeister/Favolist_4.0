@@ -5,10 +5,11 @@
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
+  padding: 0;
+  margin: 0;
+
 }
+
 
 #fullscreen-bg::before {
   content: "";
@@ -16,13 +17,12 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.5); /* Change the last value to adjust the darkness */
   z-index: 1;
 }
 
 [data-slidingimagerows-target="row"] {
-  flex: 1;
   overflow: hidden;
   position: relative;
   display: flex;
@@ -35,6 +35,7 @@
   display: flex;
   will-change: transform;
   animation: slide 200s linear infinite;
+  height: 100%;
 }
 
 @keyframes slide {
@@ -46,11 +47,21 @@
   animation: slide 200s linear infinite reverse;
 }
 
-img.uniform {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
+[data-slidingimagerows-target="row"] {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  margin: 0;
+  padding: 0;
 }
+
+
+img.uniform {
+  object-fit: fill;
+  height: 100%;
+}
+
 
 #centered-form {
   position: absolute;
@@ -61,4 +72,16 @@ img.uniform {
   background-color: white;
   padding: 2em;
   width: 25%;
+}
+
+
+.slidingimagerows {
+  height: 100%;
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+}
+
+
+[data-slidingimagerows-target="row"], .sliding-row-content {
+  min-height: 100%;
 }
