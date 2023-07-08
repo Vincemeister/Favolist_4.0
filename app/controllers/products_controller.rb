@@ -145,7 +145,14 @@ class ProductsController < ApplicationController
       'https://res.cloudinary.com/dncij7vr6/image/upload/v1688717654/Favolist%204.0/app%20assets/new_session_background/Four_Sigmatic_d05vjh_qqjuk6.jpg',
       'https://res.cloudinary.com/dncij7vr6/image/upload/v1688717612/Favolist%204.0/app%20assets/new_session_background/image_3_kvhegd.png',
       'https://res.cloudinary.com/dncij7vr6/image/upload/v1688717654/Favolist%204.0/app%20assets/new_session_background/AeroPresss_rbagzs.jpg',
-      'https://res.cloudinary.com/dncij7vr6/image/upload/v1688718051/Favolist%204.0/app%20assets/new_session_background/9735ca4df2851fb084a1fae7ec09deebf391e45c-2560x2560_thssbz.webp'
+      'https://res.cloudinary.com/dncij7vr6/image/upload/v1688718051/Favolist%204.0/app%20assets/new_session_background/9735ca4df2851fb084a1fae7ec09deebf391e45c-2560x2560_thssbz.webp',
+      'https://res.cloudinary.com/dncij7vr6/image/upload/v1688790056/Favolist%204.0/app%20assets/new_session_background/hydroponic_o2vfyg.jpg',
+      'https://res.cloudinary.com/dncij7vr6/image/upload/v1688790055/Favolist%204.0/app%20assets/new_session_background/madcatz-r.a.t.-8--16000-dpi-gaming-mouse_j5fhk8.jpg',
+      'https://res.cloudinary.com/dncij7vr6/image/upload/v1688790055/Favolist%204.0/app%20assets/new_session_background/apple_pro_display_eprjtg.jpg',
+      'https://res.cloudinary.com/dncij7vr6/image/upload/v1688790054/Favolist%204.0/app%20assets/new_session_background/oura-ring-gen-3-thumb-Small-e1643052117213_mty0ja.webp',
+      'https://res.cloudinary.com/dncij7vr6/image/upload/v1688790054/Favolist%204.0/app%20assets/new_session_background/babolat-air-viper-2023_hbjnzr.jpg',
+      'https://res.cloudinary.com/dncij7vr6/image/upload/v1688790054/Favolist%204.0/app%20assets/new_session_background/apple_vision_pro_sryrql.webp',
+      'https://res.cloudinary.com/dncij7vr6/image/upload/v1688790055/Favolist%204.0/app%20assets/new_session_background/drone_combo_vahxvr.jpg'
 
   ]
     # Slice the array into chunks to simulate rows

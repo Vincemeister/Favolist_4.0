@@ -11,6 +11,8 @@
 
 
 <div id="centered-form" class="new-session-container" data-controller="slidingimagerows">
+  <%= image_tag "https://res.cloudinary.com/dncij7vr6/image/upload/v1686124155/Favolist%204.0/app%20assets/favolist_logo_dftbgl.svg", alt: "Favolist Logo", class: "favolist-logo" %>
+
   <h2>Log in</h2>
   <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: :false }) do |f| %>
     <div class="form-inputs">

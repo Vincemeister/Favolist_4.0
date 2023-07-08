@@ -17,15 +17,14 @@ export default class extends Controller {
   }
 
   handleImages(rows) {
-    const animations = ['slide1 170s linear infinite', 'slide2 150s linear infinite', 'slide3 160s linear infinite', 'slide4 180 linear infinite'];
-
     rows.forEach((images, index) => {
       const row = this.rowTargets[index]
       if (!row) return;
 
       const imageElements = images.map(imageUrl => `<img class="uniform" style="width: ${100/images.length}%" src="${imageUrl}" />`).join('')
-      row.innerHTML = `<div class="sliding-row-content" style="animation: ${animations[index]}">${imageElements + imageElements}</div>`
+      row.innerHTML = `<div class="sliding-row-content">${imageElements + imageElements}</div>`
     })
-}
+  }
+
 
 }
