@@ -34,14 +34,15 @@
 .sliding-row-content {
   display: flex;
   will-change: transform;
-  animation: slide 200s linear infinite;
+  animation: slide 230s linear infinite;
   height: 100%;
 }
 
 @keyframes slide {
   0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
+  100% { transform: translateX(-50%); }
 }
+
 
 [data-slidingimagerows-target="row"]:nth-child(even) .sliding-row-content {
   animation: slide 200s linear infinite reverse;
@@ -84,4 +85,9 @@ img.uniform {
 
 [data-slidingimagerows-target="row"], .sliding-row-content {
   min-height: 100%;
+}
+
+
+.row-container {
+  line-height: 0;
 }
