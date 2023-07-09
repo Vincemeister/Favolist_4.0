@@ -1,5 +1,5 @@
 <div class="nav-header sticky-header">
-  <%= link_to product_path(@product) do %>
+  <%= link_to product_path(@product, source: @source) do %>
     <i class="fa-regular fa-arrow-left"></i>
   <% end %>
 
@@ -68,3 +68,4 @@
 
 </div>
     <!-- The direct reply functionality doesn't work optimal for mobile -->
+<% console %>

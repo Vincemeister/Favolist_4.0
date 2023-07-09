@@ -50,6 +50,11 @@
   width: 100%;
   box-shadow: 0 4px 1px -1px rgba($neutral-100, 0.5);
 
+  .list-name {
+    color: $neutral-500;
+
+  }
+
 
   a {
     color: $body-color;

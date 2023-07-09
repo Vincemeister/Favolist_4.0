@@ -26,6 +26,7 @@ class CommentsController < ApplicationController
 
   def show
     @replies = @comment.replies.order(created_at: :asc)
+    # @source = params[:source]
   end
 
   def replies

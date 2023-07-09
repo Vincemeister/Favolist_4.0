@@ -4,6 +4,6 @@
 </div>
 <div class="card-grid-search">
   <% @products.each do |product| %>
-    <%= render 'shared/product_card', product: product, suggested_users: @suggested_users %>
+    <%= render 'shared/product_card', product: product, suggested_users: @suggested_users, iterating_for: "home_feed" %>
   <% end %>
 </div>

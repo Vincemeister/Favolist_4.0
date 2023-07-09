@@ -20,6 +20,7 @@ class ProductsController < ApplicationController
                                    .order("users.followers_count DESC")
                                    .limit(2)
     end
+    @source = params[:source]
   end
 
 
@@ -110,6 +111,7 @@ class ProductsController < ApplicationController
   end
 
   def comments
+    @source = params[:source]
   end
 
   def search_or_manual_product_upload
@@ -173,7 +175,7 @@ class ProductsController < ApplicationController
       'https://res.cloudinary.com/dncij7vr6/image/upload/v1688882676/Favolist%204.0/app%20assets/new_session_background/uabpw8od9wk0k43ptq3z.jpg',
       'https://res.cloudinary.com/dncij7vr6/image/upload/v1688882676/Favolist%204.0/app%20assets/new_session_background/wyk8op6nyp09vspeehjh.jpg',
       'https://res.cloudinary.com/dncij7vr6/image/upload/v1688882676/Favolist%204.0/app%20assets/new_session_background/cgosnegwxhdafcuunww2.jpg',
-      
+
 
   ]
 

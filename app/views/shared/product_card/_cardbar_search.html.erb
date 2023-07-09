@@ -32,8 +32,9 @@
       <i class="fa-light fa-circle-plus fa-lg iconbox-text paragraph-large-regular"></i>
       <div class="iconbox-text paragraph-xsmall-medium">30</div>
     <% end %>
-    <%= link_to product_comments_path(product) do %>
+    <%= link_to product_comments_path(product, source: source)  do %>
       <div class="cardbar-iconbox">
+        <div> <%= source %></div>
         <i class="fa-light fa-comment fa-lg iconbox-text paragraph-large-regular"></i>
         <div class="iconbox-text paragraph-xsmall-medium"><%= product.comments.count %></div>
       </div>
