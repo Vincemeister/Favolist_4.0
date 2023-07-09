@@ -1,39 +1,4 @@
-.comment-form {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  padding: 1em;
-  position: fixed;
-  bottom: 3.5em;
-  background-color: white;
-}
 
-.reply-form {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-
-
-  // only necessary here. Otherwise the avatar distors in height for some fucked up reason
-  .avatar-small {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-  }
-}
-
-
-.comment-input {
-  flex-grow: 1;
-  margin-left: 1em;
-  textarea {
-    width: 100%;
-    resize: none;
-    border: none;
-    outline: none;
-  }
-
-}
 
 // Overkill required otherwise simple-form overides
 #long-text-area.long-text-area {

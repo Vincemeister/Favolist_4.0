@@ -75,6 +75,12 @@ img.uniform {
   width: 25%;
 }
 
+@media(max-width: 991px) {
+  #centered-form {
+    width: 80%;
+  }
+}
+
 
 .slidingimagerows {
   height: 100%;

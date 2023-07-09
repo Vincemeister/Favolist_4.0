@@ -10,6 +10,18 @@
   <div></div>
 </div>
 
+<div class="nav-header-desktop sticky-header">
+  <%= link_to product_path(@product) do %>
+    <i class="fa-regular fa-arrow-left"></i>
+  <% end %>
+
+  <div class="titles">
+    <div class="subtitle"><%= @product.title %></div>
+    <h5 class="main-title">Comments</h5>
+  </div>
+  <div></div>
+</div>
+
 
 <div class="comments" data-controller="comments">
 
@@ -51,6 +63,7 @@
 
   <div class="scroll-point h-300">
   </div>
+
   <%= render 'comments/commentform', product: @product, comment: Comment.new, parent_comment: nil, context: "comment", remote: true %>
 
 </div>

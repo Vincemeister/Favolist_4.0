@@ -1,6 +1,14 @@
 .comments {
   margin-bottom: 4em;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 auto;
+  text-decoration: none;
+  height: 100%;
+  margin-top: 1em;
 }
+
 
 
 .comment {
@@ -69,4 +77,65 @@
   font-weight: $medium;
   color: $neutral-200;
   margin-bottom: 0.5em;
+}
+
+
+
+
+
+.comment-form {
+  width: 75%; // Set this according to your requirements
+  /* Other styles... */
+}
+
+
+.comment-form {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 1em;
+  position: sticky;
+  bottom: 3.5em;
+  background-color: white;
+}
+
+@media(max-width: 991px) {
+  .comment-form {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 3.5em;
+  }
+}
+
+.reply-form {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+
+
+  // only necessary here. Otherwise the avatar distors in height for some fucked up reason
+  .avatar-small {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+}
+
+
+.comment-input {
+  flex-grow: 1;
+  margin-left: 1em;
+  textarea {
+    width: 100%;
+    resize: none;
+    border: none;
+    outline: none;
+  }
+
+}
+
+
+.comments-container {
+  height: 100%;
 }
