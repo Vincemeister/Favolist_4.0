@@ -57,7 +57,7 @@
       <% end %>
       <%= link_to new_product_path(original_product_id: product.id), class: "cardbar-iconbox" do %>
         <i class="fa-light fa-circle-plus fa-lg iconbox-text paragraph-large-regular"></i>
-        <div class="iconbox-text paragraph-xsmall-medium">30</div>
+        <div class="iconbox-text paragraph-xsmall-medium"><%= product.duplicated_count %></div>
       <% end %>
       <%= link_to product_comments_path(product, source: source)  do %>
         <div class="cardbar-iconbox">

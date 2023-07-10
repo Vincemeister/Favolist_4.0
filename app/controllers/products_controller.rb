@@ -32,46 +32,81 @@ class ProductsController < ApplicationController
                Product.new
     @user = current_user
 
-    puts "@product: #{ @product.inspect }"
-    puts "@product.referral: #{ @product.referral.inspect }"
+    # For the id to be passed to the create action so the duplication count can be incremented for the original product
+    original_product_id = params[:original_product_id]
+    session[:original_product_id] = original_product_id if original_product_id.present?
 
   end
 
   def create
     @product = Product.new(product_params)
 
-    if params[:original_product_id]
-      original_product = Product.find(params[:original_product_id])
-      if original_product.logo.attached?
-        new_blob = ActiveStorage::Blob.create_after_upload!(
-          io: StringIO.new(original_product.logo.download),
-          filename: original_product.logo.filename,
-          content_type: original_product.logo.content_type
-        )
-        @product.logo.attach(new_blob.signed_id)
-      end
 
-      if original_product.photos.attached?
-        original_product.photos.each do |photo|
-          new_blob = ActiveStorage::Blob.create_after_upload!(
-            io: StringIO.new(photo.download),
-            filename: photo.filename,
-            content_type: photo.content_type
-          )
-          @product.photos.attach(new_blob.signed_id)
-        end
-      end
+    # For counting the duplications of a product
+    puts "OG ID MAN#{session[:original_product_id]}"
+    original_product_id = session.delete(:original_product_id)
+    if original_product_id.present?
+      original_product = Product.find(original_product_id)
+      original_product.increment!(:duplicated_count)
     end
 
+
+    # puts "Params: #{params.inspect}" # Added this line
+    # puts "Product Params: #{product_params.inspect}" # Added this line
+    # puts "Checking original product ID..."
+    # if params[:original_product_id]
+    #   puts "Original product ID is present."
+    #   original_product = Product.find_by(id: params[:original_product_id])
+    #   if original_product
+    #     puts "Found original product."
+    #     puts "Before increment: #{original_product.duplicated_count}"
+    #     original_product.increment!(:duplicated_count) # for the counting of the number of times a product has been duplicated
+    #     puts "After increment: #{original_product.duplicated_count}"
+    #   else
+    #     puts "No product found with ID #{params[:original_product_id]}"
+    #   end
+    # else
+    #   puts "Original product ID is not present."
+    # end
+    # if params[:original_product_id]
+    #   original_product = Product.find(params[:original_product_id])
+    #   puts "IN THE PHOTO ADD SECTION NOW"
+    #   puts "Original product: #{original_product.inspect}"
+    #   if original_product.logo.attached?
+    #     puts "Original product has a logo attached."
+    #     new_blob = ActiveStorage::Blob.create_after_upload!(
+    #       io: StringIO.new(original_product.logo.download),
+    #       filename: original_product.logo.filename,
+    #       content_type: original_product.logo.content_type
+    #     )
+    #     @product.logo.attach(new_blob.signed_id)
+    #     puts "Logo has been attached to new product."
+    #   end
+    #   if original_product.photos.attached?
+    #     puts "Original product has photos attached."
+    #     original_product.photos.each do |photo|
+    #       new_blob = ActiveStorage::Blob.create_after_upload!(
+    #         io: StringIO.new(photo.download),
+    #         filename: photo.filename,
+    #         content_type: photo.content_type
+    #       )
+    #       @product.photos.attach(new_blob.signed_id)
+    #     end
+    #   end
+    # else
+    #   puts "PHOTOS SECTION NO ORGINIAL PRODUCT ID"
+    # end
+
     if @product.save
+
+
+
       if params[:product][:referral_attributes][:code] == "" && params[:product][:referral_attributes][:details] == ""
         @product.referral.destroy
       end
-
       if params[:product][:logo].present?
         @product.logo.attach(params[:product][:logo])
       end
-
       if params[:product][:photos]
         params[:product][:photos].reject(&:blank?).reverse.each do |photo_blob_id|
           @product.photos.attach(photo_blob_id) unless blob_exists?(photo_blob_id)

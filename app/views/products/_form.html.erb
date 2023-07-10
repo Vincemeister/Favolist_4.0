@@ -95,8 +95,11 @@
     <%= f.button :submit, class: "w-100 button button-primary" %>
 
     <%# extremely custom logic so that the form_validation controller works for these fields. still involves the dropzone controller as well as the form_validation controller %>
-    <%# extremely custom logic so that the form_validation controller works for these fields. still involves the dropzone controller as well as the form_validation controller %>
     <input type="hidden" id="logoBlob" name="product[logoBlob]" value="" data-form-validation-target="logoBlob">
     <input type="hidden" id="photosBlobs" name="product[photosBlobs]" value="" data-form-validation-target="photosBlobs">
+
+    <%# for the duplication counts %>
+  <%= f.input :original_product_id, as: :hidden, input_html: { value: params[:original_product_id] } %>
+
   <% end %>
 </div>
