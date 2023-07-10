@@ -41,15 +41,15 @@ export default class extends Controller {
     if (data.action === "bookmark") {
       this.bookmarkbuttonTarget.innerHTML = `
       <div class='cardbar-iconbox'>
-        <i class='fa-solid fa-circle-bookmark'></i>
-        <div class='iconbox-text'>${data.bookmarksCount}</div>
+        <i class='fa-solid fa-lg fa-circle-bookmark iconbox-text paragraph-large-regular'></i>
+        <div class='iconbox-text paragraph-xsmall-medium'>${data.bookmarksCount}</div>
       </div>`;
       this.bookmarkbuttonTarget.setAttribute("href", data.unbookmark_path);
     } else if (data.action === "unbookmark") {
       this.bookmarkbuttonTarget.innerHTML = `
       <div class='cardbar-iconbox'>
-        <i class='fa-light fa-circle-bookmark'></i>
-        <div class='iconbox-text'>${data.bookmarksCount}</div>
+        <i class='fa-light fa-lg fa-circle-bookmark iconbox-text paragraph-large-regular'></i>
+        <div class='iconbox-text paragraph-xsmall-medium'>${data.bookmarksCount}</div>
       </div>`;
       this.bookmarkbuttonTarget.setAttribute("href", data.bookmark_path);
     }

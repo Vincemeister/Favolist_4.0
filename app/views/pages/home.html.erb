@@ -1,6 +1,10 @@
 <div class="nav-header sticky-nav">
   <%= image_tag "https://res.cloudinary.com/dncij7vr6/image/upload/v1686124155/Favolist%204.0/app%20assets/favolist_logo_dftbgl.svg", alt: "Favolist Logo", class: "favolist-logo" %>
-  <i class="fa-sharp fa-regular fa-bell"></i>
+  <% if user_signed_in? %>
+    <%= link_to notifications_path, class: "side-nav-item" do %>
+      <i class="fa-sharp fa-regular fa-bell"></i>
+    <% end %>
+  <% end %>
 </div>
 <div class="card-grid-search">
   <% @products.each do |product| %>

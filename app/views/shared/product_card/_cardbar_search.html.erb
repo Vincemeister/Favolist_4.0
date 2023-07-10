@@ -18,7 +18,7 @@
       <% if product.bookmarked_by?(current_user) %>
         <div class="cardbar-iconbox">
           <i class="fa-solid fa-circle-bookmark iconbox-text paragraph-large-regular"></i>
-          <div class="iconbox-text paragraph-xsmall"><%= product.bookmarks.count %></div>
+          <div class="iconbox-text paragraph-xsmall-medium"><%= product.bookmarks.count %></div>
         </div>
       <% else %>
         <div class="cardbar-iconbox">
@@ -43,8 +43,8 @@
       <% if product.bookmarked_by?(current_user) %>
         <%= link_to unbookmark_product_path(product), method: :post, data: { controller: 'bookmarks', action: 'click->bookmarks#toggle', bookmarks_target: 'bookmarkbutton' } do %>
           <div class="cardbar-iconbox">
-            <i class="fa-solid fa-circle-bookmark iconbox-text paragraph-large-regular"></i>
-            <div class="iconbox-text paragraph-xsmall"><%= product.bookmarks.count %></div>
+            <i class="fa-solid fa-circle-bookmark fa-lg iconbox-text paragraph-large-regular"></i>
+            <div class="iconbox-text paragraph-xsmall-medium"><%= product.bookmarks.count %></div>
           </div>
         <% end %>
       <% else %>
