@@ -3,41 +3,72 @@
 <div class="cardbar text-decoration-none">
 
 
-    <div class="list-name-and-product-title-and-price">
-      <div class="paragraph-small-bold"><%= product.title  %></div>
-      <div class="price paragraph-small">$<%= product.price.to_i %></div>
-    </div>
+  <div class="list-name-and-product-title-and-price">
+    <div class="paragraph-small-bold"><%= product.title  %></div>
+    <div class="price paragraph-small">$<%= product.price.to_i %></div>
+  </div>
 
 
 
 
   <div class="cardbar-right col-4">
 
-    <% if product.bookmarked_by?(current_user) %>
-      <%= link_to unbookmark_product_path(product), method: :post, data: { controller: 'bookmarks', action: 'click->bookmarks#toggle', bookmarks_target: 'bookmarkbutton' } do %>
+    <%  if local_assigns[:iterating_for] == "sidebar" %>
+
+      <% if product.bookmarked_by?(current_user) %>
         <div class="cardbar-iconbox">
           <i class="fa-solid fa-circle-bookmark iconbox-text paragraph-large-regular"></i>
           <div class="iconbox-text paragraph-xsmall"><%= product.bookmarks.count %></div>
         </div>
-      <% end %>
-    <% else %>
-      <%= link_to bookmark_product_path(product), method: :post, data: { controller: 'bookmarks', action: 'click->bookmarks#toggle', bookmarks_target: 'bookmarkbutton' } do %>
+      <% else %>
         <div class="cardbar-iconbox">
           <i class="fa-light fa-circle-bookmark fa-lg iconbox-text paragraph-large-regular"></i>
           <div class="iconbox-text paragraph-xsmall-medium"><%= product.bookmarks.count %></div>
         </div>
       <% end %>
-    <% end %>
-    <%= link_to new_product_path(original_product_id: product.id), class: "cardbar-iconbox" do %>
-      <i class="fa-light fa-circle-plus fa-lg iconbox-text paragraph-large-regular"></i>
-      <div class="iconbox-text paragraph-xsmall-medium">30</div>
-    <% end %>
-    <%= link_to product_comments_path(product, source: source)  do %>
+      <div class="carbar-iconbox">
+        <i class="fa-light fa-circle-plus fa-lg iconbox-text paragraph-large-regular"></i>
+        <div class="iconbox-text paragraph-xsmall-medium">30</div>
+      </div>
       <div class="cardbar-iconbox">
-        <div> <%= source %></div>
         <i class="fa-light fa-comment fa-lg iconbox-text paragraph-large-regular"></i>
         <div class="iconbox-text paragraph-xsmall-medium"><%= product.comments.count %></div>
       </div>
+
+
+    <% else %>
+
+
+
+      <% if product.bookmarked_by?(current_user) %>
+        <%= link_to unbookmark_product_path(product), method: :post, data: { controller: 'bookmarks', action: 'click->bookmarks#toggle', bookmarks_target: 'bookmarkbutton' } do %>
+          <div class="cardbar-iconbox">
+            <i class="fa-solid fa-circle-bookmark iconbox-text paragraph-large-regular"></i>
+            <div class="iconbox-text paragraph-xsmall"><%= product.bookmarks.count %></div>
+          </div>
+        <% end %>
+      <% else %>
+        <%= link_to bookmark_product_path(product), method: :post, data: { controller: 'bookmarks', action: 'click->bookmarks#toggle', bookmarks_target: 'bookmarkbutton' } do %>
+          <div class="cardbar-iconbox">
+            <i class="fa-light fa-circle-bookmark fa-lg iconbox-text paragraph-large-regular"></i>
+            <div class="iconbox-text paragraph-xsmall-medium"><%= product.bookmarks.count %></div>
+          </div>
+        <% end %>
+      <% end %>
+      <%= link_to new_product_path(original_product_id: product.id), class: "cardbar-iconbox" do %>
+        <i class="fa-light fa-circle-plus fa-lg iconbox-text paragraph-large-regular"></i>
+        <div class="iconbox-text paragraph-xsmall-medium">30</div>
+      <% end %>
+      <%= link_to product_comments_path(product, source: source)  do %>
+        <div class="cardbar-iconbox">
+          <i class="fa-light fa-comment fa-lg iconbox-text paragraph-large-regular"></i>
+          <div class="iconbox-text paragraph-xsmall-medium"><%= product.comments.count %></div>
+        </div>
+      <% end %>
     <% end %>
+
   </div>
+
+
+
 </div>

@@ -1,5 +1,5 @@
 <div class="nav-header sticky-header">
-  <%= link_to :back do %>
+  <%= link_to product_comments_path(@product, source: @source) do %>
     <i class="fa-regular fa-arrow-left"></i>
   <% end %>
 
@@ -10,6 +10,20 @@
   <!-- empty div to make space-between styling work -->
   <div></div>
 </div>
+
+<div class="nav-header-desktop sticky-header">
+  <%= link_to product_comments_path(@product, source: @source) do %>
+    <i class="fa-regular fa-arrow-left"></i>
+  <% end %>
+
+  <div class="titles">
+    <div class="subtitle"><%= @product.title %></div>
+    <div class="main-title"> <%= @comment.user.username %>'s comment</div>
+  </div>
+  <!-- empty div to make space-between styling work -->
+  <div></div>
+</div>
+
 
 
 <div class="comments" data-controller="comments">
@@ -73,3 +87,6 @@
   <%= render 'comments/commentform', product: @product, comment: Comment.new, parent_comment: @comment, context: "reply", remote: true %>
 
 </div>
+
+
+<% console %>

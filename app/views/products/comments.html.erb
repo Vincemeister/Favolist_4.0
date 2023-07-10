@@ -11,7 +11,7 @@
 </div>
 
 <div class="nav-header-desktop sticky-header">
-  <%= link_to product_path(@product) do %>
+  <%= link_to product_path(@product, source: @source) do %>
     <i class="fa-regular fa-arrow-left"></i>
   <% end %>
 
@@ -47,7 +47,7 @@
             <% end %>
           </div>
           <% if comment.replies.count > 1 %>
-            <%= link_to "See all #{comment.replies.count} replies", product_comment_path(comment.product, comment), class: "see-all-replies", data: { replies_and_comments_target: "viewrepliesbutton" }%>
+            <%= link_to "See all #{comment.replies.count} replies", product_comment_path(comment.product, comment, source: @source), class: "see-all-replies", data: { replies_and_comments_target: "viewrepliesbutton" }%>
           <% end %>
           <div class="comment-replies-container" data-replies-and-comments-target="commentlastreplies">
             <% if comment.replies.any? %>

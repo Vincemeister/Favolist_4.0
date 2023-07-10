@@ -4,8 +4,9 @@
 
 
 
-
-      <% if @source == "user_show_page" %>
+      <% if local_assigns[:iterating_for] == "sidebar" %>
+        
+      <% elsif @source == "user_show_page" %>
         <%= link_to user_path(product.user), class: "back-arrow-show-page" do %>
           <i class="fa-regular fa-arrow-left"></i>
         <% end %>
@@ -50,6 +51,9 @@
       <% end %>
 
     <% elsif local_assigns[:iterating_for] == "sidebar" %>
+
+
+
     <% else %>
       <i class="fa-sharp fa-regular fa-ellipsis" data-bs-toggle="modal" data-bs-target="#editOrDeleteModal-<%= product.id %>"></i>
     <% end %>
@@ -98,7 +102,7 @@
     </div>
   <% end %>
   <div class="cardbar-and-text-container">
-    <%= render "shared/product_card/cardbar_search", product: product, iterating_for: (local_assigns[:iterating_for] == "product_show_page" ? "product_show_page" : ""), source: @source  %>
+    <%= render "shared/product_card/cardbar_search", product: product, iterating_for: local_assigns[:iterating_for], source: @source  %>
     <!--RENDERING THE PRODUCT SHOW TABS OR THE PARTIAL REVIEW OF THE PRODUCT CARD N THE FEED -->
     <% if local_assigns[:iterating_for] == "product_show_page" %>
       <%= render "shared/product_card/product_show_tabs", product: product %>
@@ -157,5 +161,3 @@
     </div>
   </div>
 </div>
-
-
