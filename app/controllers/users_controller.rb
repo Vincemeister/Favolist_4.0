@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   end
 
   def follow
+    flash[:notice] = "You are now following #{@user.username}"
     if current_user.follow(@user.id)
       respond_to do |format|
         format.html { redirect_back(fallback_location: root_path) }
