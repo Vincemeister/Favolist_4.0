@@ -23,23 +23,6 @@
       grid-column-end: 14; // Ends on 13th column, which is effectively the 12th because we have a 12 column grid
     }
   }
-
-  .desktop_grid_search {
-
-    .navbar-desktop {
-      grid-column-start: 1;
-      grid-column-end: 3; //
-    }
-
-    .main-section-desktop {
-      grid-column-start: 3;
-      grid-column-end: 13; // Ends on 13th column (which is effectively the 12th because we have a 12 column grid)
-    }
-
-    .sidebar {
-      display: none;
-    }
-  }
 }
 
 @media(max-width: 992px) {

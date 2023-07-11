@@ -6,7 +6,7 @@
     <% end %>
   <% end %>
 </div>
-<div class="card-grid-search">
+<div class="card-grid-home">
   <% @products.each do |product| %>
     <%= render 'shared/product_card', product: product, suggested_users: @suggested_users, iterating_for: "home_feed" %>
   <% end %>

@@ -35,6 +35,16 @@ class PagesController < ApplicationController
       @referrals = Referral.all
       @users = User.all
     end
+
+    if current_user
+      @user = current_user
+      @suggested_users = User.all - current_user.followed
+      @suggested_users = @suggested_users.sample(1)
+    end
+    @suggested_lists = List.all.first
+    # @suggested_lists = List.all.sample(1)
+    @suggested_lists = [User.first.lists.sample]
+
   end
 
 
