@@ -30,10 +30,10 @@ class PagesController < ApplicationController
       # Users can always be found
       @users = User.search_by_user_username_and_bio_and_list_name(params[:search][:query]) || []
     else
-      @products = []
-      @lists = []
-      @referrals = []
-      @users = []
+      @products = Product.all
+      @lists = List.all
+      @referrals = Referral.all
+      @users = User.all
     end
   end
 

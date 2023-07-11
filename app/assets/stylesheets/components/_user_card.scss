@@ -75,54 +75,78 @@
     align-self: stretch;
   }
 
-  // Avatar group styling
-  .follow-count-and-followed-by-avatars-and-text {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: start;
-    gap: 0.5em;
-  }
-
-
-  .followed-by-avatars-and-text {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5em;
-  }
-
-  .followed-by-text {
-    font-weight: $regular;
-    color: $neutral-400;
-  }
-
-  .avatar-group {
-    display: inline-flex;
-
-  }
-
-  .avatar-in-group {
-    position: relative;
-    border: 1px solid #fff;
-    overflow: hidden;
-  }
-
-  .avatar-in-group:not(:last-child) {
-    margin-left: -16px;
-  }
-
-  .avatar-in-group img {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
 
 }
 
+// Avatar group styling
+.follow-count-and-followed-by-avatars-and-text {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  gap: 0.5em;
+}
+
+
+.followed-by-avatars-and-text {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  gap: 0.5em;
+}
+
+.followed-by-text {
+  font-weight: $regular;
+  color: $neutral-400;
+  margin-top: 0.25em;
+}
+
+.avatar-group {
+  display: inline-flex;
+
+}
+
+.avatar-in-group {
+  position: relative;
+  border: 1px solid #fff;
+  overflow: hidden;
+}
+
+.avatar-in-group:not(:last-child) {
+  margin-left: -16px;
+}
+
+.avatar-in-group img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+
+.avatar-group {
+  display: inline-flex;
+  flex-direction: row-reverse;
+
+}
+
+.avatar-in-group {
+  position: relative;
+  border: 1px solid #fff;
+  overflow: hidden;
+}
+
+.avatar-in-group:not(:last-child) {
+  margin-left: -16px;
+}
+
+.avatar-in-group img {
+  width: 100%;
+  display: block;
+}
+
+
 // SIDEBAR-----------------------------------------------------------------------
 .user-card-sidebar {
-
 
 
 }

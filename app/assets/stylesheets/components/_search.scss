@@ -61,5 +61,15 @@ form.simple_form.search {
   align-items: center;
   width: 100%;
   border-bottom: 1px solid $neutral-100;
+  position: sticky;
+
+}
+
+
+.search-and-nav-wrapper {
+  position: sticky;
+  top: 0; /* This sticks your element to the top of the viewport */
+  z-index: 1000;
+  background-color: white;
 
 }
