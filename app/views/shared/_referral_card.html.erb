@@ -6,6 +6,8 @@
     <%= link_to user_path(referral.product.user) do %>
       <div class="username paragraph-small-medium">
         <%= referral.product.user.username %>
+        <span class="comment-date-and-reply-button">  •  <%= time_ago_in_words(referral.created_at, include_seconds: false).gsub('about', '').gsub(/minute(s)?\s*/, 'm').gsub(/hour(s)?\s*/, 'h').gsub(/day(s)?\s*/, 'd').gsub(' m', 'm').gsub(' h', 'h').gsub(' d', 'd') %></span>
+
       </div>
       <div class="paragraph-small-regular">
         <%= referral.product.list.name %>
