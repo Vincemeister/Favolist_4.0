@@ -22,6 +22,9 @@ application.register("comments", CommentsController)
 import DropzoneController from "./dropzone_controller"
 application.register("dropzone", DropzoneController)
 
+import FollowsController from "./follows_controller"
+application.register("follows", FollowsController)
+
 import FormValidationController from "./form_validation_controller"
 application.register("form-validation", FormValidationController)
 

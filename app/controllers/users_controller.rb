@@ -10,10 +10,9 @@ class UsersController < ApplicationController
   def follow
     flash[:notice] = "You are now following #{@user.username}"
     if current_user.follow(@user.id)
-      respond_to do |format|
-        format.html { redirect_back(fallback_location: root_path) }
-        format.js
-      end
+      render json: { newButtonText: "Unfollow", newButtonClass: "button button-tertiary", newMethod: "delete", newPath: unfollow_user_path(@user) }
+    else
+      head :unprocessable_entity
     end
   end
 
