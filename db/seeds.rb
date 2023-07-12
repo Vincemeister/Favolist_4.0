@@ -20,7 +20,7 @@ puts amazon_logo
 #----------------MAIN USERS---------------------------------------------------------------------------------------------
 puts "Creating main users..."
 vincent = User.create!(
-  username: "Vincent",
+  username: "Tim Ferriss",
   email: "vr@gmail.com",
   password: "password",
   bio: Faker::Lorem.paragraph(sentence_count: 10)

@@ -8,21 +8,37 @@ class UsersController < ApplicationController
   end
 
   def follow
-    flash[:notice] = "You are now following #{@user.username}"
     if current_user.follow(@user.id)
-      render json: { newButtonText: "Unfollow", newButtonClass: "button button-tertiary", newMethod: "delete", newPath: unfollow_user_path(@user) }
+      # if params[:iterating_for] == "sidebar"
+      #   flash[:notice] = "You are now following #{@user.username}"
+      #   render json: { flash: flash, hideButton: true }
+      # end
+      flash[:notice] = "You are now following #{@user.username}"
+      render json: { flash: flash, newButtonText: "Followed", newButtonClass: "button button-secondary", newMethod: "post", newPath: unfollow_user_path(@user) }
     else
-      head :unprocessable_entity
+      flash[:alert] = "There was a problem following #{@user.username}"
+      render json: { flash: flash }, status: :unprocessable_entity
     end
   end
 
+
   def unfollow
+
     if current_user.unfollow(@user.id)
-      respond_to do |format|
-        format.html { redirect_back(fallback_location: root_path) }
-        format.js { render action: :follow }
-      end
+      flash[:notice] = "You are not following #{@user.username} anymore"
+      render json: { flash: flash, newButtonText: "Follow", newButtonClass: "button button-primary", newMethod: "post", newPath: follow_user_path(@user) }
+    else
+      flash[:alert] = "There was a problem unfollowing #{@user.username}"
+      render json: { flash: flash }, status: :unprocessable_entity
     end
+
+
+    # if current_user.unfollow(@user.id)
+    #   respond_to do |format|
+    #     format.html { redirect_back(fallback_location: root_path) }
+    #     format.js { render action: :follow }
+    #   end
+    # end
   end
 
   def remove_follower
