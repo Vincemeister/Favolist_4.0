@@ -9,12 +9,13 @@ class UsersController < ApplicationController
 
   def follow
     if current_user.follow(@user.id)
-      # if params[:iterating_for] == "sidebar"
-      #   flash[:notice] = "You are now following #{@user.username}"
-      #   render json: { flash: flash, hideButton: true }
-      # end
-      flash[:notice] = "You are now following #{@user.username}"
-      render json: { flash: flash, newButtonText: "Followed", newButtonClass: "button button-secondary", newMethod: "post", newPath: unfollow_user_path(@user) }
+      if params[:iterating_for] == "sidebar"
+        flash[:notice] = "You are now following #{@user.username}"
+        render json: { flash: flash, hideButton: true }
+      else
+        flash[:notice] = "You are now following #{@user.username}"
+        render json: { flash: flash, newButtonText: "Followed", newButtonClass: "button button-secondary", newMethod: "post", newPath: unfollow_user_path(@user) }
+      end
     else
       flash[:alert] = "There was a problem following #{@user.username}"
       render json: { flash: flash }, status: :unprocessable_entity

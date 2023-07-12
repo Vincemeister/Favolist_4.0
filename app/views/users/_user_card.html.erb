@@ -8,7 +8,7 @@
           <% if local_assigns[:iterating_for] == "sidebar" %>
             <div class="follow-button">
               <%# need to pass iterating_for to the data so in the sidebar the button just vanishes once you follow someone %>
-              <%= link_to 'Follow', follow_user_path(user), method: :post, class: "button button-link", data: { controller: "follows", follows_target: "button", url: follow_user_path(user), method: "post", action: "click->follows#toggleFollow", iterating_for: local_assigns[:iterating_for] } %>
+              <%= link_to 'Follow', follow_user_path(user), method: :post, class: "button button-link", data: { controller: "follows", follows_target: "button", url: follow_user_path(user), method: "post", action: "click->follows#toggleFollow", iterating_for: "sidebar" } %>
 
             </div>
           <% end %>

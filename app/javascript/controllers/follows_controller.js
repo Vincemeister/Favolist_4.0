@@ -12,7 +12,6 @@ export default class extends Controller {
 
   toggleFollow(event) {
     event.preventDefault();
-    // const iteratingFor = button.getAttribute('data-iterating-for');
 
 
     const button = event.currentTarget;
@@ -21,6 +20,8 @@ export default class extends Controller {
       return;
     }
 
+    // hiding the button is only when the follow button is clicked in the sidebar
+    const iteratingFor = button.getAttribute('data-iterating-for');
 
     // Get the URL and method from the button's data attributes
     const url = button.getAttribute('data-url');
@@ -34,7 +35,7 @@ export default class extends Controller {
     console.log(event.currentTarget.action)
 
     // Make sure to replace 'your-token' and 'your-csrf-token' with your actual tokens
-    fetch(url, {
+    fetch(`${url}?iterating_for=${iteratingFor}`, {
       method: method,
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
@@ -61,24 +62,30 @@ export default class extends Controller {
 
 
   updateButton(data, button) {
-    // update button text
-    button.textContent = data.newButtonText;
+    // hiding the button is only when the follow button is clicked in the sidebar
+    if (data.hideButton) {
+      button.style.display = 'none';
+    } else {
+      // update button text
+      button.textContent = data.newButtonText;
 
-    // update button class
-    button.className = '';
-    let classes = data.newButtonClass.trim().replace(/\s+/g, ' ').split(' ');
-    classes.forEach((cls) => {
-      if (cls !== '') {
-        button.classList.add(cls);
-      }
-    });
+      // update button class
+      button.className = '';
+      let classes = data.newButtonClass.trim().replace(/\s+/g, ' ').split(' ');
+      classes.forEach((cls) => {
+        if (cls !== '') {
+          button.classList.add(cls);
+        }
+      });
 
-    // update button data attributes based on the data from the server
-    // Assuming the server sends a new 'method' and 'path' for the button
-    button.setAttribute('data-method', data.newMethod);
-    button.setAttribute('data-path', data.newPath);
-    button.setAttribute('data-url', data.newPath);
+      // update button data attributes based on the data from the server
+      // Assuming the server sends a new 'method' and 'path' for the button
+      button.setAttribute('data-method', data.newMethod);
+      button.setAttribute('data-path', data.newPath);
+      button.setAttribute('data-url', data.newPath);
+    }
   }
+
 
 
 
