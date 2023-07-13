@@ -14,6 +14,10 @@ class PagesController < ApplicationController
   end
 
   def search
+    @products = Product.all
+    @lists = List.all
+    @referrals = Referral.all
+    @users = User.all
     if params[:search].present?
       # First execute the pg_search query
       search_products = Product.search_by_title_and_description_and_list_name_and_user_username(params[:search][:query])
@@ -29,11 +33,6 @@ class PagesController < ApplicationController
 
       # Users can always be found
       @users = User.search_by_user_username_and_bio_and_list_name(params[:search][:query]) || []
-    else
-      @products = Product.all
-      @lists = List.all
-      @referrals = Referral.all
-      @users = User.all
     end
 
     if current_user
@@ -44,6 +43,8 @@ class PagesController < ApplicationController
     @suggested_lists = List.all.first
     # @suggested_lists = List.all.sample(1)
     @suggested_lists = [User.first.lists.sample]
+
+
 
   end
 

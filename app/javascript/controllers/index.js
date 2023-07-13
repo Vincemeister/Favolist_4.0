@@ -40,5 +40,8 @@ application.register("replies-and-comments", RepliesAndCommentsController)
 import RepliesController from "./replies_controller"
 application.register("replies", RepliesController)
 
+import SearchController from "./search_controller"
+application.register("search", SearchController)
+
 import SlidingimagerowsController from "./slidingimagerows_controller"
 application.register("slidingimagerows", SlidingimagerowsController)

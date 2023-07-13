@@ -4,10 +4,10 @@
       <%= link_to :back do %>
         <i class="fa-regular fa-arrow-left"></i>
       <% end %>
-      <%= simple_form_for :search, url: search_path, method: :get do |f| %>
+      <%= simple_form_for :search, url: search_path, method: :get, html: {data: {search_target: "form"}} do |f| %>
         <div class="custom-search-form-control form-group search-form">
           <div class="custom-input-group">
-            <%= f.input :query, label: false, input_html: {class: 'string required', id: 'search_query', style: 'width: 100%;'} %>
+            <%= f.input :query, label: false, input_html: {class: 'string required', id: 'search_query', style: 'width: 100%;', data: { search_target: "input", action: "keyup->search#update"}} %>
             <div class="custom-input-group-append">
               <button name="button" type="submit" class="custom-btn">
                 <i class="fas fa-search"></i>
