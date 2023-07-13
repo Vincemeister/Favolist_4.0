@@ -45,7 +45,10 @@ class PagesController < ApplicationController
     @suggested_lists = [User.first.lists.sample]
 
 
-
+    respond_to do |format|
+      format.html # Follow regular flow of Rails
+      format.text { render partial: "pages/search_results", locals: {products: @products, lists: @lists, referrals: @referrals, users: @users }, formats: [:html] }
+    end
   end
 
 

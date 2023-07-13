@@ -2,24 +2,24 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="search"
 export default class extends Controller {
-  static targets = [ "form", "products", "referrals", "lists", "users", "input" ]
+  static targets = [ "form", "input", "searchresults" ]
 
   connect() {
-    console.log("Search controller connected")
+    console.log("Search controller connected!!!!")
     console.log("input", this.inputTarget)
-    console.log("inputValue", this.inputTarget.value)
     console.log("form", this.formTarget)
-    console.log("products", this.productsTarget)
-    console.log("referrals", this.referralsTarget)
-    console.log("lists", this.listsTarget)
-    console.log("users", this.usersTarget)
   }
 
   update() {
     const url = `${this.formTarget.action}?query=${this.inputTarget.value}`
-    fetch(url, {headers: {"Accept": "json"}})
+    console.log("url", url)
+    console.log("inputvalue", this.inputTarget.value)
+    fetch(url, {headers: {"Accept": "text/plain"}})
       .then(response => response.text())
-      .then((data) => { console.log(data) })
+      .then((data) => {
+
+        this.searchresultsTarget.outerHTML = data
+       })
       // .then((data) => {
       //   this.productsTarget.outerHTML = data
       //   this.referralsTarget.outerHTML = data
