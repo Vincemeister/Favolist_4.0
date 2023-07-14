@@ -10,6 +10,13 @@ export default class extends Controller {
     console.log("form", this.formTarget)
   }
 
+  preventSubmit(e) {
+    e.preventDefault();
+    this.inputTarget.blur(); // Remove focus from the input field
+    this.update(); // Perform the search
+  }
+
+
   update() {
     const url = `${this.formTarget.action}?query=${this.inputTarget.value}`
     console.log("url", url)

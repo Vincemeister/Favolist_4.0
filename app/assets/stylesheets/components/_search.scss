@@ -44,6 +44,10 @@
 
 }
 
+.search_form {
+  width: 100%;
+}
+
 // For some reason I need to manually set w-100 for it to fill the container
 .string.required {
   width: 100%;
@@ -56,12 +60,11 @@ form.simple_form.search {
 
 .search-wrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100%;
   border-bottom: 1px solid $neutral-100;
-  position: sticky;
 
 }
 
@@ -71,5 +74,7 @@ form.simple_form.search {
   top: 0; /* This sticks your element to the top of the viewport */
   z-index: 1000;
   background-color: white;
+  display: flex;
+  flex-direction: column;
 
 }

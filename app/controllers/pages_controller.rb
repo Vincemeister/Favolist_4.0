@@ -18,10 +18,10 @@ class PagesController < ApplicationController
     @lists = List.all
     @referrals = Referral.all
     @users = User.all
-    if params[:search].present?
+    if params[:query].present?
       # First execute the pg_search query
-      search_products = Product.search_by_title_and_description_and_list_name_and_user_username(params[:search][:query])
-      search_lists = List.search_by_name_and_description_and_product_title_and_user_username(params[:search][:query])
+      search_products = Product.search_by_title_and_description_and_list_name_and_user_username(params[:query])
+      search_lists = List.search_by_name_and_description_and_product_title_and_user_username(params[:query])
 
 
       # Then filter the results with the viewable_by scope
@@ -29,10 +29,10 @@ class PagesController < ApplicationController
       @lists = List.where(id: search_lists.pluck(:id)).viewable_by(current_user)
 
       # Different logic for referrals at this time
-      @referrals = Referral.search_by_product_title_user_username_and_list_name(params[:search][:query]).viewable_by(current_user)
+      @referrals = Referral.search_by_product_title_user_username_and_list_name(params[:query]).viewable_by(current_user)
 
       # Users can always be found
-      @users = User.search_by_user_username_and_bio_and_list_name(params[:search][:query]) || []
+      @users = User.search_by_user_username_and_bio_and_list_name(params[:query]) || []
     end
 
     if current_user
