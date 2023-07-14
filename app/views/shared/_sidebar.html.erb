@@ -5,9 +5,9 @@
 
     <% unless @suggested_users.nil?  %>
       <div class="suggested-profiles-container">
-        <div class="paragraph-large-regular">
+        <%# <div class="paragraph-large-regular sidebar-header">
           Profiles
-        </div>
+        </div> %>
         <% @suggested_users.each do |user| %>
           <%= render 'users/user_card', user: user, iterating_for: "sidebar" %>
         <% end %>
@@ -15,9 +15,9 @@
     <% end %>
     <% unless @suggested_lists.nil? %>
       <div class="suggested-lists-container">
-        <div class="paragraph-large-regular">
+        <%# <div class="paragraph-large-regular sidebar-header">
           Lists
-        </div>
+        </div> %>
         <% @suggested_lists.each do |list| %>
           <%= render 'shared/list_card_sidebar', list: list, iterating_for: "sidebar" %>
         <% end %>
@@ -25,9 +25,9 @@
     <% end %>
     <% unless @suggested_products.nil? %>
       <div class="suggested-lists-container">
-        <div class="paragraph-large-regular">
+        <%# <div class="paragraph-large-regular sidebar-header">
           Similar listings
-        </div>
+        </div> %>
         <% @suggested_products.each do |product| %>
           <%= render 'shared/product_card', product: product, iterating_for: "sidebar" %>
         <% end %>
