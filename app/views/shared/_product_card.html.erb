@@ -65,7 +65,7 @@
   </div>
 
   <% unless local_assigns[:iterating_for] == "product_show_page"  %>
-    <%= link_to product_path(product), class: "product-card-image" do %>
+    <%= link_to product_path(product, source: (local_assigns[:iterating_for] unless local_assigns[:iterating_for] == "sidebar")), class: "product-card-image" do %>
       <%= render 'shared/product_card/product_photos', product: product %>
     <% end %>
   <% else %>
