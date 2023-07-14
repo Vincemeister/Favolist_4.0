@@ -127,6 +127,11 @@
 .product-card-show {
   width: 75%;
   margin: auto;
+
+  p {
+    padding-bottom: 3.5em;
+  }
+
 }
 
 
@@ -145,4 +150,7 @@
   object-fit: contain;
 }
 
-// LEGACY CODE STILL NEEDS TO BE CLEARED UP
+.photo-link {
+  display: flex;
+  width: 100%;
+}

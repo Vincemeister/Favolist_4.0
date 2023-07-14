@@ -1,0 +1,40 @@
+
+
+  <% if product.photos.attached? && product.photos.count > 1 %>
+    <div id="carouselExampleIndicators-<%= product.id %>" class="carousel slide">
+      <div class="carousel-indicators">
+        <% product.photos.each_with_index do |photo, index| %>
+          <button type="button" data-bs-target="#carouselExampleIndicators-<%= product.id %>" data-bs-slide-to="<%= index %>" class="<%= 'active' if index.zero? %>" aria-label="Slide <%= index + 1 %>"></button>
+        <% end %>
+      </div>
+      <div class="carousel-inner">
+        <% product.photos.each_with_index do |photo, index| %>
+          <div class="carousel-item <%= 'active' if index.zero? %>">
+            <div class="image-container">
+              <%= image_tag photo, class: "d-block" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators-<%= product.id %>" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators-<%= product.id %>" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  <% elsif product.photos.attached? %>
+    <div class="product-card-image">
+      <div class="image-container">
+        <%= image_tag product.photos.first %>
+      </div>
+    </div>
+  <% else %>
+    <div class="product-card-image">
+      <div class="image-container">
+        <%= image_tag "https://res.cloudinary.com/dncij7vr6/image/upload/v1687825911/Favolist%204.0/app%20assets/grey_rectangle_byagze.png" %>
+      </div>
+    </div>
+  <% end %>
