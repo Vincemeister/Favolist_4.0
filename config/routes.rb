@@ -69,6 +69,7 @@ Rails.application.routes.draw do
       patch :update_profile
       get :privacy
       patch :update_privacy
+      get :about
     end
   end
 

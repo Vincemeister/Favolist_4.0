@@ -40,6 +40,9 @@ class SettingsController < ApplicationController
     end
   end
 
+  def about
+  end
+
   private
 
   def set_user
