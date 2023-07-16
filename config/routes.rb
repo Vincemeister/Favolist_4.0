@@ -70,6 +70,8 @@ Rails.application.routes.draw do
       get :privacy
       patch :update_privacy
       get :about
+      get :terms_and_conditions
+      get :privacy_policy
     end
   end
 

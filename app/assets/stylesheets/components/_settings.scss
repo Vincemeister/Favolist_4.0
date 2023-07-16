@@ -95,5 +95,9 @@ input[type='radio']:checked {
 }
 
 
+.last-paragraph {
+  margin-bottom: 3.5em;
+}
+
 // This will set the border to $neutral-900, the background to white, and the dot (created by ::after pseudo-element)
 // to $primary. Adjust the width, height, top, and left properties as needed to position the dot correctly within your radio buttons.
