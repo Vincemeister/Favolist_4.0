@@ -99,5 +99,30 @@ input[type='radio']:checked {
   margin-bottom: 3.5em;
 }
 
+@media(min-width: 992px) {
+
+  .hide-on-desktop {
+    display: none;
+  }
+}
+
+@media(max-width: 991px) {
+
+  .hide-on-mobile {
+    display: none;
+  }
+}
+
+
+.nav-header-desktop-settings {
+  padding-left: 0em;
+  justify-content: start;
+  font-weight: 500;
+  color: $neutral-500;
+
+}
+
+
+
 // This will set the border to $neutral-900, the background to white, and the dot (created by ::after pseudo-element)
 // to $primary. Adjust the width, height, top, and left properties as needed to position the dot correctly within your radio buttons.

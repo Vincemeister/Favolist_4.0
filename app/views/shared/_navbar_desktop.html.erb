@@ -5,6 +5,17 @@
       <i class="fa-sharp fa-regular fa-magnifying-glass"></i>
       <div class="paragraph-large-regular">Discover</div>
     <% end %>
+    <%= link_to root_path, class: "side-nav-item" do %>
+      <i class="fa-sharp fa-solid fa-house"></i>
+      <div class="paragraph-large-regular">Home</div>
+    <% end %>
+
+    <% if user_signed_in? %>
+      <%= link_to notifications_path, class: "side-nav-item" do %>
+        <i class="fa-sharp fa-solid fa-bell"></i>
+        <div class="paragraph-large-regular">Notifications</div>
+      <% end %>
+    <% end %>
     <% if user_signed_in? %>
       <%= link_to user_path(current_user), class: "side-nav-item" do %>
         <i class="fa-sharp fa-solid fa-user"></i>
@@ -13,9 +24,11 @@
     <% else %>
       <%= link_to 'Sign in', new_user_session_path, class: "paragraph-large-regular" %>
     <% end %>
-    <%= link_to root_path, class: "side-nav-item" do %>
-      <i class="fa-sharp fa-solid fa-house"></i>
-      <div class="paragraph-large-regular">Home</div>
+    <% if user_signed_in? %>
+      <div class="side-nav-item" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <i class="fa-sharp fa-solid fa-square-plus"></i>
+        <div class="paragraph-large-regular">Add</div>
+      </div>
     <% end %>
 
     <% if user_signed_in? %>
@@ -25,19 +38,11 @@
       <% end %>
     <% end %>
 
-    <% if user_signed_in? %>
-      <div class="side-nav-item" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        <i class="fa-sharp fa-solid fa-square-plus"></i>
-        <div class="paragraph-large-regular">Add</div>
-      </div>
-    <% end %>
 
 
-    <% if user_signed_in? %>
-      <%= link_to notifications_path, class: "side-nav-item" do %>
-        <i class="fa-sharp fa-solid fa-bell"></i>
-        <div class="paragraph-large-regular">Notifications</div>
-      <% end %>
+    <%= link_to about_path, class: "side-nav-item" do %>
+      <i class="fa-sharp fa-solid fa-bell"></i>
+      <div class="paragraph-large-regular">About</div>
     <% end %>
 
   </div>
