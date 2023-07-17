@@ -8,3 +8,4 @@ document.addEventListener('turbo:load', event => {
     document.documentElement.style.scrollBehavior = 'smooth';
   }, 0);
 });
+

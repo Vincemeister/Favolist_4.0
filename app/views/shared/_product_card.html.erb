@@ -10,6 +10,19 @@
         <%= link_to user_path(product.user, anchor: "product_#{product.id}"), class: "back-arrow-show-page" do %>
           <i class="fa-regular fa-arrow-left"></i>
         <% end %>
+
+
+
+
+      <% elsif @source == "user_show_page_referrals" %>
+        <%= link_to user_path(product.user, anchor: "referral_#{product.referral.id}"), class: "back-arrow-show-page" do %>
+          <i class="fa-regular fa-arrow-left"></i>
+        <% end %>
+
+
+
+
+
       <% elsif @source == "list_show_page" %>
         <%= link_to list_path(product.list, anchor: "product_#{product.id}"), class: "back-arrow-show-page" do %>
           <i class="fa-regular fa-arrow-left"></i>
