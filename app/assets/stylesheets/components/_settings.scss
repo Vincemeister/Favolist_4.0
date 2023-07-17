@@ -119,7 +119,25 @@ input[type='radio']:checked {
   justify-content: start;
   font-weight: 500;
   color: $neutral-500;
+}
 
+// just like content-text in general-styling class
+.settings-more-content-text {
+  p {
+    line-height: 1.75em;
+    color: $neutral-700;
+    justify-content: start;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-weight: 300;
+  }
+
+  li {
+    line-height: 1.75em;
+    color: $neutral-700;
+    font-weight: 300;
+  }
 }
 
 
