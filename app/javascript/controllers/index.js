@@ -34,9 +34,6 @@ application.register("hello", HelloController)
 import NotificationController from "./notification_controller"
 application.register("notification", NotificationController)
 
-import PreservetabandscrollpositionController from "./preservetabandscrollposition_controller"
-application.register("preservetabandscrollposition", PreservetabandscrollpositionController)
-
 import RepliesAndCommentsController from "./replies_and_comments_controller"
 application.register("replies-and-comments", RepliesAndCommentsController)
 
