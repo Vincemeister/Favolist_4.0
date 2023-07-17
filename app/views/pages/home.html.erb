@@ -1,3 +1,5 @@
+
+
 <div class="nav-header sticky-nav">
   <%= image_tag "https://res.cloudinary.com/dncij7vr6/image/upload/v1686124155/Favolist%204.0/app%20assets/favolist_logo_dftbgl.svg", alt: "Favolist Logo", class: "favolist-logo" %>
   <% if user_signed_in? %>
@@ -6,6 +8,8 @@
     <% end %>
   <% end %>
 </div>
+
+
 <div class="card-grid-home">
   <% @products.each do |product| %>
     <%= render 'shared/product_card', product: product, suggested_users: @suggested_users, iterating_for: "home_feed" %>

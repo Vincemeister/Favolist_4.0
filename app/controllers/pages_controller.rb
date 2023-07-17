@@ -2,6 +2,8 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :home, :search, :no_permission ]
 
   def home
+    @start_product_id = params[:product_id]
+
     @products = Product.viewable_by(current_user)
     if current_user
       @user = current_user

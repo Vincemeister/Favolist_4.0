@@ -33,7 +33,7 @@
       <div class="paragraph-small-bold"><%= referral.product.title  %></div>
       <div class="price paragraph-small">$<%= referral.product.price.to_i %></div>
     </div>
-    <%= link_to "See review", product_path(referral.product), class: "button button-link" %>
+    <%= link_to "See review", product_path(referral.product, source: (local_assigns[:iterating_for])), class: "button button-link" %>
   </div>
 
   <div class="referral-details content-text">

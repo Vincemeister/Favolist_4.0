@@ -1,4 +1,4 @@
-<div class="product-card <%= local_assigns[:iterating_for] == "product_show_page" ? 'product-card-show' : ''  %> ">
+<div class="product-card <%= local_assigns[:iterating_for] == "product_show_page" ? 'product-card-show' : ''  %> " id="product_<%= product.id %>">
   <div class="avatar-and-username-and-logo">
     <% unless local_assigns[:iterating_for] == "list_show_page" %>
 
@@ -7,17 +7,18 @@
       <% if local_assigns[:iterating_for] == "sidebar" %>
 
       <% elsif @source == "user_show_page" %>
-        <%= link_to user_path(product.user), class: "back-arrow-show-page" do %>
+        <%= link_to user_path(product.user, anchor: "product_#{product.id}"), class: "back-arrow-show-page" do %>
           <i class="fa-regular fa-arrow-left"></i>
         <% end %>
       <% elsif @source == "list_show_page" %>
-        <%= link_to list_path(product.list), class: "back-arrow-show-page" do %>
+        <%= link_to list_path(product.list, anchor: "product_#{product.id}"), class: "back-arrow-show-page" do %>
           <i class="fa-regular fa-arrow-left"></i>
         <% end %>
       <% elsif @source == "home_feed" %>
-        <%= link_to root_path, class: "back-arrow-show-page" do %>
+        <%= link_to root_path(anchor: "product_#{product.id}"), class: "back-arrow-show-page" do %>
           <i class="fa-regular fa-arrow-left"></i>
         <% end %>
+
       <% elsif @source == "search_feed" %>
         <%= link_to search_path, class: "back-arrow-show-page" do %>
           <i class="fa-regular fa-arrow-left"></i>
