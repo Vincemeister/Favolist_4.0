@@ -1,29 +1,29 @@
-<%= link_to list_path(list), class: "text-decoration-none" do %>
-    <div class="list-grid-container">
-      <% tiles, grid_class = generate_tiled_background(list) %>
-      <div class="<%= grid_class %>">
-        <%= tiles.html_safe %>
-        <div class="grid-text <%= local_assigns[:iterating_for] == "sidebar" ? "grid-text-sidebar" : "" %> ">
-          <div class="user-info">
-            <%= image_tag list.user.avatar, class: "avatar-small" %>
-            <div class="user-text">
-              <div class="<%= local_assigns[:iterating_for] == "sidebar" ? "paragraph-xsmall-semibold" : "paragraph-small-semibold" %>"><%= list.user.username %></div>
-              <div class="<%= local_assigns[:iterating_for] == "sidebar" ? "paragraph-xsmall-regular" : "paragraph-small-regular" %>"><%= list.user.followers_count %> followers</div>
-            </div>
+<%= link_to list_path(list, source: local_assigns[:iterating_for]), class: "text-decoration-none", id: "list_#{list.id}" do %>
+  <div class="list-grid-container">
+    <% tiles, grid_class = generate_tiled_background(list) %>
+    <div class="<%= grid_class %>">
+      <%= tiles.html_safe %>
+      <div class="grid-text <%= local_assigns[:iterating_for] == "sidebar" ? "grid-text-sidebar" : "" %> ">
+        <div class="user-info">
+          <%= image_tag list.user.avatar, class: "avatar-small" %>
+          <div class="user-text">
+            <div class="<%= local_assigns[:iterating_for] == "sidebar" ? "paragraph-xsmall-semibold" : "paragraph-small-semibold" %>"><%= list.user.username %></div>
+            <div class="<%= local_assigns[:iterating_for] == "sidebar" ? "paragraph-xsmall-regular" : "paragraph-small-regular" %>"><%= list.user.followers_count %> followers</div>
           </div>
-          <div class="product-count-and-list-name">
-            <div class="<%= local_assigns[:iterating_for] == "sidebar" ? "paragraph-small-regular" : "paragraph-large-regular" %>">
-              <span class="semi-bold"><%= list.products.count %></span>
-              <%= "products".pluralize(list.products.count) %>
-            </div>
-            <hr>
-            <% if local_assigns[:iterating_for] == "sidebar" %>
-              <div class="paragraph-large-medium line-height-1-25"><%= list.name %><div>
-            <% else %>
-              <h4 class="list-name medium line-height-1-25"><%= list.name %></h4>
-            <% end %>
+        </div>
+        <div class="product-count-and-list-name">
+          <div class="<%= local_assigns[:iterating_for] == "sidebar" ? "paragraph-small-regular" : "paragraph-large-regular" %>">
+            <span class="semi-bold"><%= list.products.count %></span>
+            <%= "products".pluralize(list.products.count) %>
           </div>
+          <hr>
+          <% if local_assigns[:iterating_for] == "sidebar" %>
+            <div class="paragraph-large-medium line-height-1-25"><%= list.name %><div>
+          <% else %>
+            <h4 class="list-name medium line-height-1-25"><%= list.name %></h4>
+          <% end %>
         </div>
       </div>
     </div>
+  </div>
 <% end %>

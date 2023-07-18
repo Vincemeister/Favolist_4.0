@@ -28,7 +28,7 @@
   <div class="tab-pane fade linebreak" id="pills-lists" role="tabpanel" aria-labelledby="pills-lists-tab">
     <div class="card-grid-search">
       <% @lists.each do |list| %>
-        <%= render 'shared/list_card', list: list %>
+        <%= render 'shared/list_card', list: list, iterating_for: "user_show_page_lists" %>
       <% end %>
     </div>
   </div>

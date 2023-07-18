@@ -15,9 +15,10 @@
 
 
       <% elsif @source == "user_show_page_referrals" %>
-        <%= link_to user_path(product.user, anchor: "referral_#{product.referral.id}"), class: "back-arrow-show-page" do %>
+        <%= link_to user_path(product.user, anchor: "referral_#{product.referral.id}", tab: 'pills-referrals-tab'), class: "back-arrow-show-page" do %>
           <i class="fa-regular fa-arrow-left"></i>
         <% end %>
+
 
 
 

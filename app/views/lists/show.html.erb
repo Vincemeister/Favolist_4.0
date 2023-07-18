@@ -1,12 +1,17 @@
-<div class="nav-header sticky-header text-decoration-none">
+<div class="nav-header sticky-header text-decoration-none" >
 
-
-  
-  <%= link_to :back do %>
-    <i class="fa-regular fa-arrow-left"></i>
+    <% if @source == "user_show_page_lists" %>
+      <%= link_to user_path(@list.user, anchor: "list_#{@list.id}", tab: 'pills-lists-tab'), class: "back-arrow-show-page" do %>
+        <i class="fa-regular fa-arrow-left"></i>
+      <% end %>
+    <% else %>
+    <%= link_to :back do %>
+      <i class="fa-regular fa-arrow-left"></i>
+    <% end %>
   <% end %>
 
 
+  <% console %>
 
   <div class="titles">
     <div class="subtitle">
@@ -22,9 +27,21 @@
 
 
 <div class="nav-header-desktop sticky-header text-decoration-none">
-  <%= link_to :back do %>
-    <i class="fa-regular fa-arrow-left"></i>
+
+ <%  if @source == "user_show_page_lists" %>
+      <%= link_to user_path(@list.user, anchor: "list_#{@list.id}", tab: 'pills-lists-tab'), class: "back-arrow-show-page" do %>
+      <i class="fa-regular fa-arrow-left"></i>
+    <% end %>
+  <% else %>
+    <%= link_to :back do %>
+      <i class="fa-regular fa-arrow-left"></i>
+    <% end %>
   <% end %>
+
+
+
+
+
   <div class="titles">
     <div class="subtitle">
       <%= image_tag @list.user.avatar, class: 'avatar-xs' %>
