@@ -8,7 +8,10 @@
       <i class="fa-sharp fa-solid fa-user"></i>
     <% end %>
   <% else %>
-    <%= link_to 'Sign in', new_user_session_path %>
+    <%= link_to new_user_session_path do%>
+      <i class="fa-sharp fa-solid fa-user"></i>
+      Sign in
+    <% end %>
   <% end %>
   <%= link_to root_path do %>
     <i class="fa-sharp fa-solid fa-house"></i>

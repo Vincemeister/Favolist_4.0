@@ -22,8 +22,12 @@
         <div class="paragraph-large-regular">Profile</div>
       <% end %>
     <% else %>
-      <%= link_to 'Sign in', new_user_session_path, class: "paragraph-large-regular" %>
+      <%= link_to new_user_session_path, class: "side-nav-item" do%>
+        <i class="fa-sharp fa-solid fa-user"></i>
+        <div class="paragraph-large-regular">Sign in</div>
+      <% end %>
     <% end %>
+
     <% if user_signed_in? %>
       <div class="side-nav-item" data-bs-toggle="modal" data-bs-target="#exampleModal">
         <i class="fa-sharp fa-solid fa-square-plus"></i>
