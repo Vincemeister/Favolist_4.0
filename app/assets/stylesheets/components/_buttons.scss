@@ -76,6 +76,7 @@
   &:hover {
     // background-color: $neutral-50;
     color: $primary-700;
+    border-color: $primary-700;
   }
 }
 
@@ -93,6 +94,21 @@ a.button.button-link {
     background-color: darken($danger, 10%);
   }
 }
+
+.enter-as-guest {
+  margin-top: 2em;
+
+  &:hover {
+    color: $neutral-900;
+    background-color: transparent;
+    border-color: $neutral-300;
+  }
+}
+
+
+
+
+
 
 // .btn-list-category {
 //   font-family: $button-font;
