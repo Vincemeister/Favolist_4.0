@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
   get 'pages/about' => 'pages#about', as: 'about'
   get 'pages/search', to: 'pages#search', as: 'search'
+  get 'pages/beta', to: 'pages#beta', as: 'beta'
   get 'pages/test', to: 'pages#test', as: 'test'
   get 'pages/no_permission', to: 'pages#no_permission', as: 'no_permission'
 
@@ -72,6 +73,7 @@ Rails.application.routes.draw do
       get :about
       get :terms_and_conditions
       get :privacy_policy
+      get :beta
     end
   end
 

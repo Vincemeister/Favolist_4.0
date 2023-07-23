@@ -56,6 +56,8 @@ class PagesController < ApplicationController
   def about
   end
 
+  def beta
+  end
 
   def test
   end

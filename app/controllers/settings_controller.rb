@@ -43,6 +43,9 @@ class SettingsController < ApplicationController
   def about
   end
 
+  def beta
+  end
+
   def privacy_policy
   end
 
