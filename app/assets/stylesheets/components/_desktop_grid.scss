@@ -8,19 +8,24 @@
     width: 1200px;
     max-width: calc(100vw - 32px);
 
-    > .navbar-desktop {
+    .navbar-desktop {
       grid-column-start: 1;
       grid-column-end: 3; // Span 2 columns
     }
 
-    > .main-section-desktop {
+    .main-section-desktop {
       grid-column-start: 3; // Starts from 3rd column
       grid-column-end: 11; // Ends on 11th column
     }
 
-    > .sidebar {
+    .sidebar {
       grid-column-start: 11; // Starts from 11th column
       grid-column-end: 14; // Ends on 13th column, which is effectively the 12th because we have a 12 column grid
+    }
+
+    .main-section-desktop-content-page {
+      grid-column-start: 3; // Starts from 3rd column
+      grid-column-end: 13; // Ends on 13th column
     }
   }
 }

@@ -21,10 +21,20 @@
 
       <div class="desktop_grid">
         <%= render "shared/navbar_desktop" %>
-        <div class="main-section-desktop">
+
+
+        <div class="<%= (controller_name == 'pages' && (action_name == 'about' || action_name == 'beta')) ? 'main-section-desktop-content-page' : 'main-section-desktop' %>">
           <%= yield %>
         </div>
-        <%= render "shared/sidebar" %>
+
+
+        <% unless controller_name == 'pages' && (action_name == 'about' || action_name == 'beta') %>
+          <%= render "shared/sidebar" %>
+        <% end %>
+
+
+
+
       </div>
       <%= render "shared/navbar" %>
 
