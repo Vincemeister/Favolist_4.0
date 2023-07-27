@@ -1,0 +1,49 @@
+<%= render "users/user_card_show_page", user: @user %>
+
+
+<ul class="nav custom-nav nav-pills nav-justified sticky-nav text-decoration-none" id="pills-tab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link custom-nav-link active product-tabs overline" id="pills-products-tab" data-bs-toggle="pill" data-bs-target="#pills-products" type="button" role="tab" aria-controls="pills-products" aria-selected="true"><i class="fa-sharp fa-light fa-square"></i><div><span class="custom-nav-link-count"><%= @user.products.count %></span> Products</div></button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link custom-nav-link product-tabs overline" id="pills-lists-tab" data-bs-toggle="pill" data-bs-target="#pills-lists" type="button" role="tab" aria-controls="pills-lists" aria-selected="false"><i class="fa-sharp fa-light fa-table-cells"></i><div><span class="custom-nav-link-count"><%= @user.lists.count %></span> Lists</div></button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link custom-nav-link product-tabs overline" id="pills-referrals-tab" data-bs-toggle="pill" data-bs-target="#pills-referrals" type="button" role="tab" aria-controls="pills-referrals" aria-selected="false"><i class="fa-sharp fa-light fa-tag"></i><div><span class="custom-nav-link-count"><%= "#{@user.referrals.count}" if @user.referrals.count > 0 %></span> Referrals</div></button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link custom-nav-link product-tabs overline" id="pills-about-tab" data-bs-toggle="pill" data-bs-target="#pills-about" type="button" role="tab" aria-controls="pills-about" aria-selected="false"><i class="fa-sharp fa-user"></i>About</button>
+  </li>
+</ul>
+
+
+<div class="tab-content product-content" id="pills-tabContent">
+  <div class="tab-pane fade show active linebreak" id="pills-products" role="tabpanel" aria-labelledby="pills-products-tab">
+    <div class="card-grid-search">
+      <% @user.products.each do |product| %>
+        <%= render 'shared/product_card', product: product, iterating_for: "user_show_page"  %>
+      <% end %>
+    </div>
+  </div>
+  <div class="tab-pane fade linebreak" id="pills-lists" role="tabpanel" aria-labelledby="pills-lists-tab">
+    <div class="card-grid-search">
+      <% @lists.each do |list| %>
+        <%= render 'shared/list_card', list: list, iterating_for: "user_show_page_lists" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="tab-pane fade linebreak" id="pills-referrals" role="tabpanel" aria-labelledby="pills-referrals-tab">
+    <div class="card-grid-search">
+      <% @referrals.each do |referral| %>
+        <%= render 'shared/referral_card', referral: referral, iterating_for: "user_show_page_referrals" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="tab-pane fade linebreak" id="pills-about" role="tabpanel" aria-labelledby="pills-about-tab">
+    <div class="about-text">
+      <h6 class="text-center">About</h6>
+      <p><%= simple_format(@user.bio) %></p>
+    </div>
+  </div>
+
+</div>

@@ -7,6 +7,16 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+
+  def test
+    @lists = @user.lists
+    @referrals = @user.products.flat_map(&:referral).compact
+    @suggested_users = @user.followed.order(followers_count: :desc).sample(1)
+    @suggested_lists = List.where(user: @user.followed).order(products_count: :desc).limit(1)
+
+  end
+
+
   def follow
     if current_user.follow(@user.id)
       if params[:iterating_for] == "sidebar"
