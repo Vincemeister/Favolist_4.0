@@ -56,6 +56,7 @@ Rails.application.routes.draw do
       post :follow
       post :unfollow
       post :remove_follower
+      get :test
     end
     get :follows, on: :member
   end

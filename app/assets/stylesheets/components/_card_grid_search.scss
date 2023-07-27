@@ -38,6 +38,31 @@
   }
 }
 
+.list-card-grid-search-mobile {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: end;
+  padding: 1em;
+  gap: 1em 1em;
+  margin-bottom: 3em;
+
+
+  .list-grid-container {
+    margin: 2em 0em;
+  }
+
+  .product-card-image {
+    width: 100%;
+
+    img {
+      width: 100%;
+      object-fit: scale-down;
+      height: 100%;
+      object-fit: contain; /* ensure the image scales while preserving its aspect ratio */
+    }
+  }
+}
+
 
 
 

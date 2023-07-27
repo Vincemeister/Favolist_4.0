@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :show, :index ]
 
-  before_action :set_user, only: [:show, :follow, :unfollow, :follows, :remove_follower, :bookmark, :unbookmark]
+  before_action :set_user, only: [:show, :test, :follow, :unfollow, :follows, :remove_follower, :bookmark, :unbookmark]
 
   def index
     @users = User.all
