@@ -1,3 +1,5 @@
+
+
 .avatar-settings {
   margin: 1em 0em;
 }
@@ -144,3 +146,29 @@ input[type='radio']:checked {
 
 // This will set the border to $neutral-900, the background to white, and the dot (created by ::after pseudo-element)
 // to $primary. Adjust the width, height, top, and left properties as needed to position the dot correctly within your radio buttons.
+@media(max-width: 991px) {
+  .settings-container {
+    padding-top: 2em;
+    padding-right: 0em;
+    padding-left: 0em;
+  }
+
+  .subpage-settings-container {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 1em;
+
+  }
+
+  .settings-menu {
+    padding-top: 0em
+  }
+}
+
+@media(min-width: 992px) {
+  .settings-menu {
+    padding: 0em 1em 2em 0em;
+  }
+}

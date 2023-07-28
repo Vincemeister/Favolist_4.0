@@ -1,4 +1,10 @@
-
+@media(max-width: 991px) {
+  
+  .new-product-container {
+    width: 100%;
+    padding: 1em;
+  }
+}
 
 // Overkill required otherwise simple-form overides
 #long-text-area.long-text-area {

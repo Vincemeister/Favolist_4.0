@@ -1,7 +1,6 @@
 
-.card-grid-search {
-
-  @media(min-width: 500px) {
+.card-grid {
+  @media(min-width: 992px) {
     gap: 0em 2em;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -18,11 +17,6 @@
     .referral-card {
       padding: 2em 0em;
     }
-
-    .list-grid-container {
-      margin: 2em 0em;
-    }
-
   }
 
 
@@ -38,33 +32,21 @@
   }
 }
 
-.list-card-grid-search-mobile {
+.list-card-grid {
+  margin-top: 1em;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   align-items: end;
-  padding: 1em;
   gap: 1em 1em;
   margin-bottom: 3em;
 
-
-  .list-grid-container {
-    margin: 2em 0em;
-  }
-
-  .product-card-image {
-    width: 100%;
-
-    img {
-      width: 100%;
-      object-fit: scale-down;
-      height: 100%;
-      object-fit: contain; /* ensure the image scales while preserving its aspect ratio */
-    }
+  @media(max-width: 991px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: end;
+    padding: 0em 1em;
   }
 }
-
-
-
 
 .card-grid-home {
   overflow: scroll;
@@ -85,7 +67,7 @@
       padding: 2em 0em;
     }
 
-    .list-grid-container {
+    .list-card {
       margin: 2em 0em;
     }
   }

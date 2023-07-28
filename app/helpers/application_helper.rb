@@ -24,10 +24,10 @@ module ApplicationHelper
     end
 
     grid_class = case number_of_tiles
-                 when 1 then "list-grid-1"
-                 when 4 then "list-grid-4"
-                 when 9 then "list-grid-9"
-                 else "list-grid-16"
+                 when 1 then "list-card-background-grid-1"
+                 when 4 then "list-card-background-grid-4"
+                 when 9 then "list-card-background-grid-9"
+                 else "list-card-background-grid-16"
                  end
 
     [tiles.join.html_safe, grid_class]

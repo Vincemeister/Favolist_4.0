@@ -1,4 +1,6 @@
 
+
+
 // SEARCH-----------------------------------------------------------------------
 .user-card {
   padding: 1em 1em;
@@ -239,5 +241,11 @@
     width: 100%;
     height: 100%;
     display: block;
+  }
+}
+
+@media(min-width: 992px) {
+  .user-card-show-page {
+    padding: 1em 0em;
   }
 }

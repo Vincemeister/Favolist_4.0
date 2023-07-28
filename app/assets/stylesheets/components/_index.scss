@@ -5,13 +5,11 @@
 @import "navbar";
 @import "product_card";
 @import "tabs";
-@import "profile_box";
 @import "list_card";
 @import "search";
 @import "referral_card";
 @import "card_headers";
 @import "cardbars";
-@import "cardbars_search";
 @import "buttons";
 @import "modals";
 @import "user_card";
@@ -26,6 +24,5 @@
 @import "hairline";
 @import "notification";
 @import 'desktop_grid';
-@import 'card_grid_search';
-@import 'media_queries';
+@import 'card_grids';
 @import 'list_card_mobile';

@@ -1,3 +1,4 @@
+
 .sidebar {
   position: sticky;
   top: 0;
@@ -30,4 +31,19 @@
 
 .sidebar-header {
   color: $neutral-500;
+}
+
+
+@media(max-width: 991px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+@media(min-width: 992px) {
+  .suggested-lists-container {
+    .list-card {
+      padding: 0%;
+    }
+  }
 }

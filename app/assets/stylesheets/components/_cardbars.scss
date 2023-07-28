@@ -1,34 +1,23 @@
 .cardbar-wrapper {
   padding: 1em 0em;
 }
+
 .cardbar {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
   width: 100%;
   padding: 1em 0em;
 
-  .cardbar-left {
+  .list-name-and-product-title-and-price {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    height: 100%;
-    gap: 0.5em;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    width: 100%;
+    margin-right: 0.5em;
   }
-
-
-  .username {
-    font-weight: $semi-bold;
-  }
-
-  .cardbar-logo {
-    width: 2em;
-    height: 2em;
-    object-fit: cover;
-  }
-
 
   .cardbar-right {
     display: flex;
@@ -40,20 +29,14 @@
   .cardbar-iconbox {
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: space-between;
     align-items: center;
     margin-left: 0.5em;
-    gap: 0.25em;
+    height: 2em;
   }
-
-  // .cardbar-iconbox-right-for-sidebar-spacing {
-  //   margin-right: 0.5em;
-  // }
-
 
   .iconbox-text {
+    // display: block;
     line-height: 1;
-
   }
-
 }

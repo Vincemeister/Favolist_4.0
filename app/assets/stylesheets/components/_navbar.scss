@@ -1,3 +1,6 @@
+
+
+
 .navbar {
   display: flex;
   justify-content: center;
@@ -38,7 +41,7 @@
 
 
 
-  }
+}
 
 .navbar-logo-desktop {
   display: flex;
@@ -75,4 +78,17 @@
   }
 
 
+}
+
+@media(max-width: 991px) {
+  .navbar-desktop {
+    display: none;
+  }
+}
+
+
+@media(min-width: 992px) {
+  .navbar {
+    display: none;
+  }
 }
