@@ -272,9 +272,10 @@ class ProductsController < ApplicationController
     return unless session[:product_data]
 
     product_data = session[:product_data]
+    puts "Session product data::: #{product_data}"
 
-    if product_data['logo']
-      logo_url = product_data['logo']
+    if product_data[:logo]
+      logo_url = product_data[:logo]
       downloaded_logo = URI.open(logo_url)
       filename = File.basename(logo_url)
 
@@ -294,7 +295,7 @@ class ProductsController < ApplicationController
       @logo = ActiveStorage::Blob.find_by(filename: 'amazon_logo.png')
     end
 
-    @photos = product_data['images'].map do |image_url|
+    @photos = product_data[:images].map do |image_url|
       downloaded_image = URI.open(image_url)
       blob = ActiveStorage::Blob.create_and_upload!(
         io: downloaded_image,
@@ -305,10 +306,10 @@ class ProductsController < ApplicationController
     end
 
     Product.new(
-      title: product_data['title'],
-      price: product_data['price'],
-      description: product_data['description'],
-      url: product_data['url']
+      title: product_data[:title],
+      price: product_data[:price],
+      description: product_data[:description],
+      url: product_data[:url]
     ).tap do |product|
       product.photos.attach(@photos)
       session.delete(:product_data)

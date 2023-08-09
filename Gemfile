@@ -67,6 +67,26 @@ end
 gem 'pg_search'
 gem "httparty"
 gem 'nokogiri'
+# change from cookie storage to redis to allow for product creation from shopify and generic stores. Also created file config/initializers/session_store.rb
+=begin
+Devise works with Rails' session management mechanism, and switching the session store doesn't specifically interfere with Devise's operation. However, there are a few considerations to be aware of when integrating Devise with a Redis-backed session store:
+1. **Session Serialization**: If you've customized the serialization method of your session data, ensure that it remains compatible when switching stores.
+2. **Session Timeout**: If you're relying on Devise's `timeoutable` module to automatically sign out users after a period of inactivity, this behavior should remain the same. Just ensure that the `expire_after` option in your session store configuration is not shorter than Devise's `timeout_in` configuration to prevent unexpected session expirations.
+3. **Migration**: If you're migrating from a cookie store to Redis while your app is in production, be aware that user sessions will be reset during the migration, as the session data in cookies won't be automatically transferred to Redis. Users will need to sign in again.
+4. **Secure Your Redis**: Ensure your Redis instance is secure, especially if it's exposed to the internet. Consider using a password and binding it to localhost if it's only accessed locally. If using Redis in production, consider using a solution that supports encryption in transit, like Redis over SSL/TLS.
+5. **Session Cleanup**: Redis doesn't automatically remove expired sessions. You may want to configure Redis to use an eviction policy like `allkeys-lru` to evict least recently used keys when it reaches its maximum memory threshold. Alternatively, you can periodically run a task to clean up old sessions.
+6. **Backup and Monitoring**: Since Redis is an in-memory datastore, make sure you're regularly backing up its data if you're storing anything important in sessions. Also, monitor its usage to ensure it doesn't run out of memory, especially if you have a lot of active sessions.
+All that said, switching the session store to Redis while using Devise should be relatively straightforward, and Devise itself shouldn't be affected. But, as always, it's important to test thoroughly in a development or staging environment before making any changes in production.
+
+how I set up redis after really finding difficulties with it
+https://medium.com/@mohammedalaa/how-to-configure-redis-as-a-session-store-in-rails-7-8627c28fb4db
+
+=end
+
+gem "redis", "~> 5.0" # Redis client for Ruby
+gem "redis-actionpack", "~> 5.3" # Redis session store for ActionPack
+
+
 
 
 

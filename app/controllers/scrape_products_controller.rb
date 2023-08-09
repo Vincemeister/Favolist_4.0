@@ -10,7 +10,7 @@ class ScrapeProductsController < ApplicationController
     if params[:link].include?("amazon")
       fetch_amazon_product
     else
-      fetch_shopify_product
+      fetch_generic_product
     end
   end
 
@@ -41,6 +41,19 @@ class ScrapeProductsController < ApplicationController
       redirect_to search_or_manual_product_upload_path
     end
   end
+
+  def fetch_generic_product
+    product_data = fetch_product_from_generic_store(params[:link])
+
+    if product_data.present?
+      session[:product_data] = product_data
+      redirect_to new_product_path
+    else
+      flash[:error] = 'Failed to fetch product data from store.'
+      redirect_to search_or_manual_product_upload_path
+    end
+  end
+
 
   private
 
@@ -78,6 +91,7 @@ class ScrapeProductsController < ApplicationController
 
     # Here, you can create a new instance of Product, or return these values as a hash
     product_data = { title: title, price: price, description: description, images: images, url: link }
+    puts product_data
 
     product_data # return the product data
   end
@@ -111,7 +125,7 @@ class ScrapeProductsController < ApplicationController
     images = response_body["product"]["images"].map do |image_hash|
       image_hash["src"]
     end
-
+  # if using cookie storage, need to limit to  images.first(4) otherwise cookie overflow over 4kb. However, using redis storage
   images = images.first(4)
 
     # ----------------------------------------------------------------------------
@@ -136,10 +150,112 @@ class ScrapeProductsController < ApplicationController
     puts "LOGO RESPONSE: #{logo}"
 
     product_data = { title: title, price: price, description: description, url: link, images: images, logo: logo }
-
+    puts product_data
     product_data # return the product data
   end
+
+
+
+
+
+  def fetch_product_from_generic_store(input_url)
+    # Encode the URL first
+    puts "RUNNING FETCH PRODUCT FROM GENERIC STORE"
+    encoded_url = URI.encode_www_form_component(input_url)
+
+    # Construct the OpenGraph API URL
+    url = URI("https://opengraph.io/api/1.1/site/#{encoded_url}?&cache_ok=false&full_render=true&app_id=44aa9636-f222-4b56-96c7-b14c3b8d7577")
+
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+
+    request = Net::HTTP::Get.new(url)
+
+    response = http.request(request)
+
+    # Handle non-successful HTTP responses
+    unless response.is_a?(Net::HTTPSuccess)
+      puts "HTTP Error: #{response.message}"
+      return nil
+    end
+
+    begin
+      data = JSON.parse(response.body)
+      puts data
+      title = data["htmlInferred"]["title"]
+      price = if data["hybridGraph"] && data["hybridGraph"]["products"] && data["hybridGraph"]["products"][0] && data["hybridGraph"]["products"][0]["offers"] && data["hybridGraph"]["products"][0]["offers"][0]
+        data["hybridGraph"]["products"][0]["offers"][0]["price"]
+      elsif data["hybridGraph"] && data["hybridGraph"]["price"]
+        data["hybridGraph"]["price"]
+      else
+        0
+      end
+
+      description = data["htmlInferred"]["description"]
+      logo = data["htmlInferred"]["favicon"]
+      # if using cookie storage, need to limit to  images.first(4) otherwise cookie overflow over 4kb. However, using redis storage
+      images = data["htmlInferred"]["images"].reject { |img| img.end_with?('.svg') }
+
+
+      product_data = { title: title, price: price, description: description, url: input_url, images: images, logo: logo }
+      puts "GENERIC STORE PRODUCT DATA: #{product_data}"
+
+      product_data # return the product data
+
+    rescue JSON::ParserError => e
+      puts "JSON Error: #{e.message}"
+      nil
+    end
+  end
+
+
+
+
+
+
+
+
+
+
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# OLD CODE
+
 # CREATE PRODUCT INSTEAD OF PASSING IT THROUGH THE SESSION TBD
 
 # require 'uri'
