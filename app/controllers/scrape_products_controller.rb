@@ -80,7 +80,28 @@ class ScrapeProductsController < ApplicationController
     # Extracting the title, price, and description
     title = response_body["title"].split(/, |- |\| /)[0]
     price = response_body["price"]["amount"]
-    description = response_body["description"]&.join(' ') # join array elements into a single string
+
+
+
+    # Start with the product's description if it's a non-empty string.
+    features = response_body["features"]
+    description = if response_body["description"].is_a?(String) && !response_body["description"].strip.empty?
+                    response_body["description"].strip
+                  else
+                    ''
+                  end
+
+    # Append features if they exist.
+    if features && features.any?
+      description += "\n\u2022 " + features.join("\n\u2022 ")
+    end
+
+    # Set a default message if the description is still blank.
+    description = "Description not found" if description.strip.empty?
+
+
+
+
     link = response_body["link"]
     # Extract all high resolution images
     images = response_body["images"].map do |image_hash|
