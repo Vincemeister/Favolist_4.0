@@ -17,16 +17,16 @@
 
 
         <div class="product-count-and-list-name">
-          <div class="<%= local_assigns[:iterating_for] == "sidebar" ? "paragraph-small-regular" : "paragraph-large-regular" %>">
-            <span class="semi-bold"><%= list.products.count %></span>
-            <%= "products".pluralize(list.products.count) %>
-          </div>
-          <hr>
           <% if local_assigns[:iterating_for] == "sidebar" %>
             <div class="paragraph-large-medium line-height-1-25"><%= list.name %><div>
           <% else %>
-            <h3 class="list-name medium line-height-1-25"><%= list.name %></h3>
+            <h4 class="list-name bold line-height-1-25"><%= list.name %></h4>
           <% end %>
+          <%# <hr> %>
+          <div class="<%= local_assigns[:iterating_for] == "sidebar" ? "paragraph-small-regular" : "paragraph-large-regular" %> thin">
+            <span class="semi-bold"><%= list.products.count %></span>
+            <%= "products".pluralize(list.products.count) %>
+          </div>
         </div>
       </div>
     </div>
@@ -53,12 +53,11 @@
         <%= tiles.html_safe %>
         <div class="list-card-content-mobile <%= local_assigns[:iterating_for] == "sidebar" ? "list-card-content-sidebar" : "" %> ">
           <div class="product-count-and-list-name">
+            <h4 class="list-name medium line-height-1-25"><%= list.name %></h4>
             <div class="paragraph-small-regular">
               <span class="semi-bold"><%= list.products.count %></span>
               <%= "products".pluralize(list.products.count) %>
             </div>
-            <hr>
-              <h6 class="list-name medium line-height-1-25"><%= list.name %></h6>
           </div>
         </div>
       </div>

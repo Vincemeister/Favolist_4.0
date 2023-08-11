@@ -249,3 +249,19 @@
     padding: 1em 0em;
   }
 }
+
+
+@media(max-width: 992px) {
+  .user-card-show-page {
+    .username-and-follow-counts {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: $body-color;
+      font-size: $font-size-paragraph-small
+
+    }
+
+  }
+}
