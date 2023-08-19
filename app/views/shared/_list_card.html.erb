@@ -20,7 +20,7 @@
           <% if local_assigns[:iterating_for] == "sidebar" %>
             <div class="paragraph-large-medium line-height-1-25"><%= list.name %><div>
           <% else %>
-            <h4 class="list-name bold line-height-1-25"><%= list.name %></h4>
+            <h3 class="list-name bold line-height-1-25"><%= list.name %></h3>
           <% end %>
           <%# <hr> %>
           <div class="<%= local_assigns[:iterating_for] == "sidebar" ? "paragraph-small-regular" : "paragraph-large-regular" %> thin">

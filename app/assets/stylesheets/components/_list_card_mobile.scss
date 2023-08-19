@@ -86,7 +86,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.33);
+    background: rgba(0, 0, 0, 0.44);
   }
 
   /* text within the grid */
@@ -151,7 +151,7 @@
 }
 
 @media(min-width: 992px) {
-  .list-card-mobile {
+  .list-card-mobile-container {
     display: none;
   }
 }

@@ -9,8 +9,7 @@ class User < ApplicationRecord
     end
   }
 
-
-
+  before_create :set_default_privacy
 
   include PgSearch::Model
   # Include default devise modules. Others available are:
@@ -75,6 +74,12 @@ class User < ApplicationRecord
 
   def mutual_follows_with(user)
     self.followed & user.followers
+  end
+
+  private
+
+  def set_default_privacy
+    self.privacy ||= 'public'
   end
 
 end
