@@ -203,20 +203,17 @@ class ScrapeProductsController < ApplicationController
     begin
       data = JSON.parse(response.body)
       puts data
-      title = data["htmlInferred"]["title"]
-      price = if data["hybridGraph"] && data["hybridGraph"]["products"] && data["hybridGraph"]["products"][0] && data["hybridGraph"]["products"][0]["offers"] && data["hybridGraph"]["products"][0]["offers"][0]
-        data["hybridGraph"]["products"][0]["offers"][0]["price"]
-      elsif data["hybridGraph"] && data["hybridGraph"]["price"]
-        data["hybridGraph"]["price"]
-      else
-        0
-      end
 
-      description = data["htmlInferred"]["description"]
-      logo = data["htmlInferred"]["favicon"]
-      # if using cookie storage, need to limit to  images.first(4) otherwise cookie overflow over 4kb. However, using redis storage
-      images = data["htmlInferred"]["images"].reject { |img| img.end_with?('.svg') }
+      # Validate and extract data
+      title = data.dig("htmlInferred", "title") || "Unknown Title"
+      price = data.dig("hybridGraph", "products", 0, "offers", 0, "price") ||
+              data.dig("hybridGraph", "price") || 0
+      description = data.dig("htmlInferred", "description") || ""
+      images = (data.dig("htmlInferred", "images") || []).reject { |img| img.end_with?('.svg') }
 
+      logo = data.dig("htmlInferred", "favicon")
+      # If the logo URL is an SVG, set it to nil
+      logo = nil if logo&.end_with?('.svg')
 
       product_data = { title: title, price: price, description: description, url: input_url, images: images, logo: logo }
       puts "GENERIC STORE PRODUCT DATA: #{product_data}"
@@ -226,18 +223,12 @@ class ScrapeProductsController < ApplicationController
     rescue JSON::ParserError => e
       puts "JSON Error: #{e.message}"
       nil
+    rescue => e # General error handling
+      puts "An error occurred: #{e.message}"
+      # You can clear session data here if you're using it.
+      nil
     end
   end
-
-
-
-
-
-
-
-
-
-
 end
 
 

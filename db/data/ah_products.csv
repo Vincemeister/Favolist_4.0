@@ -1,4 +1,4 @@
-List,Price,Title,Price,Description,Logo,Photos,Details,Code,Review
+List,URL,Title,Price,Description,Logo,Photos,Details,Code,Review
 Foundational Supplements,https://www.livemomentous.com/products/essential-whey-protein?selling_plan=832700599,Momentous Grass-Fed Whey Protein Powder,64.95,"Momentous Essential Grass-Fed Whey is the highest quality whey protein available, period. Our grass-fed whey isolate is cold-processed to preserve native protein structures allowing for greater bioavailability. We also include ProHydrolase - a clinically researched enzyme blend that supports the digestion and absorptio",https://www.livemomentous.com/cdn/shop/files/momentous-favicon.png?crop=center&height=32&v=1667319949&width=32,"https://www.livemomentous.com/cdn/shop/products/ESSWB_1282x1282-01-UNFLV.jpg?v=1677700006&width=1946
 https://www.livemomentous.com/cdn/shop/products/ESSWB_1282x1282-01-CHOCO.jpg?v=1677700006&width=1946
 https://www.livemomentous.com/cdn/shop/products/ESSWB_1282x1282-01-VAN.jpg?v=1677700006&width=1946
@@ -27,7 +27,27 @@ https://www.livemomentous.com/cdn/shop/products/VTD_1282x1282-04.png?v=167771105
 https://www.livemomentous.com/cdn/shop/products/VTD_1282x1282-05.png?v=1677711055&width=1946",Receive 20% off all orders as a loyal Huberman Lab listener,https://www.livemomentous.com/collections/huberman,"Did you know that over 70% of the population has inadequate vitamin D levels? Vitamin D is a fat-soluble vitamin that your body produces naturally when exposed to sunlight. And it’s not just a vitamin; it’s also a hormone. We don’t call vitamin D ‘hormone D’ because it is essential to life; without it, we could not live. Vita means life in Latin; the more you know…
 
 Vitamin D has many health benefits, such as optimizing bone health, immunity, and hormone conversion. In a podcast episode with Dr. Rhonda Patrick, Huberman revealed he takes 5,000 IUs of vitamin D daily, equivalent to one capsule of Momentous Vitamin D."
-Longevity Supplements,https://renuebyscience.com/product/pure-powder-100-grams/?rfsn=6440098.264698,PURE NMN Powder -100 Grams – RENUE BY SCIENCE – Bioavailable NAD+ Boosters,89.05,https://donotage.org/wp-content/uploads/2022/08/cropped-dna-logo-SMALL-150x150.png,https://renuebyscience.com/june/wp-content/uploads/cropped-AliveByScience_favicon-200x200.png,"https://renuebyscience.com/june/wp-content/uploads/RENUE-PURE-NAD100g.png
+longevity supplements,https://renuebyscience.com/product/pure-powder-100-grams/?rfsn=6440098.264698,PURE NMN Powder -100 Grams – RENUE BY SCIENCE – Bioavailable NAD+ Boosters,89.05,"NAD+ products have very poor bioavailability unless a delivery method is used that can protect the ingredient from digestion. When taken in regular capsules, less than 10% of NMN or NR make it to the bloodstream intact.
+
+To address this problem, in 2016 we pioneered Sublingual delivery of NMN, and since then have advanced the industry further with Intranasal, Transdermal, and Liposomal NMN products.
+
+Convenience/Portability - This is ideal for those who want the ability to take NMN with them throughout the day. Our sublingual tablets, LIPO capsules, and nasal spray are ideal for those who are on the go and who like to take NMN at different intervals throughout the day.
+
+Fast Acting - If fast acting is important to you, then we recommend our sublingual powder, tablets, or nasal spray as they bypass digestion. They can provide rapid absorption and reach systemic circulation for a noticable effect in minutes. So whether it's before a quick workout or you need to quickly focus on mental tasks, these products can give you a quick boost when you need it most.
+
+Long Lasting - LIPO NMN lasts longer in the body than our other NMN products. Liposomes protect the active ingredients from digestion and release slowly in the bloodstream up to 24 hours.
+
+Fastest Cognitive Effect- The sublingual powder has a very fast effect on physical energy, but the intranasal spray has a much stronger impact on improved cognition (the relief of ""brain fog"").
+
+Improved Energy- Sublingual delivery is much faster acting and the energy boost is more quickly noticed, but the most common report from users of all NAD+ boosters is increased energy.
+
+Easiest to Take - Some people have trouble swallowing pills or applying powder under the tongue. For those people, LSG NMN is easier because it comes in an easy to apply liquid gel.
+
+Best Bioavailability - Approximately 30% of NMN taken sublingually gets absorbed directly into the bloodstream, while the rest passes through the GI tract and gets broken down into less effective nicotinamide. However liposomal delivery avoids degradation in the GI tract entirely, meaning far more NMN is delivered to the tissues intact.
+
+Best Cost per Milligram - The NMN product with the best price is our sublingual powder as there is very little added cost for processing. Tablets are next. Manufacturing of Liposomes takes the most time and expensive machinery, so cost the most per Milligram.
+
+Best Overall Value - The best overall value is the product which is best in price combined with best bioavailability. Bioavailability is how much of the product actually makes it to the cells intact. For example, our LIPO capsules cost more per milligram to manufacture, but are 3 to 5 times more bioavailable than sublingual products, so are much more cost effective.",https://renuebyscience.com/june/wp-content/uploads/cropped-AliveByScience_favicon-200x200.png,"https://renuebyscience.com/june/wp-content/uploads/RENUE-PURE-NAD100g.png
 https://renuebyscience.com/june/wp-content/uploads/GMPcertified_SideProduct00gnmn.png
 https://renuebyscience.com/june/wp-content/uploads/RENUE-PURE-NMN-100gr-2a.png
 https://renuebyscience.com/june/wp-content/uploads/RENUE-PURE-NMN-100gr-5a.png
@@ -111,25 +131,13 @@ https://www.livemomentous.com/cdn/shop/files/11-22-informed-sport-certified_1_sm
 
 Andrew uses 400mg daily as a testosterone boost over time, equivalent to two Momentous Tongkat Ali capsules.
 "
-Hormone Support Supplements,https://www.livemomentous.com/products/fadogia?_pos=1&_sid=e8412f419&_ss=r&selling_plan=644579511,Momentous Fadogia Agrestis,24.95,"Momentous Fadogia Agrestis is derived from a Nigerian shrub and can help support hormones that impact strength, libido and recovery from exercise.†",https://www.livemomentous.com/cdn/shop/files/momentous-favicon.png?crop=center&height=32&v=1667319949&width=32,"https://www.livemomentous.com/cdn/shop/t/544/assets/momentous-logo.svg?v=136942605177147681291675842390
-https://www.livemomentous.com/cdn/shop/products/RES_1282x1282-01.jpg?v=1677737100&width=400
-https://www.livemomentous.com/cdn/shop/files/06-22-L-glutamine-thumbnail-front.jpg?v=1691601249&width=400
-https://www.livemomentous.com/cdn/shop/files/FadogiaAgrestis.Front.1500x1500.png?v=1691601311&width=1946
+Hormone Support Supplements,https://www.livemomentous.com/products/fadogia?_pos=1&_sid=e8412f419&_ss=r&selling_plan=644579511,Momentous Fadogia Agrestis,24.95,"Momentous Fadogia Agrestis is derived from a Nigerian shrub and can help support hormones that impact strength, libido and recovery from exercise.†",https://www.livemomentous.com/cdn/shop/files/momentous-favicon.png?crop=center&height=32&v=1667319949&width=32,"https://www.livemomentous.com/cdn/shop/files/FadogiaAgrestis.Front.1500x1500.png?v=1691601311&width=1946
 https://www.livemomentous.com/cdn/shop/products/FAD_1282x1282-02.jpg?v=1691601311&width=1946
 https://www.livemomentous.com/cdn/shop/products/FAD_1282x1282-03.png?v=1691601311&width=1946
 https://www.livemomentous.com/cdn/shop/products/FAD_1282x1282-04.png?v=1691601311&width=1946
 https://www.livemomentous.com/cdn/shop/products/FAD_1282x1282-05.png?v=1691601311&width=1946
 https://www.livemomentous.com/cdn/shop/products/11-22-informed-sport-certified_1_8b107496-1d00-4483-91a5-31c16320840a.jpg?v=1691601311&width=1946
-https://www.livemomentous.com/cdn/shop/files/FadogiaAgrestis.Front.1500x1500.png?v=1691601311&width=1445
-https://www.livemomentous.com/cdn/shop/products/FAD_1282x1282-02.jpg?v=1691601311&width=1445
-https://www.livemomentous.com/cdn/shop/products/FAD_1282x1282-03.png?v=1691601311&width=1445
-https://www.livemomentous.com/cdn/shop/products/FAD_1282x1282-04.png?v=1691601311&width=1445
-https://www.livemomentous.com/cdn/shop/products/FAD_1282x1282-05.png?v=1691601311&width=1445
-https://www.livemomentous.com/cdn/shop/products/11-22-informed-sport-certified_1_8b107496-1d00-4483-91a5-31c16320840a.jpg?v=1691601311&width=1445
-https://www.livemomentous.com/cdn/shop/files/11-22-informed-sport-certified_1_small.jpg?v=1671730509
-https://www.livemomentous.com/cdn/shop/files/couch_kelly-copy1.jpg?v=1650404568
-https://www.livemomentous.com/cdn/shop/files/lauren-fisher-lp-535x600.jpg?v=1654788200&width=1500
-https://www.livemomentous.com/cdn/shop/files/06-22-HP-trusted-pro-team.jpg?v=1656373722&width=1500",Receive 20% off all orders as a loyal Huberman Lab listener,https://www.livemomentous.com/collections/huberman,"Fadogia Agrestis is a plant native to Nigeria. There it is used for a variety of issues. Andrew describes Fadogia Agrestis’s use to increase testosterone as a Luteinizing Hormone mimic. Studies have shown that Fadogia increases blood testosterone concentrations. It is believed that it produces more testosterone by stimulating the testes. Huberman has been on the record saying that by taking Tongkat Ali with Fadogia, his testosterone went from the 600s to the low 800s – which is extremely impressive. Huberman uses Momentous Fadogia Agrestis.
+https://www.livemomentous.com/cdn/shop/files/11-22-informed-sport-certified_1_small.jpg?v=1671730509",Receive 20% off all orders as a loyal Huberman Lab listener,https://www.livemomentous.com/collections/huberman,"Fadogia Agrestis is a plant native to Nigeria. There it is used for a variety of issues. Andrew describes Fadogia Agrestis’s use to increase testosterone as a Luteinizing Hormone mimic. Studies have shown that Fadogia increases blood testosterone concentrations. It is believed that it produces more testosterone by stimulating the testes. Huberman has been on the record saying that by taking Tongkat Ali with Fadogia, his testosterone went from the 600s to the low 800s – which is extremely impressive. Huberman uses Momentous Fadogia Agrestis.
 "
 Hormone Support Supplements,https://www.livemomentous.com/products/zinc-picolinate?_pos=1&_psq=zin&_ss=e&_v=1.0&selling_plan=801276087,Momentous Zinc Picolinate,17.95,"Zinc is an essential mineral that plays a vital role in many bodily functions, including the immune system and wound healing. It's also necessary for almost 300 enzymes to carry out crucial chemical reactions in the body. Zinc picolinate is a more bioavailable form of zinc, allowing your body to absorb it more easi",https://www.livemomentous.com/cdn/shop/files/momentous-favicon.png?crop=center&height=32&v=1667319949&width=32,"https://www.livemomentous.com/cdn/shop/products/ZNC_1282x1282-01.jpg?v=1677711129&width=1946
 https://www.livemomentous.com/cdn/shop/products/ZNC_1282x1282-02.jpg?v=1677711129&width=1946
@@ -214,7 +222,8 @@ It’s worth noting the multivitamin he takes, mentioned below, contains 1,500 I
 Food Supplements,https://www.nowfoods.com/products/supplements/mk-7-vitamin-k-2-100-mcg-veg-capsules,NOW MK-7 Vitamin K-2,31,NOW MK-7 Vitamin K-2 plays a critical role in arterial health through its ability to support proper calcium metabolism in blood vessels and arteries. Shop here.,https://www.nowfoods.com/themes/_custom/sd/favicons/android-chrome-192x192.png,"https://www.nowfoods.com/sites/default/files/styles/cloudzoom_image/public/2023-08/0992_mainimage.png?itok=eVkVsgHM
 https://www.nowfoods.com/sites/default/files/styles/cloudzoom_image/public/2023-08/0992_nowproductlabels.png?itok=gKCFg9t5
 https://www.nowfoods.com/sites/default/files/styles/cloudzoom_image/public/2023-08/0992_nowproductlabels2.png?itok=v6gqBaQe
-",,,"Huberman mentions taking vitamin K2 on the MPMD podcast (link), saying that he noticed his cardiac markers improved after.
+","https://ninelife.id/_next/image?url=https%3A%2F%2Fd11qgm9a5k858y.cloudfront.net%2F1o29t9ni2rga2x3m4ditaz567b2t&w=384&q=75
+https://ninelife.id/_next/image?url=https%3A%2F%2Fd11qgm9a5k858y.cloudfront.net%2Fb8pcj2jzxjhqjkk3vcl1pi3j6qh0&w=384&q=75",,"Huberman mentions taking vitamin K2 on the MPMD podcast (link), saying that he noticed his cardiac markers improved after.
 
 Vitamin K plays key roles in blood clotting, bone health and calcium transport.
 
@@ -379,23 +388,11 @@ FREE LMNT SAMPLE PACK WITH ANY PURCHASE
 LMNT is a tasty electrolyte drink mix that replaces vital electrolytes without sugars and dodgy ingredients found in conventional sports drinks. For a limited time, try all the flavors with a free 8-count LMNT sample pack on any purchase.",https://partners.drinklmnt.com/huberman,"""When we get our electrolytes in the proper ratios, the cells of our brain and body can function optimally. LMNT provides that balance.""
 
 Dr. Andrew Huberman"
-Sponsors of the Huberman Lab Podcast,https://www.eightsleep.com/huberman/,Eight Sleep Pod Pro Cooling Cover,2145,"Sleep at your perfect temperature each night with the Pod, Andrew Huberman’s go-to sleep solution.",https://www.eightsleep.com/favicon-32x32.png,"https://cdn.shopify.com/s/files/1/1354/6123/files/icons_x.svg?v=1650776727
-https://cdn.shopify.com/s/files/1/1354/6123/files/Logo_White.svg?10878386720812330155
-https://cdn.shopify.com/s/files/1/1354/6123/files/shop_cart_desktop.svg?v=1622155699
-https://cdn.shopify.com/s/files/1/1354/6123/files/hamburger_mobile.svg?v=1622155699
-https://cdn.shopify.com/s/files/1/1354/6123/files/expand_arrow_0a90cfd3-0caf-4227-80e9-c3c7a7a22696.svg?v=1650559768
-https://eight-sleep.imgix.net/cover_shop_blur.png?auto=format
-https://eight-sleep.imgix.net/Mattress_Upsell_2.jpg?auto=format
-https://eight-sleep.imgix.net/Mattress_Upsell_1.jpg?auto=format
-https://eight-sleep.imgix.net/mattress_4.jpg?auto=format
-https://cdn.shopify.com/s/files/1/1354/6123/files/shoppay_purple.svg?v=1666368298
-https://cdn.shopify.com/s/files/1/1354/6123/files/icons_moon.svg?v=1650776727
-https://cdn.shopify.com/s/files/1/1354/6123/files/icons_8_box.svg?v=1650776726
-https://cdn.shopify.com/s/files/1/1354/6123/files/icons_delivery.svg?v=1650776727
-https://eight-sleep.imgix.net/ecap_b_big.jpg?auto=format
-https://eight-sleep.imgix.net/ecap_b_small_4920315b-0aca-4337-991f-3d551d1cc676.jpg?auto=format
-https://cdn.shopify.com/s/files/1/1354/6123/files/logo_0c17cdd4-7930-4520-b7a2-41331b22b2e2.svg?v=1619637907
-https://cdn.shopify.com/s/files/1/1354/6123/files/close_d716c4c1-e156-409d-93c2-92907327e991.svg?v=1679385254",$150 off. Andrew Huberman Exclusive,https://www.eightsleep.com/huberman/,"Andrew Huberman, a renowned neuroscientist, and host of the Huberman Lab Podcast, has been vocal about the importance of sleep for overall well-being. Recently, he highlighted his preferred sleep solution: the Eight Sleep Pod 3 mattress. This innovative sleep system ensures a comfortable night’s sleep and is packed with smart technology that enhances the overall sleep experience.
+Sponsors of the Huberman Lab Podcast,https://www.eightsleep.com/huberman/,Eight Sleep Pod Pro Cooling Cover,2145,"Sleep at your perfect temperature each night with the Pod, Andrew Huberman’s go-to sleep solution.",https://www.eightsleep.com/favicon-32x32.png,"""https://eight-sleep.imgix.net/pc3_1.jpg?auto=format&h=1000&dpr=1
+https://eight-sleep.imgix.net/Mattress_carousel_c9930900-f74e-4c14-9316-967029462c18.jpg?auto=format&h=1000&dpr=1
+https://eight-sleep.imgix.net/pc3_3.jpg?auto=format&h=1000&dpr=1
+https://eight-sleep.imgix.net/cover_pod_3_00866448-db09-4b8b-9d6b-22b0d726fe29.jpg?auto=format&h=1000&dpr=1
+https://eight-sleep.imgix.net/carousel_phone.png?auto=format&h=1000&dpr=1""",$150 off. Andrew Huberman Exclusive,https://www.eightsleep.com/huberman/,"Andrew Huberman, a renowned neuroscientist, and host of the Huberman Lab Podcast, has been vocal about the importance of sleep for overall well-being. Recently, he highlighted his preferred sleep solution: the Eight Sleep Pod 3 mattress. This innovative sleep system ensures a comfortable night’s sleep and is packed with smart technology that enhances the overall sleep experience.
 
 The Eight Sleep Pod 3 mattress features an intelligent sleep system equipped with climate control, enabling users to customize their sleep temperature. Additionally, its smart technology can track and monitor sleep patterns, allowing people to optimize their rest and recovery. Andrew Huberman believes that the Eight Sleep Pod 3 mattress is an essential tool for those who prioritize their sleep health and want to achieve improved performance in their daily lives."
 Sponsors of the Huberman Lab Podcast,https://insidetracker.com/huberman,Andrew Huberman x InsideTracker,699,"InsideTracker is your personal health analysis and data-driven wellness guide, designed to help you live healthier longer.",https://store.insidetracker.com/cdn/shop/files/InsideTracker_Favicon_32x32_ea919184-37d2-46a8-a835-7391fd39779b_32x32.png?v=1644890266,"https://store.insidetracker.com/cdn/shop/files/PDP_Ultimate_2_f8e79328-88ae-4879-9357-b4bad74f0a56.jpg?v=1688059102
@@ -410,11 +407,11 @@ InsideTracker is your personal health analysis and data-driven wellness guide, d
 Exclusive offer for Huberman Lab podcast listeners.
  
 InsideTracker is your personal health analysis and data-driven wellness guide, designed to help you live healthier longer."
-Sponsors of the Huberman Lab Podcast,https://www.roka.com/collections/huberman-lab-podcast,ROKA Glasses,180,Leverage the science. Learn from the best. Enter your email below to unlock your exclusive 20% discount.,https://cdn.shopify.com/s/files/1/0109/5012/files/favicon_237173a1-53bc-4bbf-bd8b-5b30522d318e.ico,"https://images.prismic.io/roka/733a72d7-f2cf-4beb-97d5-f97e52b7edf0_joe-extended-flipped%402x.jpg?auto=compress,format&w=1074
+Sponsors of the Huberman Lab Podcast,https://www.roka.com/collections/huberman-lab-podcast,ROKA Glasses,180,Leverage the science. Learn from the best. Enter your email below to unlock your exclusive 20% discount.,https://cdn.shopify.com/s/files/1/0109/5012/files/favicon_237173a1-53bc-4bbf-bd8b-5b30522d318e.ico,"https://img.roka.com/collections/220620-huberman-collection/images/HUBERMAN.svg
 https://www.roka.com/cdn/shop/products/AT-1_SUN_MATTEBLACK_GLACIERMIRROR_FRONT_1600x.jpg?v=1684858690
 https://www.roka.com/cdn/shop/products/AT-1_SUN_MATTEBLACK_GLACIERMIRROR_TQ_1600x.jpg?v=1684858690
 https://www.roka.com/cdn/shop/products/841791113445_841791187071_87ed8fd1-f997-4b20-a3d1-c3c894f8453c_1600x.jpg?v=1684858690
-https://www.roka.com/cdn/shop/products/Roka_Round2-48_2760ac5a-c825-4eba-8c11-0557a48c303a_1600x.jpg?v=1667421539","ROKA x Lex Fridman Podcast
+https://www.roka.com/cdn/shop/products/Roka_Round2-48_2760ac5a-c825-4eba-8c11-0557a48c303a_1600x.jpg?v=1667421539","ROKA x Huberman Labs Podcast
 Leverage the science. Learn from the best.
 Enter your email to unlock your exclusive 20% discount.",https://www.roka.com/collections/huberman-lab-podcast,"ROKA x Lex Fridman Podcast
 Leverage the science. Learn from the best.
@@ -476,8 +473,12 @@ https://d9hhrg4mnvzow.cloudfront.net/join.levelshealth.com/huberman/4d07ca35-and
 Your offer will be automatically applied at checkout and confirmed via an email from the Levels team after your purchase. This offer applies to new members only.",https://join.levelshealth.com/huberman/,"I have learned so much from tracking my blood glucose in real-time with Levels. What I've learned has led to permanent shifts in what I eat and when I eat, and in doing so, vast improvements in some critical health metrics, including my LDL.
 
 - Dr. Andrew Huberman"
-Sponsors of the Huberman Lab Podcast,https://helixsleep.com/pages/audio-partner/?promo=huberman,Helix Sleep Mattress,1899,Get 20% OFF any purchase,https://helixsleep.com/images/helix-sleep/favicon-32x32.png,"https://www.ipqscdn.com/api/*/7ObC23CF9JZUCiZ6KAVyGL74GAoPxUvXdvq4i3sRUDm76n7ewvcodGhlPgcelKxRKQXTGNhj1pa1Jtz8PoVmCeoPd3P8Pm0ZoA5i4BUvCvAyexCK8wGe9eyPGQUxvw45wFnMa3HK0PebmvpUuKALCs1LTo1DiRJqh2otuYRxtsvrWNgpZqEmqdAuMPW6v8N9XvUOXwEKnw0nXYxYD9Cl5atMWBYP7iZAt0R6wp39DYpPKyffQ9rMGMQ4GCFwpjWR/pixel.png
-https://pix.pub/t.png?&t=1692091881940&l=tvscientific-pix-o-e585d0a3-6d67-4c79-b1d6-bd74ce67bc93&u3=https%3A%2F%2Fhelixsleep.com%2Fpages%2Faudio-partner%2F%3Fpromo%3Dhuberman","Get 20% OFF any purchase
+Sponsors of the Huberman Lab Podcast,https://helixsleep.com/pages/audio-partner/?promo=huberman,Helix Sleep Mattress,1899,Get 20% OFF any purchase,https://helixsleep.com/images/helix-sleep/favicon-32x32.png,"https://res.cloudinary.com/helixsleep/image/upload/f_auto/c_scale,w_1200/Carousel_-_Mattress_-_Luxe_-_Regular_-_Midnight_-_01_xvcxcy?_a=BAAAROBs
+https://res.cloudinary.com/helixsleep/image/upload/f_auto/c_scale,w_1200/Carousel_-_Mattress_-_Luxe_-_Regular_-_Midnight_-_02_vjcuef?_a=BAAAROBs
+https://res.cloudinary.com/helixsleep/image/upload/f_auto/c_scale,w_1200/Carousel_-_Mattress_-_Luxe_-_Regular_-_Midnight_-_03_oznhya?_a=BAAAROBs
+https://res.cloudinary.com/helixsleep/image/upload/f_auto/c_scale,w_1200/Carousel_-_Mattress_-_Luxe_-_Midnight_-_06_1_yisjzg?_a=BAAAROBs
+https://res.cloudinary.com/helixsleep/image/upload/f_auto/c_scale,w_1200/Carousel_-_Mattress_-_Luxe_-_Regular_-_Midnight_-_05_f2xpyv?_a=BAAAROBs
+https://res.cloudinary.com/helixsleep/image/upload/f_auto/c_scale,w_1200/Carousel_-_Mattress_-_Luxe_-_Regular_-_Midnight_-_04_skonjy?_a=BAAAROBs","Get 20% OFF any purchase
 
 Use code HELIXPARTNER20
 

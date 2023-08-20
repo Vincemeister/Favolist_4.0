@@ -179,28 +179,28 @@ export default class extends Controller {
       console.log('removedfile event triggered with file:', file)
 
       if (this.element.classList.contains("dropzone-logo")) {
-        // if the removed file is a logo, just clear the input field
-        document.getElementById('logoBlob').value = "";
+          // if the removed file is a logo, just clear the input field
+          document.getElementById('logoBlob').value = "";
       } else {
-        let photosBlobs = document.getElementById('photosBlobs').value;
-        photosBlobs = photosBlobs ? photosBlobs.split(',') : [];
-        photosBlobs = photosBlobs.filter(blob => blob !== file.name); // remove the file from the list
-        document.getElementById('photosBlobs').value = photosBlobs.join(',');
+          let photosBlobs = document.getElementById('photosBlobs').value;
+          photosBlobs = photosBlobs ? photosBlobs.split(',') : [];
+
+          // Assuming the values in photosBlobs are blobSignedId's
+          photosBlobs = photosBlobs.filter(blob => blob !== file.blobSignedId);
+
+          document.getElementById('photosBlobs').value = photosBlobs.join(',');
       }
 
       if (file.blobSignedId) {
-        // This is an Active Storage object. Remove it in the usual way.
-        let hiddenInput = this.element.querySelector(`input[type="hidden"][value="${file.blobSignedId}"]`)
-        hiddenInput && hiddenInput.remove()
-      } else if (file.url) {
-        // This is an Amazon logo. Do whatever you need to do here.
-        // If you're adding the Amazon logo URL to a hidden input field, you would remove that field here.
-        // REDUNDANT SINCE I CREATED AND AMAZON LOGO BLOB IN THE SEED?
+          // This is an Active Storage object. Remove it in the usual way.
+          let hiddenInput = this.element.querySelector(`input[type="hidden"][value="${file.blobSignedId}"]`)
+          hiddenInput && hiddenInput.remove()
       }
+      // Removed the redundant block for file.url as per your comment.
 
       file.controller && removeElement(file.controller.hiddenInput)
       console.log('Hidden inputs after removal:', this.element.querySelectorAll('input[type="hidden"]'))
-    })
+  });
 
 
 

@@ -210,8 +210,6 @@ class ProductsController < ApplicationController
       'https://res.cloudinary.com/dncij7vr6/image/upload/v1688882676/Favolist%204.0/app%20assets/new_session_background/uabpw8od9wk0k43ptq3z.jpg',
       'https://res.cloudinary.com/dncij7vr6/image/upload/v1688882676/Favolist%204.0/app%20assets/new_session_background/wyk8op6nyp09vspeehjh.jpg',
       'https://res.cloudinary.com/dncij7vr6/image/upload/v1688882676/Favolist%204.0/app%20assets/new_session_background/cgosnegwxhdafcuunww2.jpg',
-
-
   ]
 
 
@@ -274,36 +272,49 @@ class ProductsController < ApplicationController
     product_data = session[:product_data]
     puts "Session product data::: #{product_data}"
 
+    # Handle logo processing
     if product_data[:logo]
       logo_url = product_data[:logo]
-      downloaded_logo = URI.open(logo_url)
-      filename = File.basename(logo_url)
+      begin
+        downloaded_logo = URI.open(logo_url)
 
-      if filename.ends_with?('.svg')
-        uploaded_image = Cloudinary::Uploader.upload(logo_url)
-        png_url = Cloudinary::Utils.cloudinary_url(uploaded_image["public_id"], format: "png")
-        downloaded_logo = URI.open(png_url)
-        filename = filename.gsub('.svg', '.png')
+        filename = File.basename(logo_url)
+        if filename.ends_with?('.svg')
+          uploaded_image = Cloudinary::Uploader.upload(logo_url)
+          png_url = Cloudinary::Utils.cloudinary_url(uploaded_image["public_id"], format: "png")
+          downloaded_logo = URI.open(png_url)
+          filename = filename.gsub('.svg', '.png')
+        end
+
+        @logo = ActiveStorage::Blob.create_and_upload!(
+          io: downloaded_logo,
+          filename: filename,
+          content_type: downloaded_logo.content_type
+        )
+      rescue OpenURI::HTTPError => e
+        Rails.logger.error "Failed to download the logo from #{logo_url}: #{e.message}"
+        # Keep a default logo as a fallback or just skip setting the logo
+        @logo = ActiveStorage::Blob.find_by(filename: 'amazon_logo.png')
       end
-
-      @logo = ActiveStorage::Blob.create_and_upload!(
-        io: downloaded_logo,
-        filename: filename,
-        content_type: downloaded_logo.content_type
-      )
     else
       @logo = ActiveStorage::Blob.find_by(filename: 'amazon_logo.png')
     end
 
+    # Handle images processing
     @photos = product_data[:images].map do |image_url|
-      downloaded_image = URI.open(image_url)
-      blob = ActiveStorage::Blob.create_and_upload!(
-        io: downloaded_image,
-        filename: File.basename(image_url),
-        content_type: downloaded_image.content_type
-      )
-      blob
-    end
+      begin
+        downloaded_image = URI.open(image_url)
+        blob = ActiveStorage::Blob.create_and_upload!(
+          io: downloaded_image,
+          filename: File.basename(image_url),
+          content_type: downloaded_image.content_type
+        )
+        blob
+      rescue OpenURI::HTTPError => e
+        Rails.logger.error "Failed to download image from #{image_url}: #{e.message}"
+        nil # return nil so that we can filter it out later
+      end
+    end.compact # Remove nil values
 
     Product.new(
       title: product_data[:title],
@@ -316,10 +327,12 @@ class ProductsController < ApplicationController
     end
   end
 
+
   def initialize_product_from_params
     return unless params[:product]
 
     Product.new(product_params)
+    session.delete(:product_data)
   end
 end
 
