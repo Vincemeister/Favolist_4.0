@@ -6,26 +6,26 @@ puts "destroying all users"
 User.destroy_all
 
 # people_csv = "./db/data/people.csv"
-sugg_profiles_csv = "./db/data/sugg_profiles.csv"
 # i = 0
 # CSV.foreach(profiles_csv, headers: :first_row, header_converters: :symbol, encoding: 'utf-8') do |row|
 #   puts "----------------- ROW #{i} -----------------"
 #   user = User.create!(
-#     username: row[:profile],
-#     bio: row[:bio],
-#     about: row[:about],
-#     email: "#{row[:profile].gsub(/\s+/, '')}@gmail.com",
-#     password: "password"
-#   )
-#   puts "created: #{user.username}"
-#   i += 1
-#   avatar = URI.open("#{row[:avatar]}")
-#   puts avatar
-#   user.avatar.attach(io: avatar, filename: 'avatar.jpg', content_type: 'image/jpg')
-#   user.save!
-# end
+  #     username: row[:profile],
+  #     bio: row[:bio],
+  #     about: row[:about],
+  #     email: "#{row[:profile].gsub(/\s+/, '')}@gmail.com",
+  #     password: "password"
+  #   )
+  #   puts "created: #{user.username}"
+  #   i += 1
+  #   avatar = URI.open("#{row[:avatar]}")
+  #   puts avatar
+  #   user.avatar.attach(io: avatar, filename: 'avatar.jpg', content_type: 'image/jpg')
+  #   user.save!
+  # end
 
-i = 0
+  i = 0
+sugg_profiles_csv = "./db/data/sugg_profiles.csv"
 CSV.foreach(sugg_profiles_csv, headers: :first_row, header_converters: :symbol, encoding: 'utf-8') do |row|
   puts "----------------- ROW #{i} -----------------"
   user = User.create!(
@@ -36,7 +36,7 @@ CSV.foreach(sugg_profiles_csv, headers: :first_row, header_converters: :symbol, 
   )
   puts "created: #{user.username}"
   i += 1
-  avatar = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1684039630/Favolist%204.0/owl.jpg")
+  avatar = URI.open("#{row[:avatar]}")
   puts avatar
   user.avatar.attach(io: avatar, filename: 'avatar.jpg', content_type: 'image/jpg')
   user.save!
