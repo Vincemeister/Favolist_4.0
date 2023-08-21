@@ -31,6 +31,7 @@ CSV.foreach(sugg_profiles_csv, headers: :first_row, header_converters: :symbol, 
   user = User.create!(
     username: row[:profile],
     bio: row[:bio],
+    about: row[:about],
     email: "#{row[:profile].gsub(/\s+/, '')}@gmail.com",
     password: "password"
   )

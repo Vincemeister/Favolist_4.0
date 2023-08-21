@@ -47,7 +47,7 @@
 
       <div class="avatar-and-username">
         <%= link_to user_path(product.user) do %>
-          <%= image_tag product.user.avatar, class: 'avatar-small' %>
+          <%= image_tag product.user.avatar, class: 'avatar-small', loading: "lazy" %>
         <% end %>
         <%= link_to user_path(product.user) do %>
           <div class="username paragraph-small-medium">
@@ -85,11 +85,11 @@
 
   <% unless local_assigns[:iterating_for] == "product_show_page"  %>
     <%= link_to product_path(product, source: (local_assigns[:iterating_for] unless local_assigns[:iterating_for] == "sidebar")), class: "product-card-image" do %>
-      <%= render 'shared/product_card/product_photos', product: product %>
+      <%= render 'shared/product_card/product_photos', product: product, photos: product.photos  %>
     <% end %>
   <% else %>
   <div class="product-card-image">
-    <%= render 'shared/product_card/product_photos', product: product %>
+    <%= render 'shared/product_card/product_photos', product: product, photos: product.photos %>
   </div>
   <% end %>
 

@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   def home
     @start_product_id = params[:product_id]
 
-    @products = Product.viewable_by(current_user)
+    @products = Product.viewable_by(current_user).includes(:list,  :bookmarks, :comments, photos_attachments: :blob, user: [{avatar_attachment: :blob}, :followers])
     if current_user
       @user = current_user
       @suggested_users = User.all - current_user.followed
@@ -12,7 +12,7 @@ class PagesController < ApplicationController
     else
       @suggested_users = User.all.sample(1)
     end
-    random_list = List.viewable_by(current_user).order("RANDOM()").first
+    random_list = List.viewable_by(current_user).order("RANDOM()").includes(user: :followers).first
     @suggested_lists = [random_list] if random_list
 
   end

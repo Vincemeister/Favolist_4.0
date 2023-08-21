@@ -57,7 +57,7 @@ class UsersController < ApplicationController
     @lists = @user.lists
     @referrals = @user.products.flat_map(&:referral).compact
     if current_user
-      @user = current_user
+      # @user = current_user
       @suggested_users = User.all - current_user.followed
       @suggested_users = @suggested_users.sample(1)
     else
@@ -96,6 +96,6 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    @user = User.find(params[:id])
+    @user = User.includes(avatar_attachment: :blob, products: [{ photos_attachments: :blob }, { logo_attachment: :blob }, :referral, :comments, :list]).find(params[:id])
   end
 end

@@ -50,7 +50,11 @@
   margin-bottom: 1em;
 
   .bio {
-    min-height: calc(1.5em*4 + 0.75rem + 2px);
+    min-height: calc(1.5em*3 + 0.75rem + 2px);
+  }
+
+  .about {
+    min-height: calc(1.5em*6 + 0.75rem + 2px);
   }
 
 }

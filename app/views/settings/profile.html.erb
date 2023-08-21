@@ -29,6 +29,8 @@
     <h3 class="hide-on-mobile">Profile</h3>
     <div class="form-container">
       <%= simple_form_for @user, url: update_profile_settings_path, method: :patch, html: { multipart: true, class: 'settings-form' } do |f| %>
+
+
         <div class="avatar-settings" data-controller="avatar-preview">
           <div class="form-group">
             <% if @user.avatar.attached? %>
@@ -43,10 +45,24 @@
           </div>
         </div>
         <%= f.input :username, label: 'Username' %>
-        <div class="form-group form-group-container">
-          <%= f.label :bio, class: "label mb-2" %>
-          <%= f.text_area :bio, class: 'form-control bio' %>
-        </div>
+
+
+
+
+      <div class="form-group form-group-container" data-controller="charactercounter" data-charactercounter-limit-value="360">
+        <%= f.label :bio, class: "label mb-2" %>
+        <%= f.text_area :bio, class: 'form-control bio', placeholder: "Your bio (maximum 360 characters)", maxlength: 360, data: { action: "keyup->charactercounter#updateCounter" } %>
+        <i data-charactercounter-target="counter" class="counter-text"></i>
+      </div>
+
+
+
+
+      <div class="form-group form-group-container" data-controller="charactercounter" data-charactercounter-limit-value="5000">
+        <%= f.label :about, class: "label mb-2" %>
+        <%= f.text_area :about, class: 'form-control about', placeholder: "Your about text (maximum 5000 characters)", maxlength: 5000, data: { action: "keyup->charactercounter#updateCounter" } %>
+        <i data-charactercounter-target="counter" class="counter-text"></i>
+      </div>
 
         <%= f.button :submit, 'Update profile', class: 'button button-primary' %>
       <% end %>

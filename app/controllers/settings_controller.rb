@@ -26,9 +26,12 @@ class SettingsController < ApplicationController
     if @user.update(profile_params)
       redirect_to profile_settings_path, notice: 'Profile updated successfully'
     else
+      Rails.logger.debug @user.errors.full_messages.inspect
       render :profile
     end
   end
+
+
 
   def privacy; end
 
@@ -64,7 +67,7 @@ class SettingsController < ApplicationController
 
 
   def profile_params
-    params.require(:user).permit(:username, :avatar, :bio)
+    params.require(:user).permit(:username, :avatar, :bio, :about)
   end
 
   def privacy_params

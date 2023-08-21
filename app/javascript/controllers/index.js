@@ -16,6 +16,9 @@ application.register("avatar-preview", AvatarPreviewController)
 import BookmarksController from "./bookmarks_controller"
 application.register("bookmarks", BookmarksController)
 
+import CharactercounterController from "./charactercounter_controller"
+application.register("charactercounter", CharactercounterController)
+
 import CommentsController from "./comments_controller"
 application.register("comments", CommentsController)
 

@@ -29,6 +29,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   validates :username, presence: true, uniqueness: true
 
+  validates :bio, length: { maximum: 360 }
+
   has_one_attached :avatar
 
   has_many :follower_relationships, foreign_key: :followed_id, class_name: 'Follow', dependent: :destroy
