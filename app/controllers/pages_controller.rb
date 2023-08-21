@@ -9,10 +9,12 @@ class PagesController < ApplicationController
       @user = current_user
       @suggested_users = User.all - current_user.followed
       @suggested_users = @suggested_users.sample(1)
+    else
+      @suggested_users = User.all.sample(1)
     end
-    @suggested_lists = List.all.first
-    # @suggested_lists = List.all.sample(1)
-    @suggested_lists = [User.first.lists.sample]
+    random_list = List.viewable_by(current_user).order("RANDOM()").first
+    @suggested_lists = [random_list] if random_list
+
   end
 
   def search
@@ -41,10 +43,12 @@ class PagesController < ApplicationController
       @user = current_user
       @suggested_users = User.all - current_user.followed
       @suggested_users = @suggested_users.sample(1)
+    else
+      @suggested_users = User.all.sample(1)
     end
-    @suggested_lists = List.all.first
-    # @suggested_lists = List.all.sample(1)
-    @suggested_lists = [User.first.lists.sample]
+    random_list = List.viewable_by(current_user).order("RANDOM()").first
+    @suggested_lists = [random_list] if random_list
+
 
 
     respond_to do |format|

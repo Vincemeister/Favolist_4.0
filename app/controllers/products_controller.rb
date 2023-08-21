@@ -16,9 +16,7 @@ class ProductsController < ApplicationController
       flash[:alert] = "You do not have permission to view this product."
       redirect_to no_permission_path # or wherever you want
     else
-      @suggested_products = Product.viewable_by(current_user).joins(list: :user)
-                                   .order("users.followers_count DESC")
-                                   .limit(2)
+      @suggested_products = Product.viewable_by(current_user).order("RANDOM()").limit(1)
     end
     @source = params[:source]
   end

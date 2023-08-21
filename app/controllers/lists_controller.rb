@@ -11,7 +11,8 @@ class ListsController < ApplicationController
       redirect_to no_permission_path
     else
       @products = @list.products
-      @suggested_lists = List.where(user: @list.user.followed).order(products_count: :desc).limit(1)
+      @suggested_lists = List.viewable_by(current_user).order("RANDOM()").limit(2).to_a
+      # @suggested_products = Product.viewable_by(current_user).order("RANDOM()").limit(1)
     end
     @source = params[:source]
   end

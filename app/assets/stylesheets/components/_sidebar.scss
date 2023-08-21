@@ -16,15 +16,21 @@
 
 
   .user-card {
-    padding: 1em 0em;
+    padding: 0em 0em 2.5em 0em;
   }
 }
 
 
-.suggested-lists-container, .suggested-profiles-container {
+.suggested-lists-container {
   display: flex;
   flex-direction: column;
   gap: 1em;
+  width: 100%;
+}
+
+.suggested-profiles-container {
+  display: flex;
+  flex-direction: column;
   width: 100%;
 }
 

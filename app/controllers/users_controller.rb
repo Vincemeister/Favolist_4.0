@@ -8,14 +8,6 @@ class UsersController < ApplicationController
   end
 
 
-  def test
-    @lists = @user.lists
-    @referrals = @user.products.flat_map(&:referral).compact
-    @suggested_users = @user.followed.order(followers_count: :desc).sample(1)
-    @suggested_lists = List.where(user: @user.followed).order(products_count: :desc).limit(1)
-
-  end
-
 
   def follow
     if current_user.follow(@user.id)
@@ -64,8 +56,15 @@ class UsersController < ApplicationController
   def show
     @lists = @user.lists
     @referrals = @user.products.flat_map(&:referral).compact
-    @suggested_users = @user.followed.order(followers_count: :desc).sample(1)
-    @suggested_lists = List.where(user: @user.followed).order(products_count: :desc).limit(1)
+    if current_user
+      @user = current_user
+      @suggested_users = User.all - current_user.followed
+      @suggested_users = @suggested_users.sample(1)
+    else
+      @suggested_users = User.all.sample(1)
+    end
+    # random_list = List.viewable_by(current_user).order("RANDOM()").first
+    # @suggested_lists = [random_list] if random_list
   end
 
   def follows
