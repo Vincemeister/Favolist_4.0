@@ -16,7 +16,7 @@ class ScrapeProductsController < ApplicationController
 
 
   def fetch_amazon_product
-    product_data = fetch_product_from_amazon_2(params[:link])
+    product_data = fetch_product_from_amazon(params[:link])
     if product_data.present?
       session[:product_data] = product_data
       redirect_to new_product_path
@@ -169,22 +169,18 @@ class ScrapeProductsController < ApplicationController
   end
 
 
-
-
-
   def fetch_product_from_generic_store(input_url)
     # Encode the URL first
     puts "RUNNING FETCH PRODUCT FROM GENERIC STORE"
     encoded_url = URI.encode_www_form_component(input_url)
 
     # Construct the OpenGraph API URL
-    url = URI("https://opengraph.io/api/1.1/site/#{encoded_url}?&cache_ok=false&full_render=true&app_id=44aa9636-f222-4b56-96c7-b14c3b8d7577")
+    opengraph_url = URI("https://opengraph.io/api/1.1/site/#{encoded_url}?&cache_ok=false&full_render=true&app_id=44aa9636-f222-4b56-96c7-b14c3b8d7577")
 
-    http = Net::HTTP.new(url.host, url.port)
+    http = Net::HTTP.new(opengraph_url.host, opengraph_url.port)
     http.use_ssl = true
 
-    request = Net::HTTP::Get.new(url)
-
+    request = Net::HTTP::Get.new(opengraph_url)
     response = http.request(request)
 
     # Handle non-successful HTTP responses
@@ -195,33 +191,55 @@ class ScrapeProductsController < ApplicationController
 
     begin
       data = JSON.parse(response.body)
-      puts data
 
       # Validate and extract data
       title = data.dig("htmlInferred", "title") || "Unknown Title"
-      price = data.dig("hybridGraph", "products", 0, "offers", 0, "price") ||
-      data.dig("hybridGraph", "price") || 0
+      price = data.dig("hybridGraph", "products", 0, "offers", 0, "price") || data.dig("hybridGraph", "price") || 0
       description = data.dig("htmlInferred", "description") || ""
-      images = (data.dig("htmlInferred", "images") || []).reject { |img| img.end_with?('.svg') }
+      images = (data.dig("htmlInferred", "images") || []).reject do |img|
+        img_downcased = img.downcase
+        %w(.svg badge logo icon flag thumb).any? { |word| img_downcased.include?(word) }
+      end
+      images = images.first(15)
+
+      # EXTRACT LOGO FROM BRANDR API - HOWEVER, IT SEEMS ITS MOSTLY THE SAME AS FAVICON SO TO SAFE SPEED I WILL OMMMIT EXTRA FETCH
+      # logo_url = URI("https://brandr.p.rapidapi.com/extract")
+      # logo_http = Net::HTTP.new(logo_url.host, logo_url.port)
+      # logo_http.use_ssl = true
+
+      # logo_request = Net::HTTP::Post.new(logo_url)
+      # logo_request["content-type"] = 'application/x-www-form-urlencoded'
+      # logo_request["X-RapidAPI-Key"] = 'your_api_key_here'
+      # logo_request["X-RapidAPI-Host"] = 'brandr.p.rapidapi.com'
+      # logo_request.body = "endpoint=#{input_url}"
+
+      # logo_response = logo_http.request(logo_request)
+      # logo_data = JSON.parse(logo_response.body)
+      # logo = logo_data.dig("extractions", "dom-logo")
+
+      # # ELSE JUST USE THE FAVICON if logo from brandr API is nil or empty
+      # if logo.nil? || logo.empty?
+      #   logo = data.dig("htmlInferred", "favicon")
+      #   # If the logo URL is an SVG, set it to nil
+      #   logo = nil if logo&.end_with?('.svg')
+      # end
 
       logo = data.dig("htmlInferred", "favicon")
       # If the logo URL is an SVG, set it to nil
       logo = nil if logo&.end_with?('.svg')
-
       product_data = { title: title, price: price, description: description, url: input_url, images: images, logo: logo }
       puts "GENERIC STORE PRODUCT DATA: #{product_data}"
-
-      product_data # return the product data
+      product_data
 
     rescue JSON::ParserError => e
       puts "JSON Error: #{e.message}"
       nil
     rescue => e # General error handling
       puts "An error occurred: #{e.message}"
-      # You can clear session data here if you're using it.
       nil
     end
   end
+
 end
 
 
