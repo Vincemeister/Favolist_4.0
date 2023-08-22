@@ -12,7 +12,7 @@ class PagesController < ApplicationController
     else
       @suggested_users = User.all.sample(1)
     end
-    random_list = List.viewable_by(current_user).order("RANDOM()").includes(user: :followers).first
+    random_list = List.viewable_by(current_user).order("RANDOM()").first
     @suggested_lists = [random_list] if random_list
 
   end

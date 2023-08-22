@@ -15,12 +15,8 @@ class ScrapeProductsController < ApplicationController
   end
 
 
-
   def fetch_amazon_product
-    asin = extract_asin(params[:link])
-    puts "Extracted ASIN: #{asin} from URL: #{params[:link]}"
-    product_data = fetch_product_from_amazon(asin)
-
+    product_data = fetch_product_from_amazon_2(params[:link])
     if product_data.present?
       session[:product_data] = product_data
       redirect_to new_product_path
@@ -29,6 +25,7 @@ class ScrapeProductsController < ApplicationController
       redirect_to search_or_manual_product_upload_path
     end
   end
+
 
   def fetch_shopify_product
     product_data = fetch_product_from_shopify(params[:link])
@@ -58,42 +55,44 @@ class ScrapeProductsController < ApplicationController
   private
 
 
-  def fetch_product_from_amazon(asin)
-    url = URI("https://parazun-amazon-data.p.rapidapi.com/product/?asin=#{asin}&region=US")
 
-    http = Net::HTTP.new(url.host, url.port)
+
+  def fetch_product_from_amazon(url)
+    require 'uri'
+    require 'net/http'
+
+    url_encoded = URI.encode_www_form_component(url)
+    request_url = URI("https://axesso-axesso-amazon-data-service-v1.p.rapidapi.com/amz/amazon-lookup-product?url=#{url_encoded}")
+
+    http = Net::HTTP.new(request_url.host, request_url.port)
     http.use_ssl = true
 
-    request = Net::HTTP::Get.new(url)
+    request = Net::HTTP::Get.new(request_url)
     request["X-RapidAPI-Key"] = '971b32dc4emshdc908738f2fb7c0p15bcc5jsn4f8c98db4f7d'
-    request["X-RapidAPI-Host"] = 'parazun-amazon-data.p.rapidapi.com'
-
+    request["X-RapidAPI-Host"] = 'axesso-axesso-amazon-data-service-v1.p.rapidapi.com'
 
     response = http.request(request)
+    puts response.read_body
     response_body = JSON.parse(response.body) # convert the JSON response to a Ruby hash
-
-    # Print the ASIN and the response body
-    puts "ASIN: #{asin}"
-    puts "Response: #{response.body}"
-
+    puts response_body
 
     # Extracting the title, price, and description
-    title = response_body["title"].split(/, |- |\| /)[0]
-    price = response_body["price"]["amount"]
+    title = response_body["productTitle"].split(/, |- |\| /)[0]
+    price = response_body["price"]
 
 
 
     # Start with the product's description if it's a non-empty string.
     features = response_body["features"]
-    description = if response_body["description"].is_a?(String) && !response_body["description"].strip.empty?
-                    response_body["description"].strip
+    description = if response_body["productDescription"].is_a?(String) && !response_body["productDescription"].strip.empty?
+                    response_body["productDescription"].strip
                   else
                     ''
                   end
 
     # Append features if they exist.
     if features && features.any?
-      description += "\n\u2022 " + features.join("\n\u2022 ")
+      description += "\n\n\u2022 " + features.join("\n\u2022 ")
     end
 
     # Set a default message if the description is still blank.
@@ -102,11 +101,10 @@ class ScrapeProductsController < ApplicationController
 
 
 
-    link = response_body["link"]
+    link = url
     # Extract all high resolution images
-    images = response_body["images"].map do |image_hash|
-      image_hash["hi_res"]
-    end
+    images = response_body["imageUrlList"]
+
 
     puts "URL: #{link}"
 
@@ -115,14 +113,9 @@ class ScrapeProductsController < ApplicationController
     puts product_data
 
     product_data # return the product data
+
   end
 
-  def extract_asin(url)
-    uri = URI(url)
-    path_segments = uri.path.split('/')
-    asin_index = path_segments.find_index('dp')
-    asin_index ? path_segments[asin_index + 1] : nil
-  end
 
 
 
@@ -207,7 +200,7 @@ class ScrapeProductsController < ApplicationController
       # Validate and extract data
       title = data.dig("htmlInferred", "title") || "Unknown Title"
       price = data.dig("hybridGraph", "products", 0, "offers", 0, "price") ||
-              data.dig("hybridGraph", "price") || 0
+      data.dig("hybridGraph", "price") || 0
       description = data.dig("htmlInferred", "description") || ""
       images = (data.dig("htmlInferred", "images") || []).reject { |img| img.end_with?('.svg') }
 
@@ -232,8 +225,88 @@ class ScrapeProductsController < ApplicationController
 end
 
 
+  # OLD AMAZON FETCH REQUEST USING INFERIOR PARAZUN API
+
+  # def fetch_amazon_product
+  #   asin = extract_asin(params[:link])
+  #   puts "Extracted ASIN: #{asin} from URL: #{params[:link]}"
+  #   product_data = fetch_product_from_amazon(asin)
+
+  #   if product_data.present?
+  #     session[:product_data] = product_data
+  #     redirect_to new_product_path
+  #   else
+  #     flash[:error] = 'Failed to fetch product data from Amazon.'
+  #     redirect_to search_or_manual_product_upload_path
+  #   end
+  # end
 
 
+  # def fetch_product_from_amazon(asin)
+  #   url = URI("https://parazun-amazon-data.p.rapidapi.com/product/?asin=#{asin}&region=US")
+
+  #   http = Net::HTTP.new(url.host, url.port)
+  #   http.use_ssl = true
+
+  #   request = Net::HTTP::Get.new(url)
+  #   request["X-RapidAPI-Key"] = '971b32dc4emshdc908738f2fb7c0p15bcc5jsn4f8c98db4f7d'
+  #   request["X-RapidAPI-Host"] = 'parazun-amazon-data.p.rapidapi.com'
+
+
+  #   response = http.request(request)
+  #   response_body = JSON.parse(response.body) # convert the JSON response to a Ruby hash
+
+  #   # Print the ASIN and the response body
+  #   puts "ASIN: #{asin}"
+  #   puts "Response: #{response.body}"
+
+
+  #   # Extracting the title, price, and description
+  #   title = response_body["title"].split(/, |- |\| /)[0]
+  #   price = response_body["price"]["amount"]
+
+
+
+  #   # Start with the product's description if it's a non-empty string.
+  #   features = response_body["features"]
+  #   description = if response_body["description"].is_a?(String) && !response_body["description"].strip.empty?
+  #                   response_body["description"].strip
+  #                 else
+  #                   ''
+  #                 end
+
+  #   # Append features if they exist.
+  #   if features && features.any?
+  #     description += "\n\u2022 " + features.join("\n\u2022 ")
+  #   end
+
+  #   # Set a default message if the description is still blank.
+  #   description = "Description not found" if description.strip.empty?
+
+
+
+
+  #   link = response_body["link"]
+  #   # Extract all high resolution images
+  #   images = response_body["images"].map do |image_hash|
+  #     image_hash["hi_res"]
+  #   end
+
+  #   puts "URL: #{link}"
+
+  #   # Here, you can create a new instance of Product, or return these values as a hash
+  #   product_data = { title: title, price: price, description: description, images: images, url: link }
+  #   puts product_data
+
+  #   product_data # return the product data
+  # end
+
+  # def extract_asin(url)
+  #   uri = URI(url)
+  #   path_segments = uri.path.split('/')
+  #   asin_index = path_segments.find_index('dp')
+  #   asin_index ? path_segments[asin_index + 1] : nil
+  # end
 
 
 

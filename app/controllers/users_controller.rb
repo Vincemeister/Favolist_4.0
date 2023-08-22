@@ -54,6 +54,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @products = @user.products
     @lists = @user.lists
     @referrals = @user.products.flat_map(&:referral).compact
     if current_user
@@ -96,6 +97,6 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    @user = User.includes(avatar_attachment: :blob, products: [{ photos_attachments: :blob }, { logo_attachment: :blob }, :referral, :comments, :list]).find(params[:id])
+    @user = User.includes(:lists, avatar_attachment: :blob, products: [{photos_attachments: :blob}, :referral, :user]).find(params[:id])
   end
 end
