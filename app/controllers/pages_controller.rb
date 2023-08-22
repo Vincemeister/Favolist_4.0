@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   def home
     @start_product_id = params[:product_id]
 
-    @products = Product.viewable_by(current_user).includes(:list,  :bookmarks, :comments, photos_attachments: :blob, user: [{avatar_attachment: :blob}, :followers])
+    @products = Product.viewable_by(current_user).includes(:list, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
     if current_user
       @user = current_user
       @suggested_users = User.all - current_user.followed
@@ -18,9 +18,9 @@ class PagesController < ApplicationController
   end
 
   def search
-    @products = Product.all
-    @lists = List.all
-    @referrals = Referral.all
+    @products = Product.all.includes(:list, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
+    @lists = List.all.includes(:products, :user)
+    @referrals = Referral.all.includes(:product)
     @users = User.all
     if params[:query].present?
       # First execute the pg_search query
