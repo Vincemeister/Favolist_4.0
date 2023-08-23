@@ -29,7 +29,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   validates :username, presence: true, uniqueness: true
 
-  validates :bio, length: { maximum: 360 }
+  validates :intro, length: { maximum: 280 }
+  validates :bio, length: { maximum: 5000 }
+
 
   has_one_attached :avatar
 

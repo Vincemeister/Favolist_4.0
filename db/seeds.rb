@@ -10,7 +10,7 @@ require "csv"
 #     username: Faker::Internet.username,
 #     email: Faker::Internet.email,
 #     password: "password",
-#     bio: Faker::Lorem.paragraph(sentence_count: 10)
+#     bio: Faker::Lorem.paragraph(sentence_count: 2)
 #   )
 #   avatar = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1684039630/Favolist%204.0/owl.jpg")
 #   user.avatar.attach(io: avatar, filename: 'avatar.jpg', content_type: 'image/jpg')
@@ -41,7 +41,7 @@ puts amazon_logo
 #   username: "Tim Test",
 #   email: "vr@gmail.com",
 #   password: "password",
-#   bio: Faker::Lorem.paragraph(sentence_count: 10)
+#   bio: Faker::Lorem.paragraph(sentence_count: 2)
 # )
 # avatar = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1684039630/Favolist%204.0/owl.jpg")
 # vincent.avatar.attach(io: avatar, filename: 'avatar.jpg', content_type: 'image/jpg')
@@ -54,7 +54,7 @@ puts amazon_logo
 #     username: Faker::Internet.username,
 #     email: Faker::Internet.email,
 #     password: "password",
-#     bio: Faker::Lorem.paragraph(sentence_count: 10)
+#     bio: Faker::Lorem.paragraph(sentence_count: 2)
 #   )
 #   avatar = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1684039630/Favolist%204.0/owl.jpg")
 #   user.avatar.attach(io: avatar, filename: 'avatar.jpg', content_type: 'image/jpg')
@@ -89,7 +89,7 @@ puts amazon_logo
 #     username: Faker::Internet.username,
 #     email: Faker::Internet.email,
 #     password: "password",
-#     bio: Faker::Lorem.paragraph(sentence_count: 10)
+#     bio: Faker::Lorem.paragraph(sentence_count: 2)
 #   )
 #   avatar = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1684039630/Favolist%204.0/owl.jpg")
 #   user.avatar.attach(io: avatar, filename: 'avatar.jpg', content_type: 'image/jpg')
@@ -110,7 +110,7 @@ puts amazon_logo
 #     username: Faker::Internet.username,
 #     email: Faker::Internet.email,
 #     password: "password",
-#     bio: Faker::Lorem.paragraph(sentence_count: 10)
+#     bio: Faker::Lorem.paragraph(sentence_count:2)
 #   )
 #   avatar = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1684039630/Favolist%204.0/owl.jpg")
 #   user.avatar.attach(io: avatar, filename: 'avatar.jpg', content_type: 'image/jpg')

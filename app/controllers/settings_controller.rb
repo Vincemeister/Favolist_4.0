@@ -67,7 +67,7 @@ class SettingsController < ApplicationController
 
 
   def profile_params
-    params.require(:user).permit(:username, :avatar, :bio, :about)
+    params.require(:user).permit(:username, :avatar, :intro, :bio)
   end
 
   def privacy_params

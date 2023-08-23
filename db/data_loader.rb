@@ -12,7 +12,7 @@ User.destroy_all
 #   user = User.create!(
   #     username: row[:profile],
   #     bio: row[:bio],
-  #     about: row[:about],
+  #     intro: row[:intro],
   #     email: "#{row[:profile].gsub(/\s+/, '')}@gmail.com",
   #     password: "password"
   #   )
@@ -30,8 +30,8 @@ CSV.foreach(sugg_profiles_csv, headers: :first_row, header_converters: :symbol, 
   puts "----------------- ROW #{i} -----------------"
   user = User.create!(
     username: row[:profile],
+    intro: row[:intro],
     bio: row[:bio],
-    about: row[:about],
     email: "#{row[:profile].gsub(/\s+/, '')}@gmail.com",
     password: "password"
   )
