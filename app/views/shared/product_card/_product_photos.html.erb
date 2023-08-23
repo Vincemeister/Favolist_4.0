@@ -1,6 +1,6 @@
 
 
-  <% if photos.attached? && photos.count > 1 %>
+  <% if photos.attached? && photos.count > 1 &&  %>
     <div id="carouselExampleIndicators-<%= product.id %>" class="carousel slide">
       <div class="carousel-indicators">
         <% photos.each_with_index do |photo, index| %>

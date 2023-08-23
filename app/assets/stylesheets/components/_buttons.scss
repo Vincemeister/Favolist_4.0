@@ -36,7 +36,7 @@
 
 .button-primary {
   background-color: $primary;
-  color: white;
+  color: white!important;
 
   &:hover {
     color: white;
