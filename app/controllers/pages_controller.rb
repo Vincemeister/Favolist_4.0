@@ -5,6 +5,8 @@ class PagesController < ApplicationController
     @start_product_id = params[:product_id]
 
     @products = Product.viewable_by(current_user).includes(:list, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
+    @user_bookmarks = Bookmark.where(user_id: current_user.id, product_id: @products.map(&:id)).pluck(:product_id)
+
     if current_user
       @user = current_user
       @suggested_users = User.all - current_user.followed

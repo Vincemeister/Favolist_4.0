@@ -8,10 +8,14 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.viewable_by(current_user)
+    @user_bookmarks = Bookmark.where(user_id: current_user.id, product_id: @products.map(&:id)).pluck(:product_id)
+
   end
 
 
   def show
+    @user_bookmarks = Bookmark.where(user_id: current_user.id, product_id: @products.map(&:id)).pluck(:product_id)
+
     unless @product.viewable_by?(current_user)
       flash[:alert] = "You do not have permission to view this product."
       redirect_to no_permission_path # or wherever you want

@@ -47,6 +47,14 @@ class Product < ApplicationRecord
     bookmarks.where(user_id: user.id).exists?
   end
 
+  # NEW METHOD THAT'S HELPS NOT CREATE A NEW DATABASE REQUEST ALL THE TIME - IN THE CONROLLERS NEED TO ALSO SET
+  # @user_bookmarks = Bookmark.where(user_id: current_user.id, product_id: @products.map(&:id)).pluck(:product_id)
+
+  def bookmarked_by_user?(user_bookmarks)
+    user_bookmarks.include?(self.id)
+  end
+
+
   def viewable_by?(user)
     User.viewable_by(user).include?(self.list.user)
   end
