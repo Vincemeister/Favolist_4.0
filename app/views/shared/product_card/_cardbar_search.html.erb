@@ -18,12 +18,12 @@
       <% if product.bookmarked_by?(current_user) %>
         <div class="cardbar-iconbox cardbar-iconbox-right-for-sidebar-spacing">
           <i class="fa-solid fa-circle-bookmark fa-lg iconbox-text paragraph-large-regular"></i>
-          <div class="iconbox-text paragraph-xsmall-medium"><%= product.bookmarks.count %></div>
+          <div class="iconbox-text paragraph-xsmall-medium"><%= product.bookmarks_count %></div>
         </div>
       <% else %>
           <div class="cardbar-iconbox cardbar-iconbox-right-for-sidebar-spacing">
             <i class="fa-light fa-circle-bookmark fa-lg iconbox-text paragraph-large-regular"></i>
-            <div class="iconbox-text paragraph-xsmall-medium"><%= product.bookmarks.count %></div>
+            <div class="iconbox-text paragraph-xsmall-medium"><%= product.bookmarks_count %></div>
           </div>
       <% end %>
       <div class="cardbar-iconbox">
@@ -32,7 +32,7 @@
       </div>
       <div class="cardbar-iconbox">
         <i class="fa-light fa-comment fa-lg iconbox-text paragraph-large-regular"></i>
-        <div class="iconbox-text paragraph-xsmall-medium"><%= product.comments.count %></div>
+        <div class="iconbox-text paragraph-xsmall-medium"><%= product.comments_count %></div>
       </div>
 
     <% else %>
@@ -43,14 +43,14 @@
         <%= link_to unbookmark_product_path(product), method: :post, data: { controller: 'bookmarks', action: 'click->bookmarks#toggle', bookmarks_target: 'bookmarkbutton' } do %>
           <div class="cardbar-iconbox">
             <i class="fa-solid fa-circle-bookmark fa-lg iconbox-text paragraph-large-regular"></i>
-            <div class="iconbox-text paragraph-xsmall-medium"><%= product.bookmarks.count %></div>
+            <div class="iconbox-text paragraph-xsmall-medium"><%= product.bookmarks_count %></div>
           </div>
         <% end %>
       <% else %>
         <%= link_to bookmark_product_path(product), method: :post, data: { controller: 'bookmarks', action: 'click->bookmarks#toggle', bookmarks_target: 'bookmarkbutton' } do %>
           <div class="cardbar-iconbox">
             <i class="fa-light fa-circle-bookmark fa-lg iconbox-text paragraph-large-regular"></i>
-            <div class="iconbox-text paragraph-xsmall-medium"><%= product.bookmarks.count %></div>
+            <div class="iconbox-text paragraph-xsmall-medium"><%= product.bookmarks_count %></div>
           </div>
         <% end %>
       <% end %>
@@ -61,7 +61,7 @@
       <%= link_to product_comments_path(product, source: source)  do %>
         <div class="cardbar-iconbox">
           <i class="fa-light fa-comment fa-lg iconbox-text paragraph-large-regular"></i>
-          <div class="iconbox-text paragraph-xsmall-medium"><%= product.comments.count %></div>
+          <div class="iconbox-text paragraph-xsmall-medium"><%= product.comments_count %></div>
         </div>
       <% end %>
     <% end %>

@@ -1,6 +1,6 @@
 
 
-  <% if photos.attached? && photos.count > 1 &&  %>
+  <% if photos.attached? && photos.count > 1 %>
     <div id="carouselExampleIndicators-<%= product.id %>" class="carousel slide">
       <div class="carousel-indicators">
         <% photos.each_with_index do |photo, index| %>
@@ -11,7 +11,7 @@
         <% photos.each_with_index do |photo, index| %>
           <div class="carousel-item <%= 'active' if index.zero? %>">
             <div class="image-container">
-              <%= image_tag photo, class: "d-block" %>
+              <%= cl_image_tag(photo.key, class: "d-block") %>
             </div>
           </div>
         <% end %>
@@ -28,7 +28,7 @@
   <% elsif photos.attached? %>
     <div class="product-card-image">
       <div class="image-container">
-        <%= image_tag photos.first %>
+        <%= cl_image_tag(photos.first.key) %>
       </div>
     </div>
   <% else %>
