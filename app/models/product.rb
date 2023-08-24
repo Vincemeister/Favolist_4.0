@@ -1,4 +1,7 @@
 class Product < ApplicationRecord
+  after_save :update_photos_count
+
+
   scope :viewable_by, -> (user) {
     joins(list: :user).where(users: { id: User.viewable_by(user).pluck(:id) })
   }
@@ -46,6 +49,12 @@ class Product < ApplicationRecord
 
   def viewable_by?(user)
     User.viewable_by(user).include?(self.list.user)
+  end
+
+  private
+
+  def update_photos_count
+    self.update_column(:photos_count, self.photos.length)
   end
 
 
