@@ -17,7 +17,7 @@
 
   <div class="product-card-image">
     <div class="image-container">
-      <%= image_tag referral.product.photos.first %>
+      <%= cl_image_tag(referral.product.photos.first.key) %>
     </div>
   </div>
 

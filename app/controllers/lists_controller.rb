@@ -10,7 +10,9 @@ class ListsController < ApplicationController
     unless @list.viewable_by?(current_user)
       redirect_to no_permission_path
     else
-      @products = @list.products
+      @products = @list.products.includes(:referral, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
+      @referrals = @list.products.flat_map(&:referral).compact
+      @user_bookmarks = Bookmark.where(user_id: current_user.id, product_id: @products.map(&:id)).pluck(:product_id)
       @suggested_lists = List.viewable_by(current_user).order("RANDOM()").limit(2).to_a
       # @suggested_products = Product.viewable_by(current_user).order("RANDOM()").limit(1)
     end
@@ -55,6 +57,6 @@ class ListsController < ApplicationController
   end
 
   def set_list
-    @list = List.find(params[:id])
+    @list = List.includes(:products, :user).find(params[:id])
   end
 end
