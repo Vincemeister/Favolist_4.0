@@ -5,7 +5,11 @@ class PagesController < ApplicationController
     @start_product_id = params[:product_id]
 
     @products = Product.viewable_by(current_user).includes(:list, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
-    @user_bookmarks = Bookmark.where(user_id: current_user.id, product_id: @products.map(&:id)).pluck(:product_id)
+    if current_user
+      @user_bookmarks = Bookmark.where(user_id: current_user.id, product_id: @products.map(&:id)).pluck(:product_id)
+    else
+      @user_bookmarks = []
+    end
 
     if current_user
       @user = current_user
@@ -23,7 +27,14 @@ class PagesController < ApplicationController
     @products = Product.all.includes(:list, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
     @lists = List.all.includes(:products, :user)
     @referrals = Referral.all.includes(:product)
-    @users = User.all
+    @users = User.with_attached_avatar.includes(:followers).all
+
+    if current_user
+      @user_bookmarks = Bookmark.where(user_id: current_user.id, product_id: @products.map(&:id)).pluck(:product_id)
+    else
+      @user_bookmarks = []
+    end
+
     if params[:query].present?
       # First execute the pg_search query
       search_products = Product.search_by_title_and_description_and_list_name_and_user_username(params[:query])

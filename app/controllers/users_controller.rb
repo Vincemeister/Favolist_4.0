@@ -55,7 +55,11 @@ class UsersController < ApplicationController
 
   def show
     @products = @user.products
-    @user_bookmarks = Bookmark.where(user_id: current_user.id, product_id: @products.map(&:id)).pluck(:product_id)
+    if current_user
+      @user_bookmarks = Bookmark.where(user_id: current_user.id, product_id: @products.map(&:id)).pluck(:product_id)
+    else
+      @user_bookmarks = []
+    end
 
     @lists = @user.lists
     @referrals = @user.products.flat_map(&:referral).compact
