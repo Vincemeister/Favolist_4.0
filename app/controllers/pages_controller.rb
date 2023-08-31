@@ -5,11 +5,12 @@ class PagesController < ApplicationController
     @start_product_id = params[:product_id]
 
     @products = Product.viewable_by(current_user).includes(:list, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
+    @user_bookmarks = []
+
     if current_user
-      @user_bookmarks = Bookmark.where(user_id: current_user.id, product_id: @products.map(&:id)).pluck(:product_id)
-    else
-      @user_bookmarks = []
+      @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
     end
+
 
     if current_user
       @user = current_user
@@ -29,10 +30,10 @@ class PagesController < ApplicationController
     @referrals = Referral.all.includes(:product)
     @users = User.with_attached_avatar.includes(:followers).all
 
+    @user_bookmarks = []
+
     if current_user
-      @user_bookmarks = Bookmark.where(user_id: current_user.id, product_id: @products.map(&:id)).pluck(:product_id)
-    else
-      @user_bookmarks = []
+      @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
     end
 
     if params[:query].present?
