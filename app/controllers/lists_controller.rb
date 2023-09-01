@@ -18,7 +18,7 @@ class ListsController < ApplicationController
         @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
       end
 
-      @suggested_lists = List.viewable_by(current_user).order("RANDOM()").limit(2).to_a
+      @suggested_lists = List.viewable_by(current_user).order("RANDOM()").limit(1).to_a
       # @suggested_products = Product.viewable_by(current_user).order("RANDOM()").limit(1)
     end
     @source = params[:source]

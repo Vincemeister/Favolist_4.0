@@ -1,21 +1,23 @@
 <div class="nav-header sticky-header text-decoration-none" >
 
-    <% if @source == "user_show_page_lists" %>
-      <%= link_to user_path(@list.user, anchor: "list_#{@list.id}", tab: 'pills-lists-tab'), class: "back-arrow-show-page" do %>
-        <i class="fa-regular fa-arrow-left"></i>
-      <% end %>
-    <% else %>
-    <%= link_to :back do %>
-      <i class="fa-regular fa-arrow-left"></i>
-    <% end %>
-  <% end %>
+  <%# <% if @source == "user_show_page_lists" %>
+    <%# <%= link_to user_path(@list.user, anchor: "list_#{@list.id}", tab: 'pills-lists-tab'), class: "back-arrow-show-page" do %>
+      <%# <i class="fa-regular fa-arrow-left"></i> %>
+    <%# <% end %>
+  <%# <% else %>
+    <%# <%= link_to :back do %>
+      <%# <i class="fa-regular fa-arrow-left"></i> %>
+    <%# <% end %>
+  <%# <% end %>
+  <div></div>
 
 
   <div class="titles">
-    <div class="subtitle">
+    <%= link_to user_path(@list.user), class: "subtitle" do %>
       <%= image_tag @list.user.avatar, class: 'avatar-xs' %>
       <%= @list.user.username %>
-    </div>
+    <% end %>
+
     <h5 class="main-title">
       <%= @list.name %>
     </h5>
@@ -26,25 +28,26 @@
 
 <div class="nav-header-desktop sticky-header text-decoration-none">
 
- <%  if @source == "user_show_page_lists" %>
-      <%= link_to user_path(@list.user, anchor: "list_#{@list.id}", tab: 'pills-lists-tab'), class: "back-arrow-show-page" do %>
-      <i class="fa-regular fa-arrow-left"></i>
-    <% end %>
-  <% else %>
-    <%= link_to :back do %>
-      <i class="fa-regular fa-arrow-left"></i>
-    <% end %>
-  <% end %>
+
+ <%# <%  if @source == "user_show_page_lists" %>
+      <%# <%= link_to user_path(@list.user, anchor: "list_#{@list.id}", tab: 'pills-lists-tab'), class: "back-arrow-show-page" do %>
+      <%# <i class="fa-regular fa-arrow-left"></i> %>
+    <%# <% end %>
+  <%# <% else %>
+    <%# <%= link_to :back do %>
+      <%# <i class="fa-regular fa-arrow-left"></i> %>
+    <%# <% end %>
+  <%# <% end %>
 
 
 
-
+<div></div>
 
   <div class="titles">
-    <div class="subtitle">
+    <%= link_to user_path(@list.user), class: "subtitle" do %>
       <%= image_tag @list.user.avatar, class: 'avatar-xs' %>
       <%= @list.user.username %>
-    </div>
+    <% end %>
     <h5 class="main-title">
       <%= @list.name %>
     </h5>
