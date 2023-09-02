@@ -17,6 +17,7 @@ class UsersController < ApplicationController
       else
         flash[:notice] = "You are now following #{@user.username}"
         render json: { flash: flash, newButtonText: "Followed", newButtonClass: "button button-secondary", newMethod: "post", newPath: unfollow_user_path(@user) }
+        # render json: { flash: flash, hideButton: true }
       end
     else
       flash[:alert] = "There was a problem following #{@user.username}"
