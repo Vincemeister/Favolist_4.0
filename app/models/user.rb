@@ -1,4 +1,8 @@
+
 class User < ApplicationRecord
+  require 'open-uri'
+
+
   scope :viewable_by, -> (user) {
     if user
       where(privacy: 'public')
@@ -34,6 +38,9 @@ class User < ApplicationRecord
 
 
   has_one_attached :avatar
+
+  after_commit :set_default_avatar, on: :create
+
 
   has_many :follower_relationships, foreign_key: :followed_id, class_name: 'Follow', dependent: :destroy
   has_many :followers, through: :follower_relationships, source: :follower, dependent: :destroy
@@ -85,5 +92,14 @@ class User < ApplicationRecord
   def set_default_privacy
     self.privacy ||= 'public'
   end
+
+  def set_default_avatar
+    unless avatar.attached?
+      file = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1693654445/Favolist%204.0/app%20assets/profile_avatar_at2r80.jpg")
+      avatar.attach(io: file, filename: 'default_avatar.jpg', content_type: 'image/jpg')
+    end
+  end
+
+
 
 end
