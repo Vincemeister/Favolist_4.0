@@ -31,7 +31,7 @@
 
   <body>
     <%= render "shared/flashes" %>
-    <% unless controller_name == 'sessions' && action_name == 'new' %>
+    <% unless controller_name == 'sessions' && action_name == 'new' || controller_name == 'registrations' && action_name == 'new' %>
 
       <div class="desktop_grid">
         <%= render "shared/navbar_desktop" %>
