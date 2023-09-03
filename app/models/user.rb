@@ -87,18 +87,25 @@ class User < ApplicationRecord
     self.followed & user.followers
   end
 
-  private
-
-  def set_default_privacy
-    self.privacy ||= 'public'
-  end
-
   def set_default_avatar
     unless avatar.attached?
       file = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1693654445/Favolist%204.0/app%20assets/profile_avatar_at2r80.jpg")
       avatar.attach(io: file, filename: 'default_avatar.jpg', content_type: 'image/jpg')
     end
   end
+
+  private
+
+  def set_default_privacy
+    self.privacy ||= 'public'
+  end
+
+  # def set_default_avatar
+  #   unless avatar.attached?
+  #     file = URI.open("https://res.cloudinary.com/dncij7vr6/image/upload/v1693654445/Favolist%204.0/app%20assets/profile_avatar_at2r80.jpg")
+  #     avatar.attach(io: file, filename: 'default_avatar.jpg', content_type: 'image/jpg')
+  #   end
+  # end
 
 
 
