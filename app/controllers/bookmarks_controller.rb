@@ -2,7 +2,10 @@ class BookmarksController < ApplicationController
   before_action :set_product, only: [:bookmark, :unbookmark]
 
   def index
-    @bookmarks = Bookmark.where(user: current_user)
+    @user_bookmarks = []
+
+    @suggested_products = Product.viewable_by(current_user).order("RANDOM()").limit(1)
+    @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
     @products = Product.joins(:bookmarks).where(bookmarks: { user: current_user })
   end
 
@@ -36,4 +39,5 @@ class BookmarksController < ApplicationController
   def set_product
     @product = Product.find(params[:id])
   end
+
 end

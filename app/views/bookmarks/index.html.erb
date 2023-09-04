@@ -1,3 +1,61 @@
+<div class="nav-header sticky-header text-decoration-none" >
+
+  <%# <% if @source == "user_show_page_lists" %>
+    <%# <%= link_to user_path(@list.user, anchor: "list_#{@list.id}", tab: 'pills-lists-tab'), class: "back-arrow-show-page" do %>
+      <%# <i class="fa-regular fa-arrow-left"></i> %>
+    <%# <% end %>
+  <%# <% else %>
+    <%# <%= link_to :back do %>
+      <%# <i class="fa-regular fa-arrow-left"></i> %>
+    <%# <% end %>
+  <%# <% end %>
+  <div></div>
+
+
+  <div class="titles">
+    <%= link_to user_path(current_user), class: "subtitle" do %>
+      <%= image_tag current_user.avatar, class: 'avatar-xs' %>
+      <%= current_user.username %>
+    <% end %>
+
+    <h5 class="main-title">
+      Bookmarks
+    </h5>
+  </div>
+  <div></div>
+</div>
+
+
+<div class="nav-header-desktop sticky-header text-decoration-none">
+
+
+ <%# <%  if @source == "user_show_page_lists" %>
+      <%# <%= link_to user_path(@list.user, anchor: "list_#{@list.id}", tab: 'pills-lists-tab'), class: "back-arrow-show-page" do %>
+      <%# <i class="fa-regular fa-arrow-left"></i> %>
+    <%# <% end %>
+  <%# <% else %>
+    <%# <%= link_to :back do %>
+      <%# <i class="fa-regular fa-arrow-left"></i> %>
+    <%# <% end %>
+  <%# <% end %>
+
+
+
+<div></div>
+
+  <div class="titles">
+    <%= link_to user_path(current_user), class: "subtitle" do %>
+      <%= image_tag current_user.avatar, class: 'avatar-xs' %>
+      <%= current_user.username %>
+    <% end %>
+    <h5 class="main-title">
+      Bookmarks
+    </h5>
+  </div>
+  <div></div>
+</div>
+
+
 <div class="nav-header sticky-header  text-decoration-none">
   <%= link_to user_path(current_user) do %>
     <i class="fa-regular fa-arrow-left"></i>
@@ -9,6 +67,9 @@
   <div class="w-16"></div>
 </div>
 
+
+<div class="card-grid">
 <% @products.each do |product| %>
 <%= render 'shared/product_card', product: product %>
 <% end %>
+</div>
