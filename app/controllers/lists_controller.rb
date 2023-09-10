@@ -19,7 +19,7 @@ class ListsController < ApplicationController
       end
 
       @suggested_lists = List.viewable_by(current_user).order("RANDOM()").limit(1).to_a
-      @suggested_products = Product.viewable_by(current_user).order("RANDOM()").limit(1)
+      # @suggested_products = Product.viewable_by(current_user).order("RANDOM()").limit(1)
     end
     @source = params[:source]
   end
