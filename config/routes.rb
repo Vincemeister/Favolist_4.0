@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
   get 'pages/about' => 'pages#about', as: 'about'
   get 'pages/search', to: 'pages#search', as: 'search'
+  get 'pages/creators', to: 'pages#creators', as: 'creators'
   get 'pages/beta', to: 'pages#beta', as: 'beta'
   get 'pages/test', to: 'pages#test', as: 'test'
   get 'pages/no_permission', to: 'pages#no_permission', as: 'no_permission'
