@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [ :home, :search, :no_permission, :beta, :about, :creatprs ]
+  skip_before_action :authenticate_user!, only: [ :home, :search, :no_permission, :beta, :about, :creators ]
 
   def home
     @start_product_id = params[:product_id]
