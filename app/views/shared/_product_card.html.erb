@@ -101,7 +101,7 @@
 
 
   <div class="cardbar-and-text-container">
-    <%= render "shared/product_card/cardbar_search", product: product, iterating_for: local_assigns[:iterating_for], source: @source  %>
+    <%= render "shared/product_card/cardbar", product: product, iterating_for: local_assigns[:iterating_for], source: @source  %>
     <!--RENDERING THE PRODUCT SHOW TABS OR THE PARTIAL REVIEW OF THE PRODUCT CARD N THE FEED -->
     <% if local_assigns[:iterating_for] == "product_show_page" %>
       <%= render "shared/product_card/product_show_tabs", product: product %>

@@ -39,6 +39,7 @@
 
 
 
+
       <% if product.bookmarked_by_user?(@user_bookmarks) %>
         <%= link_to unbookmark_product_path(product), method: :post, data: { controller: 'bookmarks', action: 'click->bookmarks#toggle', bookmarks_target: 'bookmarkbutton' } do %>
           <div class="cardbar-iconbox">
@@ -54,7 +55,7 @@
           </div>
         <% end %>
       <% end %>
-      
+
       <%= link_to new_product_path(original_product_id: product.id), class: "cardbar-iconbox" do %>
         <i class="fa-light fa-circle-plus fa-lg iconbox-text paragraph-large-regular"></i>
         <div class="iconbox-text paragraph-xsmall-medium"><%= product.duplicated_count %></div>
