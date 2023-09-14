@@ -1,29 +1,39 @@
 
 <div class="navbar text-decoration-none">
+    <%= link_to creators_path do %>
+      <i class="fa-sharp fa-solid fa-star fa-lg"></i>
+    <% end %>
+
+
   <%= link_to search_path do %>
-    <i class="fa-sharp fa-regular fa-magnifying-glass"></i>
+    <i class="fa-sharp fa-solid fa-magnifying-glass fa-lg"></i>
   <% end %>
   <% if user_signed_in? %>
     <%= link_to user_path(current_user) do %>
-      <i class="fa-sharp fa-solid fa-user"></i>
+      <i class="fa-sharp fa-solid fa-user fa-lg"></i>
     <% end %>
   <% else %>
     <%= link_to new_user_session_path do%>
-      <i class="fa-sharp fa-solid fa-user"></i>
-      Sign in
+      <i class="fa-sharp fa-solid fa-user fa-lg"></i>
     <% end %>
   <% end %>
   <%= link_to root_path do %>
-    <i class="fa-sharp fa-solid fa-house"></i>
+    <i class="fa-sharp fa-solid fa-house fa-lg"></i>
   <% end %>
   <% if user_signed_in? %>
     <%= link_to settings_path do %>
-      <i class="fa-sharp fa-solid fa-gear"></i>
+      <i class="fa-sharp fa-solid fa-gear fa-lg"></i>
     <% end %>
   <% end %>
   <% if user_signed_in? %>
-    <i class="fa-sharp fa-solid fa-square-plus" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+    <i class="fa-sharp fa-solid fa-square-plus fa-lg" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
   <% end %>
+
+      <% if user_signed_in? %>
+      <%= link_to notifications_path do %>
+        <i class="fa-sharp fa-solid fa-bell fa-lg"></i>
+      <% end %>
+    <% end %>
   </div>
 
 
