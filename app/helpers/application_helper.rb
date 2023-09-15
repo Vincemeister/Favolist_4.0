@@ -23,19 +23,25 @@ module ApplicationHelper
 
     grid_class = case required_products.length
                  when 1 then "list-card-background-grid-1"
-                 when 4 then "list-card-background-grid-4"
-                 when 9 then "list-card-background-grid-9"
+                 when 2..4 then "list-card-background-grid-4"
+                 when 5..9 then "list-card-background-grid-9"
                  else "list-card-background-grid-16"
                  end
 
     [tiles.join.html_safe, grid_class]
   end
 
-
   private
 
-  def fill_tiles(tiles, desired_count, color)
-    while tiles.count < desired_count
+  def fill_tiles(tiles, current_count, color)
+    target_count = case current_count
+                   when 1 then 1
+                   when 2..4 then 4
+                   when 5..9 then 9
+                   else 16
+                   end
+
+    while tiles.count < target_count
       tiles << "<div class='tile' style='background-image: linear-gradient(#{color}, #{color})'></div>"
     end
   end

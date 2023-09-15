@@ -4,7 +4,7 @@
     <div class="<%= grid_class %>">
       <%= tiles.html_safe %>
       <div class="list-card-content <%= local_assigns[:iterating_for] == "sidebar" ? "list-card-content-sidebar" : "" %> ">
-        <% unless controller_name = "users" && action_name == "show"  %>
+        <% unless controller_name == "users" && action_name == "show"  %>
 
           <div class="user-info">
             <%= image_tag list.user.avatar, class: "avatar-small" %>
@@ -35,7 +35,7 @@
 
 
 <div class="list-card-mobile-container">
-  <% unless controller_name = "users" && action_name == "show"  %>
+  <% unless controller_name == "users" && action_name == "show"  %>
     <div class="user-info-mobile">
       <%= image_tag list.user.avatar, class: "avatar-small" %>
       <div class="user-text-mobile">
