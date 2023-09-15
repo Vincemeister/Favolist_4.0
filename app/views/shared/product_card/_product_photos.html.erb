@@ -9,7 +9,7 @@
       <% photos.each_with_index do |photo, index| %>
         <div class="carousel-item <%= 'active' if index.zero? %>">
           <div class="image-container">
-            <%= cl_image_tag(photo.key, class: "d-block") %>
+            <%= cl_image_tag(photo.key, class: "d-block", loading: "lazy") %>
           </div>
         </div>
       <% end %>

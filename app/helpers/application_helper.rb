@@ -2,28 +2,26 @@ module ApplicationHelper
   include CloudinaryHelper
 
   def generate_tiled_background(list, default_color = "$neutral-300")
-    products = list.products
     tiles = []
-    number_of_tiles = if products.count.between?(1, 3)
-                        1
-                      elsif products.count.between?(4, 8)
-                        4
-                      elsif products.count.between?(9, 15)
-                        9
-                      else
-                        16
-                      end
+    products_with_photos = list.products.select { |p| p.photos.attached? }
 
-    number_of_tiles.times do |i|
-      if products[i] && products[i].photos.attached?
-        tiles << "<div class='tile' style='background-image: url(#{cl_image_path(products[i].photos.first.key)})'></div>"
-      else
-        tiles << "<div class='tile' style='background-image: linear-gradient(#{default_color}, #{default_color})'></div>"
-      end
+    # Get the required number of products based on the count
+    required_products = case products_with_photos.count
+                        when 1..3 then products_with_photos.first(1)
+                        when 4..8 then products_with_photos.first(4)
+                        when 9..15 then products_with_photos.first(9)
+                        else products_with_photos.first(16)
+                        end
 
+    # Generate the tiles for the required products
+    required_products.each do |product|
+      tiles << "<div class='tile' style='background-image: url(#{cl_image_path(product.photos.first.key)})'></div>"
     end
 
-    grid_class = case number_of_tiles
+    # Fill in any missing tiles
+    fill_tiles(tiles, required_products.length, default_color)
+
+    grid_class = case required_products.length
                  when 1 then "list-card-background-grid-1"
                  when 4 then "list-card-background-grid-4"
                  when 9 then "list-card-background-grid-9"
@@ -32,6 +30,7 @@ module ApplicationHelper
 
     [tiles.join.html_safe, grid_class]
   end
+
 
   private
 

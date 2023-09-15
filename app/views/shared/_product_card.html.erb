@@ -47,7 +47,7 @@
 
       <div class="avatar-and-username">
         <%= link_to user_path(product.user) do %>
-          <%= image_tag product.user.avatar, class: 'avatar-small', loading: "lazy" %>
+          <%= image_tag product.user.avatar, class: 'avatar-small'%>
         <% end %>
         <%= link_to user_path(product.user) do %>
           <div class="username paragraph-small-medium">
@@ -67,7 +67,7 @@
     <% if local_assigns[:iterating_for] == "product_show_page" %>
       <% if product.logo.present? %>
         <%= link_to product.url, target: "_blank", rel: "noopener noreferrer" do %>
-          <%= image_tag product.logo, class: 'logo' %>
+          <%= image_tag product.logo, class: 'logo'%>
         <% end %>
       <% end %>
 

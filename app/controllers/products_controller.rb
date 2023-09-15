@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy, :comments, :bookmark, :unbookmark]
 
   def index
-    @products = Product.viewable_by(current_user)
+    @products = Product.all
     @user_bookmarks = []
 
     if current_user

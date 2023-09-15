@@ -26,7 +26,9 @@ class PagesController < ApplicationController
 
   def search
     @products = Product.all.includes(:list, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
-    @lists = List.all.includes(:products, :user)
+    @lists = List.all.includes(:user, products: [{photos_attachments: :blob}])
+    # @lists = List.all.includes(:user, products: [{photos_attachments: :blob}])
+
     @referrals = Referral.all.includes(:product)
     @users = User.with_attached_avatar.includes(:followers).all
 
