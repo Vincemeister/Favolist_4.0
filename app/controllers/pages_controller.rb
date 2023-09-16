@@ -26,7 +26,8 @@ class PagesController < ApplicationController
 
   def search
     @products = Product.all.includes(:list, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
-    @lists = List.all.includes(:user, products: [{photos_attachments: :blob}])
+    @lists = List.all.includes(:user, background_image_attachment: :blob)
+
     # @lists = List.all.includes(:user, products: [{photos_attachments: :blob}])
 
     @referrals = Referral.all.includes(:product)
@@ -76,7 +77,7 @@ class PagesController < ApplicationController
 
   def creators
     @products = Product.includes(list: :user, photos_attachments: :blob, list: {user: {avatar_attachment: :blob}}).where(lists: { users: { is_creator: true }})
-    @lists = List.includes(:products, :user).where(users: { is_creator: true })
+    @lists = List.includes(:user, background_image_attachment: :blob).where(users: { is_creator: true })
     @referrals = Referral.includes(product: { list: :user }).where(products: { lists: { users: { is_creator: true }}})
     @users = User.with_attached_avatar.includes(:followers).where(is_creator: true).all
 

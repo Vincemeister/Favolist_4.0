@@ -34,8 +34,13 @@ class List < ApplicationRecord
     User.viewable_by(user).include?(self.user)
   end
 
+
   def regenerate_background
     puts "Regenerating background for List: #{id}"
+
+    # Destroy the old background_image blob, if it exists
+    background_image.purge if background_image.attached?
+
     new_image = generate_background_image
     puts "Generated Image: #{new_image.inspect}"
 
@@ -47,7 +52,8 @@ class List < ApplicationRecord
     uploaded_image = Cloudinary::Uploader.upload(file, public_id: "list_backgrounds/#{id}")
     # Attach the Cloudinary URL to the List instance via Active Storage
     background_image.attach(io: URI.open(uploaded_image['url']), filename: "list_background_#{id}.jpg")
-  end
+end
+
 
 
   def generate_background_image
@@ -63,7 +69,7 @@ class List < ApplicationRecord
         if photo
           cloudinary_base = "https://res.cloudinary.com/dncij7vr6/image/upload"
           cloudinary_path = "v1/development"
-          cloudinary_transformations = "c_fill,h_100,w_100"
+          cloudinary_transformations = "c_fill,h_400,w_400"
 
           # Construct the new Cloudinary URL
           cloudinary_url = "#{cloudinary_base}/#{cloudinary_transformations}/#{cloudinary_path}/#{photo.key}"
@@ -80,7 +86,7 @@ class List < ApplicationRecord
           img = Magick::Image.from_blob(img_data).first
           img_list << img
         else
-          img_list << Magick::Image.new(100, 100) { |img| img.background_color = 'gray' }
+          img_list << Magick::Image.new(400, 400) { |img| img.background_color = 'gray' }
         end
       end
 
@@ -93,17 +99,17 @@ class List < ApplicationRecord
         combined_image = img_list.first
       when 4
         combined_image = img_list.montage do |montage|
-          montage.geometry = '100x100+0+0'
+          montage.geometry = '400x400+0+0'
           montage.tile = '2x2'
         end.first # extract the image from the ImageList
       when 9
         combined_image = img_list.montage do |montage|
-          montage.geometry = '100x100+0+0'
+          montage.geometry = '400x400+0+0'
           montage.tile = '3x3'
         end.first
       when 16
         combined_image = img_list.montage do |montage|
-          montage.geometry = '100x100+0+0'
+          montage.geometry = '400x400+0+0'
           montage.tile = '4x4'
         end.first # extract the image from the ImageList
       end
