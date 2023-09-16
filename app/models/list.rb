@@ -68,7 +68,7 @@ end
       photos_for_grid.each do |photo|
         if photo
           cloudinary_base = "https://res.cloudinary.com/dncij7vr6/image/upload"
-          cloudinary_path = "v1/development"
+          cloudinary_path = Rails.env.production? ? "v1/production" : "v1/development"
           cloudinary_transformations = "c_fill,h_400,w_400"
 
           # Construct the new Cloudinary URL
