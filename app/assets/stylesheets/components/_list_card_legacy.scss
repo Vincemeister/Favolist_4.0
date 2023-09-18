@@ -1,0 +1,141 @@
+.list-card-legacy {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+
+  .list-card-background-grid-1 {
+    display: grid;
+    grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  height: 100%;
+  width: 100%;
+  grid-gap: 0;
+  }
+
+  .list-card-background-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    height: 100%;
+    width: 100%;
+    grid-gap: 0;
+  }
+
+  .list-card-background-grid-9 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    width: 100%;
+    height: 100%;
+    grid-gap: 0;
+  }
+
+  .list-card-background-grid-16 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    width: 100%;
+    height: 100%;
+    grid-gap: 0;
+  }
+
+  .tile {
+    background-size: cover;
+    background-position: center;
+    height: 100%; /* Set height to fill the parent grid item */
+    width: 100%; /* Set width to fill the parent grid item */
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+  /* text within the grid */
+  .list-card-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    color: #fff;
+    text-align: start;
+    padding: 1em;
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5em;
+    }
+
+    .product-count-and-list-name {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      justify-content: center;
+      height: 100%;
+    }
+
+    hr {
+      width: 6em;
+      margin: 1em 0;
+      color: white;
+      border: none; /* This is to get rid of the default border */
+      height: 2px; /* This is your thickness */
+      background: white; /* This is your color */
+      opacity: 1; /* Reset opacity */
+    }
+
+    .line-height-1-25 {
+      line-height: 1.25;
+    }
+  }
+
+  .list-card-content-sidebar {
+
+    // .product-count-and-list-name {
+    //   margin-top: 2em;
+    // }
+
+    hr {
+      width: 4.5em;
+      height: 1px;
+      margin: 0.5em 0;
+    }
+  }
+
+  /*
+  In this code, we're creating a pseudo-element ::after for each grid class. This pseudo-element is positioned absolutely to cover the entire area of its parent grid. The background: rgba(0, 0, 0, 0.5); applies a semi-transparent black color over the whole grid area.
+  However, note that this will darken the entire grid, not just the individual tiles. If you have content within the grid that you don't want to be darkened (like text or other elements), this might not be the solution you want. You may need to apply the darkening directly to the .tile class instead to only affect the backgrounds of the tiles.
+  Also, remember that with this solution, any content in the grid needs to have a higher z-index than the ::after pseudo-element to be visible on top of the overlay.*/
+  .list-card-background-grid-1,
+  .list-card-background-grid-4,
+  .list-card-background-grid-9,
+  .list-card-background-grid-16 {
+    position: relative;
+  }
+
+  .list-card-background-grid-1::after,
+  .list-card-background-grid-4::after,
+  .list-card-background-grid-9::after,
+  .list-card-background-grid-16::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.45);
+  }
+
+}
+
+
+@media(max-width: 992px) {
+  .list-card {
+    display: none;
+  }
+}

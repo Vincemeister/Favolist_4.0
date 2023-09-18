@@ -33,17 +33,17 @@
           align-items: center;
           z-index: 2;  // Ensures the user info is above the overlay.
 
-          .avatar-small {
-              /* Add any specific styles for the avatar. */
-          }
-
           .user-text {
               .username {
-                  font-size: 1em; // For desktop
+                font-size: $font-size-paragraph-small;
+                font-weight: $semi-bold;
+                line-height: $line-height-paragraph-small;
               }
 
               .followers {
-                  font-size: 0.8em; // For desktop
+                font-size: $font-size-paragraph-small;
+                font-weight: $regular;
+                line-height: $line-height-paragraph-small;
               }
           }
       }
@@ -52,15 +52,18 @@
         position: absolute;
         top: 50%;
         transform: translateY(-50%);  // Centering vertically.
-        left: 1em;  // This gives it some space from the left edge.
+        padding: 0em 1em;  // This gives it some space from the left edge.
         z-index: 2;  // Ensures it's above the overlay.
 
         .list-name {
             font-size: 1.5em; // For desktop
+            font-weight: $bold;
+            line-height: 1.25;
+
         }
 
         .product-count {
-            font-size: 1em; // For desktop
+    
         }
       }
   }

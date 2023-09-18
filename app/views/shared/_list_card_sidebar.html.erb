@@ -1,5 +1,5 @@
 <%= link_to list_path(list), class: "text-decoration-none" do %>
-    <div class="list-card">
+    <div class="list-card-sidebar">
       <% tiles, grid_class = generate_tiled_background(list) %>
       <div class="<%= grid_class %>">
         <%= tiles.html_safe %>
@@ -14,7 +14,7 @@
           </div>
           <div class="product-count-and-list-name">
             <h6 class="list-name bold line-height-1-25"><%= list.name %></h6>
-            <div class="paragraph-small-regular">
+            <div class="paragraph-small-regular">z
               <span class="semi-bold"><%= list.products.count %></span>
               <%= "products".pluralize(list.products.count) %>
             </div>
