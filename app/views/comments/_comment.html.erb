@@ -13,13 +13,19 @@
     </div>
     <div class="comment-date-and-reply">
       <span class="comment-date-and-reply-button"><%= time_ago_in_words(comment.created_at, include_seconds: false).gsub('about', '').gsub(/minute(s)?\s*/, 'm').gsub(/hour(s)?\s*/, 'h').gsub(/day(s)?\s*/, 'd').gsub(' m', 'm').gsub(' h', 'h').gsub(' d', 'd') %></span>
-      <span class="comment-date-and-reply-button" data-action="click->replies-and-comments#togglereplyform">Reply</span>
+      <% if current_user.present? %>
+        <span class="comment-date-and-reply-button" data-action="click->replies-and-comments#togglereplyform">Reply</span>
+      <% end %>
+
       <% if comment.user == current_user %>
         <%= button_to 'Delete', comment_path(comment), method: :delete, class: 'comment-date-and-reply-button' %>
       <% end %>
     </div>
     <% if context = "comment" %>
-      <%= render "comments/direct_reply_form", product: comment.product, parent_comment: comment, reply: Comment.new, remote: true %>
+      <% if current_user.present? %>
+        <%= render "comments/direct_reply_form", product: comment.product, parent_comment: comment, reply: Comment.new, remote: true %>
+      <% end %>
+
       <div class="comment-replies-container" data-replies-and-comments-target="commentlastreplies">
         <% if comment.replies.any? %>
             <%= render "comments/comment_reply", reply: comment.replies.last, parent_comment: comment, product: comment.product %>

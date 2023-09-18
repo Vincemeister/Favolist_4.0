@@ -44,7 +44,10 @@
         <div class="comment-date-and-reply">
           <span class="comment-date-and-reply-button"><%= time_ago_in_words(@comment.created_at, include_seconds: false).gsub('about', '').gsub(/minute(s)?\s*/, 'm').gsub(/hour(s)?\s*/, 'h').gsub(/day(s)?\s*/, 'd').gsub(' m', 'm').gsub(' h', 'h').gsub(' d', 'd') %></span>
           <%# In the /comments/show page, the reply button autoselects the commentform at the bottom and does not toggle the direct_replies_form as in the products/show page %>
-          <span class="comment-date-and-reply-button" data-action="click->comments#selectcommentform">Reply</span>
+          <% if current_user.present? %>
+            <span class="comment-date-and-reply-button" data-action="click->comments#selectcommentform">Reply</span>
+          <% end %>
+
           <% if @comment.user == current_user %>
             <%= button_to 'Delete', comment_path(@comment), method: :delete, class: 'comment-date-and-reply-button' %>
           <% end %>
@@ -84,8 +87,8 @@
   <!-- so the scrolling after comment submission works  -->
   <div class="scroll-point h-300">
   </div>
-  <%= render 'comments/commentform', product: @product, comment: Comment.new, parent_comment: @comment, context: "reply", remote: true %>
+  <% if current_user.present? %>
+    <%= render 'comments/commentform', product: @product, comment: Comment.new, parent_comment: @comment, context: "reply", remote: true %>
+  <% end %>
 
 </div>
-
-
