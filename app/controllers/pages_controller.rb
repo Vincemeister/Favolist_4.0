@@ -31,7 +31,12 @@ class PagesController < ApplicationController
 
 
   def search
-    @products = Product.all.includes(:list, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
+    @page = params[:page] || 1
+    @products = Product.viewable_by(current_user)
+                       .includes(:list, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
+                       .page(@page)
+
+
     @lists = List.all.includes(:user, background_image_attachment: :blob)
 
     # @lists = List.all.includes(:user, products: [{photos_attachments: :blob}])
