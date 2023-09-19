@@ -31,6 +31,7 @@ class PagesController < ApplicationController
 
 
   def search
+    @pagination_url = search_url
     @page = params[:page] || 1
     @products = Product.viewable_by(current_user)
                        .includes(:list, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
@@ -93,7 +94,9 @@ class PagesController < ApplicationController
 
 
   def creators
-    @products = Product.includes(list: :user, photos_attachments: :blob, list: {user: {avatar_attachment: :blob}}).where(lists: { users: { is_creator: true }})
+    @pagination_url = creators_url
+    @page = params[:page] || 1
+    @products = Product.includes(list: :user, photos_attachments: :blob, list: {user: {avatar_attachment: :blob}}).where(lists: { users: { is_creator: true }}).page(@page)
     @lists = List.includes(:user, background_image_attachment: :blob).where(users: { is_creator: true })
     @referrals = Referral.includes(product: { list: :user }).where(products: { lists: { users: { is_creator: true }}})
     @users = User.with_attached_avatar.includes(:followers).where(is_creator: true).all
@@ -105,12 +108,13 @@ class PagesController < ApplicationController
     end
 
     if params[:query].present?
+      @page = params[:page] || 1
       # First execute the pg_search query
       search_products = Product.search_by_title_and_description_and_list_name_and_user_username(params[:query]).where(lists: { users: { is_creator: true }})
       search_lists = List.search_by_name_and_description_and_product_title_and_user_username(params[:query]).where(users: { is_creator: true })
 
       # Then filter the results with the viewable_by scope
-      @products = Product.where(id: search_products.pluck(:id)).viewable_by(current_user)
+      @products = Product.where(id: search_products.pluck(:id)).viewable_by(current_user).page(@page)
       @lists = List.where(id: search_lists.pluck(:id)).viewable_by(current_user)
 
       # Different logic for referrals at this time

@@ -19,11 +19,20 @@
 
 <div class="tab-content product-content" id="pills-tabContent">
   <div class="tab-pane fade show active linebreak" id="pills-products" role="tabpanel" aria-labelledby="pills-products-tab">
-    <div class="card-grid">
-      <% @products.each do |product| %>
-        <%= render 'shared/product_card', product: product, iterating_for: "user_show_page"  %>
-      <% end %>
+    <%# <div class="card-grid"> %>
+      <%# <% @products.each do |product| %>
+        <%# <%= render 'shared/product_card', product: product, iterating_for: "user_show_page"  %>
+      <%# <% end %>
+    <%# </div> %>
+
+    <div id="products" class="card-grid"
+    data-controller="pagination"
+    data-pagination-target="products"
+    data-pagination-url-value="<%= user_url(@user) %>"
+    data-pagination-page-value="<%= 2 %>">
+      <%= render @products%>
     </div>
+
   </div>
   <div class="tab-pane fade linebreak" id="pills-lists" role="tabpanel" aria-labelledby="pills-lists-tab">
     <div class="list-card-grid">

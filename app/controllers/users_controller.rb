@@ -55,7 +55,13 @@ class UsersController < ApplicationController
   end
 
   def show
+    @pagination_url = search_url
+    @page = params[:page] || 1
+
     @products = @user.products
+    @products = @user.products.includes(:list, photos_attachments: :blob, user: [{avatar_attachment: :blob}]).page(@page)
+
+
     @user_bookmarks = []
 
     if current_user
