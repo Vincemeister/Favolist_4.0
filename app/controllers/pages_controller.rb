@@ -4,7 +4,12 @@ class PagesController < ApplicationController
   def home
     @start_product_id = params[:product_id]
 
-    @products = Product.viewable_by(current_user).includes(:list, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
+    @page = params[:page] || 1
+    @products = Product.viewable_by(current_user)
+                       .includes(:list, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
+                       .page(@page)
+
+
     @user_bookmarks = []
 
     if current_user
@@ -23,6 +28,7 @@ class PagesController < ApplicationController
     @suggested_lists = [random_list] if random_list
 
   end
+
 
   def search
     @products = Product.all.includes(:list, photos_attachments: :blob, user: [{avatar_attachment: :blob}])

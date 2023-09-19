@@ -10,8 +10,19 @@
 </div>
 
 
-<div class="card-grid-home">
-  <% @products.each do |product| %>
-    <%= render 'shared/product_card', product: product, suggested_users: @suggested_users, iterating_for: "home_feed" %>
-  <% end %>
+<%# <div class="card-grid-home"> %>
+  <%# <% @products.each do |product| %>
+    <%# <%= render 'shared/product_card', product: product, suggested_users: @suggested_users, iterating_for: "home_feed" %>
+  <%# <% end %>
+<%# </div> %>
+
+
+
+
+<div id="products" class="card-grid-home"
+  data-controller="pagination"
+  data-pagination-target="products"
+  data-pagination-url-value="<%= root_url %>"
+  data-pagination-page-value="<%= 2 %>">
+    <%= render @products%>
 </div>
