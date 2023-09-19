@@ -7,12 +7,15 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy, :comments, :bookmark, :unbookmark]
 
   def index
-    @products = Product.all
     @user_bookmarks = []
+    @page = params[:page] || 1
+    @products = Product.page @page
 
     if current_user
       @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
     end
+
+
 
 
   end

@@ -87,7 +87,7 @@ gem "redis-actionpack", "~> 5.3" # Redis session store for ActionPack
 gem 'bullet', group: 'development'
 gem 'rack-mini-profiler'
 gem 'rmagick' # to generate tiled backgrounds
-
+gem 'kaminari' # pagination
 
 
 
