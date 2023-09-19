@@ -87,9 +87,11 @@ class PagesController < ApplicationController
 
 
     respond_to do |format|
-      format.html # Follow regular flow of Rails
+      format.html
+      format.turbo_stream
       format.text { render partial: "pages/search_results", locals: {products: @products, lists: @lists, referrals: @referrals, users: @users }, formats: [:html] }
     end
+
   end
 
 
@@ -137,6 +139,7 @@ class PagesController < ApplicationController
 
     respond_to do |format|
       format.html # Follow regular flow of Rails
+      format.turbo_stream
       format.text { render partial: "pages/search_results", locals: { products: @products, lists: @lists, referrals: @referrals, users: @users }, formats: [:html] }
     end
   end
