@@ -1,0 +1,162 @@
+<div class="product-card <%= local_assigns[:iterating_for] == "product_show_page" ? 'product-card-show' : ''  %> " id="product_<%= product.id %>">
+  <div class="avatar-and-username-and-logo">
+    <% unless local_assigns[:iterating_for] == "list_show_page" %>
+
+
+
+      <% if local_assigns[:iterating_for] == "sidebar" %>
+
+      <% elsif @source == "user_show_page" %>
+        <%= link_to user_path(product.user, anchor: "product_#{product.id}"), class: "back-arrow-show-page" do %>
+          <i class="fa-regular fa-arrow-left"></i>
+        <% end %>
+
+
+
+
+      <% elsif @source == "user_show_page_referrals" %>
+        <%= link_to user_path(product.user, anchor: "referral_#{product.referral.id}", tab: 'pills-referrals-tab'), class: "back-arrow-show-page" do %>
+          <i class="fa-regular fa-arrow-left"></i>
+        <% end %>
+
+
+
+
+
+
+      <% elsif @source == "list_show_page" %>
+        <%= link_to list_path(product.list, anchor: "product_#{product.id}"), class: "back-arrow-show-page" do %>
+          <i class="fa-regular fa-arrow-left"></i>
+        <% end %>
+      <% elsif @source == "home_feed" %>
+        <%= link_to root_path(anchor: "product_#{product.id}"), class: "back-arrow-show-page" do %>
+          <i class="fa-regular fa-arrow-left"></i>
+        <% end %>
+
+      <% elsif @source == "search_feed" %>
+        <%= link_to search_path, class: "back-arrow-show-page" do %>
+          <i class="fa-regular fa-arrow-left"></i>
+        <% end %>
+      <% elsif @source == "user_referrals" %>
+        <%= link_to user_path(product.user), class: "back-arrow-show-page" do %>
+          <i class="fa-regular fa-arrow-left"></i>
+        <% end %>
+      <% end %>
+
+
+
+      <div class="avatar-and-username">
+        <%= link_to user_path(product.user) do %>
+          <%= image_tag product.user.avatar, class: 'avatar-small'%>
+        <% end %>
+        <%= link_to user_path(product.user) do %>
+          <div class="username paragraph-small-medium">
+            <%= product.user.username %>
+            <span class="comment-date-and-reply-button">  •  <%= time_ago_in_words(product.created_at, include_seconds: false).gsub('about', '').gsub(/minute(s)?\s*/, 'm').gsub(/hour(s)?\s*/, 'h').gsub(/day(s)?\s*/, 'd').gsub(' m', 'm').gsub(' h', 'h').gsub(' d', 'd') %></span>
+
+          </div>
+          <div class="list-name paragraph-small-regular">
+            <%= product.list.name %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div></div>
+    <% end %>
+
+    <% if local_assigns[:iterating_for] == "product_show_page" %>
+      <% if product.logo.present? %>
+        <%= link_to product.url, target: "_blank", rel: "noopener noreferrer" do %>
+          <%= image_tag product.logo, class: 'logo'%>
+        <% end %>
+      <% end %>
+
+    <% elsif local_assigns[:iterating_for] == "sidebar" %>
+
+
+
+    <% else %>
+      <i class="fa-sharp fa-regular fa-ellipsis" data-bs-toggle="modal" data-bs-target="#editOrDeleteModal-<%= product.id %>"></i>
+    <% end %>
+
+
+
+  </div>
+
+  <% unless local_assigns[:iterating_for] == "product_show_page"  %>
+    <%= link_to product_path(product, source: (local_assigns[:iterating_for] unless local_assigns[:iterating_for] == "sidebar")), class: "product-card-image" do %>
+      <%= render 'shared/product_card/product_photos', product: product, photos: product.photos  %>
+    <% end %>
+  <% else %>
+  <div class="product-card-image">
+    <%= render 'shared/product_card/product_photos', product: product, photos: product.photos %>
+  </div>
+  <% end %>
+
+
+
+
+
+
+
+
+  <div class="cardbar-and-text-container">
+    <%= render "shared/product_card/cardbar", product: product, iterating_for: local_assigns[:iterating_for], source: @source  %>
+    <!--RENDERING THE PRODUCT SHOW TABS OR THE PARTIAL REVIEW OF THE PRODUCT CARD N THE FEED -->
+    <% if local_assigns[:iterating_for] == "product_show_page" %>
+      <%= render "shared/product_card/product_show_tabs", product: product %>
+    <% else %>
+      <% unless local_assigns[:iterating_for] == "sidebar" %>
+        <div class="product-card-review content-text">
+          <%= link_to product_path(product, source: local_assigns[:iterating_for]) do %>
+            <div class="truncate-3-lines content-text text-start">
+              <%= product.review%>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+</div>
+
+
+<!-- Edit or delete modal -->
+<div class="modal fade" id="editOrDeleteModal-<%= product.id %>" tabindex="-1" aria-labelledby="editOrDeleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%= product.title %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body custom-modal-body ">
+        <%# // to achieve a gap between the buttons on the modal I set a mb-1 %>
+        <%= link_to edit_product_path(product), class: "button button-tertiary w-100 mb-3" do %>
+          Edit
+        <% end %>
+        <div class="button button-danger w-100" data-bs-target="#deleteModal-<%= product.id %>" data-bs-toggle="modal" data-bs-dismiss="modal"> Delete</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Delete modal -->
+<div class="modal fade" id="deleteModal-<%= product.id %>" aria-hidden="true" aria-labelledby="deleteModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-0 d-flex flex-end">
+        <%# empty button to create space between the icon and the close button %>
+        <div class="btn-close invisible"></div>
+        <i class="fa-sharp fa-light fa-trash-can fa-2xl custom-modal-icon"></i>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body custom-modal">
+        <h5>Are you sure you want to delete this listing?</h5>
+        <p>All related data including comments will be permanently deleted.</p>
+        <button type="button w-100" class="button button-tertiary w-100" data-bs-dismiss="modal">No, I want to keep this listing.</button>
+        <%= link_to 'Yes, please delete', product_path(product),  data: {turbo_method: :delete}, class: "button button-danger w-100" %>
+      </div>
+    </div>
+  </div>
+</div>
