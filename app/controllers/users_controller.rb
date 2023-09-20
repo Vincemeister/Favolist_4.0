@@ -55,6 +55,8 @@ class UsersController < ApplicationController
   end
 
   def show
+
+    
     @pagination_url = search_url
     @page = params[:page] || 1
 

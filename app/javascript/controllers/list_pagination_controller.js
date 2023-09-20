@@ -1,60 +1,62 @@
+// lists_pagination_controller.js
+
 import { Controller } from "@hotwired/stimulus";
 import { get } from "@rails/request.js";
 
-// The HTML code for the spinner.
 const spinner = `
   <div class="col-span-12 container mx-auto h-24 mb-8" id="spinner">
     <div class="loader">Loading...</div>
   </div>`;
 
 export default class extends Controller {
-  fetching = false; // debounce
-  static hasProductScrollListener = true;  // Add this line to initialize a flag
+  fetching = false;
+  static hasListScrollListener = false; // flag for lists
 
 
   static values = {
     url: String,
     page: { type: Number, default: 1 },
+    activeTab: String
   };
 
-  static targets = ["products", "noRecords"];
+  static targets = ["lists", "noRecords"];
 
   initialize() {
     this.scroll = this.scroll.bind(this);
   }
 
   connect() {
-    console.log("product pagination connected");
+    console.log("list pagination connected");
     console.log("Initial urlValue:", this.urlValue);
     console.log("Initial pageValue:", this.pageValue);
+    console.log("Initial activeTabValue:", this.activeTabValue);
 
   }
 
   tabShown() {
-    if (!this.constructor.hasProductScrollListener) {
+    if (!this.constructor.hasListScrollListener) {
         document.addEventListener('scroll', this.scroll);
-        this.constructor.hasProductScrollListener = true;
+        this.constructor.hasListScrollListener = true;
+    }
+}
+
+tabHidden() {
+    if (this.constructor.hasListScrollListener) {
+        document.removeEventListener('scroll', this.scroll);
+        this.constructor.hasListScrollListener = false;
     }
 }
 
 
-tabHidden() {
-  if (this.constructor.hasProductScrollListener) {
-      document.removeEventListener('scroll', this.scroll);
-      this.constructor.hasProductScrollListener = false;
-  }
-}
+
 
   scroll() {
     if (this.#pageEnd && !this.fetching && !this.hasNoRecordsTarget) {
-      // Add the spinner at the end of the page.
-      this.productsTarget.insertAdjacentHTML("beforeend", spinner);
-
+      this.listsTarget.insertAdjacentHTML("beforeend", spinner);
       this.#loadRecords();
     }
   }
 
-  // Send a turbo-stream request to the controller.
 
 
 
@@ -66,10 +68,9 @@ tabHidden() {
     console.log("url:", url);
     url.searchParams.set("page", this.pageValue);
     console.log("page", this.pageValue)
-    url.searchParams.set("type", "product");
+    url.searchParams.set("type", "list");
     console.log("params", url.searchParams)
     console.log("url", url)
-
 
 
     this.fetching = true;
@@ -79,11 +80,11 @@ tabHidden() {
     });
     console.log("Finished loading records...");
 
+
     this.fetching = false;
     this.pageValue += 1;
   }
 
-  // Detect if we're at the bottom of the page.
   get #pageEnd() {
     const { scrollHeight, scrollTop, clientHeight } = document.documentElement;
     return scrollHeight - scrollTop - clientHeight < 40;

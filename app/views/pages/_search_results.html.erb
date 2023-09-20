@@ -5,31 +5,40 @@
 
 
   <div class="tab-content product-content" id="pills-tabContent">
+
+
+
     <div class="tab-pane fade show active linebreak" id="pills-products" role="tabpanel" aria-labelledby="pills-products-tab">
-      <%# <div class="card-grid" data-search-target="products">
-        <%# <% products.each do |product| %>
-          <%# <%= render 'shared/product_card', product: product, iterating_for: "search_feed" %>
-        <%# <% end %>
-      <%# </div> %>
-
-
       <div id="products" class="card-grid" data-search-target="products"
-        data-controller="pagination"
         data-pagination-target="products"
         data-pagination-url-value="<%= @pagination_url%>"
-        data-pagination-page-value="<%= 2 %>">
-          <%= render @products%>
+        data-pagination-page-value="<%= 2%>">
+
+       <% if @products %>
+        <%= render @products %>
+      <% end %>
+
       </div>
-
-
     </div>
+
+
+
     <div class="tab-pane fade linebreak" id="pills-lists" role="tabpanel" aria-labelledby="pills-lists-tab">
-      <div class="list-card-grid" data-search-target="lists">
-        <% lists.each do |list| %>
-          <%= render 'shared/list_card', list: list %>
-        <% end %>
+      <div id="lists" class="list-card-grid" data-search-target="lists"
+        data-list-pagination-target="lists"
+        data-list-pagination-url-value="<%= @pagination_url%>"
+        data-list-pagination-page-value="<%= 2 %>">
+       <% if @lists %>
+  <%= render @lists %>
+<% end %>
+
       </div>
     </div>
+
+
+
+
+
     <div class="tab-pane fade linebreak" id="pills-referrals" role="tabpanel" aria-labelledby="pills-referrals-tab">
       <div class="card-grid" data-search-target="referrals">
         <% referrals.each do |referral| %>
