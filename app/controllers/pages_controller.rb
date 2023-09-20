@@ -51,13 +51,14 @@ class PagesController < ApplicationController
 
     @product_page = params[:page] || 1
     @list_page = params[:page] || 1
+    @referral_page = params[:page] || 1
+    @user_page = params[:page] || 1
 
 
 
 
 
     @users = User.with_attached_avatar.includes(:followers).all
-    @referrals = Referral.all.includes(:product)
 
     if current_user
       @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
@@ -83,6 +84,10 @@ class PagesController < ApplicationController
         @lists = List.viewable_by(current_user)
                      .includes(:user, background_image_attachment: :blob)
                      .page(@list_page)
+      when "referral"
+        @referrals = Referral.viewable_by(current_user).page(@referral_page)
+      when "user"
+        @users = User.with_attached_avatar.includes(:followers).all.page(@user_page)
       end
     end
 
@@ -175,6 +180,18 @@ class PagesController < ApplicationController
 
 
   def creators
+
+
+    @type = params[:type] || "product"  # default to product if no type is given
+    @pagination_url = creators_url
+
+    @product_page = params[:page] || 1
+    @list_page = params[:page] || 1
+
+
+
+
+
     @pagination_url = creators_url
     @page = params[:page] || 1
     @products = Product.includes(list: :user, photos_attachments: :blob, list: {user: {avatar_attachment: :blob}}).where(lists: { users: { is_creator: true }}).page(@page)

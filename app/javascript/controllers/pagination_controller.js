@@ -8,9 +8,7 @@ const spinner = `
   </div>`;
 
 export default class extends Controller {
-  fetching = false; // debounce
-  static hasProductScrollListener = true;  // Add this line to initialize a flag
-
+  static fetching = false; // debounce
 
   static values = {
     url: String,
@@ -24,26 +22,8 @@ export default class extends Controller {
   }
 
   connect() {
-    console.log("product pagination connected");
-    console.log("Initial urlValue:", this.urlValue);
-    console.log("Initial pageValue:", this.pageValue);
-
+    document.addEventListener("scroll", this.scroll);
   }
-
-  tabShown() {
-    if (!this.constructor.hasProductScrollListener) {
-        document.addEventListener('scroll', this.scroll);
-        this.constructor.hasProductScrollListener = true;
-    }
-}
-
-
-tabHidden() {
-  if (this.constructor.hasProductScrollListener) {
-      document.removeEventListener('scroll', this.scroll);
-      this.constructor.hasProductScrollListener = false;
-  }
-}
 
   scroll() {
     if (this.#pageEnd && !this.fetching && !this.hasNoRecordsTarget) {
@@ -55,29 +35,15 @@ tabHidden() {
   }
 
   // Send a turbo-stream request to the controller.
-
-
-
   async #loadRecords() {
-    console.log("Loading records...");
-
-    console.log("urlValue:", this.urlValue);
-    const url = new URL("http://localhost:3000/pages/search");
-    console.log("url:", url);
+    const url = new URL(this.urlValue);
     url.searchParams.set("page", this.pageValue);
-    console.log("page", this.pageValue)
-    url.searchParams.set("type", "product");
-    console.log("params", url.searchParams)
-    console.log("url", url)
-
-
 
     this.fetching = true;
 
     await get(url.toString(), {
       responseKind: "turbo-stream",
     });
-    console.log("Finished loading records...");
 
     this.fetching = false;
     this.pageValue += 1;

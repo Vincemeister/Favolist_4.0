@@ -22,7 +22,8 @@ require "csv"
 # User.destroy_all
 # puts "Removign amazon logo..."
 
-require_relative 'data_loader'
+# require_relative 'data_loader'
+require_relative 'fast_seed'
 
 
 #----------------AMAZON LOGO--------------------------------------------------------------------------------------------

@@ -43,6 +43,12 @@ application.register("notification", NotificationController)
 import PaginationController from "./pagination_controller"
 application.register("pagination", PaginationController)
 
+import ProductPaginationController from "./product_pagination_controller"
+application.register("product-pagination", ProductPaginationController)
+
+import ReferralPaginationController from "./referral_pagination_controller"
+application.register("referral-pagination", ReferralPaginationController)
+
 import RepliesAndCommentsController from "./replies_and_comments_controller"
 application.register("replies-and-comments", RepliesAndCommentsController)
 
@@ -54,3 +60,6 @@ application.register("search", SearchController)
 
 import SlidingimagerowsController from "./slidingimagerows_controller"
 application.register("slidingimagerows", SlidingimagerowsController)
+
+import UserPaginationController from "./user_pagination_controller"
+application.register("user-pagination", UserPaginationController)
