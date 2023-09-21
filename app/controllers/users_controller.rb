@@ -55,33 +55,47 @@ class UsersController < ApplicationController
   end
 
   def show
-
-    
-    @pagination_url = search_url
-    @page = params[:page] || 1
-
-    @products = @user.products
-    @products = @user.products.includes(:list, photos_attachments: :blob, user: [{avatar_attachment: :blob}]).page(@page)
-
-
+    @products_count = @user.products.count
+    @lists_count = @user.lists.count
+    @referrals_count = @user.referrals.count
     @user_bookmarks = []
+
+    @type = params[:type] || "product"  # default to product if no type is given
+    @pagination_url = user_url(@user)
+    @product_page = params[:page] || 1
+    @list_page = params[:page] || 1
+    @referral_page = params[:page] || 1
+
+
+    case @type
+    when "product"
+      @products = @user.products.includes(:list, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
+                        .page(@product_page)
+    when "list"
+      @lists = @user.lists
+                   .includes(:user, background_image_attachment: :blob)
+                   .page(@list_page)
+    when "referral"
+      @referrals = @user.referrals.page(@referral_page)
+    end
+
 
     if current_user
       @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
     end
 
-
-    @lists = @user.lists
-    @referrals = @user.products.flat_map(&:referral).compact
     if current_user
-      # @user = current_user
       @suggested_users = User.all - current_user.followed
       @suggested_users = @suggested_users.sample(1)
     else
       @suggested_users = User.all.sample(1)
     end
-    # random_list = List.viewable_by(current_user).order("RANDOM()").first
-    # @suggested_lists = [random_list] if random_list
+
+    respond_to do |format|
+      format.html
+      format.json
+      format.turbo_stream
+    end
   end
 
   def follows

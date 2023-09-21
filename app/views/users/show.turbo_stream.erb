@@ -1,8 +1,25 @@
-<%= turbo_stream.remove "spinner" %>
-<%= turbo_stream.append "products" do %>
-  <%= render @products %>
-
-  <% if @products.page(@page.to_i + 1).out_of_range? %>
-    <span class="hidden" data-pagination-target="noRecords"></span>
+<% if @type == "product" %>
+  <%= turbo_stream.remove "spinner" %>
+  <%= turbo_stream.append "products" do %>
+    <%= render @products %>
+    <% if @products.page(@product_page.to_i + 1).out_of_range? %>
+      <span class="hidden" data-product-pagination-target="noRecords"></span>
+    <% end %>
+  <% end %>
+<% elsif @type == "list" %>
+  <%= turbo_stream.remove "spinner" %>
+  <%= turbo_stream.append "lists" do %>
+    <%= render @lists %>
+    <% if @lists.page(@list_page.to_i + 1).out_of_range? %>
+      <span class="hidden" data-list-pagination-target="noRecords"></span>
+    <% end %>
+  <% end %>
+<% elsif @type == "referral" %>
+  <%= turbo_stream.remove "spinner" %>
+  <%= turbo_stream.append "referrals" do %>
+    <%= render @referrals %>
+    <% if @referrals.page(@referral_page.to_i + 1).out_of_range? %>
+      <span class="hidden" data-referral-pagination-target="noRecords"></span>
+    <% end %>
   <% end %>
 <% end %>
