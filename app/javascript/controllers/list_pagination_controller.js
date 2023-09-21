@@ -11,6 +11,8 @@ const spinner = `
 export default class extends Controller {
   fetching = false;
   static hasListScrollListener = false; // flag for lists
+  static hasLoadedInitialRecords = false;
+
 
 
   static values = {
@@ -25,7 +27,6 @@ export default class extends Controller {
 
   connect() {
     console.log("list pagination connected");
-    console.log("Initial activeTabValue:", this.activeTabValue);
 
   }
 
@@ -34,6 +35,10 @@ export default class extends Controller {
         document.addEventListener('scroll', this.scroll);
         this.constructor.hasListScrollListener = true;
     }
+    if (!this.constructor.hasLoadedInitialRecords) {
+      this.#loadRecords();
+      this.constructor.hasLoadedInitialRecords = true;
+  }
 }
 
 tabHidden() {

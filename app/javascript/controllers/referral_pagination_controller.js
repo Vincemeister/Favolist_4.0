@@ -10,6 +10,8 @@ const spinner = `
 export default class extends Controller {
   fetching = false; // debounce
   static hasReferralScrollListener = false;  // Add this line to initialize a flag
+  static hasLoadedInitialRecords = false;
+
 
   static values = {
     page: { type: Number, default: 1 },
@@ -31,6 +33,10 @@ export default class extends Controller {
         document.addEventListener('scroll', this.scroll);
         this.constructor.hasReferralScrollListener = true;
     }
+    if (!this.constructor.hasLoadedInitialRecords) {
+      this.#loadRecords();
+      this.constructor.hasLoadedInitialRecords = true;
+  }
   }
 
   tabHidden() {
