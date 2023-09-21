@@ -10,8 +10,9 @@ const spinner = `
 
 export default class extends Controller {
   fetching = false;
-  static hasListScrollListener = false; // flag for lists
-  static hasLoadedInitialRecords = false;
+// Add these at the beginning of the class
+  hasListScrollListener = false;
+  hasLoadedInitialRecords = false;
 
 
 
@@ -31,21 +32,22 @@ export default class extends Controller {
   }
 
   tabShown() {
-    if (!this.constructor.hasListScrollListener) {
+    if (!this.hasListScrollListener) {
         document.addEventListener('scroll', this.scroll);
-        this.constructor.hasListScrollListener = true;
+        this.hasListScrollListener = true;
     }
-    if (!this.constructor.hasLoadedInitialRecords) {
-      this.#loadRecords();
-      this.constructor.hasLoadedInitialRecords = true;
-  }
-}
+    if (!this.hasLoadedInitialRecords) {
+        this.#loadRecords();
+        this.hasLoadedInitialRecords = true;
+    }
+ }
 
-tabHidden() {
-    if (this.constructor.hasListScrollListener) {
-        document.removeEventListener('scroll', this.scroll);
-        this.constructor.hasListScrollListener = false;
-    }
+
+ tabHidden() {
+  if (this.hasListScrollListener) {
+      document.removeEventListener('scroll', this.scroll);
+      this.hasListScrollListener = false;
+  }
 }
 
 

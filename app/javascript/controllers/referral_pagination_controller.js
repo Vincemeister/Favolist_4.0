@@ -9,9 +9,9 @@ const spinner = `
 
 export default class extends Controller {
   fetching = false; // debounce
-  static hasReferralScrollListener = false;  // Add this line to initialize a flag
-  static hasLoadedInitialRecords = false;
 
+  hasListScrollListener = false;
+  hasLoadedInitialRecords = false;
 
   static values = {
     page: { type: Number, default: 1 },
@@ -27,24 +27,26 @@ export default class extends Controller {
     console.log("referral pagination connected");
     console.log("trying to find out:", this.referralsTarget.dataset.referralPaginationUrlValue);
   }
-
+  
   tabShown() {
-    if (!this.constructor.hasReferralScrollListener) {
+    if (!this.hasListScrollListener) {
         document.addEventListener('scroll', this.scroll);
-        this.constructor.hasReferralScrollListener = true;
+        this.hasListScrollListener = true;
     }
-    if (!this.constructor.hasLoadedInitialRecords) {
-      this.#loadRecords();
-      this.constructor.hasLoadedInitialRecords = true;
-  }
-  }
+    if (!this.hasLoadedInitialRecords) {
+        this.#loadRecords();
+        this.hasLoadedInitialRecords = true;
+    }
+ }
 
-  tabHidden() {
-    if (this.constructor.hasReferralScrollListener) {
-        document.removeEventListener('scroll', this.scroll);
-        this.constructor.hasReferralScrollListener = false;
-    }
+
+ tabHidden() {
+  if (this.hasListScrollListener) {
+      document.removeEventListener('scroll', this.scroll);
+      this.hasListScrollListener = false;
   }
+}
+
 
   scroll() {
     if (this.#pageEnd && !this.fetching && !this.hasNoRecordsTarget) {

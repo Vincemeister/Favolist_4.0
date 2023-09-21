@@ -9,8 +9,8 @@ const spinner = `
 
 export default class extends Controller {
   fetching = false; // debounce
-  static hasUserScrollListener = false;  // Add this line to initialize a flag
-  static hasLoadedInitialRecords = false;
+  hasListScrollListener = false;
+  hasLoadedInitialRecords = false;
 
 
   static values = {
@@ -29,22 +29,24 @@ export default class extends Controller {
   }
 
   tabShown() {
-    if (!this.constructor.hasUserScrollListener) {
+    if (!this.hasListScrollListener) {
         document.addEventListener('scroll', this.scroll);
-        this.constructor.hasUserScrollListener = true;
+        this.hasListScrollListener = true;
     }
-    if (!this.constructor.hasLoadedInitialRecords) {
-      this.#loadRecords();
-      this.constructor.hasLoadedInitialRecords = true;
-  }
-  }
+    if (!this.hasLoadedInitialRecords) {
+        this.#loadRecords();
+        this.hasLoadedInitialRecords = true;
+    }
+ }
 
-  tabHidden() {
-    if (this.constructor.hasUserScrollListener) {
-        document.removeEventListener('scroll', this.scroll);
-        this.constructor.hasUserScrollListener = false;
-    }
+
+ tabHidden() {
+  if (this.hasListScrollListener) {
+      document.removeEventListener('scroll', this.scroll);
+      this.hasListScrollListener = false;
   }
+}
+
 
   scroll() {
     if (this.#pageEnd && !this.fetching && !this.hasNoRecordsTarget) {
