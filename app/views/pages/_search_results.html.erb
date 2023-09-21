@@ -1,28 +1,17 @@
 
 
 <div data-search-target="searchresults">
-
-
-
   <div class="tab-content product-content" id="pills-tabContent">
-
-
-
     <div class="tab-pane fade show active linebreak" id="pills-products" role="tabpanel" aria-labelledby="pills-products-tab">
       <div id="products" class="card-grid" data-search-target="products"
         data-product-pagination-target="products"
         data-product-pagination-url-value="<%= pagination_url%>"
         data-product-pagination-page-value="<%= 2%>">
-
-       <% if @products %>
+      <% if @products %>
         <%= render @products %>
       <% end %>
-
       </div>
     </div>
-
-
-
     <div class="tab-pane fade linebreak" id="pills-lists" role="tabpanel" aria-labelledby="pills-lists-tab">
       <div id="lists" class="list-card-grid" data-search-target="lists"
         data-list-pagination-target="lists"
@@ -33,8 +22,6 @@
         <% end %>
       </div>
     </div>
-
-
     <div class="tab-pane fade linebreak" id="pills-referrals" role="tabpanel" aria-labelledby="pills-referrals-tab">
       <div id="referrals" class="list-card-grid" data-search-target="referrals"
         data-referral-pagination-target="referrals"
@@ -45,7 +32,6 @@
         <% end %>
       </div>
     </div>
-
     <div class="tab-pane fade linebreak" id="pills-users" role="tabpanel" aria-labelledby="pills-users-tab">
       <div id="users" class="list-card-grid" data-search-target="users"
         data-user-pagination-target="users"
@@ -56,10 +42,6 @@
         <% end %>
       </div>
     </div>
-
-
-
-
     <%# KEEPING THIS HERE AS A REFERENCE WHEN I NEED TO ADJUST NAVIGATION WITH BACK ARROWS SINCE I REMOVED ITERATIRN FOR STUFF %>
     <%# <div class="tab-pane fade linebreak" id="pills-referrals" role="tabpanel" aria-labelledby="pills-referrals-tab"> %>
       <%# <div class="card-grid" data-search-target="referrals"> %>
@@ -68,17 +50,5 @@
         <%# <% end %>
       <%# </div> %>
     <%# </div> %>
-
-
-
-
-
-    <div class="tab-pane fade linebreak" id="pills-profiles" role="tabpanel" aria-labelledby="pills-profiles-tab">
-      <div class="card-grid" data-search-target="users">
-        <% users.each do |user| %>
-          <%= render 'users/user_card', user: user %>
-        <% end %>
-      </div>
-    </div>
   </div>
 </div>

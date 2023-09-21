@@ -60,11 +60,11 @@
       <% end %>
     </div>
 
-<% if user.intro.present? %>
-  <%= link_to user_path(user), class: "intro" do %>
-    <%= user.intro %>
-  <% end %>
-<% end %>
+    <% if user.intro.present? %>
+      <%= link_to user_path(user), class: "intro" do %>
+        <%= user.intro %>
+      <% end %>
+    <% end %>
 
 
 
