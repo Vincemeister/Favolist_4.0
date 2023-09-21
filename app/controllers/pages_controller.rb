@@ -30,6 +30,11 @@ class PagesController < ApplicationController
   end
 
   def search
+    @products_count = Product.viewable_by(current_user).count
+    @lists_count = List.viewable_by(current_user).count
+    @referrals_count = Referral.viewable_by(current_user).count
+    @users_count = User.count
+
     @user_bookmarks = []
     if current_user
       @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
@@ -92,6 +97,13 @@ class PagesController < ApplicationController
 
 
   def creators
+    @products_count = Product.where(lists: { users: { is_creator: true }}).viewable_by(current_user).count
+    @lists_count = List.where(users: { is_creator: true }).viewable_by(current_user).count
+    @referrals_count = Referral.where(products: { lists: { users: { is_creator: true }}}).viewable_by(current_user).count
+    @users_count = User.where(is_creator: true).count
+
+
+
     @user_bookmarks = []
     if current_user
       @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
@@ -137,7 +149,7 @@ class PagesController < ApplicationController
                      .includes(:user, background_image_attachment: :blob).where(users: { is_creator: true })
                      .page(@list_page)
       when "referral"
-        @referrals = Referral.viewable_by(current_user).page(@referral_page)
+        @referrals = Referral.viewable_by(current_user).where(products: { lists: { users: { is_creator: true }}}).page(@referral_page)
       when "user"
         @users = User.includes(:followers).where(is_creator: true).all.page(@user_page)
       end
