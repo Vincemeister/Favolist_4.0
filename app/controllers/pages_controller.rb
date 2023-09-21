@@ -67,9 +67,15 @@ class PagesController < ApplicationController
       # Filter the results with the viewable_by scope
       @products = Product.where(id: search_products.pluck(:id)).viewable_by(current_user).page(@product_page)
       @lists = List.where(id: search_lists.pluck(:id)).viewable_by(current_user).page(@list_page)
+      @referrals = Referral.search_by_product_title_user_username_and_list_name(params[:query]).viewable_by(current_user).page(@referral_page)
+      @users = User.search_by_user_username_and_bio_and_list_name(params[:query]).page(@users_page) || []
 
-      @referrals = Referral.search_by_product_title_user_username_and_list_name(params[:query]).viewable_by(current_user)
-      @users = User.search_by_user_username_and_bio_and_list_name(params[:query]) || []
+      #counts
+      @products_count = search_products.count
+      @lists_count = @lists.count
+      @referrals_count = @referrals.count
+      @users_count = User.search_by_user_username_and_bio_and_list_name(params[:query]).count
+
     else
       case @type
       when "product"
@@ -91,6 +97,7 @@ class PagesController < ApplicationController
       format.html
       format.json
       format.turbo_stream
+      format.text { render partial: "pages/search_results", locals: { products: @products, lists: @lists, referrals: @referrals, users: @users, pagination_url: @pagination_url  }, formats: [:html] }
     end
   end
 
@@ -158,8 +165,7 @@ class PagesController < ApplicationController
     respond_to do |format|
       format.html # Follow regular flow of Rails
       format.turbo_stream
-      format.text
-      # format.text { render partial: "pages/search_results", locals: { products: @products, lists: @lists, referrals: @referrals, users: @users }, formats: [:html] }
+      format.text { render partial: "pages/search_results", locals: { products: @products, lists: @lists, referrals: @referrals, users: @users, pagination_url: @pagination_url  }, formats: [:html] }
     end
   end
 

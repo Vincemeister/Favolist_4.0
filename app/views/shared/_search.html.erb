@@ -4,10 +4,10 @@
       <%= link_to :back do %>
         <i class="fa-regular fa-arrow-left"></i>
       <% end %>
-      <%= simple_form_for :query, url: search_path, method: :get, html: {class: "search_form", data: {search_target: "form", action: "submit->search#preventSubmit"}} do |f| %>
 
+      <%# <%= simple_form_for :query, url: search_path, method: :get, html: {class: "search_form", data: {search_target: "form", action: "submit->search#preventSubmit"}} do |f| %> %>
       <%# this is the starting point - currently deactivated - to make ajax instant load of search results happen with keyup. it works, just a little buggy. dont need to focus on it now %>
-      <%# <%= simple_form_for :query, url: search_path, method: :get, html: {class: "search_form", data: {search_target: "form", action: "submit->search#preventSubmit"}} do |f| %>
+      <%= simple_form_for :query, url: search_path, method: :get, html: {class: "search_form", data: {search_target: "form", action: "submit->search#preventSubmit"}} do |f|
 
         <div class="custom-search-form-control form-group search-form">
           <div class="custom-input-group">
@@ -27,7 +27,7 @@
 
   <ul class="nav custom-nav nav-pills nav-justified sticky-nav" id="pills-tab" role="tablist">
     <li class="nav-item" role="presentation">
-      <button class="nav-link custom-nav-link active product-tabs overline" id="pills-products-tab" data-action="show.bs.tab->product-pagination#tabShown hide.bs.tab->product-pagination#tabHidden" data-bs-toggle="pill" data-bs-target="#pills-products" type="button" role="tab" aria-controls="pills-products" aria-selected="true"><i class="fa-sharp fa-regular fa-square"></i><div><span class="custom-nav-link-count"><%= @products_count %></span></div></button>
+      <button class="nav-link custom-nav-link active product-tabs overline" id="pills-products-tab" data-action="show.bs.tab->product-pagination#tabShown hide.bs.tab->product-pagination#tabHidden" data-bs-toggle="pill" data-bs-target="#pills-products" type="button" role="tab" aria-controls="pills-products" aria-selected="true"><i class="fa-sharp fa-regular fa-square"></i><div><span class="custom-nav-link-count"><%= @products_count %></span> Products</div></button>
     </li>
     <li class="nav-item" role="presentation">
       <button class="nav-link custom-nav-link product-tabs overline" id="pills-lists-tab" data-action="show.bs.tab->list-pagination#tabShown hide.bs.tab->list-pagination#tabHidden" data-bs-toggle="pill" data-bs-target="#pills-lists" type="button" role="tab" aria-controls="pills-lists" aria-selected="false"><i class="fa-sharp far fa-table-cells"></i><div><span class="custom-nav-link-count"> <%= @lists_count %></span> Lists</div></button>
