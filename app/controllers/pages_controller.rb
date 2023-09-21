@@ -30,12 +30,10 @@ class PagesController < ApplicationController
   end
 
   def search
-      @user_bookmarks = []
-
+    @user_bookmarks = []
     if current_user
       @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
     end
-
     if current_user
       @suggested_users = User.all - current_user.followed
       @suggested_users = @suggested_users.sample(1)
@@ -94,6 +92,18 @@ class PagesController < ApplicationController
 
 
   def creators
+    @user_bookmarks = []
+    if current_user
+      @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
+    end
+    if current_user
+      @suggested_users = User.where(is_creator: true) - current_user.followed
+      @suggested_users = @suggested_users.sample(1)
+    else
+      @suggested_users = User.where(is_creator: true).sample(1)
+    end
+    random_list = List.viewable_by(current_user).where(users: { is_creator: true }).order("RANDOM()").first
+    @suggested_lists = [random_list] if random_list
 
 
     @type = params[:type] || "product"  # default to product if no type is given
@@ -101,56 +111,43 @@ class PagesController < ApplicationController
 
     @product_page = params[:page] || 1
     @list_page = params[:page] || 1
+    @referral_page = params[:page] || 1
+    @user_page = params[:page] || 1
 
-
-
-
-
-    @pagination_url = creators_url
-    @page = params[:page] || 1
-    @products = Product.includes(list: :user, photos_attachments: :blob, list: {user: {avatar_attachment: :blob}}).where(lists: { users: { is_creator: true }}).page(@page)
-    @lists = List.includes(:user, background_image_attachment: :blob).where(users: { is_creator: true })
-    @referrals = Referral.includes(product: { list: :user }).where(products: { lists: { users: { is_creator: true }}})
-    @users = User.with_attached_avatar.includes(:followers).where(is_creator: true).all
-
-    @user_bookmarks = []
-
-    if current_user
-      @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
-    end
 
     if params[:query].present?
-      @page = params[:page] || 1
-      # First execute the pg_search query
       search_products = Product.search_by_title_and_description_and_list_name_and_user_username(params[:query]).where(lists: { users: { is_creator: true }})
       search_lists = List.search_by_name_and_description_and_product_title_and_user_username(params[:query]).where(users: { is_creator: true })
 
-      # Then filter the results with the viewable_by scope
-      @products = Product.where(id: search_products.pluck(:id)).viewable_by(current_user).page(@page)
-      @lists = List.where(id: search_lists.pluck(:id)).viewable_by(current_user)
-
+      # Filter the results with the viewable_by scope
+      @products = Product.where(id: search_products.pluck(:id)).viewable_by(current_user).page(@product_page)
+      @lists = List.where(id: search_lists.pluck(:id)).viewable_by(current_user).page(@list_page)
       # Different logic for referrals at this time
-      @referrals = Referral.search_by_product_title_user_username_and_list_name(params[:query]).viewable_by(current_user).where(products: { lists: { users: { is_creator: true }}})
-
+      @referrals = Referral.search_by_product_title_user_username_and_list_name(params[:query]).viewable_by(current_user).where(products: { lists: { users: { is_creator: true }}}).page(@referral_page)
       # Users can always be found
       @users = User.search_by_user_username_and_bio_and_list_name(params[:query]).where(is_creator: true) || []
-    end
-
-    if current_user
-      @user = current_user
-      @suggested_users = User.where(is_creator: true) - current_user.followed
-      @suggested_users = @suggested_users.sample(1)
     else
-      @suggested_users = User.where(is_creator: true).sample(1)
+      case @type
+      when "product"
+        @products = Product.viewable_by(current_user)
+                           .includes(:list, photos_attachments: :blob, user: [{avatar_attachment: :blob}]).where(lists: { users: { is_creator: true }})
+                           .page(@product_page)
+      when "list"
+        @lists = List.viewable_by(current_user)
+                     .includes(:user, background_image_attachment: :blob).where(users: { is_creator: true })
+                     .page(@list_page)
+      when "referral"
+        @referrals = Referral.viewable_by(current_user).page(@referral_page)
+      when "user"
+        @users = User.includes(:followers).where(is_creator: true).all.page(@user_page)
+      end
     end
-
-    random_list = List.viewable_by(current_user).where(users: { is_creator: true }).order("RANDOM()").first
-    @suggested_lists = [random_list] if random_list
 
     respond_to do |format|
       format.html # Follow regular flow of Rails
       format.turbo_stream
-      format.text { render partial: "pages/search_results", locals: { products: @products, lists: @lists, referrals: @referrals, users: @users }, formats: [:html] }
+      format.text
+      # format.text { render partial: "pages/search_results", locals: { products: @products, lists: @lists, referrals: @referrals, users: @users }, formats: [:html] }
     end
   end
 

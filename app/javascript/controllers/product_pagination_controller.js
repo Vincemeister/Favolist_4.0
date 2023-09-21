@@ -9,6 +9,8 @@ const spinner = `
 
 export default class extends Controller {
   fetching = false; // debounce
+  static hasReferralScrollListener = false;  // Add this line to initialize a flag
+
 
   static values = {
     page: { type: Number, default: 1 },
