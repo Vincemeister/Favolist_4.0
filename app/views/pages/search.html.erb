@@ -1,4 +1,7 @@
-<div data-controller="search product-pagination list-pagination referral-pagination user-pagination">
+<div data-controller="product-pagination list-pagination referral-pagination user-pagination">
+
+<%# <div data-controller="search product-pagination list-pagination referral-pagination user-pagination"> %>
+
   <%= render 'shared/search' %>
   <%= render 'search_results', products: @products, lists: @lists, referrals: @referrals, users: @users, pagination_url: @pagination_url %>
 </div>

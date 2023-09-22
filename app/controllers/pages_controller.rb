@@ -49,7 +49,13 @@ class PagesController < ApplicationController
     @suggested_lists = [random_list] if random_list
 
     @type = params[:type] || "product"  # default to product if no type is given
-    @pagination_url = search_url
+    if params[:query].present? && params[:query][:query].present?
+      @pagination_url = search_url(query: { query: params[:query][:query] })
+    else
+      @pagination_url = search_url
+    end
+
+
 
     @product_page = params[:page] || 1
     @list_page = params[:page] || 1
@@ -61,14 +67,14 @@ class PagesController < ApplicationController
     end
 
     if params[:query].present?
-      search_products = Product.search_by_title_and_description_and_list_name_and_user_username(params[:query])
-      search_lists = List.search_by_name_and_description_and_product_title_and_user_username(params[:query])
+      search_products = Product.search_by_title_and_description_and_list_name_and_user_username(params[:query][:query])
+      search_lists = List.search_by_name_and_description_and_product_title_and_user_username(params[:query][:query])
 
       # Filter the results with the viewable_by scope
       @products = Product.where(id: search_products.pluck(:id)).viewable_by(current_user).page(@product_page)
       @lists = List.where(id: search_lists.pluck(:id)).viewable_by(current_user).page(@list_page)
-      @referrals = Referral.search_by_product_title_user_username_and_list_name(params[:query]).viewable_by(current_user).page(@referral_page)
-      @users = User.search_by_user_username_and_bio_and_list_name(params[:query]).page(@users_page) || []
+      @referrals = Referral.search_by_product_title_user_username_and_list_name(params[:query][:query]).viewable_by(current_user).page(@referral_page)
+      @users = User.search_by_user_username_and_bio_and_list_name(params[:query][:query]).page(@users_page) || []
 
       #counts
       @products_count = search_products.count

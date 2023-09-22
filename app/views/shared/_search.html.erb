@@ -4,14 +4,17 @@
       <%= link_to :back do %>
         <i class="fa-regular fa-arrow-left"></i>
       <% end %>
-      <%= simple_form_for :query, url: search_path, method: :get, html: {class: "search_form", data: {search_target: "form", action: "submit->search#preventSubmit"}} do |f| %>
-  
+
+      <%= simple_form_for :query, url: search_path, method: :get, html: {class: "search_form"} do |f| %>
+      <%# KEEP <%= simple_form_for :query, url: search_path, method: :get, html: {class: "search_form", data: {search_target: "form", action: "submit->search#preventSubmit"}} do |f| %>
+
       <%# this is the starting point - currently deactivated - to make ajax instant load of search results happen with keyup. it works, just a little buggy. dont need to focus on it now %>
       <%# <%= simple_form_for :query, url: search_path, method: :get, html: {class: "search_form", data: {search_target: "form", action: "submit->search#preventSubmit"}} do |f| %>
 
         <div class="custom-search-form-control form-group search-form">
           <div class="custom-input-group">
-            <%= f.input :query, label: false, input_html: {class: 'string required', id: 'search_query', style: 'width: 100%;', data: { search_target: "input"}} %>
+            <%= f.input :query, label: false, input_html: {class: 'string required', id: 'search_query', style: 'width: 100%;'} %>
+           <%# KEEP <%= f.input :query, label: false, input_html: {class: 'string required', id: 'search_query', style: 'width: 100%;', data: { search_target: "input"}} %>
             <%# this is the starting point - currently deactivated - to make ajax instant load of search results happen with keyup. it works, just a little buggy. dont need to focus on it now %>
             <%# <%= f.input :query, label: false, input_html: {class: 'string required', id: 'search_query', style: 'width: 100%;', data: { search_target: "input", action: "keyup->search#update"}} %>
             <div class="custom-input-group-append">

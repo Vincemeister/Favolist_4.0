@@ -9,7 +9,7 @@ const spinner = `
 
 export default class extends Controller {
   fetching = false; // debounce
-  static hasReferralScrollListener = true;  // Add this line to initialize a flag
+  hasReferralScrollListener = true;  // Add this line to initialize a flag
 
 
   static values = {
@@ -24,7 +24,7 @@ export default class extends Controller {
 
   connect() {
     console.log("product pagination connected");
-    console.log("trying to find out:", this.productsTarget.dataset.productPaginationUrlValue);
+    console.log("productPagination initial url value:", this.productsTarget.dataset.productPaginationUrlValue);
 
     // Attach the scroll listener if the product tab is the default open tab
     const productTab = document.getElementById("pills-products-tab");
@@ -58,6 +58,7 @@ export default class extends Controller {
   }
 
   // Send a turbo-stream request to the controller.
+
   async #loadRecords() {
 
     console.log("Loading records...");
