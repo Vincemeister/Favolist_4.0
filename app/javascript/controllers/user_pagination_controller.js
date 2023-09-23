@@ -25,7 +25,6 @@ export default class extends Controller {
 
   connect() {
     console.log("user pagination connected");
-    console.log("trying to find out:", this.usersTarget.dataset.userPaginationUrlValue);
   }
 
   tabShown() {

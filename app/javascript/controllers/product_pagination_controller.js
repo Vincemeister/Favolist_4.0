@@ -61,22 +61,22 @@ export default class extends Controller {
 
   async #loadRecords() {
 
-    console.log("Loading records...");
-    console.log("urlValue:", this.productsTarget.dataset.productPaginationUrlValue);
+    console.log("Loading product records...");
+    console.log("product urlValue:", this.productsTarget.dataset.productPaginationUrlValue);
     const url = new URL(this.productsTarget.dataset.productPaginationUrlValue);
-    console.log("url:", url);
+    console.log("product url:", url);
     url.searchParams.set("page", this.pageValue);
-    console.log("page", this.pageValue)
+    console.log("product page", this.pageValue)
     url.searchParams.set("type", "product");
-    console.log("params", url.searchParams)
-    console.log("url", url)
+    console.log("porduct params", url.searchParams)
+    console.log("product url with params", url)
 
     this.fetching = true;
 
     await get(url.toString(), {
       responseKind: "turbo-stream",
     });
-    console.log("Finished loading records...");
+    console.log("Finished product loading records...");
 
     this.fetching = false;
     this.pageValue += 1;

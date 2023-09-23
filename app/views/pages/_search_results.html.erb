@@ -17,9 +17,9 @@
         data-list-pagination-target="lists"
         data-list-pagination-url-value="<%= pagination_url%>"
         data-list-pagination-page-value="<%= 2 %>">
-        <% if @lists %>
-          <%= render @lists %>
-        <% end %>
+        <%# <% if @lists %>
+          <%# <%= render @lists %>
+        <%# <% end %>
       </div>
     </div>
     <div class="tab-pane fade linebreak" id="pills-referrals" role="tabpanel" aria-labelledby="pills-referrals-tab">
@@ -27,9 +27,9 @@
         data-referral-pagination-target="referrals"
         data-referral-pagination-url-value="<%= pagination_url%>"
         data-referral-pagination-page-value="<%= 2 %>">
-        <% if @referrals %>
-          <%= render @referrals %>
-        <% end %>
+        <%# <% if @referrals %>
+          <%# <%= render @referrals %>
+        <%# <% end %>
       </div>
     </div>
     <div class="tab-pane fade linebreak" id="pills-users" role="tabpanel" aria-labelledby="pills-users-tab">
@@ -37,9 +37,9 @@
         data-user-pagination-target="users"
         data-user-pagination-url-value="<%= pagination_url%>"
         data-user-pagination-page-value="<%= 2 %>">
-        <% if @users %>
-          <%= render @users %>
-        <% end %>
+        <%# <% if @users %>
+          <%# <%= render @users %>
+        <%# <% end %>
       </div>
     </div>
     <%# KEEPING THIS HERE AS A REFERENCE WHEN I NEED TO ADJUST NAVIGATION WITH BACK ARROWS SINCE I REMOVED ITERATIRN FOR STUFF %>

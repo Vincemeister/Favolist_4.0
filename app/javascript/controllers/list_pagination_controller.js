@@ -64,16 +64,16 @@ export default class extends Controller {
 
 
   async #loadRecords() {
-    console.log("Loading records...");
+    console.log("Loading list records...");
 
-    console.log("urlValue:", this.listsTarget.dataset.listPaginationUrlValue);
+    console.log("list urlValue:", this.listsTarget.dataset.listPaginationUrlValue);
     const url = new URL(this.listsTarget.dataset.listPaginationUrlValue);
-    console.log("url:", url);
+    console.log("list url:", url);
     url.searchParams.set("page", this.pageValue);
-    console.log("page", this.pageValue)
+    console.log("list page", this.pageValue)
     url.searchParams.set("type", "list");
-    console.log("params", url.searchParams)
-    console.log("url", url)
+    console.log("list params", url.searchParams)
+    console.log("list url with params", url)
 
 
     this.fetching = true;
@@ -81,7 +81,7 @@ export default class extends Controller {
     await get(url.toString(), {
       responseKind: "turbo-stream",
     });
-    console.log("Finished loading records...");
+    console.log("Finished loading list records...");
 
 
     this.fetching = false;

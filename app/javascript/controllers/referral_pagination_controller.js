@@ -25,9 +25,8 @@ export default class extends Controller {
 
   connect() {
     console.log("referral pagination connected");
-    console.log("trying to find out:", this.referralsTarget.dataset.referralPaginationUrlValue);
   }
-  
+
   tabShown() {
     if (!this.hasListScrollListener) {
         document.addEventListener('scroll', this.scroll);

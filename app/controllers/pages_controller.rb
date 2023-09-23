@@ -80,7 +80,18 @@ class PagesController < ApplicationController
       @products_count = search_products.count
       @lists_count = @lists.count
       @referrals_count = @referrals.count
-      @users_count = User.search_by_user_username_and_bio_and_list_name(params[:query]).count
+      @users_count = @users.count
+
+      case @type
+      when "product"
+        @products = Product.where(id: search_products.pluck(:id)).viewable_by(current_user).page(@product_page)
+      when "list"
+        @lists = List.where(id: search_lists.pluck(:id)).viewable_by(current_user).page(@list_page)
+      when "referral"
+        @referrals = Referral.search_by_product_title_user_username_and_list_name(params[:query][:query]).viewable_by(current_user).page(@referral_page)
+      when "user"
+        @users = User.search_by_user_username_and_bio_and_list_name(params[:query][:query]).page(@users_page) || []
+      end
 
     else
       case @type
