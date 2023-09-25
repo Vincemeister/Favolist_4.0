@@ -33,6 +33,7 @@ export default class extends Controller {
     if (productTab && productTab.classList.contains("active") && !this.constructor.hasProductScrollListener) {
         document.addEventListener('scroll', this.scroll);
         this.constructor.hasProductScrollListener = true;
+      this.#loadRecords();
     }
   }
 
