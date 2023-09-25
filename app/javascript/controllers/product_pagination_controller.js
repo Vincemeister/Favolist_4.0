@@ -9,11 +9,12 @@ const spinner = `
 
 export default class extends Controller {
   fetching = false; // debounce
-  hasReferralScrollListener = true;  // Add this line to initialize a flag
+  hasProductScrollListener = false;  // Add this line to initialize a flag
 
 
   static values = {
     page: { type: Number, default: 1 },
+    url: String
   };
 
   static targets = ["products", "noRecords"];
@@ -25,6 +26,7 @@ export default class extends Controller {
   connect() {
     console.log("product pagination connected");
     console.log("productPagination initial url value:", this.productsTarget.dataset.productPaginationUrlValue);
+    console.log("PRODUCT URL VALUE:", this.productsTarget.dataset.productPaginationUrlValue);
 
     // Attach the scroll listener if the product tab is the default open tab
     const productTab = document.getElementById("pills-products-tab");
@@ -33,6 +35,14 @@ export default class extends Controller {
         this.constructor.hasProductScrollListener = true;
     }
   }
+
+  disconnect() {
+    if (this.constructor.hasProductScrollListener) {
+        document.removeEventListener('scroll', this.scroll);
+        this.constructor.hasProductScrollListener = false;
+    }
+}
+
 
   tabShown() {
     if (!this.constructor.hasProductScrollListener) {
@@ -62,7 +72,7 @@ export default class extends Controller {
   async #loadRecords() {
 
     console.log("Loading product records...");
-    console.log("product urlValue:", this.productsTarget.dataset.productPaginationUrlValue);
+    console.log("product urlValue:",  this.productsTarget.dataset.productPaginationUrlValue);
     const url = new URL(this.productsTarget.dataset.productPaginationUrlValue);
     console.log("product url:", url);
     url.searchParams.set("page", this.pageValue);

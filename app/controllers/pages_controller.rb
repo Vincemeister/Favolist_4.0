@@ -30,11 +30,6 @@ class PagesController < ApplicationController
   end
 
   def search
-    @products_count = Product.viewable_by(current_user).count
-    @lists_count = List.viewable_by(current_user).count
-    @referrals_count = Referral.viewable_by(current_user).count
-    @users_count = User.count
-
     @user_bookmarks = []
     if current_user
       @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
@@ -48,25 +43,55 @@ class PagesController < ApplicationController
     random_list = List.viewable_by(current_user).order("RANDOM()").first
     @suggested_lists = [random_list] if random_list
 
+
+
+    puts "SEARCH ACTION INITIALIZED"
+    @products_count = Product.viewable_by(current_user).count
+    @lists_count = List.viewable_by(current_user).count
+    @referrals_count = Referral.viewable_by(current_user).count
+    @users_count = User.count
+    puts "PRODUCT COUNT: #{@products_count}"
+    puts "LIST COUNT: #{@lists_count}"
+    puts "REFERRAL COUNT: #{@referrals_count}"
+    puts "USER COUNT: #{@users_count}"
+
+
+    puts "PARAMS: #{params}"
+    puts "PARAMS TYPE: #{params[:type]}"
     @type = params[:type] || "product"  # default to product if no type is given
-    if params[:query].present? && params[:query][:query].present?
-      @pagination_url = search_url(query: { query: params[:query][:query] })
-    else
-      @pagination_url = search_url
-    end
+    puts "@TYPE: #{@type}"
+    puts "-------------------------------------------------------------------------------------------------------------------"
+    puts "PARAMS QUERY PRESENT ??? #{params[:query].present?}"
 
 
+
+    puts "-----------PAGES-SETTING-----------------------"
+    puts "PAGE PARAMS: #{params[:page]}"
 
     @product_page = params[:page] || 1
+    puts "PRODUCT PAGE: #{@product_page}"
     @list_page = params[:page] || 1
+    puts "LIST PAGE: #{@list_page}"
     @referral_page = params[:page] || 1
+    puts "REFERRAL PAGE: #{@referral_page}"
     @user_page = params[:page] || 1
+    puts "USER PAGE: #{@user_page}"
 
     if current_user
       @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
     end
 
     if params[:query].present?
+      puts "QUERY PRESENT"
+      puts "QUERY: #{params[:query][:query]}"
+      @pagination_url = search_url(query: { query: params[:query][:query] })
+      puts "QUERY PRESENT PAGINATION URL: #{@pagination_url}"
+      puts "QUERY PRESENT"
+      puts "QUERY: #{params[:query]}"
+      if params.dig(:query, :query).present?
+        puts "QUERY QUERY: #{params[:query][:query]}"
+      end
+
       search_products = Product.search_by_title_and_description_and_list_name_and_user_username(params[:query][:query])
       search_lists = List.search_by_name_and_description_and_product_title_and_user_username(params[:query][:query])
 
@@ -94,6 +119,9 @@ class PagesController < ApplicationController
       end
 
     else
+      puts "QUERY NOT PRESENT"
+      @pagination_url = search_url
+      puts "QUERY NOT PRESENT PAGINATION URL: #{@pagination_url}"
       case @type
       when "product"
         @products = Product.viewable_by(current_user)
