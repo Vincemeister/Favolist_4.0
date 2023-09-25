@@ -9,7 +9,7 @@ const spinner = `
 
 export default class extends Controller {
   fetching = false; // debounce
-  hasListScrollListener = false;
+  hasUserScrollListener = false;
   hasLoadedInitialRecords = false;
 
 
@@ -27,10 +27,19 @@ export default class extends Controller {
     console.log("user pagination connected");
   }
 
+
+  disconnect() {
+    if (this.hasUserScrollListener) {
+        document.removeEventListener('scroll', this.scroll);
+        this.hasUserScrollListener = false;
+    }
+}
+
+
   tabShown() {
-    if (!this.hasListScrollListener) {
+    if (!this.hasUserScrollListener) {
         document.addEventListener('scroll', this.scroll);
-        this.hasListScrollListener = true;
+        this.hasUserScrollListener = true;
     }
     if (!this.hasLoadedInitialRecords) {
         this.#loadRecords();
@@ -40,9 +49,9 @@ export default class extends Controller {
 
 
  tabHidden() {
-  if (this.hasListScrollListener) {
+  if (this.hasUserScrollListener) {
       document.removeEventListener('scroll', this.scroll);
-      this.hasListScrollListener = false;
+      this.hasUserScrollListener = false;
   }
 }
 

@@ -31,6 +31,14 @@ export default class extends Controller {
 
   }
 
+  disconnect() {
+    if (this.hasListScrollListener) {
+        document.removeEventListener('scroll', this.scroll);
+        this.hasListScrollListener = false;
+    }
+}
+
+
   tabShown() {
     if (!this.hasListScrollListener) {
         document.addEventListener('scroll', this.scroll);

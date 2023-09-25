@@ -10,7 +10,7 @@ const spinner = `
 export default class extends Controller {
   fetching = false; // debounce
 
-  hasListScrollListener = false;
+  hasReferralScrollListener = false;
   hasLoadedInitialRecords = false;
 
   static values = {
@@ -27,10 +27,19 @@ export default class extends Controller {
     console.log("referral pagination connected");
   }
 
+
+  disconnect() {
+    if (this.hasReferralScrollListener) {
+        document.removeEventListener('scroll', this.scroll);
+        this.hasReferralScrollListener = false;
+    }
+}
+
+
   tabShown() {
-    if (!this.hasListScrollListener) {
+    if (!this.hasReferralScrollListener) {
         document.addEventListener('scroll', this.scroll);
-        this.hasListScrollListener = true;
+        this.hasReferralScrollListener = true;
     }
     if (!this.hasLoadedInitialRecords) {
         this.#loadRecords();
@@ -40,9 +49,9 @@ export default class extends Controller {
 
 
  tabHidden() {
-  if (this.hasListScrollListener) {
+  if (this.hasReferralScrollListener) {
       document.removeEventListener('scroll', this.scroll);
-      this.hasListScrollListener = false;
+      this.hasReferralScrollListener = false;
   }
 }
 
