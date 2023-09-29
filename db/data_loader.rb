@@ -46,24 +46,24 @@ require "open-uri"
 
 
 
-# i = 0
-# new_profiles_csv = "./db/data/new_profiles.csv"
-# CSV.foreach(new_profiles_csv, headers: :first_row, header_converters: :symbol, encoding: 'utf-8') do |row|
-#   puts "----------------- ROW #{i} -----------------"
-#   user = User.create!(
-#     username: row[:profile],
-#     intro: row[:intro],
-#     bio: row[:bio],
-#     email: "#{row[:profile].gsub(/\s+/, '')}@gmail.com",
-#     password: "password"
-#   )
-#   puts "created: #{user.username}"
-#   i += 1
-#   avatar = URI.open("#{row[:avatar]}")
-#   puts avatar
-#   user.avatar.attach(io: avatar, filename: 'avatar.jpg', content_type: 'image/jpg')
-#   user.save!
-# end
+i = 0
+new_profiles_csv = "./db/data/new_profiles.csv"
+CSV.foreach(new_profiles_csv, headers: :first_row, header_converters: :symbol, encoding: 'utf-8') do |row|
+  puts "----------------- ROW #{i} -----------------"
+  user = User.create!(
+    username: row[:profile],
+    intro: row[:intro],
+    bio: row[:bio],
+    email: "#{row[:profile].gsub(/\s+/, '')}@gmail.com",
+    password: "password"
+  )
+  puts "created: #{user.username}"
+  i += 1
+  avatar = URI.open("#{row[:avatar]}")
+  puts avatar
+  user.avatar.attach(io: avatar, filename: 'avatar.jpg', content_type: 'image/jpg')
+  user.save!
+end
 
 
 
@@ -104,20 +104,20 @@ require "open-uri"
 #   i += 1
 # end
 
-# new_lists_csv = "./db/data/new_lists.csv"
-# i = 0
-# CSV.foreach(new_lists_csv, headers: :first_row, header_converters: :symbol, encoding: 'utf-8') do |row|
-#   puts "----------------- ROW #{i} -----------------"
-#   p row[:profile]
-#   list = List.new(
-#     name: row[:list],
-#     description: row[:info],
-#   )
-#   list.user = User.find_by(username: row[:profile])
-#   list.save!
-#   puts "created: #{list.name}"
-#   i += 1
-# end
+new_lists_csv = "./db/data/new_lists.csv"
+i = 0
+CSV.foreach(new_lists_csv, headers: :first_row, header_converters: :symbol, encoding: 'utf-8') do |row|
+  puts "----------------- ROW #{i} -----------------"
+  p row[:profile]
+  list = List.new(
+    name: row[:list],
+    description: row[:info],
+  )
+  list.user = User.find_by(username: row[:profile])
+  list.save!
+  puts "created: #{list.name}"
+  i += 1
+end
 
 
 # failed_lists_csv = "./db/data/failed_lists.csv"
