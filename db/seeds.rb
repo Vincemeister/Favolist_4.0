@@ -22,17 +22,17 @@ require "csv"
 # User.destroy_all
 # puts "Removign amazon logo..."
 
-# require_relative 'data_loader'
-require_relative 'fast_seed'
+require_relative 'data_loader'
+# require_relative 'fast_seed'
 
 
 #----------------AMAZON LOGO--------------------------------------------------------------------------------------------
 
 
-file_path = "https://res.cloudinary.com/dncij7vr6/image/upload/v1686825737/Favolist%204.0/app%20assets/amazon-logo-transparent_lhlhxu.png"
-file = URI.open(file_path)
-amazon_logo = ActiveStorage::Blob.create_and_upload!(io: file, filename: 'amazon_logo.png', content_type: 'image/png')
-puts amazon_logo
+# file_path = "https://res.cloudinary.com/dncij7vr6/image/upload/v1686825737/Favolist%204.0/app%20assets/amazon-logo-transparent_lhlhxu.png"
+# file = URI.open(file_path)
+# amazon_logo = ActiveStorage::Blob.create_and_upload!(io: file, filename: 'amazon_logo.png', content_type: 'image/png')
+# puts amazon_logo
 
 
 

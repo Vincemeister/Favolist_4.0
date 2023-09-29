@@ -7,8 +7,7 @@ class List < ApplicationRecord
   include PgSearch::Model
 
   has_one_attached :background_image, dependent: :destroy
-
-  after_commit :regenerate_background, if: -> { saved_change_to_products_count? }
+  
 
   belongs_to :user
   has_many :products, dependent: :destroy
@@ -36,6 +35,8 @@ class List < ApplicationRecord
 
 
   def regenerate_background
+    Rails.logger.info "Regenerating background for List ID: #{id}"
+
     puts "Regenerating background for List: #{id}"
 
     # Destroy the old background_image blob, if it exists

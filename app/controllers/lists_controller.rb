@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class ListsController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show ]
   before_action :set_list, only: [:show, :edit, :update, :destroy, :add_product, :remove_product]
@@ -34,6 +36,7 @@ class ListsController < ApplicationController
     @user = current_user
     @list.user = @user
     if @list.save
+      set_default_background_if_empty
       redirect_to list_path(@list)
     else
       render :new
@@ -64,4 +67,15 @@ class ListsController < ApplicationController
   def set_list
     @list = List.includes(:products, :user).find(params[:id])
   end
+
+
+  def set_default_background_if_empty
+    unless @list.background_image.attached?
+      default_image_url = "https://res.cloudinary.com/dncij7vr6/image/upload/v1687825911/Favolist%204.0/app%20assets/grey_rectangle_byagze.png"
+      @list.background_image.attach(io: URI.open(default_image_url),
+                                    filename: "default_background.png",
+                                    content_type: "image/png")
+    end
+  end
+
 end

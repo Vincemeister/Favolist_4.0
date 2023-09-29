@@ -1,5 +1,6 @@
 class Product < ApplicationRecord
-  after_save :update_photos_count
+  after_save :update_photos_count, :trigger_list_update
+  after_destroy :trigger_list_update
 
 
   scope :viewable_by, -> (user) {
@@ -65,5 +66,10 @@ class Product < ApplicationRecord
     self.update_column(:photos_count, self.photos.length)
   end
 
+
+  def trigger_list_update
+    Rails.logger.info "Triggering list update for List ID: #{list.id}" if list.present?
+    list.regenerate_background if list.present?
+  end
 
 end
