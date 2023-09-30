@@ -24,26 +24,28 @@
 
     <%# Defining which button to appear (follow, unfollow, remove follower, or followed (the latter serves the same function as remove follower but just discourages the negative action of unfollowing).
     The unfollow nad remove follow buttons only appear on the follow page of current_user, in the followed and following tabs respectively%>
-    <div class="follow-or-bookmarks-button col-3">
-      <% if !user_signed_in?%>
-        <%= button_to 'Follow', follow_user_path(user), method: :post, class: "button button-primary button-small" %>
-      <% elsif local_assigns[:current_user_followers_tab] %>
-        <%= button_to 'Remove', remove_follower_user_path(user), method: :post, class: "btn btn-main" %>
-      <% elsif local_assigns[:current_user_followed_tab] %>
-        <%= button_to 'Unfollow', unfollow_user_path(user), method: :post, class: "btn btn-main" %>
-      <% elsif current_user.is_following?(user.id) %>
-        <%= button_to 'Followed', unfollow_user_path(user), method: :post, class: "button button-secondary button-small" %>
-      <% elsif user.is_following?(current_user.id) %>
-        <%= button_to 'Follow Back', follow_user_path(user), method: :post, class: "button button-primary button-small" %>
-      <% elsif user != current_user %>
-        <%= button_to 'Follow', follow_user_path(user), method: :post, class: "button button-primary button-small" %>
-      <% else %>
-      <div class="bookmarks-button">
-        <%= link_to bookmarks_path do%>
-          <i class="fa-sharp fa-light fa-book-bookmark fa-2xl"></i>
-        <% end %>
-      </div>
 
+    <div class="follow-or-bookmarks-button col-3">
+      <% if !user_signed_in? %>
+        <%= link_to 'Follow', follow_user_path(user), method: :post, class: "button button-primary button-small", data: { controller: "follows", follows_target: "button", url: follow_user_path(user), method: "post", action: "click->follows#toggleFollow" } %>
+      <% elsif local_assigns[:sidebar] %>
+        <!-- ... -->
+      <% elsif local_assigns[:current_user_followers_tab] %>
+        <%= link_to 'Remove', remove_follower_user_path(user), class: "button button-tertiary", method: :post, data: { controller: "follows", follows_target: "button" , method: "post", url: follow_user_path(user), action: "click->follows#toggleFollow" } %>
+      <% elsif local_assigns[:current_user_followed_tab] %>
+        <%= link_to 'Unfollow', unfollow_user_path(user), class: "button button-tertiary", method: :post, data: { controller: "follows", follows_target: "button", method: "post", url: unfollow_user_path(user), action: "click->follows#toggleFollow" } %>
+      <% elsif current_user.is_following?(user.id) %>
+        <%= link_to 'Followed', unfollow_user_path(user), class: "button button-secondary", method: :post, data: { controller: "follows", follows_target: "button", method: "post", url: unfollow_user_path(user), action: "click->follows#toggleFollow" } %>
+      <% elsif user.is_following?(current_user.id) %>
+        <%= link_to 'Follow back', follow_user_path(user), method: :post, class: "button button-primary button-small", data: { controller: "follows", follows_target: "button", url: follow_user_path(user), method: "post", action: "click->follows#toggleFollow" } %>
+      <% elsif user != current_user %>
+        <%= link_to 'Follow', follow_user_path(user), method: :post, class: "button button-primary button-small", data: { controller: "follows", follows_target: "button", url: follow_user_path(user), method: "post", action: "click->follows#toggleFollow" } %>
+      <% else %>
+        <div class="bookmarks-button">
+          <%= link_to bookmarks_path do %>
+            <i class="fa-sharp fa-light fa-book-bookmark fa-2xl"></i>
+          <% end %>
+        </div>
       <% end %>
     </div>
   </div>
