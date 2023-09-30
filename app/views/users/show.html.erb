@@ -22,9 +22,7 @@
       data-product-pagination-target="products"
       data-product-pagination-url-value="<%= @pagination_url %>"
       data-product-pagination-page-value="<%= 2 %>">
-        <% if @products %>
-          <%= render @products %>
-        <% end %>
+
       </div>
     </div>
     <div class="tab-pane fade linebreak" id="pills-lists" role="tabpanel" aria-labelledby="pills-lists-tab">
@@ -32,9 +30,7 @@
       data-list-pagination-target="lists"
       data-list-pagination-url-value="<%= @pagination_url %>"
       data-list-pagination-page-value="<%= 2 %>">
-        <% if @lists %>
-          <%= render @lists %>
-        <% end %>
+ 
       </div>
     </div>
     <div class="tab-pane fade linebreak" id="pills-referrals" role="tabpanel" aria-labelledby="pills-referrals-tab">
@@ -42,9 +38,7 @@
       data-referral-pagination-target="referrals"
       data-referral-pagination-url-value="<%= @pagination_url %>"
       data-referral-pagination-page-value="<%= 2 %>">
-        <% if @referrals %>
-          <%= render @referrals %>
-        <% end %>
+
       </div>
     </div>
     <div class="tab-pane fade linebreak" id="pills-about" role="tabpanel" aria-labelledby="pills-about-tab">
