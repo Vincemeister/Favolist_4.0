@@ -34,6 +34,9 @@ application.register("form-validation", FormValidationController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import HidemodalController from "./hidemodal_controller"
+application.register("hidemodal", HidemodalController)
+
 import ListPaginationController from "./list_pagination_controller"
 application.register("list-pagination", ListPaginationController)
 

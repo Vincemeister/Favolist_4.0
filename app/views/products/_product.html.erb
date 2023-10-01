@@ -1,3 +1,6 @@
+
+
+
 <div class="product-card <%= local_assigns[:iterating_for] == "product_show_page" ? 'product-card-show' : ''  %> " id="product_<%= product.id %>">
   <div class="avatar-and-username-and-logo">
     <% unless local_assigns[:iterating_for] == "list_show_page" %>
@@ -122,7 +125,7 @@
 
 
 <!-- Edit or delete modal -->
-<div class="modal fade" id="editOrDeleteModal-<%= product.id %>" tabindex="-1" aria-labelledby="editOrDeleteModalLabel" aria-hidden="true">
+<div class="modal fade" id="editOrDeleteModal-<%= product.id %>" tabindex="-1" aria-labelledby="editOrDeleteModalLabel" aria-hidden="true" data-controller="hidemodal">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
