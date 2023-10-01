@@ -81,7 +81,7 @@ class PagesController < ApplicationController
       @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
     end
 
-    if params[:query].present?
+    if params[:query].present? && params.dig(:query, :query).present?
       puts "QUERY PRESENT"
       puts "QUERY: #{params[:query][:query]}"
       @pagination_url = search_url(query: { query: params[:query][:query] })
