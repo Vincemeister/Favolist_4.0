@@ -48,18 +48,17 @@
       <div class="modal-body custom-modal-body ">
         <%# // to achieve a gap between the buttons on the modal I set a mb-1 %>
         <% if current_user && current_user.lists.present?%>
-%>
-          <%= button_to new_list_path, class: "button button-secondary w-100" do %>
-            <i class="fa-sharp fa-light fa-table-cells"></i>List
-          <% end %>
-          <%= link_to new_product_path, class: "button button-primary w-100 mb-3" do %>
+          <%= link_to new_product_path, class: "button button-tertiary w-100 mb-3" do %>
             <i class="fa-sharp fa-light fa-square"></i>Product
+          <% end %>
+          <%= link_to new_list_path, class: "button button-tertiary w-100" do %>
+            <i class="fa-sharp fa-light fa-table-cells"></i>List
           <% end %>
         <% else %>
           <%= link_to '#', class: "button button-primary w-100 mb-3 disabled", aria_disabled: true do %>
             <i class="fa-sharp fa-light fa-square"></i>Product (create a list first)
           <% end %>
-          <%= link_to new_list_path, class: "button button-secondary w-100" do %>
+          <%= link_to new_list_path, class: "button button-tertiary w-100" do %>
             <i class="fa-sharp fa-light fa-table-cells"></i>List
           <% end %>
 
