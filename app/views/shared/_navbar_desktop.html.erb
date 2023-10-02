@@ -75,7 +75,7 @@
       </div>
         <%# // to achieve a gap between the buttons on the modal I set a mb-1 %>
 
-        <% if current_user.lists.present?  %>
+        <% if current_user && current_user.lists.present?%>
           <div class="modal-body custom-modal-body ">
             <%= link_to search_or_manual_product_upload_path, class: "button button-tertiary w-100 mb-3" do %>
               <i class="fa-sharp fa-light fa-square"></i>Product

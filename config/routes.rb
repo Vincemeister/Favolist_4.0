@@ -18,6 +18,10 @@ Rails.application.routes.draw do
   post 'fetch_generic_product', to: 'scrape_products#fetch_product_from_generic_store', as: 'fetch_generic_product'
   post '/fetch_product', to: 'scrape_products#fetch_product', as: 'fetch_product'
 
+  resources :contacts, only: [:new, :create ]
+  get '/contacts', to: 'contacts#new', as: 'contact'
+  get 'contacts/sent'
+
   resources :products, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
 
     get 'photos', on: :collection

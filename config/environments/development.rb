@@ -39,7 +39,22 @@ Rails.application.configure do
 
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  # config.action_mailer.raise_delivery_errors = false SETTING BEFORE IMPLEMENTING CONTACT FORM
+  # USING this https://medium.com/@Gabriel.Valle/rails-and-mail-form-f4bc4f991c83   https://stackoverflow.com/questions/60701936/error-invalid-login-application-specific-password-required
+
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com',
+    port: 587,
+    domain: 'favolist.xyz',
+    authentication: 'plain',
+    enable_starttls_auto: true,
+    user_name: ENV['GMAIL_USERNAME'],
+    password: ENV['GMAIL_PASSWORD']
+}
 
   config.action_mailer.perform_caching = false
 
