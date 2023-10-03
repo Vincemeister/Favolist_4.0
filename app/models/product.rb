@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  after_save :update_photos_count, :trigger_list_update
+  after_save :update_photos_count
   after_destroy :trigger_list_update
 
 

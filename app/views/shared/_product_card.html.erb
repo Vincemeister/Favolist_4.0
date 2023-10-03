@@ -52,7 +52,15 @@
         <%= link_to user_path(product.user) do %>
           <div class="username paragraph-small-medium">
             <%= product.user.username %>
-            <span class="comment-date-and-reply-button">  •  <%= time_ago_in_words(product.created_at, include_seconds: false).gsub('about', '').gsub(/minute(s)?\s*/, 'm').gsub(/hour(s)?\s*/, 'h').gsub(/day(s)?\s*/, 'd').gsub(' m', 'm').gsub(' h', 'h').gsub(' d', 'd') %></span>
+            <span class="comment-date-and-reply-button">  •   <% if time_ago_in_words(product.created_at, include_seconds: false) == "less than a minute ago" %>
+              <%= time_ago_in_words(product.created_at, include_seconds: false) %>
+            <% else %>
+              <%= time_ago_in_words(product.created_at, include_seconds: false).gsub('about', '').gsub(/(\d+)\s*minute(s)?\s*/, '\1m').gsub(/(\d+)\s*hour(s)?\s*/, '\1h').gsub(/(\d+)\s*day(s)?\s*/, '\1d').gsub(/(\d+)\s*month(s)?\s*/, '\1mo').gsub(/(\d+)\s*year(s)?\s*/, '\1y') %>
+            <% end %>
+
+
+
+            </span>
 
           </div>
           <div class="list-name paragraph-small-regular">

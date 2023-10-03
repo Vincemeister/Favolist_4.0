@@ -127,6 +127,8 @@ class ProductsController < ApplicationController
           @product.photos.attach(photo_blob_id) unless blob_exists?(photo_blob_id)
         end
       end
+      trigger_list_update
+
       redirect_to product_path(@product), notice: 'Product was successfully created.'
     else
       flash[:error] = @product.errors.full_messages
@@ -247,6 +249,15 @@ class ProductsController < ApplicationController
   def set_product
     @product = Product.find(params[:id])
   end
+
+
+def trigger_list_update
+  if @product.list.present?
+    Rails.logger.info "Triggering list update for List ID: #{@product.list.id}"
+    @product.list.regenerate_background
+  end
+end
+
 
   def photo_already_attached?(blob_id)
     @product.photos.blobs.any? { |blob| blob.signed_id == blob_id }
