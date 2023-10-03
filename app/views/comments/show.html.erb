@@ -42,14 +42,25 @@
           </div>
         </div>
         <div class="comment-date-and-reply">
-          <span class="comment-date-and-reply-button"><%= time_ago_in_words(@comment.created_at, include_seconds: false).gsub('about', '').gsub(/minute(s)?\s*/, 'm').gsub(/hour(s)?\s*/, 'h').gsub(/day(s)?\s*/, 'd').gsub(' m', 'm').gsub(' h', 'h').gsub(' d', 'd') %></span>
+          <span class="comment-date-and-reply-button">
+
+
+
+                  <% if time_ago_in_words(@comment.created_at, include_seconds: false) == "less than a minute ago" %>
+              <%= time_ago_in_words(@comment.created_at, include_seconds: false) %>
+            <% else %>
+              <%= time_ago_in_words(@comment.created_at, include_seconds: false).gsub('about', '').gsub(/(\d+)\s*minute(s)?\s*/, '\1m').gsub(/(\d+)\s*hour(s)?\s*/, '\1h').gsub(/(\d+)\s*day(s)?\s*/, '\1d').gsub(/(\d+)\s*month(s)?\s*/, '\1mo').gsub(/(\d+)\s*year(s)?\s*/, '\1y') %>
+            <% end %>
+            </span>
           <%# In the /comments/show page, the reply button autoselects the commentform at the bottom and does not toggle the direct_replies_form as in the products/show page %>
           <% if current_user.present? %>
             <span class="comment-date-and-reply-button" data-action="click->comments#selectcommentform">Reply</span>
           <% end %>
 
           <% if @comment.user == current_user %>
-            <%= button_to 'Delete', comment_path(@comment), method: :delete, class: 'comment-date-and-reply-button' %>
+                <span class='comment-date-and-reply-button'>
+                <%= button_to 'Delete', comment_path(@comment), method: :delete, style: "border: none; padding: 0; background: none; color: inherit; font: inherit; text-align: inherit;" %>
+              </span>
           <% end %>
         </div>
         <!-- Replies within main comment div to make it nest -->
@@ -67,11 +78,22 @@
                   </div>
                 </div>
                 <div class="comment-date-and-reply">
-                  <span class="comment-date-and-reply-button"><%= time_ago_in_words(reply.created_at, include_seconds: false).gsub('about', '').gsub(/minute(s)?\s*/, 'm').gsub(/hour(s)?\s*/, 'h').gsub(/day(s)?\s*/, 'd').gsub(' m', 'm').gsub(' h', 'h').gsub(' d', 'd') %></span>
+                  <span class="comment-date-and-reply-button">
+
+
+
+                  <% if time_ago_in_words(reply.created_at, include_seconds: false) == "less than a minute ago" %>
+              <%= time_ago_in_words(reply.created_at, include_seconds: false) %>
+            <% else %>
+              <%= time_ago_in_words(reply.created_at, include_seconds: false).gsub('about', '').gsub(/(\d+)\s*minute(s)?\s*/, '\1m').gsub(/(\d+)\s*hour(s)?\s*/, '\1h').gsub(/(\d+)\s*day(s)?\s*/, '\1d').gsub(/(\d+)\s*month(s)?\s*/, '\1mo').gsub(/(\d+)\s*year(s)?\s*/, '\1y') %>
+            <% end %>
+            </span>
                   <span class="comment-date-and-reply-button" data-action="click->comments#selectcommentform">Reply</span>
                   <% if reply.user == current_user %>
-                      <%= button_to 'Delete', comment_path(reply), method: :delete, class: 'comment-date-and-reply-button' %>
-                  <% end %>
+                      <span class='comment-date-and-reply-button'>
+                <%= button_to 'Delete', comment_path(reply), method: :delete, style: "border: none; padding: 0; background: none; color: inherit; font: inherit; text-align: inherit;" %>
+              </span>
+              <% end %>
                 </div>
               </div>
             </div>
