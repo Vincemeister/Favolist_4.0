@@ -35,7 +35,7 @@
 
       <div class="desktop_grid">
         <%= render "shared/navbar_desktop" %>
-        <div class="<%= (controller_name == 'pages' && (action_name == 'about' || action_name == 'beta')) || controller_name == 'settings' ? 'main-section-desktop-content-page' : 'main-section-desktop' %>">
+        <div class="<%= (controller_name == 'pages' && (action_name == 'about' || action_name == 'beta')) || ( controller_name == 'settings' || controller_name == 'contacts')   ? 'main-section-desktop-content-page' : 'main-section-desktop' %>">
           <%= yield %>
         </div>
         <% unless controller_name == 'pages' && (action_name == 'about' || action_name == 'beta') || controller_name == 'settings' %>
