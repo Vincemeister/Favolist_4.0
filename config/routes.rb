@@ -18,7 +18,8 @@ Rails.application.routes.draw do
   post '/fetch_shopify_product', to: 'scrape_products#fetch_shopify_product', as: 'fetch_shopify_product'
   post 'fetch_generic_product', to: 'scrape_products#fetch_product_from_generic_store', as: 'fetch_generic_product'
   post '/fetch_product', to: 'scrape_products#fetch_product', as: 'fetch_product'
-  post '/fetch_app_id', to: 'scrape_apps#fetch_app_id', as: 'fetch_app_id'
+  post '/fetch_app_or_website', to: 'scrape_apps#fetch_app_or_website', as: 'fetch_app_or_website'
+
 
 
   resources :contacts, only: [:new, :create ]
