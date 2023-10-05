@@ -13,10 +13,13 @@ Rails.application.routes.draw do
   get 'pages/no_permission', to: 'pages#no_permission', as: 'no_permission'
 
   get '/search_or_manual_product_upload', to: 'products#search_or_manual_product_upload', as: 'search_or_manual_product_upload'
+  get '/search_or_manual_app_upload', to: 'products#search_or_manual_app_upload', as: 'search_or_manual_app_upload'
   post '/fetch_amazon_product', to: 'scrape_products#fetch_amazon_product', as: 'fetch_amazon_product'
   post '/fetch_shopify_product', to: 'scrape_products#fetch_shopify_product', as: 'fetch_shopify_product'
   post 'fetch_generic_product', to: 'scrape_products#fetch_product_from_generic_store', as: 'fetch_generic_product'
   post '/fetch_product', to: 'scrape_products#fetch_product', as: 'fetch_product'
+  post '/fetch_app_id', to: 'scrape_apps#fetch_app_id', as: 'fetch_app_id'
+
 
   resources :contacts, only: [:new, :create ]
   get '/contacts', to: 'contacts#new', as: 'contact'

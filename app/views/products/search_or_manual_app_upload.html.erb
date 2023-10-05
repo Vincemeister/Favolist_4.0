@@ -1,0 +1,27 @@
+
+<div class="search_upload_container">
+  <%= form_with url: fetch_app_id_path, method: :post, class: 'search_form' do |f| %>
+    <div class="custom-search-form-control form-group search-form">
+      <div class="custom-input-group">
+        <%= f.text_field :app_name, class: "link w-100", placeholder: 'Type app name' %>
+        <div class="custom-input-group-append">
+          <%= button_tag(type: 'submit', class: "custom-btn") do %>
+            <i class="fas fa-search"></i>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+
+
+  or
+
+
+
+
+
+  <%= link_to new_product_path, class: "button button-tertiary w-100" do %>
+    Manually create app
+  <% end %>
+</div>
