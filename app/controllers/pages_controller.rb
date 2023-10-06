@@ -6,8 +6,9 @@ class PagesController < ApplicationController
 
     @page = params[:page] || 1
     @products = Product.viewable_by(current_user)
-                       .includes(:list, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
-                       .page(@page)
+    .includes(:list, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
+    .order(created_at: :desc)
+    .page(@page)
 
 
     @user_bookmarks = []
