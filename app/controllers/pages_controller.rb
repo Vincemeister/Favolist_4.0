@@ -99,7 +99,9 @@ class PagesController < ApplicationController
       @products = Product.where(id: search_products.pluck(:id)).viewable_by(current_user).page(@product_page)
       @lists = List.where(id: search_lists.pluck(:id)).viewable_by(current_user).page(@list_page)
       @referrals = Referral.search_by_product_title_user_username_and_list_name(params[:query][:query]).viewable_by(current_user).page(@referral_page)
-      @users = User.search_by_user_username_and_bio_and_list_name(params[:query][:query]).page(@users_page) || []
+      @users = User.search_by_user_username_and_bio_and_list_name(params[:query][:query])
+      .order(followers_count: :desc)
+      .page(@users_page) || []
 
       #counts
       @products_count = search_products.count
@@ -134,7 +136,7 @@ class PagesController < ApplicationController
       when "referral"
         @referrals = Referral.viewable_by(current_user).page(@referral_page)
       when "user"
-        @users = User.includes(:followers).all.page(@user_page)
+        @users = User.includes(:followers).order(followers_count: :desc).page(@user_page)
       end
     end
 
