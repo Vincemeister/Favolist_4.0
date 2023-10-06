@@ -298,11 +298,18 @@ end
     product_data = session[:product_data]
     puts "Session product data::: #{product_data}"
 
+    user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+    headers = {
+      "User-Agent" => user_agent,
+      "Referer" => product_data[:url] # Adding the Referer header
+    }
+
+
     # Handle logo processing
     if product_data[:logo]
       logo_url = product_data[:logo]
       begin
-        downloaded_logo = URI.open(logo_url)
+        downloaded_logo = URI.open(logo_url, headers) # to also be able to download images with scrape restrictions
 
         filename = File.basename(logo_url)
         if filename.ends_with?('.svg')
@@ -329,7 +336,7 @@ end
     # Handle images processing
     @photos = product_data[:images].map do |image_url|
       begin
-        downloaded_image = URI.open(image_url)
+        downloaded_image = URI.open(image_url,  headers) # to also be able to download images with scrape restrictions
         blob = ActiveStorage::Blob.create_and_upload!(
           io: downloaded_image,
           filename: File.basename(image_url),

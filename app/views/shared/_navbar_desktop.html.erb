@@ -70,7 +70,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">What do you want to create?</h5>
+        <h5 class="modal-title">What do you want to add?</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
         <%# // to achieve a gap between the buttons on the modal I set a mb-1 %>
@@ -78,7 +78,10 @@
         <% if current_user && current_user.lists.present?%>
           <div class="modal-body custom-modal-body ">
             <%= link_to search_or_manual_product_upload_path, class: "button button-tertiary w-100 mb-3" do %>
-              <i class="fa-sharp fa-light fa-square"></i>Product
+              <i class="fa-sharp fa-light fa-square"></i>Physical product
+            <% end %>
+            <%= link_to search_or_manual_app_upload_path, class: "button button-tertiary w-100 mb-3" do %>
+              <i class="fa-sharp fa-light fa-square"></i>Mobile app or digital product
             <% end %>
             <%= link_to new_list_path, class: "button button-tertiary w-100" do %>
               <i class="fa-sharp fa-light fa-table-cells"></i>List
@@ -87,7 +90,10 @@
         <% else %>
           <div class="modal-body custom-modal-body ">
             <%= link_to '#', class: "button button-tertiary w-100 mb-3 disabled", aria_disabled: true do %>
-              <i class="fa-sharp fa-light fa-square"></i>Product (create a list first)
+              <i class="fa-sharp fa-light fa-square"></i>Pysical product (create a list first)
+            <% end %>
+            <%= link_to search_or_manual_app_upload_path, class: "button button-tertiary w-100 mb-3 disabled", aria_disabled: true do %>
+              <i class="fa-sharp fa-light fa-square"></i>Mobile app or digital product
             <% end %>
             <%= link_to new_list_path, class: "button button-tertiary w-100" do %>
               <i class="fa-sharp fa-light fa-table-cells"></i>List

@@ -7,7 +7,7 @@ class ScrapeAppsController < ApplicationController
 
 
   def fetch_app_or_website
-    if params[:query].include?('www.')
+    if params[:query].include?('www.') || params[:query].include?('http://') || params[:query].include?('https://')
       fetch_website(params[:query])
     else
       fetch_app_id(params[:query])
@@ -68,16 +68,19 @@ class ScrapeAppsController < ApplicationController
 
   def fetch_website(query)
     query = "https://#{query}" unless query.start_with?('http://', 'https://')
-
+    puts "QUERY: #{query}"
 
     encoded_url = URI.encode_www_form_component(query)
-    opengraph_url = URI("https://opengraph.io/api/1.1/site/#{encoded_url}?accept_lang=auto&cache_ok=false&use_proxy=true&app_id=44aa9636-f222-4b56-96c7-b14c3b8d7577")
+    puts "ENCODED URL: #{encoded_url}"
+    opengraph_url = URI("https://opengraph.io/api/1.1/site/#{encoded_url}?accept_lang=auto&cache_ok=false&use_proxy=true&use_superior=true&app_id=44aa9636-f222-4b56-96c7-b14c3b8d7577")
+    puts "OPENGRAPH URL: #{opengraph_url}"
     http = Net::HTTP.new(opengraph_url.host, opengraph_url.port)
     http.use_ssl = true
     request = Net::HTTP::Get.new(opengraph_url)
     response = http.request(request)
+    puts "RESPONSE: #{response}"
     data = JSON.parse(response.body)
-    puts data
+    puts "DATA: #{data}"
     begin
       data = JSON.parse(response.body)
 
