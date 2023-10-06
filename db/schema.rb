@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_15_070830) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_06_042917) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -130,7 +130,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_15_070830) do
     t.datetime "updated_at", null: false
     t.string "username"
     t.text "intro"
-    t.integer "followers_count"
+    t.integer "followers_count", default: 0
     t.string "privacy", default: "public"
     t.text "bio"
     t.boolean "is_creator", default: false
