@@ -8,7 +8,9 @@ const spinner = `
   </div>`;
 
 export default class extends Controller {
-  static fetching = false; // debounce
+  fetching = false; // debounce
+  hasProductScrollListener = false;  // Add this line to initialize a flag
+
 
   static values = {
     url: String,
@@ -22,8 +24,20 @@ export default class extends Controller {
   }
 
   connect() {
-    document.addEventListener("scroll", this.scroll);
+    if (!this.constructor.hasProductScrollListener) {
+      document.addEventListener('scroll', this.scroll);
+      this.constructor.hasProductScrollListener = true;
+    this.#loadRecords();
   }
+  }
+
+
+  disconnect() {
+    if (this.constructor.hasProductScrollListener) {
+        document.removeEventListener('scroll', this.scroll);
+        this.constructor.hasProductScrollListener = false;
+    }
+}
 
   scroll() {
     if (this.#pageEnd && !this.fetching && !this.hasNoRecordsTarget) {
