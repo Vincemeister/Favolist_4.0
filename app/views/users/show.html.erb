@@ -11,7 +11,7 @@
       <button class="nav-link custom-nav-link product-tabs overline" id="pills-referrals-tab" data-action="show.bs.tab->referral-pagination#tabShown hide.bs.tab->referral-pagination#tabHidden" data-bs-toggle="pill" data-bs-target="#pills-referrals" type="button" role="tab" aria-controls="pills-referrals" aria-selected="false"><i class="fa-sharp fa-light fa-tag"></i><div><span class="custom-nav-link-count"><%= "#{@referrals_count}" if @referrals_count > 0 %></span> Referrals</div></button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link custom-nav-link product-tabs overline" id="pills-about-tab" data-bs-toggle="pill" data-bs-target="#pills-about" type="button" role="tab" aria-controls="pills-about" aria-selected="false"><i class="fa-sharp fa-user"></i>About</button>
+      <button class="nav-link custom-nav-link product-tabs overline" id="pills-about-tab" data-bs-toggle="pill" data-bs-target="#pills-about" type="button" role="tab" aria-controls="pills-about" aria-selected="false"><i class="fa-sharp fa-light fa-address-card"></i>About</button>
     </li>
   </ul>
 
@@ -30,7 +30,7 @@
       data-list-pagination-target="lists"
       data-list-pagination-url-value="<%= @pagination_url %>"
       data-list-pagination-page-value="<%= 2 %>">
- 
+
       </div>
     </div>
     <div class="tab-pane fade linebreak" id="pills-referrals" role="tabpanel" aria-labelledby="pills-referrals-tab">
