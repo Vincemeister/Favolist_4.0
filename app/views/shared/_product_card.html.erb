@@ -79,6 +79,8 @@
         <% end %>
       <% end %>
 
+      <i class="fa-sharp fa-regular fa-ellipsis" style="margin-left: 1.5em;" data-bs-toggle="modal" data-bs-target="#editOrDeleteModal-<%= product.id %>"></i>
+
     <% elsif local_assigns[:iterating_for] == "sidebar" %>
 
 
@@ -130,7 +132,7 @@
 
 
 <!-- Edit or delete modal -->
-<div class="modal fade" id="editOrDeleteModal-<%= product.id %>" tabindex="-1" aria-labelledby="editOrDeleteModalLabel" aria-hidden="true">
+<div class="modal fade" id="editOrDeleteModal-<%= product.id %>" tabindex="-1" aria-labelledby="editOrDeleteModalLabel" aria-hidden="true" data-controller="hidemodal">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -138,11 +140,23 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body custom-modal-body ">
-        <%# // to achieve a gap between the buttons on the modal I set a mb-1 %>
-        <%= link_to edit_product_path(product), class: "button button-tertiary w-100 mb-3" do %>
-          Edit
+        <% if product.user == current_user %>
+          <%= link_to new_product_path(original_product_id: product.id), class: "button button-tertiary w-100 mb-3" do %>
+            Copy listing
+          <% end %>
+          <%= link_to edit_product_path(product), class: "button button-tertiary w-100 mb-3" do %>
+            Edit
+          <% end %>
+          <div class="button button-danger w-100" data-bs-target="#deleteModal-<%= product.id %>" data-bs-toggle="modal" data-bs-dismiss="modal"> Delete</div>
+        <% else %>
+          <%= link_to new_product_path(original_product_id: product.id), class: "button button-tertiary w-100 mb-3" do %>
+            Copy listing
+          <% end %>
+          <%= link_to contacts_path, class: "button button-primary w-100 mb-3" do%>
+            Report listing
+          <% end %>
         <% end %>
-        <div class="button button-danger w-100" data-bs-target="#deleteModal-<%= product.id %>" data-bs-toggle="modal" data-bs-dismiss="modal"> Delete</div>
+
       </div>
     </div>
   </div>
