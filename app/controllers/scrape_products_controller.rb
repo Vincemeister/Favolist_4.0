@@ -9,6 +9,8 @@ class ScrapeProductsController < ApplicationController
   # to amazon
     if params[:link].include?("amazon")
       fetch_amazon_product
+    elsif params[:link].include?("tokopedia")
+      fetch_tokopedia_product
     else
       fetch_generic_product
     end
@@ -50,6 +52,18 @@ class ScrapeProductsController < ApplicationController
       redirect_to search_or_manual_product_upload_path
     end
   end
+
+  def fetch_tokopedia_product
+    product_data = fetch_product_from_tokopedia(params[:link])
+    if product_data.present?
+      session[:product_data] = product_data
+      redirect_to new_product_path
+    else
+      flash[:error] = 'Failed to fetch product data from store.'
+      redirect_to search_or_manual_product_upload_path
+    end
+  end
+
 
 
   private
@@ -109,7 +123,7 @@ class ScrapeProductsController < ApplicationController
     puts "URL: #{link}"
 
     # Here, you can create a new instance of Product, or return these values as a hash
-    product_data = { title: title, price: price, description: description, images: images, url: link }
+    product_data = { title: title, price: price, description: description, images: images, url: link, source: "amazon" }
     puts product_data
 
     product_data # return the product data
@@ -227,7 +241,7 @@ class ScrapeProductsController < ApplicationController
       logo = data.dig("htmlInferred", "favicon")
       # If the logo URL is an SVG, set it to nil
       logo = nil if logo&.end_with?('.svg')
-      product_data = { title: title, price: price, description: description, url: input_url, images: images, logo: logo }
+      product_data = { title: title, price: price, description: description, url: input_url, images: images, logo: logo, source: "generic" }
       puts "GENERIC STORE PRODUCT DATA: #{product_data}"
       product_data
 
@@ -239,6 +253,52 @@ class ScrapeProductsController < ApplicationController
       nil
     end
   end
+
+  def fetch_product_from_tokopedia(url)
+    uri = URI.parse(url)
+    slug = uri.path + (uri.query ? "?#{uri.query}" : "")
+    encoded_slug = CGI.escape(slug)
+    api_url = URI("https://tokopediaapi.p.rapidapi.com/?act=detail&slug=#{encoded_slug}&_pretty=true")
+
+    http = Net::HTTP.new(api_url.host, api_url.port)
+    http.use_ssl = true
+
+    request = Net::HTTP::Get.new(api_url)
+    request["X-RapidAPI-Key"] = '971b32dc4emshdc908738f2fb7c0p15bcc5jsn4f8c98db4f7d'
+    request["X-RapidAPI-Host"] = 'tokopediaapi.p.rapidapi.com'
+
+    response = http.request(request)
+    puts response.read_body
+
+    if response.is_a?(Net::HTTPSuccess)
+        response_body = JSON.parse(response.body) rescue {}
+
+        title = response_body["title"]
+        price = response_body["price"].gsub(/[^\d]/, '').to_i if response_body["price"]
+
+        description = response_body["description"]
+        images = response_body["images"]
+
+        product_data = {
+            title: title,
+            price: price,
+            description: description,
+            url: url,
+            images: images,
+            source: "tokopedia"
+        }
+
+        puts product_data
+    else
+        puts "Failed to retrieve the product data"
+    end
+
+    product_data
+end
+
+
+
+
 
 end
 

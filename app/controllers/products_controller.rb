@@ -329,8 +329,10 @@ end
         # Keep a default logo as a fallback or just skip setting the logo
         @logo = ActiveStorage::Blob.find_by(filename: 'amazon_logo.png')
       end
-    else
+    elsif product_data[:source] == "amazon"
       @logo = ActiveStorage::Blob.find_by(filename: 'amazon_logo.png')
+    elsif product_data[:source] == "tokopedia"
+      @logo = ActiveStorage::Blob.find_by(filename: 'tokopedia_logo.png')
     end
 
     # Handle images processing
