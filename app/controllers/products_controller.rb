@@ -55,6 +55,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+    @product.price_cents = (product_params[:price].to_f * 100).round
 
 
     # For counting the duplications of a product
@@ -243,7 +244,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:title, :price, :review, :description, :url, :list_id, :currency, :logo, photos: [], referral_attributes: [:id, :code, :details])
+    params.require(:product).permit(:title, :price, :price_cents, :price_currency, :review, :description, :url, :list_id, :currency, :logo, photos: [], referral_attributes: [:id, :code, :details])
   end
 
   def set_product
@@ -355,7 +356,8 @@ end
       title: product_data[:title],
       price: product_data[:price],
       description: product_data[:description],
-      url: product_data[:url]
+      url: product_data[:url],
+      price_currency: product_data[:currency]
     ).tap do |product|
       product.photos.attach(@photos)
       session.delete(:product_data)

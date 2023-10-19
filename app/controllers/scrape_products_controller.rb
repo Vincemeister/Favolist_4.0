@@ -285,7 +285,8 @@ class ScrapeProductsController < ApplicationController
             description: description,
             url: url,
             images: images,
-            source: "tokopedia"
+            source: "tokopedia",
+            currency: "IDR"
         }
 
         puts product_data

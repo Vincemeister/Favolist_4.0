@@ -1,15 +1,20 @@
 <div class="new-product-container">
   <%= simple_form_for @product, html: { data: { controller: "form-validation", action: "submit->form-validation#submit" } } do |f| %>
-
-    <div class="title-and-price-input">
       <div class="form-input-wrapper">
         <%= f.input :title, required: true, input_html: {data: {form_validation_target: "title"}} %>
         <span class="error-message paragraph-xsmall-regular" data-target="form-validation.titleError"></span>
       </div>
+
+    <div class="title-and-price-input">
       <div class="form-input-wrapper">
         <%= f.input :price, required: true, input_html: {data: {form_validation_target: "price"}} %>
         <span class="error-message paragraph-xsmall-regular" data-target="form-validation.priceError"></span>
       </div>
+      <div class="form-input-wrapper">
+      <%= f.input :price_currency, collection: Money::Currency.table.values.map { |c| c[:iso_code] }, prompt: 'Select Currency', required: true, input_html: {data: {form_validation_target: "currency"}} %>
+      <span class="error-message paragraph-xsmall-regular" data-target="form-validation.currencyError"></span>
+    </div>
+
     </div>
 
     <div class="form-input-wrapper">
