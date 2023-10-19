@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_06_042917) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_19_024208) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -108,6 +108,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_06_042917) do
     t.integer "comments_count", default: 0
     t.integer "bookmarks_count", default: 0
     t.integer "photos_count", default: 0
+    t.integer "price_cents"
+    t.string "price_currency", default: "USD", null: false
     t.index ["list_id"], name: "index_products_on_list_id"
   end
 
