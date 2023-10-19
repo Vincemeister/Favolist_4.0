@@ -19,7 +19,7 @@ class Product < ApplicationRecord
 
   has_many :comments, dependent: :destroy
 
-  # monetize :price_cents, as: "price"
+  monetize :price_cents, as: "price"
 
 
   has_one_attached :logo, dependent: :destroy
