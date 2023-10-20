@@ -50,7 +50,7 @@
 
       <div class="form-group form-group-container" data-controller="charactercounter" data-charactercounter-limit-value="360">
         <%= f.label :intro, class: "label mb-2" %>
-        <%= f.text_area :intro, class: 'form-control bio', placeholder: "Your bio (maximum 360 characters)", maxlength: 280, data: { action: "keyup->charactercounter#updateCounter" } %>
+        <%= f.text_area :intro, class: 'form-control bio', placeholder: "Your bio (maximum 360 characters)", maxlength: 400, data: { action: "keyup->charactercounter#updateCounter" } %>
         <i data-charactercounter-target="counter" class="counter-text"></i>
       </div>
 
