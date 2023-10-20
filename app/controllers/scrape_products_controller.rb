@@ -93,6 +93,9 @@ class ScrapeProductsController < ApplicationController
     # Extracting the title, price, and description
     title = response_body["productTitle"].split(/, |- |\| /)[0]
     price = response_body["price"]
+    # currency = response_body["currencyAbbreviation"]
+    currency = "USD"
+    puts "CURRENCY: #{currency}"
 
 
 
@@ -123,7 +126,7 @@ class ScrapeProductsController < ApplicationController
     puts "URL: #{link}"
 
     # Here, you can create a new instance of Product, or return these values as a hash
-    product_data = { title: title, price: price, description: description, images: images, url: link, source: "amazon" }
+    product_data = { title: title, price: price, description: description, images: images, url: link, source: "amazon", currency: currency }
     puts product_data
 
     product_data # return the product data
