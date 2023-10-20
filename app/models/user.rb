@@ -34,7 +34,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   validates :username, presence: true, uniqueness: true
 
-  validates :intro, length: { maximum: 280 }
+  validates :intro, length: { maximum: 400 }
   validates :bio, length: { maximum: 5000 }
 
 
