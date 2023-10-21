@@ -163,21 +163,24 @@ class PagesController < ApplicationController
     @referrals_count = Referral.where(products: { lists: { users: { is_creator: true }}}).viewable_by(current_user).count
     @users_count = User.where(is_creator: true).count
 
-
-
-    @user_bookmarks = []
     if current_user
       @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
-    end
-    if current_user
-      @suggested_users = User.where(is_creator: true) - current_user.followed
-      @suggested_users = @suggested_users.sample(1)
+      @suggested_users = (User.where.not(id: current_user.id) - current_user.followed).sample(1)
+      random_list = List.joins(:user)
+                        .merge(User.viewable_by(current_user))
+                        .where.not(user_id: current_user.id)
+                        .order("RANDOM()")
+                        .first
+      @suggested_lists = random_list ? [random_list] : []
     else
-      @suggested_users = User.where(is_creator: true).sample(1)
+      @user_bookmarks = []
+      @suggested_users = User.all.sample(1)
+      random_list = List.joins(:user)
+                        .merge(User.viewable_by(nil))
+                        .order("RANDOM()")
+                        .first
+      @suggested_lists = random_list ? [random_list] : []
     end
-    random_list = List.viewable_by(current_user).where(users: { is_creator: true }).order("RANDOM()").first
-    @suggested_lists = [random_list] if random_list
-
 
     @type = params[:type] || "product"  # default to product if no type is given
     @pagination_url = creators_url
