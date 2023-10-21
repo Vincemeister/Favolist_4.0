@@ -14,12 +14,7 @@
             <%= link_to user_path(user), class: "paragraph-small-semibold" do%>
               <%= user.username %>
             <% end %>
-            <% if local_assigns[:iterating_for] == "sidebar" %>
-              <div class="follow-button">
-                <%# need to pass iterating_for to the data so in the sidebar the button just vanishes once you follow someone %>
-                <%= link_to 'Follow', follow_user_path(user), method: :post, class: "button button-link", data: { controller: "follows", follows_target: "button", url: follow_user_path(user), method: "post", action: "click->follows#toggleFollow", iterating_for: "sidebar" } %>
-              </div>
-            <% end %>
+
           </div>
 
           <%= link_to user_path(user), class: "product-list-follow-counts" do%>
@@ -33,31 +28,30 @@
       </div>
       <%# Defining which button to appear (follow, unfollow, remove follower, or followed (the latter serves the same function as remove follower but just discourages the negative action of unfollowing).
       The unfollow nad remove follow buttons only appear on the follow page of current_user, in the followed and following tabs respectively%>
-      <% unless local_assigns[:iterating_for] == "sidebar" %>
-        <div class="follow-or-bookmarks-button">
-          <% if !user_signed_in? %>
-            <%= link_to 'Follow', follow_user_path(user), method: :post, class: "button button-primary button-small", data: { controller: "follows", follows_target: "button", url: follow_user_path(user), method: "post", action: "click->follows#toggleFollow" } %>
-          <% elsif local_assigns[:sidebar] %>
-            <!-- ... -->
-          <% elsif local_assigns[:current_user_followers_tab] %>
-            <%= link_to 'Remove', remove_follower_user_path(user), class: "button button-tertiary", method: :post, data: { controller: "follows", follows_target: "button" , method: "post", url: follow_user_path(user), action: "click->follows#toggleFollow" } %>
-          <% elsif local_assigns[:current_user_followed_tab] %>
-            <%= link_to 'Unfollow', unfollow_user_path(user), class: "button button-tertiary", method: :post, data: { controller: "follows", follows_target: "button", method: "post", url: unfollow_user_path(user), action: "click->follows#toggleFollow" } %>
-          <% elsif current_user.is_following?(user.id) %>
-            <%= link_to 'Followed', unfollow_user_path(user), class: "button button-secondary", method: :post, data: { controller: "follows", follows_target: "button", method: "post", url: unfollow_user_path(user), action: "click->follows#toggleFollow" } %>
-          <% elsif user.is_following?(current_user.id) %>
-            <%= link_to 'Follow back', follow_user_path(user), method: :post, class: "button button-primary button-small", data: { controller: "follows", follows_target: "button", url: follow_user_path(user), method: "post", action: "click->follows#toggleFollow" } %>
-          <% elsif user != current_user %>
-            <%= link_to 'Follow', follow_user_path(user), method: :post, class: "button button-primary button-small", data: { controller: "follows", follows_target: "button", url: follow_user_path(user), method: "post", action: "click->follows#toggleFollow" } %>
-          <% else %>
-            <div class="bookmarks-button">
-              <%= link_to bookmarks_path do %>
-                <i class="fa-sharp fa-light fa-book-bookmark fa-2xl"></i>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
+      <div class="follow-or-bookmarks-button">
+        <% if local_assigns[:iterating_for] == "sidebar" %>
+          <div class="follow-button">
+            <%# need to pass iterating_for to the data so in the sidebar the button just vanishes once you follow someone %>
+            <%= link_to 'Follow', follow_user_path(user), method: :post, class: "button button-link", data: { controller: "follows", follows_target: "button", url: follow_user_path(user), method: "post", action: "click->follows#toggleFollow", iterating_for: "sidebar" } %>
+          </div>
+        <% elsif !user_signed_in? %>
+          <%= link_to 'Follow', follow_user_path(user), method: :post, class: "button button-primary button-small", data: { controller: "follows", follows_target: "button", url: follow_user_path(user), method: "post", action: "click->follows#toggleFollow" } %>
+        <% elsif local_assigns[:current_user_followers_tab] %>
+          <%= link_to 'Remove', remove_follower_user_path(user), class: "button button-tertiary", method: :post, data: { controller: "follows", follows_target: "button" , method: "post", url: follow_user_path(user), action: "click->follows#toggleFollow" } %>
+        <% elsif local_assigns[:current_user_followed_tab] %>
+          <%= link_to 'Unfollow', unfollow_user_path(user), class: "button button-tertiary", method: :post, data: { controller: "follows", follows_target: "button", method: "post", url: unfollow_user_path(user), action: "click->follows#toggleFollow" } %>
+        <% elsif current_user.is_following?(user.id) %>
+          <%= link_to 'Followed', unfollow_user_path(user), class: "button button-secondary", method: :post, data: { controller: "follows", follows_target: "button", method: "post", url: unfollow_user_path(user), action: "click->follows#toggleFollow" } %>
+        <% elsif user.is_following?(current_user.id) %>
+          <%= link_to 'Follow back', follow_user_path(user), method: :post, class: "button button-primary button-small", data: { controller: "follows", follows_target: "button", url: follow_user_path(user), method: "post", action: "click->follows#toggleFollow" } %>
+        <% elsif user != current_user %>
+          <%= link_to 'Follow', follow_user_path(user), method: :post, class: "button button-primary button-small", data: { controller: "follows", follows_target: "button", url: follow_user_path(user), method: "post", action: "click->follows#toggleFollow" } %>
+        <% elsif user == current_user %>
+          <div class="bookmarks-button">
+              <%= link_to 'My profile', user_path(current_user), class: "button button-primary button-small"  %>
+          </div>
+        <% end %>
+      </div>
     </div>
 
     <% if user.intro.present? %>

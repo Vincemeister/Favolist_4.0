@@ -11,39 +11,45 @@ class PagesController < ApplicationController
     .page(@page)
 
 
-    @user_bookmarks = []
-
     if current_user
       @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
-    end
-
-
-    if current_user
-      @user = current_user
-      @suggested_users = User.all - current_user.followed
-      @suggested_users = @suggested_users.sample(1)
+      @suggested_users = (User.where.not(id: current_user.id) - current_user.followed).sample(1)
+      random_list = List.joins(:user)
+                        .merge(User.viewable_by(current_user))
+                        .where.not(user_id: current_user.id)
+                        .order("RANDOM()")
+                        .first
+      @suggested_lists = random_list ? [random_list] : []
     else
+      @user_bookmarks = []
       @suggested_users = User.all.sample(1)
+      random_list = List.joins(:user)
+                        .merge(User.viewable_by(nil))
+                        .order("RANDOM()")
+                        .first
+      @suggested_lists = random_list ? [random_list] : []
     end
-    random_list = List.viewable_by(current_user).order("RANDOM()").first
-    @suggested_lists = [random_list] if random_list
-
   end
 
   def search
-    @user_bookmarks = []
     if current_user
       @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
-    end
-    if current_user
-      @suggested_users = User.all - current_user.followed
-      @suggested_users = @suggested_users.sample(1)
+      @suggested_users = (User.where.not(id: current_user.id) - current_user.followed).sample(1)
+      random_list = List.joins(:user)
+                        .merge(User.viewable_by(current_user))
+                        .where.not(user_id: current_user.id)
+                        .order("RANDOM()")
+                        .first
+      @suggested_lists = random_list ? [random_list] : []
     else
+      @user_bookmarks = []
       @suggested_users = User.all.sample(1)
+      random_list = List.joins(:user)
+                        .merge(User.viewable_by(nil))
+                        .order("RANDOM()")
+                        .first
+      @suggested_lists = random_list ? [random_list] : []
     end
-    random_list = List.viewable_by(current_user).order("RANDOM()").first
-    @suggested_lists = [random_list] if random_list
-
 
 
     puts "SEARCH ACTION INITIALIZED"

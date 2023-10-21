@@ -55,6 +55,15 @@ class UsersController < ApplicationController
   end
 
   def show
+    if current_user
+      @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
+      @suggested_users = (User.where.not(id: current_user.id) - current_user.followed).sample(1)
+    else
+      @user_bookmarks = []
+      @suggested_users = User.all.sample(1)
+    end
+
+    
     @products_count = @user.products.count
     @lists_count = @user.lists.count
     @referrals_count = @user.referrals.count
@@ -80,16 +89,6 @@ class UsersController < ApplicationController
     end
 
 
-    if current_user
-      @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
-    end
-
-    if current_user
-      @suggested_users = User.all - current_user.followed
-      @suggested_users = @suggested_users.sample(1)
-    else
-      @suggested_users = User.all.sample(1)
-    end
 
     respond_to do |format|
       format.html

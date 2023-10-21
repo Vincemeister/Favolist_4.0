@@ -14,14 +14,23 @@ class ListsController < ApplicationController
     else
       @products = @list.products.includes(:referral, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
       @referrals = @list.products.flat_map(&:referral).compact
-      @user_bookmarks = []
 
       if current_user
         @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
+        random_list = List.joins(:user)
+                          .merge(User.viewable_by(current_user))
+                          .where.not(user_id: current_user.id)
+                          .order("RANDOM()")
+                          .first
+        @suggested_lists = random_list ? [random_list] : []
+      else
+        @user_bookmarks = []
+        random_list = List.joins(:user)
+                          .merge(User.viewable_by(nil))
+                          .order("RANDOM()")
+                          .first
+        @suggested_lists = random_list ? [random_list] : []
       end
-
-      @suggested_lists = List.viewable_by(current_user).order("RANDOM()").limit(1).to_a
-      # @suggested_products = Product.viewable_by(current_user).order("RANDOM()").limit(1)
     end
     @source = params[:source]
   end
