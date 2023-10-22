@@ -6,10 +6,15 @@
   <div class="list-name-and-product-title-and-price">
     <div class="paragraph-small-bold"><%= product.title  %></div>
     <div class="price paragraph-small">
+      <% if product.price == 0 %>
+        Free
+        <% else %>
       <%= humanized_money_with_symbol(product.price) %>
         <% if product.subscription_type == "yearly" || product.subscription_type == "monthly" %>
         / <%= product.subscription_type %>
         <% end %>
+        <% end %>
+        
     </div>
   </div>
 
