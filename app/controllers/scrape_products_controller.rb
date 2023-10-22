@@ -11,6 +11,8 @@ class ScrapeProductsController < ApplicationController
       fetch_amazon_product
     elsif params[:link].include?("tokopedia")
       fetch_tokopedia_product
+    elsif params[:link].include?("shopee")
+      fetch_shopee_product
     else
       fetch_generic_product
     end
@@ -55,6 +57,17 @@ class ScrapeProductsController < ApplicationController
 
   def fetch_tokopedia_product
     product_data = fetch_product_from_tokopedia(params[:link])
+    if product_data.present?
+      session[:product_data] = product_data
+      redirect_to new_product_path
+    else
+      flash[:error] = 'Failed to fetch product data from store.'
+      redirect_to search_or_manual_product_upload_path
+    end
+  end
+
+  def fetch_shopee_product
+    product_data = fetch_product_from_shopee(params[:link])
     if product_data.present?
       session[:product_data] = product_data
       redirect_to new_product_path
@@ -298,7 +311,56 @@ class ScrapeProductsController < ApplicationController
     end
 
     product_data
+  end
+
+
+
+  
+  def fetch_product_from_shopee(url)
+    api_url = URI("https://shopee-e-commerce-data.p.rapidapi.com/shopee/item_detail_by_url/v2")
+
+    http = Net::HTTP.new(api_url.host, api_url.port)
+    http.use_ssl = true
+
+    request = Net::HTTP::Post.new(api_url)
+    request["content-type"] = 'application/json'
+    request["X-RapidAPI-Key"] = '971b32dc4emshdc908738f2fb7c0p15bcc5jsn4f8c98db4f7d'
+    request["X-RapidAPI-Host"] = 'shopee-e-commerce-data.p.rapidapi.com'
+    request.body = {
+        url: url
+    }.to_json
+
+    response = http.request(request)
+    data = JSON.parse(response.body) rescue {}
+
+    if response.is_a?(Net::HTTPSuccess) && data['code'] == 200
+        item_data = data['data']
+
+        title = item_data['title']
+        price = item_data['price_info']['price'].to_f
+        description = item_data['details']
+        images = item_data['main_imgs']
+        currency = item_data['currency']
+
+        product_data = {
+            title: title,
+            price: price,
+            description: description,
+            url: url,
+            images: images,
+            source: "shopee",
+            currency: currency
+        }
+
+        puts product_data  # For debugging; remove or replace with proper logging in production code
+    else
+        puts "Failed to retrieve the product data"
+        return nil  # You might want to return a more informative error object here
+    end
+
+    product_data
 end
+
 
 
 

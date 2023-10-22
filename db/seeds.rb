@@ -34,10 +34,19 @@ require "csv"
 # amazon_logo = ActiveStorage::Blob.create_and_upload!(io: file, filename: 'amazon_logo.png', content_type: 'image/png')
 # puts amazon_logo
 
-file_path = "https://res.cloudinary.com/dncij7vr6/image/upload/v1697608781/Favolist%204.0/app%20assets/tokopedia_logo_idmj6z.png"
+# file_path = "https://res.cloudinary.com/dncij7vr6/image/upload/v1697608781/Favolist%204.0/app%20assets/tokopedia_logo_idmj6z.png"
+# file = URI.open(file_path)
+# tokopedia_logo = ActiveStorage::Blob.create_and_upload!(io: file, filename: 'tokopedia_logo.png', content_type: 'image/png')
+# puts tokopedia_logo
+
+
+
+
+file_path = "https://res.cloudinary.com/dncij7vr6/image/upload/v1697973267/Favolist%204.0/app%20assets/shopee_logo_jxbadx.png"
 file = URI.open(file_path)
-tokopedia_logo = ActiveStorage::Blob.create_and_upload!(io: file, filename: 'tokopedia_logo.png', content_type: 'image/png')
-puts tokopedia_logo
+shopee_logo = ActiveStorage::Blob.create_and_upload!(io: file, filename: 'shopee_logo.png', content_type: 'image/png')
+puts shopee_logo
+
 
 
 # #----------------MAIN USERS---------------------------------------------------------------------------------------------

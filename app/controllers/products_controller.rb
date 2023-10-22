@@ -337,6 +337,8 @@ end
       @logo = ActiveStorage::Blob.find_by(filename: 'amazon_logo.png')
     elsif product_data[:source] == "tokopedia"
       @logo = ActiveStorage::Blob.find_by(filename: 'tokopedia_logo.png')
+    elsif product_data[:source] == "shopee"
+      @logo = ActiveStorage::Blob.find_by(filename: 'shopee_logo.png')
     end
 
     # Handle images processing
