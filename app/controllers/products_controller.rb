@@ -45,7 +45,8 @@ class ProductsController < ApplicationController
                initialize_product_from_session ||
                initialize_product_from_params ||
                Product.new
-    @product.subscription_type ||= 'one_time' if @product.new_record?
+
+    @product.subscription_type ||= 'one_time'
 
     @user = current_user
 
