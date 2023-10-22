@@ -30,7 +30,8 @@ class Product < ApplicationRecord
 
   validates :review, presence: true
   validates :description, presence: true
-
+  validates :subscription_type, inclusion: { in: ['one_time', 'monthly', 'yearly'],
+    message: "%{value} is not a valid purchase type" }
 
   pg_search_scope :search_by_title_and_description_and_list_name_and_user_username,
   against: [:title, :description],

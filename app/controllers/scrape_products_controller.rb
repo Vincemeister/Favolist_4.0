@@ -244,7 +244,7 @@ class ScrapeProductsController < ApplicationController
       logo = data.dig("htmlInferred", "favicon")
       # If the logo URL is an SVG, set it to nil
       logo = nil if logo&.end_with?('.svg')
-      product_data = { title: title, price: price, description: description, url: input_url, images: images, logo: logo, source: "generic" }
+      product_data = { title: title, price: price, description: description, url: input_url, images: images, logo: logo, currency: "USD", source: "generic" }
       puts "GENERIC STORE PRODUCT DATA: #{product_data}"
       product_data
 

@@ -45,6 +45,8 @@ class ProductsController < ApplicationController
                initialize_product_from_session ||
                initialize_product_from_params ||
                Product.new
+    @product.subscription_type ||= 'one_time' if @product.new_record?
+
     @user = current_user
 
     # For the id to be passed to the create action so the duplication count can be incremented for the original product
@@ -244,7 +246,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:title, :price, :price_cents, :price_currency, :review, :description, :url, :list_id, :currency, :logo, photos: [], referral_attributes: [:id, :code, :details])
+    params.require(:product).permit(:title, :price, :price_cents, :price_currency, :subscription_type, :review, :description, :url, :list_id, :currency, :logo, photos: [], referral_attributes: [:id, :code, :details])
   end
 
   def set_product

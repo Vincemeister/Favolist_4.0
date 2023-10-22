@@ -11,9 +11,22 @@
         <span class="error-message paragraph-xsmall-regular" data-target="form-validation.priceError"></span>
       </div>
       <div class="form-input-wrapper">
-      <%= f.input :price_currency, collection: Money::Currency.table.values.map { |c| c[:iso_code] }, prompt: 'Select Currency', required: true, input_html: {data: {form_validation_target: "currency"}} %>
-      <span class="error-message paragraph-xsmall-regular" data-target="form-validation.currencyError"></span>
-    </div>
+        <%= f.input :price_currency, collection: Money::Currency.table.values.map { |c| c[:iso_code] }, prompt: 'Select Currency', required: true, input_html: {data: {form_validation_target: "currency"}} %>
+        <span class="error-message paragraph-xsmall-regular" data-target="form-validation.currencyError"></span>
+      </div>
+
+      <div class="form-input-wrapper">
+        <%= f.input :subscription_type,
+                      as: :select,
+                      label: 'Payment plan',
+                      collection: [['One-time', 'one_time'], ['Monthly', 'monthly'], ['Yearly', 'yearly']],
+                      required: true,
+                      input_html: { data: {form_validation_target: "subscriptionType"}} %>
+          <span class="error-message paragraph-xsmall-regular" data-target="form-validation.subscriptionTypeError"></span>
+
+      </div>
+
+
 
     </div>
 
