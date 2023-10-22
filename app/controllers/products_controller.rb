@@ -1,5 +1,6 @@
 require 'open-uri'
 require 'net/http'
+require 'nokogiri'
 include CloudinaryHelper
 
 class ProductsController < ApplicationController
@@ -339,6 +340,8 @@ end
       @logo = ActiveStorage::Blob.find_by(filename: 'tokopedia_logo.png')
     elsif product_data[:source] == "shopee"
       @logo = ActiveStorage::Blob.find_by(filename: 'shopee_logo.png')
+    elsif product_data[:source] == "lazada"
+      @logo = ActiveStorage::Blob.find_by(filename: 'lazada_logo.png')
     end
 
     # Handle images processing

@@ -40,13 +40,16 @@ require "csv"
 # puts tokopedia_logo
 
 
+# file_path = "https://res.cloudinary.com/dncij7vr6/image/upload/v1697973267/Favolist%204.0/app%20assets/shopee_logo_jxbadx.png"
+# file = URI.open(file_path)
+# shopee_logo = ActiveStorage::Blob.create_and_upload!(io: file, filename: 'shopee_logo.png', content_type: 'image/png')
+# puts shopee_logo
 
 
-file_path = "https://res.cloudinary.com/dncij7vr6/image/upload/v1697973267/Favolist%204.0/app%20assets/shopee_logo_jxbadx.png"
+file_path = "https://res.cloudinary.com/dncij7vr6/image/upload/v1697980464/Favolist%204.0/app%20assets/lazada_logo_rf2ktw.png"
 file = URI.open(file_path)
-shopee_logo = ActiveStorage::Blob.create_and_upload!(io: file, filename: 'shopee_logo.png', content_type: 'image/png')
-puts shopee_logo
-
+lazada_logo = ActiveStorage::Blob.create_and_upload!(io: file, filename: 'lazada_logo.png', content_type: 'image/png')
+puts
 
 
 # #----------------MAIN USERS---------------------------------------------------------------------------------------------

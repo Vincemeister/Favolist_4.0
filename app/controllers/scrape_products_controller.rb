@@ -13,6 +13,8 @@ class ScrapeProductsController < ApplicationController
       fetch_tokopedia_product
     elsif params[:link].include?("shopee")
       fetch_shopee_product
+    elsif params[:link].include?("lazada")
+      fetch_lazada_product
     else
       fetch_generic_product
     end
@@ -68,6 +70,17 @@ class ScrapeProductsController < ApplicationController
 
   def fetch_shopee_product
     product_data = fetch_product_from_shopee(params[:link])
+    if product_data.present?
+      session[:product_data] = product_data
+      redirect_to new_product_path
+    else
+      flash[:error] = 'Failed to fetch product data from store.'
+      redirect_to search_or_manual_product_upload_path
+    end
+  end
+
+  def fetch_lazada_product
+    product_data = fetch_product_from_lazada(params[:link])
     if product_data.present?
       session[:product_data] = product_data
       redirect_to new_product_path
@@ -315,7 +328,7 @@ class ScrapeProductsController < ApplicationController
 
 
 
-  
+
   def fetch_product_from_shopee(url)
     api_url = URI("https://shopee-e-commerce-data.p.rapidapi.com/shopee/item_detail_by_url/v2")
 
@@ -359,9 +372,74 @@ class ScrapeProductsController < ApplicationController
     end
 
     product_data
+  end
+
+
+  def fetch_product_from_lazada(url)
+    # Extract item ID from the URL
+    match = /-i(\d+)-s\d+/.match(url)
+
+    if match.nil?
+        puts "Failed to extract item ID"
+        return nil
+    end
+
+    item_id = match[1]
+    puts "Item ID: #{item_id}" # Print item ID for debugging
+
+    api_url = URI("https://lazada-datahub.p.rapidapi.com/item_detail_2?itemId=#{item_id}&region=ID")
+
+    http = Net::HTTP.new(api_url.host, api_url.port)
+    http.use_ssl = true
+
+    request = Net::HTTP::Get.new(api_url)
+    request["X-RapidAPI-Key"] = '971b32dc4emshdc908738f2fb7c0p15bcc5jsn4f8c98db4f7d'
+    request["X-RapidAPI-Host"] = 'lazada-datahub.p.rapidapi.com'
+
+    response = http.request(request)
+    puts response.read_body # Print response body for debugging
+
+    data = JSON.parse(response.body) rescue {}
+
+    if data['result']['status']['code'] == 200 && data['result']['status']['data'] == 'success' && data['result']['item']
+        item = data['result']['item']
+        puts "Successfully retrieved the product data"
+
+        title = item['title']
+        price = item['sku']['def']['promotionPrice']  # Adapted to the structure provided in your example
+        original_price = item['sku']['def']['price']  # Extracting original price
+        images = item['images'].map { |img| "https:#{img}" } # Convert protocol-relative URLs to absolute URLs
+        currency = data['settings'] ? data['settings']['currency'] : 'Unknown Currency'
+
+        html_description = item['description']['html']  # Getting the HTML description
+
+        # Parse HTML and replace <br> and <p> tags with newlines to preserve formatting
+        parsed_description = Nokogiri::HTML(html_description)
+        parsed_description.search('br').each { |br| br.replace("\n") }
+        parsed_description.search('p').each { |p| p.after("\n") }
+
+        # Extract text content with formatting preserved
+        plain_text_description = parsed_description.text.strip
+
+        product_data = {
+            title: title,
+            price: price,
+            original_price: original_price,
+            description: plain_text_description,
+            url: url,  # Use the original URL
+            images: images,
+            source: "lazada",
+            currency: "IDR"
+        }
+
+        puts product_data  # For debugging; remove or replace with proper logging in production code
+    else
+        puts "Failed to retrieve the product data"
+        return nil  # You might want to return a more informative error object here
+    end
+
+    product_data
 end
-
-
 
 
 
