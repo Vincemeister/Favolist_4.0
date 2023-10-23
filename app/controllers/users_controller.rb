@@ -57,13 +57,13 @@ class UsersController < ApplicationController
   def show
     if current_user
       @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
-      @suggested_users = (User.where.not(id: current_user.id) - current_user.followed).sample(1)
+      @suggested_users = (User.where.not(id: current_user.id).where(is_creator: true) - current_user.followed).sample(1)
     else
       @user_bookmarks = []
-      @suggested_users = User.all.sample(1)
+      @suggested_users = User.all.where(is_creator: true).sample(1)
     end
 
-    
+
     @products_count = @user.products.count
     @lists_count = @user.lists.count
     @referrals_count = @user.referrals.count

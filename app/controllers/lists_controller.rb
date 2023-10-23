@@ -18,17 +18,19 @@ class ListsController < ApplicationController
       if current_user
         @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
         random_list = List.joins(:user)
-                          .merge(User.viewable_by(current_user))
-                          .where.not(user_id: current_user.id)
-                          .order("RANDOM()")
-                          .first
+        .where(users: { is_creator: true })
+      .merge(User.viewable_by(current_user))
+      .where.not(user_id: current_user.id)
+      .order("RANDOM()")
+      .first
         @suggested_lists = random_list ? [random_list] : []
       else
         @user_bookmarks = []
         random_list = List.joins(:user)
-                          .merge(User.viewable_by(nil))
-                          .order("RANDOM()")
-                          .first
+        .where(users: { is_creator: true })
+        .merge(User.viewable_by(nil))
+        .order("RANDOM()")
+        .first
         @suggested_lists = random_list ? [random_list] : []
       end
     end
