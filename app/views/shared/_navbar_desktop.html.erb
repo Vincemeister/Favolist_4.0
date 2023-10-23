@@ -43,12 +43,20 @@
       <% end %>
     <% end %>
 
-    <% if user_signed_in? %>
-      <%= link_to notifications_path, class: "side-nav-item" do %>
-        <i class="fa-sharp fa-solid fa-bell"></i>
-        <div class="paragraph-large-regular">Notifications</div>
-      <% end %>
-    <% end %>
+<% if user_signed_in? %>
+  <%= link_to notifications_path, class: "side-nav-item" do %>
+    <i class="fa-sharp fa-solid fa-bell"></i>
+    <div class="paragraph-large-regular">
+      <div class="notification-label">
+        Notifications
+        <% if @unread_notifications_count > 0 %>
+          <span class="notification-count"><%= @unread_notifications_count %></span>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
 
 
     <%= link_to about_path, class: "side-nav-item" do %>

@@ -19,7 +19,8 @@ class Comment < ApplicationRecord
         actor: user,
         recipient: parent_comment.user,  # Notify the user who wrote the parent comment
         action: 'replied',
-        comment: self  # Add the comment to the notification
+        comment: self,  # Add the comment to the notification
+        read: false
       )
     else  # If this is a new comment, not a reply
       return if user == product.user  # Don't notify if commenting on own product
@@ -27,7 +28,8 @@ class Comment < ApplicationRecord
         actor: user,
         recipient: product.user,  # Notify the product owner
         action: 'commented',
-        comment: self  # Add the comment to the notification
+        comment: self,  # Add the comment to the notification
+        read: false
       )
     end
   end

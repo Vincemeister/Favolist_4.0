@@ -3,10 +3,16 @@
 <div class="nav-header sticky-nav">
   <%= image_tag "https://res.cloudinary.com/dncij7vr6/image/upload/v1686124155/Favolist%204.0/app%20assets/favolist_logo_dftbgl.svg", alt: "Favolist Logo", class: "favolist-logo" %>
   <% if user_signed_in? %>
-    <%= link_to notifications_path, class: "side-nav-item text-decoration-none" do %>
-      <i class="fa-sharp fa-regular fa-bell"></i>
+    <%= link_to notifications_path do %>
+      <div class="notification-container-mobile">
+        <i class="fa-sharp fa-regular fa-bell fa-lg notification-bell-mobile"></i>
+        <% if @unread_notifications_count > 0 %>
+          <span class="notification-count-mobile"><%= @unread_notifications_count %></span>
+        <% end %>
+      </div>
     <% end %>
   <% end %>
+
 </div>
 
 

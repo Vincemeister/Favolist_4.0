@@ -33,6 +33,15 @@
             </div>
             <%= image_tag notification.comment.product.photos.first, class: "notification-image" %>
           <% end %>
+        <% when 'bookmarked' %>
+          <%= link_to product_path(notification.bookmark.product), class: "notification text-decoration-none", data: { notification_target: 'link', action: "click->notification#markAsRead" } do %>
+            <%= image_tag notification.actor.avatar, class: "avatar" %>
+            <div class="notification-text">
+              <strong><%= notification.actor.username %></strong> bookmarked <strong><%= notification.bookmark.product.title %></strong>
+            </div>
+            <%= image_tag notification.bookmark.product.photos.first, class: "notification-image" if notification.bookmark.product.photos.any? %>
+          <% end %>
+
       <% end %>
     </div>
   <% end %>
