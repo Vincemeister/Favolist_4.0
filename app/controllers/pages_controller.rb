@@ -13,20 +13,22 @@ class PagesController < ApplicationController
 
     if current_user
       @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
-      @suggested_users = (User.where.not(id: current_user.id) - current_user.followed).sample(1)
+      @suggested_users = (User.where.not(id: current_user.id).where(is_creator: true) - current_user.followed).sample(1)
       random_list = List.joins(:user)
-                        .merge(User.viewable_by(current_user))
-                        .where.not(user_id: current_user.id)
-                        .order("RANDOM()")
-                        .first
+      .where(users: { is_creator: true })
+      .merge(User.viewable_by(current_user))
+      .where.not(user_id: current_user.id)
+      .order("RANDOM()")
+      .first
       @suggested_lists = random_list ? [random_list] : []
     else
       @user_bookmarks = []
-      @suggested_users = User.all.sample(1)
+      @suggested_users = User.where(is_creator: true).sample(1)
       random_list = List.joins(:user)
-                        .merge(User.viewable_by(nil))
-                        .order("RANDOM()")
-                        .first
+      .where(users: { is_creator: true })
+      .merge(User.viewable_by(nil))
+      .order("RANDOM()")
+      .first
       @suggested_lists = random_list ? [random_list] : []
     end
   end
@@ -34,20 +36,22 @@ class PagesController < ApplicationController
   def search
     if current_user
       @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
-      @suggested_users = (User.where.not(id: current_user.id) - current_user.followed).sample(1)
+      @suggested_users = (User.where.not(id: current_user.id).where(is_creator: true) - current_user.followed).sample(1)
       random_list = List.joins(:user)
-                        .merge(User.viewable_by(current_user))
-                        .where.not(user_id: current_user.id)
-                        .order("RANDOM()")
-                        .first
+      .where(users: { is_creator: true })
+      .merge(User.viewable_by(current_user))
+      .where.not(user_id: current_user.id)
+      .order("RANDOM()")
+      .first
       @suggested_lists = random_list ? [random_list] : []
     else
       @user_bookmarks = []
-      @suggested_users = User.all.sample(1)
+      @suggested_users = User.where(is_creator: true).sample(1)
       random_list = List.joins(:user)
-                        .merge(User.viewable_by(nil))
-                        .order("RANDOM()")
-                        .first
+      .where(users: { is_creator: true })
+      .merge(User.viewable_by(nil))
+      .order("RANDOM()")
+      .first
       @suggested_lists = random_list ? [random_list] : []
     end
 
@@ -165,20 +169,22 @@ class PagesController < ApplicationController
 
     if current_user
       @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
-      @suggested_users = (User.where.not(id: current_user.id) - current_user.followed).sample(1)
+      @suggested_users = (User.where.not(id: current_user.id).where(is_creator: true) - current_user.followed).sample(1)
       random_list = List.joins(:user)
-                        .merge(User.viewable_by(current_user))
-                        .where.not(user_id: current_user.id)
-                        .order("RANDOM()")
-                        .first
+      .where(users: { is_creator: true })
+      .merge(User.viewable_by(current_user))
+      .where.not(user_id: current_user.id)
+      .order("RANDOM()")
+      .first
       @suggested_lists = random_list ? [random_list] : []
     else
       @user_bookmarks = []
-      @suggested_users = User.all.sample(1)
+      @suggested_users = User.where(is_creator: true).sample(1)
       random_list = List.joins(:user)
-                        .merge(User.viewable_by(nil))
-                        .order("RANDOM()")
-                        .first
+      .where(users: { is_creator: true })
+      .merge(User.viewable_by(nil))
+      .order("RANDOM()")
+      .first
       @suggested_lists = random_list ? [random_list] : []
     end
 
