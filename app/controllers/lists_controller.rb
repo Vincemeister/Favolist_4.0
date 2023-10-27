@@ -12,7 +12,9 @@ class ListsController < ApplicationController
     unless @list.viewable_by?(current_user)
       redirect_to no_permission_path
     else
-      @products = @list.products.includes(:referral, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
+      # @products = @list.products.includes(:referral, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
+        @products = @list.products.order(:position).includes(:referral, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
+
       @referrals = @list.products.flat_map(&:referral).compact
 
       if current_user

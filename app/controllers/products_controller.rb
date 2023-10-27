@@ -152,15 +152,36 @@ class ProductsController < ApplicationController
   end
 
   def update
+    Rails.logger.debug("Initial params position: #{params[:product][:position]}")
+    Rails.logger.debug("Position before save: #{@product.position}")
+
+
     if @product.update(product_params)
-      if params[:product][:referral_attributes][:code] == "" && params[:product][:referral_attributes][:details] == ""
-        @product.referral.destroy
+
+    Rails.logger.debug("Position after save: #{@product.position}")
+
+      # Check if referral_attributes are provided and if code and details are both empty
+      referral_attrs = params[:product][:referral_attributes]
+      if referral_attrs.present? && referral_attrs[:code].blank? && referral_attrs[:details].blank?
+        @product.referral.destroy if @product.referral
       end
-      redirect_to product_path(@product), notice: 'Product was successfully updated.'
+      if product_params.keys == ["position"]
+        # If only position is updated, respond differently
+        head :ok
+      else
+        redirect_to product_path(@product), notice: 'Product was successfully updated.'
+      end
+
     else
+      Rails.logger.debug("Update failed: #{@product.errors.full_messages}")
+
       render :edit
     end
   end
+
+
+
+
 
   def destroy
     if @product.destroy

@@ -1,4 +1,4 @@
-<div class="product-card <%= local_assigns[:iterating_for] == "product_show_page" ? 'product-card-show' : ''  %> " id="product_<%= product.id %>">
+<div class="product-card <%= local_assigns[:iterating_for] == "product_show_page" ? 'product-card-show' : ''  %> " id="product_<%= product.id %>" data-sortable-update-url="<%= product_path(product) %>">
   <div class="avatar-and-username-and-logo">
     <% unless local_assigns[:iterating_for] == "list_show_page" %>
 
@@ -27,6 +27,7 @@
       <% elsif @source == "list_show_page" %>
         <%= link_to list_path(product.list, anchor: "product_#{product.id}"), class: "back-arrow-show-page" do %>
           <i class="fa-regular fa-arrow-left"></i>
+
         <% end %>
       <% elsif @source == "home_feed" %>
         <%= link_to root_path(anchor: "product_#{product.id}"), class: "back-arrow-show-page" do %>
@@ -128,56 +129,54 @@
     <% end %>
   </div>
 
-</div>
+  <!-- Edit or delete modal -->
+  <div class="modal fade" id="editOrDeleteModal-<%= product.id %>" tabindex="-1" aria-labelledby="editOrDeleteModalLabel" aria-hidden="true" data-controller="hidemodal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><%= product.title %></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body custom-modal-body ">
+          <% if product.user == current_user %>
+            <%= link_to new_product_path(original_product_id: product.id), class: "button button-tertiary w-100 mb-3" do %>
+              Copy listing
+            <% end %>
+            <%= link_to edit_product_path(product), class: "button button-tertiary w-100 mb-3" do %>
+              Edit
+            <% end %>
+            <div class="button button-danger w-100" data-bs-target="#deleteModal-<%= product.id %>" data-bs-toggle="modal" data-bs-dismiss="modal"> Delete</div>
+          <% else %>
+            <%= link_to new_product_path(original_product_id: product.id), class: "button button-tertiary w-100 mb-3" do %>
+              Copy listing
+            <% end %>
+            <%= link_to contacts_path, class: "button button-primary w-100 mb-3" do%>
+              Report listing
+            <% end %>
+          <% end %>
 
-
-<!-- Edit or delete modal -->
-<div class="modal fade" id="editOrDeleteModal-<%= product.id %>" tabindex="-1" aria-labelledby="editOrDeleteModalLabel" aria-hidden="true" data-controller="hidemodal">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title"><%= product.title %></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body custom-modal-body ">
-        <% if product.user == current_user %>
-          <%= link_to new_product_path(original_product_id: product.id), class: "button button-tertiary w-100 mb-3" do %>
-            Copy listing
-          <% end %>
-          <%= link_to edit_product_path(product), class: "button button-tertiary w-100 mb-3" do %>
-            Edit
-          <% end %>
-          <div class="button button-danger w-100" data-bs-target="#deleteModal-<%= product.id %>" data-bs-toggle="modal" data-bs-dismiss="modal"> Delete</div>
-        <% else %>
-          <%= link_to new_product_path(original_product_id: product.id), class: "button button-tertiary w-100 mb-3" do %>
-            Copy listing
-          <% end %>
-          <%= link_to contacts_path, class: "button button-primary w-100 mb-3" do%>
-            Report listing
-          <% end %>
-        <% end %>
-
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 
-<!-- Delete modal -->
-<div class="modal fade" id="deleteModal-<%= product.id %>" aria-hidden="true" aria-labelledby="deleteModal" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header border-0 d-flex flex-end">
-        <%# empty button to create space between the icon and the close button %>
-        <div class="btn-close invisible"></div>
-        <i class="fa-sharp fa-light fa-trash-can fa-2xl custom-modal-icon"></i>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body custom-modal">
-        <h5>Are you sure you want to delete this listing?</h5>
-        <p>All related data including comments will be permanently deleted.</p>
-        <button type="button w-100" class="button button-tertiary w-100" data-bs-dismiss="modal">No, I want to keep this listing.</button>
-        <%= link_to 'Yes, please delete', product_path(product),  data: {turbo_method: :delete}, class: "button button-danger w-100" %>
+  <!-- Delete modal -->
+  <div class="modal fade" id="deleteModal-<%= product.id %>" aria-hidden="true" aria-labelledby="deleteModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0 d-flex flex-end">
+          <%# empty button to create space between the icon and the close button %>
+          <div class="btn-close invisible"></div>
+          <i class="fa-sharp fa-light fa-trash-can fa-2xl custom-modal-icon"></i>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body custom-modal">
+          <h5>Are you sure you want to delete this listing?</h5>
+          <p>All related data including comments will be permanently deleted.</p>
+          <button type="button w-100" class="button button-tertiary w-100" data-bs-dismiss="modal">No, I want to keep this listing.</button>
+          <%= link_to 'Yes, please delete', product_path(product),  data: {turbo_method: :delete}, class: "button button-danger w-100" %>
+        </div>
       </div>
     </div>
   </div>

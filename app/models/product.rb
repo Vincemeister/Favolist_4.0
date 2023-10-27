@@ -28,7 +28,7 @@ class Product < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   has_many :bookmarked_by, through: :bookmarks, source: :user
 
-  acts_as_list
+  acts_as_list scope: :list_id # replace list_id with whatever your scope should be
 
   validates :review, presence: true
   validates :description, presence: true
