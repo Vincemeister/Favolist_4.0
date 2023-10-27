@@ -70,7 +70,13 @@
         <% end %>
       </div>
     <% else %>
-      <div></div>
+
+      <% if product.user == current_user %>
+        <i class="fa-thin fa-grip-lines"></i>
+      <% else %>
+        <div></div>
+      <% end %>
+
     <% end %>
 
     <% if local_assigns[:iterating_for] == "product_show_page" %>
