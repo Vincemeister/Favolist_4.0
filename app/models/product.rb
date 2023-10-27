@@ -28,6 +28,8 @@ class Product < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   has_many :bookmarked_by, through: :bookmarks, source: :user
 
+  acts_as_list
+
   validates :review, presence: true
   validates :description, presence: true
   validates :subscription_type, inclusion: { in: ['one_time', 'monthly', 'yearly'],
