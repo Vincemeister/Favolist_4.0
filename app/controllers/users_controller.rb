@@ -55,6 +55,9 @@ class UsersController < ApplicationController
   end
 
   def show
+    @iterating_for = "user_show"
+
+
     if current_user
       @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
       @suggested_users = (User.where.not(id: current_user.id).where(is_creator: true) - current_user.followed).sample(1)
@@ -81,7 +84,7 @@ class UsersController < ApplicationController
       @products = @user.products.includes(:list, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
                         .page(@product_page)
     when "list"
-      @lists = @user.lists
+      @lists = @user.lists.order(:position)
                    .includes(:user, background_image_attachment: :blob)
                    .page(@list_page)
     when "referral"

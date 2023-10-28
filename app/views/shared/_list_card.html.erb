@@ -3,13 +3,22 @@
       <%= link_to list_path(list, source: local_assigns[:iterating_for]), class: "text-decoration-none", id: "list_#{list.id}" do %>
 
         <!-- User Info -->
-        <div class="user-info">
-            <%= image_tag list.user.avatar, class: "avatar-small" %>
-            <div class="user-text">
-                <div class="username"><%= list.user.username %></div>
-                <div class="followers paragraph-small-medium"><%= (list.user.followers_count || 0) %> followers</div>
-            </div>
-        </div>
+        <% if @iterating_for == "user_show" %>
+          <% if product.user == current_user %>
+            <i class="fa-thin fa-grip-lines"></i>
+          <% else %>
+            <div></div>
+          <% end %>
+        <% else %>
+          <div class="user-info">
+              <%= image_tag list.user.avatar, class: "avatar-small" %>
+              <div class="user-text">
+                  <div class="username"><%= list.user.username %></div>
+                  <div class="followers paragraph-small-medium"><%= (list.user.followers_count || 0) %> followers</div>
+              </div>
+          </div>
+        <% end %>
+
 
         <!-- List Info -->
         <div class="product-count-and-list-name">

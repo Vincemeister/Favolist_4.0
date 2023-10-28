@@ -7,11 +7,14 @@ class List < ApplicationRecord
   include PgSearch::Model
 
   has_one_attached :background_image, dependent: :destroy
-  
+
 
   belongs_to :user
   has_many :products, dependent: :destroy
   has_many :referrals, through: :products
+
+  acts_as_list scope: :user_id # replace list_id with whatever your scope should be
+
 
   pg_search_scope :search_by_name_and_description_and_product_title_and_user_username,
   against: [:name, :description],

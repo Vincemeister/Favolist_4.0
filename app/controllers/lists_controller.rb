@@ -61,7 +61,12 @@ class ListsController < ApplicationController
 
   def update
     @list.update(list_params)
-    redirect_to list_path(@list)
+    if list_params.keys == ["position"]
+      # If only position is updated, respond differently
+      head :ok
+    else
+      redirect_to list_path(@list), notice: 'List was successfully updated.'
+    end
   end
 
   def destroy
@@ -74,7 +79,7 @@ class ListsController < ApplicationController
   private
 
   def list_params
-    params.require(:list).permit(:name, :description)
+    params.require(:list).permit(:name, :description, :position)
   end
 
   def set_list
