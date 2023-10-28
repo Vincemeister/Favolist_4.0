@@ -11,10 +11,12 @@ end
 
 
 namespace :lists do
-  desc "Initialize positions for existing lists"
+  desc "Initialize positions for existing lists per user"
   task initialize_positions: :environment do
-    List.order(:created_at).each_with_index do |list, index|
-      list.update_column(:position, index + 1)
+    User.find_each do |user|
+      user.lists.order(:created_at).each_with_index do |list, index|
+        list.update_column(:position, index + 1)
+      end
     end
   end
 end
