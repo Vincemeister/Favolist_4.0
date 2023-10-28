@@ -59,15 +59,38 @@ class ListsController < ApplicationController
   def edit
   end
 
+  # def update
+  #   @list.update(list_params)
+  #   if list_params.keys == ["position"]
+  #     # If only position is updated, respond differently
+  #     head :ok
+  #   else
+  #     redirect_to list_path(@list), notice: 'List was successfully updated.'
+  #   end
+  # end
+
+
   def update
-    @list.update(list_params)
+    logger.info "=== Entering ListsController#update ==="
+
+    logger.info "List Params: #{list_params.inspect}"
+
+    update_result = @list.update(list_params)
+
+    logger.info "Update Result: #{update_result}"
+    logger.info "Errors: #{@list.errors.full_messages.to_sentence}" if @list.errors.any?
+
     if list_params.keys == ["position"]
-      # If only position is updated, respond differently
+      logger.info "Only updating position. Responding with head :ok"
       head :ok
     else
+      logger.info "Redirecting to list path"
       redirect_to list_path(@list), notice: 'List was successfully updated.'
     end
+
+    logger.info "=== Exiting ListsController#update ==="
   end
+
 
   def destroy
     if @list.destroy
