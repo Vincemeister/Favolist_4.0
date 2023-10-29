@@ -81,7 +81,7 @@ class UsersController < ApplicationController
 
     case @type
     when "product"
-      @products = @user.products.includes(:list, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
+      @products = @user.products.order(created_at: :desc).includes(:list, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
                         .page(@product_page)
     when "list"
       @lists = @user.lists.order(:position)

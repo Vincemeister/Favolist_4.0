@@ -15,7 +15,7 @@ class ListsController < ApplicationController
       # @products = @list.products.includes(:referral, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
         @products = @list.products.order(:position).includes(:referral, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
 
-      @referrals = @list.products.flat_map(&:referral).compact
+      @referrals = @list.referrals.order(:position).includes(:product, product: [{photos_attachments: :blob}, {user: [{avatar_attachment: :blob}]}])
 
       if current_user
         @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)

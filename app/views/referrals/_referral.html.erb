@@ -1,4 +1,4 @@
-<div class="referral-card text-decoration-none" id="referral_<%= referral.id %>">
+<div class="referral-card text-decoration-none" id="referral_<%= referral.id %>" data-sortable-update-url="<%= referral_path(referral) %>">
   <div class="avatar-and-username-and-list-name">
     <%= link_to user_path(referral.product.user) do %>
       <%= image_tag referral.product.user.avatar, class: 'avatar-small' %>
@@ -33,7 +33,7 @@
       <div class="paragraph-small-bold"><%= referral.product.title  %></div>
       <div class="price paragraph-small">$<%= referral.product.price.to_i %></div>
     </div>
-    <%= link_to "See review", product_path(referral.product, source: (local_assigns[:iterating_for])), class: "button button-link" %>
+    <%= link_to "See listing", product_path(referral.product, source: (local_assigns[:iterating_for])), class: "button button-link" %>
   </div>
 
   <div class="referral-details content-text">

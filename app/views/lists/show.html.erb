@@ -83,9 +83,13 @@
   </div>
 
   <div class="tab-pane fade linebreak" id="pills-referrals" role="tabpanel" aria-labelledby="pills-referrals-tab">
-    <div class="card-grid">
+    <% if @list.user == current_user %>
+      <div class="card-grid" data-controller="sortable" data-sortable-resource-name-value="referral">
+    <% else %>
+      <div class="card-grid"></div>
+    <% end %>
       <% @referrals.each do |referral| %>
-        <%= render 'shared/referral_card', referral: referral %>
+        <%= render 'shared/referral_card', referral: referral, iterating_for: "list_show_page"  %>
       <% end %>
     </div>
 

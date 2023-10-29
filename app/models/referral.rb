@@ -1,4 +1,6 @@
 class Referral < ApplicationRecord
+  before_save :sync_list_id
+
 
   scope :viewable_by, -> (user) {
     joins(product: { list: :user }).where(users: { id: User.viewable_by(user).pluck(:id) })
@@ -8,6 +10,13 @@ class Referral < ApplicationRecord
   include PgSearch::Model
 
   belongs_to :product
+  belongs_to :list
+  acts_as_list scope: :list_id
+
+  def list_id
+    product.list_id if product
+  end
+
 
   # validates :code, presence: true
   # validates :details, presence: true
@@ -37,6 +46,12 @@ class Referral < ApplicationRecord
 
   def viewable_by?(user)
     User.viewable_by(user).include?(self.product.list.user)
+  end
+
+  private
+
+  def sync_list_id
+    self.list_id = product.list_id if product
   end
 
 end

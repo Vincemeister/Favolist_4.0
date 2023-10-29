@@ -73,7 +73,7 @@ Rails.application.routes.draw do
   end
 
   resources :lists, only: [:index, :show, :new, :create, :edit, :update, :destroy]
-  resources :referrals, only: [:index]
+  resources :referrals, only: [:index, :show, :update]
   resources :settings, only: [:index] do
     collection do
       get :email_password

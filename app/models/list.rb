@@ -11,7 +11,7 @@ class List < ApplicationRecord
 
   belongs_to :user
   has_many :products, dependent: :destroy
-  has_many :referrals, through: :products
+  has_many :referrals, dependent: :destroy
 
   acts_as_list scope: :user_id # replace list_id with whatever your scope should be
 

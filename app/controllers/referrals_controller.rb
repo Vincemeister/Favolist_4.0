@@ -26,10 +26,32 @@ class ReferralsController < ApplicationController
     end
   end
 
+
+  def update
+    # Rails.logger.debug("Initial params position: #{params[:referral][:position]}")
+    Rails.logger.debug("Received Params: #{params.inspect}")
+    Rails.logger.debug("Position before save: #{@referral.position}")
+
+
+    if @referral.update(referral_params)
+
+    Rails.logger.debug("Position after save: #{@referral.position}")
+
+      # Check if referral_attributes are provided and if code and details are both empty
+      if referral_params.keys == ["position"]
+        # If only position is updated, respond differently
+        head :ok
+      end
+
+    else
+      Rails.logger.debug("Update failed: #{@referral.errors.full_messages}")
+    end
+  end
+
   private
 
   def referral_params
-    params.require(:referral).permit(:name, :email, :phone, :message)
+    params.require(:referral).permit(:position, :list_id)
   end
 
   def set_referral

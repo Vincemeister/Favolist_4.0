@@ -1,22 +1,35 @@
-<div class="referral-card text-decoration-none" id="referral_<%= referral.id %>">
+<div class="referral-card text-decoration-none" id="referral_<%= referral.id %>" data-sortable-update-url="<%= referral_path(referral) %>">
   <div class="avatar-and-username-and-list-name">
-    <%= link_to user_path(referral.product.user) do %>
-      <%= image_tag referral.product.user.avatar, class: 'avatar-small' %>
-    <% end %>
-    <%= link_to user_path(referral.product.user) do %>
-      <div class="username paragraph-small-medium">
-        <%= referral.product.user.username %>
-        <span class="comment-date-and-reply-button">  •   <% if time_ago_in_words(referral.created_at, include_seconds: false) == "less than a minute ago" %>
-              <%= time_ago_in_words(referral.created_at, include_seconds: false) %>
-            <% else %>
-              <%= time_ago_in_words(referral.created_at, include_seconds: false).gsub('about', '').gsub(/(\d+)\s*minute(s)?\s*/, '\1m').gsub(/(\d+)\s*hour(s)?\s*/, '\1h').gsub(/(\d+)\s*day(s)?\s*/, '\1d').gsub(/(\d+)\s*month(s)?\s*/, '\1mo').gsub(/(\d+)\s*year(s)?\s*/, '\1y') %>
-            <% end %></span>
 
-      </div>
-      <div class="paragraph-small-regular">
-        <%= referral.product.list.name %>
-      </div>
+
+    <% unless local_assigns[:iterating_for] == "list_show_page" %>
+
+      <%= link_to user_path(referral.product.user) do %>
+        <%= image_tag referral.product.user.avatar, class: 'avatar-small' %>
+      <% end %>
+      <%= link_to user_path(referral.product.user) do %>
+        <div class="username paragraph-small-medium">
+          <%= referral.product.user.username %>
+          <span class="comment-date-and-reply-button">  •   <% if time_ago_in_words(referral.created_at, include_seconds: false) == "less than a minute ago" %>
+                <%= time_ago_in_words(referral.created_at, include_seconds: false) %>
+              <% else %>
+                <%= time_ago_in_words(referral.created_at, include_seconds: false).gsub('about', '').gsub(/(\d+)\s*minute(s)?\s*/, '\1m').gsub(/(\d+)\s*hour(s)?\s*/, '\1h').gsub(/(\d+)\s*day(s)?\s*/, '\1d').gsub(/(\d+)\s*month(s)?\s*/, '\1mo').gsub(/(\d+)\s*year(s)?\s*/, '\1y') %>
+              <% end %></span>
+
+        </div>
+        <div class="paragraph-small-regular">
+          <%= referral.product.list.name %>
+        </div>
+      <% end %>
+    <% else %>
+      <% if referral.product.user == current_user %>
+        <i class="fa-thin fa-grip-lines"></i>
+      <% else %>
+        <div></div>
+      <% end %>
     <% end %>
+
+
   </div>
 
   <div class="product-card-image">
@@ -37,7 +50,7 @@
       <div class="paragraph-small-bold"><%= referral.product.title  %></div>
       <div class="price paragraph-small">$<%= referral.product.price.to_i %></div>
     </div>
-    <%= link_to "See review", product_path(referral.product, source: (local_assigns[:iterating_for])), class: "button button-link" %>
+    <%= link_to "See listing", product_path(referral.product, source: (local_assigns[:iterating_for])), class: "button button-link" %>
   </div>
 
   <div class="referral-details content-text">
