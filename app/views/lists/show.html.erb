@@ -86,14 +86,17 @@
     <% if @list.user == current_user %>
       <div class="card-grid" data-controller="sortable" data-sortable-resource-name-value="referral">
     <% else %>
-      <div class="card-grid"></div>
+      <div class="card-grid">
     <% end %>
-      <% @referrals.each do |referral| %>
-        <%= render 'shared/referral_card', referral: referral, iterating_for: "list_show_page"  %>
-      <% end %>
+    <% @referrals.each do |referral| %>
+      <%= render 'shared/referral_card', referral: referral, iterating_for: "list_show_page"  %>
+    <% end %>
     </div>
 
   </div>
+
+
+
   <div class="tab-pane fade linebreak" id="pills-about" role="tabpanel" aria-labelledby="pills-about-tab">
     <div class="about-text">
       <p><%= simple_format(@list.description) %></p>
@@ -121,7 +124,8 @@
         <%= link_to edit_list_path(@list), class: "button button-tertiary w-100 mb-3" do %>
           Edit
         <% end %>
-        <div class="button button-danger w-100" data-bs-target="#deleteModal-<%= @list.id %>" data-bs-toggle="modal" data-bs-dismiss="modal" %>Delete</div>
+        <div class="button button-danger w-100" data-bs-target="#deleteModal-<%= @list.id %>" data-bs-toggle="modal" data-bs-dismiss="modal">Delete</div>
+
       </div>
     </div>
   </div>

@@ -93,6 +93,6 @@ export default class extends Controller {
   // Detect if we're at the bottom of the page.
   get #pageEnd() {
     const { scrollHeight, scrollTop, clientHeight } = document.documentElement;
-    return scrollHeight - scrollTop - clientHeight < 40;
+    return scrollHeight - scrollTop - clientHeight < 3000;
   }
 }
