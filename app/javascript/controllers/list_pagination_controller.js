@@ -12,12 +12,12 @@ export default class extends Controller {
   fetching = false;
 // Add these at the beginning of the class
   hasListScrollListener = false;
-  hasLoadedInitialRecords = false;
 
 
 
   static values = {
     page: { type: Number, default: 1 },
+    url: String
   };
 
   static targets = ["lists", "noRecords"];
@@ -26,35 +26,47 @@ export default class extends Controller {
     this.scroll = this.scroll.bind(this);
   }
 
-  connect() {
-    console.log("list pagination connected");
 
+  connect() {
+    console.log("product pagination connected");
+    console.log("productPagination initial url value:", this.listsTarget.dataset.listPaginationUrlValue);
+    console.log("list URL VALUE:", this.listsTarget.dataset.listPaginationUrlValue);
+
+    // Attach the scroll listener if the product tab is the default open tab
+    const listTab = document.getElementById("pills-lists-tab");
+    if (listTab && listTab.classList.contains("active") && !this.constructor.hasListScrollListener) {
+        document.addEventListener('scroll', this.scroll);
+        this.constructor.hasListScrollListener = true;
+      this.#loadRecords();
+    }
   }
 
   disconnect() {
-    if (this.hasListScrollListener) {
+    if (this.constructor.hasListScrollListener) {
         document.removeEventListener('scroll', this.scroll);
-        this.hasListScrollListener = false;
+        this.constructor.hasListScrollListener = false;
     }
 }
 
 
-  tabShown() {
-    if (!this.hasListScrollListener) {
-        document.addEventListener('scroll', this.scroll);
-        this.hasListScrollListener = true;
-    }
-    if (!this.hasLoadedInitialRecords) {
-        this.#loadRecords();
-        this.hasLoadedInitialRecords = true;
-    }
- }
 
 
- tabHidden() {
-  if (this.hasListScrollListener) {
+
+ tabShown() {
+  if (!this.constructor.hasListScrollListener) {
+      document.addEventListener('scroll', this.scroll);
+      this.constructor.hasListScrollListener = true;
+  }
+}
+
+
+
+
+
+tabHidden() {
+  if (this.constructor.hasListScrollListener) {
       document.removeEventListener('scroll', this.scroll);
-      this.hasListScrollListener = false;
+      this.constructor.hasListScrollListener = false;
   }
 }
 

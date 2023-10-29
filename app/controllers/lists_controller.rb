@@ -13,7 +13,7 @@ class ListsController < ApplicationController
       redirect_to no_permission_path
     else
       # @products = @list.products.includes(:referral, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
-        @products = @list.products.order(:position).includes(:referral, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
+      @products = @list.products.order(:position).includes(:referral, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
 
       @referrals = @list.referrals.order(:position).includes(:product, product: [{photos_attachments: :blob}, {user: [{avatar_attachment: :blob}]}])
 

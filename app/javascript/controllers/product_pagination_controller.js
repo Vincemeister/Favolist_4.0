@@ -10,11 +10,11 @@ const spinner = `
 export default class extends Controller {
   fetching = false; // debounce
   hasProductScrollListener = false;  // Add this line to initialize a flag
+  hasLoadedInitialRecords = false;
 
 
   static values = {
     page: { type: Number, default: 1 },
-    url: String
   };
 
   static targets = ["products", "noRecords"];
@@ -25,37 +25,34 @@ export default class extends Controller {
 
   connect() {
     console.log("product pagination connected");
-    console.log("productPagination initial url value:", this.productsTarget.dataset.productPaginationUrlValue);
-    console.log("PRODUCT URL VALUE:", this.productsTarget.dataset.productPaginationUrlValue);
-
-    // Attach the scroll listener if the product tab is the default open tab
-    const productTab = document.getElementById("pills-products-tab");
-    if (productTab && productTab.classList.contains("active") && !this.constructor.hasProductScrollListener) {
-        document.addEventListener('scroll', this.scroll);
-        this.constructor.hasProductScrollListener = true;
-      this.#loadRecords();
-    }
   }
 
+
   disconnect() {
-    if (this.constructor.hasProductScrollListener) {
+    if (this.hasProductScrollListener) {
         document.removeEventListener('scroll', this.scroll);
-        this.constructor.hasProductScrollListener = false;
+        this.hasProductScrollListener = false;
     }
 }
 
 
+
   tabShown() {
-    if (!this.constructor.hasProductScrollListener) {
+    if (!this.hasProductScrollListener) {
         document.addEventListener('scroll', this.scroll);
-        this.constructor.hasProductScrollListener = true;
+        this.hasProductScrollListener = true;
+    }
+    if (!this.hasLoadedInitialRecords) {
+        this.#loadRecords();
+        this.hasLoadedInitialRecords = true;
     }
   }
 
+
   tabHidden() {
-    if (this.constructor.hasProductScrollListener) {
+    if (this.hasProductScrollListener) {
         document.removeEventListener('scroll', this.scroll);
-        this.constructor.hasProductScrollListener = false;
+        this.hasProductScrollListener = false;
     }
   }
 
