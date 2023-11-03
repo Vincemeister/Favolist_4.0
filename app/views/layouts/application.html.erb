@@ -13,7 +13,7 @@
       <% if current_user %>
         <script>
           dataLayer.push({
-            'user_id': '<%= current_user.unique_identifier %>' // Replace with your user ID variable
+            'user_id': '<%= current_user.id %>' // Replace with your user ID variable
           });
         </script>
       <% end %>
