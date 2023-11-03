@@ -10,7 +10,7 @@
       })(window,document,'script','dataLayer','GTM-MWM76P43');</script>
       <!-- End Google Tag Manager -->
 
-      <% if user_signed_in? %>
+      <% if current_user %>
         <script>
           dataLayer.push({
             'user_id': '<%= current_user.unique_identifier %>' // Replace with your user ID variable
