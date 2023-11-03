@@ -19,10 +19,15 @@
   <div class="tab-content product-content" id="pills-tabContent">
 
     <div class="tab-pane fade show active linebreak" id="pills-lists" role="tabpanel" aria-labelledby="pills-lists-tab">
-      <div id="lists" class="list-card-grid"
+    <div id="lists" class="list-card-grid"
       data-list-pagination-target="lists"
       data-list-pagination-url-value="<%= @pagination_url %>"
-      data-list-pagination-page-value="<%= 2 %>" data-controller="sortable" data-sortable-resource-name-value="list">
+      data-list-pagination-page-value="<%= 2 %>"
+      <% if @user == current_user %>
+        data-controller="sortable"
+        data-sortable-resource-name-value="list"
+      <% end %>
+    >
 
 
       </div>
