@@ -9,6 +9,14 @@
       'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
       })(window,document,'script','dataLayer','GTM-MWM76P43');</script>
       <!-- End Google Tag Manager -->
+
+    <% if user_signed_in? %>
+      <script>
+        dataLayer.push({
+          'user_id': '<%= current_user.unique_identifier %>' // Replace with your user ID variable
+        });
+      </script>
+      
     <% end %>
 
     <!-- Start VWO Async SmartCode -->
