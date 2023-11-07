@@ -2,6 +2,13 @@
   <%= image_tag "https://res.cloudinary.com/dncij7vr6/image/upload/v1686124155/Favolist%204.0/app%20assets/favolist_logo_dftbgl.svg", alt: "Favolist Logo", class: "navbar-logo-desktop" %>
   <div class="nav-items text-decoration-none">
 
+    <% if user_signed_in? %>
+      <%= link_to user_path(current_user), class: "side-nav-item" do %>
+        <i class="fa-sharp fa-solid fa-user"></i>
+        <div class="paragraph-large-regular">Profile</div>
+      <% end %>
+    <% end %>
+
     <%= link_to creators_path, class: "side-nav-item" do %>
       <i class="fa-sharp fa-solid fa-star"></i>
       <div class="paragraph-large-regular">Creators</div>
@@ -18,18 +25,6 @@
     <% end %>
 
     <% if user_signed_in? %>
-      <%= link_to user_path(current_user), class: "side-nav-item" do %>
-        <i class="fa-sharp fa-solid fa-user"></i>
-        <div class="paragraph-large-regular">Profile</div>
-      <% end %>
-    <% else %>
-      <%= link_to new_user_session_path, class: "side-nav-item" do%>
-        <i class="fa-sharp fa-solid fa-user"></i>
-        <div class="paragraph-large-regular">Sign in</div>
-      <% end %>
-    <% end %>
-
-    <% if user_signed_in? %>
       <div class="side-nav-item" data-bs-toggle="modal" data-bs-target="#exampleModal">
         <i class="fa-sharp fa-solid fa-square-plus"></i>
         <div class="paragraph-large-regular">Add</div>
@@ -42,6 +37,8 @@
         <div class="paragraph-large-regular">Settings</div>
       <% end %>
     <% end %>
+
+
 
 <% if user_signed_in? %>
   <%= link_to notifications_path, class: "side-nav-item" do %>
@@ -68,6 +65,13 @@
       <i class="fa-sharp fa-flask-vial"></i>
       <div class="paragraph-large-regular">Beta</div>
     <% end %>
+
+        <% if !user_signed_in? %>
+        <%= link_to new_user_session_path, class: "btn btn-primary", style: "color: white; width: 100%;" do%>
+        <div class="paragraph-large-regular">Sign in</div>
+      <% end %>
+    <% end %>
+
 
   </div>
 </div>

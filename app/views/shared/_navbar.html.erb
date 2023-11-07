@@ -1,13 +1,5 @@
 
 <div class="navbar text-decoration-none">
-    <%= link_to creators_path do %>
-      <i class="fa-sharp fa-solid fa-star fa-lg"></i>
-    <% end %>
-
-
-  <%= link_to search_path do %>
-    <i class="fa-sharp fa-solid fa-magnifying-glass fa-lg"></i>
-  <% end %>
   <% if user_signed_in? %>
     <%= link_to user_path(current_user) do %>
       <i class="fa-sharp fa-solid fa-user fa-lg"></i>
@@ -16,6 +8,16 @@
     <%= link_to new_user_session_path do%>
       <i class="fa-sharp fa-solid fa-user fa-lg"></i>
     <% end %>
+  <% end %>
+
+
+  <%= link_to creators_path do %>
+    <i class="fa-sharp fa-solid fa-star fa-lg"></i>
+  <% end %>
+
+
+  <%= link_to search_path do %>
+    <i class="fa-sharp fa-solid fa-magnifying-glass fa-lg"></i>
   <% end %>
   <%= link_to root_path do %>
     <i class="fa-sharp fa-solid fa-house fa-lg"></i>
