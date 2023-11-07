@@ -22,10 +22,11 @@
         </div>
       <% end %>
     <% else %>
-      <% if referral.product.user == current_user %>
-        <i class="fa-thin fa-grip-lines"></i>
-      <% else %>
+      <% if product.user == current_user %>
+        <i class="fa-thin fa-grip-lines fa-grip-lines-referral"></i>
         <div></div>
+      <% else %>
+        <div> </div>
       <% end %>
     <% end %>
 

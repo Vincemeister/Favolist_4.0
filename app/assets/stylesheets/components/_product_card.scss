@@ -160,16 +160,24 @@
 }
 
 
-// .fa-grip-lines {
-//   cursor: grab; // Hand on hover
+.fa-grip-lines-product {
+  &:hover {
+    cursor: grab;
+  }
 
-// }
+}
 
 
-@media(max-width: 991px) {
+@media(max-width: 993px) {
   .product-card-show {
     width: 100%;
   }
+
+  .fa-grip-lines-product {
+    display: none;
+
+  }
+
 }
 
 @media(min-width: 992px) {

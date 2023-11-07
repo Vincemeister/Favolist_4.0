@@ -108,5 +108,8 @@
 .fa-grip-lines-list {
   color: white;
   opacity: 1;
+  &.hover {
+    cursor: grab;
+  }
 
 }

@@ -57,3 +57,22 @@
   height: 100%;
   gap: 1em;
 }
+
+
+
+.fa-grip-lines-referral {
+  &:hover {
+    cursor: grab;
+  }
+
+}
+
+
+
+@media(max-width: 993px) {
+
+  .fa-grip-lines-referral {
+    display: none;
+
+  }
+}
