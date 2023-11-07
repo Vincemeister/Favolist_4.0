@@ -72,6 +72,17 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <%= render "shared/flashes" %>
+
+
+    <%# <div data-controller="popup" data-popup-target="banner" class="popup-banner" style="display: none;">
+      <div class="popup-content">
+        <h1>Special Announcement!</h1>
+        <p>This is your popup banner message.</p>
+        <button data-action="click->popup#close">Close</button>
+      </div>
+    </div> %>
+
+
     <% unless controller_name == 'sessions' && action_name == 'new' || controller_name == 'registrations' && action_name == 'new' || controller_name == 'passwords' && action_name == 'new' %>
 
       <div class="desktop_grid">
