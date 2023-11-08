@@ -27,7 +27,7 @@
 
     <div class="follow-or-bookmarks-button col-3">
       <% if !user_signed_in? %>
-        <%= link_to 'Follow', follow_user_path(user), method: :post, class: "button button-primary button-small", data: { controller: "follows", follows_target: "button", url: follow_user_path(user), method: "post", action: "click->follows#toggleFollow" } %>
+        <%= link_to 'Follow', new_user_session_path, class: "button button-primary button-small" %>
       <% elsif local_assigns[:sidebar] %>
         <!-- ... -->
       <% elsif local_assigns[:current_user_followers_tab] %>

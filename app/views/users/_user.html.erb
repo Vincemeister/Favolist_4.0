@@ -32,10 +32,15 @@
         <% if local_assigns[:iterating_for] == "sidebar" %>
           <div class="follow-button">
             <%# need to pass iterating_for to the data so in the sidebar the button just vanishes once you follow someone %>
-            <%= link_to 'Follow', follow_user_path(user), method: :post, class: "button button-link", data: { controller: "follows", follows_target: "button", url: follow_user_path(user), method: "post", action: "click->follows#toggleFollow", iterating_for: "sidebar" } %>
+            <% if user_signed_in? %>
+              <%= link_to 'Follow', follow_user_path(user), method: :post, class: "button button-link", data: { controller: "follows", follows_target: "button", url: follow_user_path(user), method: "post", action: "click->follows#toggleFollow", iterating_for: "sidebar" } %>
+            <% else %>
+              <%= link_to 'Follow', new_user_session_path, class: "button button-link" %>
+            <% end %>
           </div>
+
         <% elsif !user_signed_in? %>
-          <%= link_to 'Follow', follow_user_path(user), method: :post, class: "button button-primary button-small", data: { controller: "follows", follows_target: "button", url: follow_user_path(user), method: "post", action: "click->follows#toggleFollow" } %>
+          <%= link_to 'Follow', new_user_session_path, class: "button button-primary button-small" %>
         <% elsif local_assigns[:current_user_followers_tab] %>
           <%= link_to 'Remove', remove_follower_user_path(user), class: "button button-tertiary", method: :post, data: { controller: "follows", follows_target: "button" , method: "post", url: follow_user_path(user), action: "click->follows#toggleFollow" } %>
         <% elsif local_assigns[:current_user_followed_tab] %>

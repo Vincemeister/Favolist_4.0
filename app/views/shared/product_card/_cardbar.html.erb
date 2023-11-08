@@ -14,7 +14,7 @@
         / <%= product.subscription_type %>
         <% end %>
         <% end %>
-        
+
     </div>
   </div>
 
@@ -54,6 +54,14 @@
             <div class="iconbox-text paragraph-xsmall-medium"><%= product.bookmarks_count %></div>
           </div>
         <% end %>
+      <% elsif !user_signed_in? %>
+        <%= link_to new_user_session_path do %>
+          <div class="cardbar-iconbox">
+            <i class="fa-light fa-circle-bookmark fa-lg iconbox-text paragraph-large-regular"></i>
+            <div class="iconbox-text paragraph-xsmall-medium"><%= product.bookmarks_count %></div>
+          </div>
+        <% end %>
+
       <% else %>
         <%= link_to bookmark_product_path(product), method: :post, data: { controller: 'bookmarks', action: 'click->bookmarks#toggle', bookmarks_target: 'bookmarkbutton' } do %>
           <div class="cardbar-iconbox">
