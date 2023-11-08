@@ -46,9 +46,6 @@ application.register("notification", NotificationController)
 import PaginationController from "./pagination_controller"
 application.register("pagination", PaginationController)
 
-import PopupController from "./popup_controller"
-application.register("popup", PopupController)
-
 import ProductPaginationController from "./product_pagination_controller"
 application.register("product-pagination", ProductPaginationController)
 
