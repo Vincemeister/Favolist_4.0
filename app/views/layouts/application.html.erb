@@ -74,13 +74,25 @@
     <%= render "shared/flashes" %>
 
 
-    <%# <div data-controller="popup" data-popup-target="banner" class="popup-banner" style="display: none;">
-      <div class="popup-content">
-        <h1>Special Announcement!</h1>
-        <p>This is your popup banner message.</p>
-        <button data-action="click->popup#close">Close</button>
-      </div>
-    </div> %>
+ <%# <div class="vwo-modal">
+    <button aria-label="close modal" type="button" class="vwo-modal__close-button">
+        <!-- SVG for Close Button Here -->
+    </button>
+    <div class="vwo-modal__sidebar">
+        <!-- Sidebar content goes here, background is set via CSS -->
+    </div>
+    <div class="vwo-modal__body">
+        <div>
+            <h2 class="vwo-modal__heading" id="vwo-modal-heading">Enjoying Favolist?</h2>
+            <h3 class="vwo-modal__sub-heading">Sign up now – it's free</h3>
+            <p class="vwo-modal__content">Create lists of your favorite digital and physical products to share with friends, family or fans.</p>
+            <div class="vwo-modal__input-wrapper">
+                <a href="https://www.favolist.xyz/pages/about" class="vwo-modal__button about-button" style="color: rgb(252, 70, 125); background-color: #FFFFFF; border: 1px solid rgb(252, 70, 125);">About</a>
+                <a href="https://www.favolist.xyz/users/sign_up" class="vwo-modal__button sign-up-button" style="color: #FFFFFF; background-color: rgb(252, 70, 125);">Sign up</a>
+            </div>
+        </div>
+    </div>
+  </div> %>
 
 
     <% unless controller_name == 'sessions' && action_name == 'new' || controller_name == 'registrations' && action_name == 'new' || controller_name == 'passwords' && action_name == 'new' %>
