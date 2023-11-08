@@ -1,43 +1,34 @@
 <div class="list-card-container">
   <div class="list-card" style="background-image: url('<%= cl_image_path(list.background_image.key) %>');">
-      <%= link_to list_path(list, source: local_assigns[:iterating_for]), class: "text-decoration-none", id: "list_#{list.id}" do %>
-
-        <!-- User Info -->
-        <% if @iterating_for == "user_show" %>
-          <% if product.user == current_user %>
-            <i class="fa-thin fa-grip-lines"></i>
-          <% else %>
-            <div></div>
-          <% end %>
+    <%= link_to list_path(list, source: local_assigns[:iterating_for]), class: "text-decoration-none", id: "list_#{list.id}" do %>
+      <!-- User Info -->
+      <% if @iterating_for == "user_show" %>
+        <% if product.user == current_user %>
+          <i class="fa-thin fa-grip-lines fa-grip-lines-list"></i>
         <% else %>
-          <div class="user-info">
-              <%= image_tag list.user.avatar, class: "avatar-small" %>
-              <div class="user-text">
-                  <div class="username"><%= list.user.username %></div>
-                  <div class="followers paragraph-small-medium"><%= (list.user.followers_count || 0) %> followers</div>
-              </div>
-          </div>
+          <div></div>
         <% end %>
-
-
-        <!-- List Info -->
-        <div class="product-count-and-list-name">
-
-
-          <% if local_assigns[:iterating_for] == "sidebar" %>
-            <div class="paragraph-large-semibold line-height-1-1-25 mb-2"><%= list.name %></div>
-          <% else %>
-            <h3 class="list-name bold line-height-1-25"><%= list.name %></h3>
-          <% end %>
-
-
-          <div class="product-count <%= local_assigns[:iterating_for] == "sidebar" ? "paragraph-small-regular" : "paragraph-large-regular" %> thin">
-              <span class="semi-bold"><%= list.products.count %></span>
-              <%= "products".pluralize(list.products.count) %>
+      <% else %>
+        <div class="user-info">
+          <%= image_tag list.user.avatar, class: "avatar-small" %>
+          <div class="user-text">
+              <div class="username"><%= list.user.username %></div>
+              <div class="followers paragraph-small-medium"><%= (list.user.followers_count || 0) %> followers</div>
           </div>
-
-
         </div>
       <% end %>
+      <!-- List Info -->
+      <div class="product-count-and-list-name">
+        <% if local_assigns[:iterating_for] == "sidebar" %>
+          <div class="paragraph-large-semibold line-height-1-1-25 mb-2"><%= list.name %></div>
+        <% else %>
+          <h3 class="list-name bold line-height-1-25"><%= list.name %></h3>
+        <% end %>
+        <div class="product-count <%= local_assigns[:iterating_for] == "sidebar" ? "paragraph-small-regular" : "paragraph-large-regular" %> thin">
+          <span class="semi-bold"><%= list.products.count %></span>
+          <%= "products".pluralize(list.products.count) %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
