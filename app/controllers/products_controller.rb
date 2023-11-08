@@ -148,7 +148,7 @@ class ProductsController < ApplicationController
     @logo = @product.logo if @product.logo.attached?
     @photos = @product.photos if @product.photos.attached?
     @referral = @product.referral if @product.referral
-    render :edit
+    # render :edit
   end
 
   def update
