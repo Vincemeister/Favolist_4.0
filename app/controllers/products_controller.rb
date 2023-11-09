@@ -137,10 +137,18 @@ class ProductsController < ApplicationController
       end
       trigger_list_update
 
-      redirect_to product_path(@product), notice: 'Product was successfully created.'
+      respond_to do |format|
+        # redirect_to product_path(@product), notice: 'Product was successfully created.' OLD CODE BEFORE I HAD A BUG
+        format.html { redirect_to product_path(@product), notice: 'Post was successfully created.' }
+      end
+
     else
+
+      # redirect_to new_product_path(product: product_params) OLD CODE BEFORE I HAD A BUG
       flash[:error] = @product.errors.full_messages
-      redirect_to new_product_path(product: product_params)
+      respond_to do |format|
+        format.html { redirect_to new_product_path(product: product_params), status: :unprocessable_entity }
+      end
     end
   end
 
@@ -148,7 +156,7 @@ class ProductsController < ApplicationController
     @logo = @product.logo if @product.logo.attached?
     @photos = @product.photos if @product.photos.attached?
     @referral = @product.referral if @product.referral
-    # render :edit
+    render :edit
   end
 
   def update
@@ -169,13 +177,19 @@ class ProductsController < ApplicationController
         # If only position is updated, respond differently
         head :ok
       else
-        redirect_to product_path(@product), notice: 'Product was successfully updated.'
+        respond_to do |format|
+        # redirect_to product_path(@product), notice: 'Product was successfully updated.' OLD CODE BEFORE I HAD A BUG
+        format.html { redirect_to product_path(@product), notice: 'Post was successfully edited.' }
+        end
       end
 
     else
       Rails.logger.debug("Update failed: #{@product.errors.full_messages}")
+      respond_to do |format|
+      format.html { render :edit, status: :unprocessable_entity}
+      end
 
-      render :edit
+      # render :edit OLD CODE BEFORE I HAD A BUG
     end
   end
 

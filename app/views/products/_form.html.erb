@@ -1,18 +1,18 @@
 <div class="new-product-container">
-  <%= simple_form_for @product, html: { data: { controller: "form-validation", action: "submit->form-validation#submit" } } do |f| %>
+  <%= simple_form_for @product, html: { data: { controller: "form-validation", action: "submit->form-validation#submit" } }, remote: true do |f| %>
       <div class="form-input-wrapper">
         <%= f.input :title, required: true, input_html: {data: {form_validation_target: "title"}} %>
-        <span class="error-message paragraph-xsmall-regular" data-target="form-validation.titleError"></span>
+        <span class="error-message paragraph-xsmall-regular" data-form-validation-target="titleError"></span>
       </div>
 
     <div class="title-and-price-input">
       <div class="form-input-wrapper">
         <%= f.input :price, required: true, input_html: {data: {form_validation_target: "price"}} %>
-        <span class="error-message paragraph-xsmall-regular" data-target="form-validation.priceError"></span>
+        <span class="error-message paragraph-xsmall-regular" data-form-validation-target="priceError"></span>
       </div>
       <div class="form-input-wrapper">
         <%= f.input :price_currency, collection: Money::Currency.table.values.map { |c| c[:iso_code] }, prompt: 'Select Currency', required: true, input_html: {data: {form_validation_target: "currency"}} %>
-        <span class="error-message paragraph-xsmall-regular" data-target="form-validation.currencyError"></span>
+        <span class="error-message paragraph-xsmall-regular" data-form-validation-target="currencyError"></span>
       </div>
 
       <div class="form-input-wrapper">
@@ -22,7 +22,7 @@
                       collection: [['One-time', 'one_time'], ['Monthly', 'monthly'], ['Yearly', 'yearly']],
                       required: true,
                       input_html: { data: {form_validation_target: "subscriptionType"}} %>
-          <span class="error-message paragraph-xsmall-regular" data-target="form-validation.subscriptionTypeError"></span>
+          <span class="error-message paragraph-xsmall-regular" data-form-validation-target="subscriptionTypeError"></span>
 
       </div>
 
@@ -32,22 +32,22 @@
 
     <div class="form-input-wrapper">
       <%= f.association :list, collection: List.where(user: current_user), prompt: 'Select a list', required: true, input_html: {data: {form_validation_target: "list"}} %>
-      <span class="error-message paragraph-xsmall-regular" data-target="form-validation.listError"></span>
+      <span class="error-message paragraph-xsmall-regular" data-form-validation-target="listError"></span>
     </div>
 
     <div class="form-input-wrapper">
       <%= f.input :description, required: true, input_html: { id: 'long-text-area', class: 'long-text-area', data: {form_validation_target: "description"}} %>
-      <span class="error-message paragraph-xsmall-regular" data-target="form-validation.descriptionError"></span>
+      <span class="error-message paragraph-xsmall-regular" data-form-validation-target="descriptionError"></span>
     </div>
 
     <div class="form-input-wrapper">
       <%= f.input :review, required: true, input_html: { id: 'long-text-area', class: 'long-text-area', data: {form_validation_target: "review"}} %>
-      <span class="error-message paragraph-xsmall-regular" data-target="form-validation.reviewError"></span>
+      <span class="error-message paragraph-xsmall-regular" data-form-validation-target="reviewError"></span>
     </div>
 
     <div class="form-input-wrapper">
       <%= f.input :url, required: true, input_html: {data: {form_validation_target: "url"}} %>
-      <span class="error-message paragraph-xsmall-regular" data-target="form-validation.urlError"></span>
+      <span class="error-message paragraph-xsmall-regular" data-form-validation-target="urlError"></span>
     </div>
 
     <div class="form-input-wrapper">
@@ -56,25 +56,25 @@
       <%# extremely custom logic so that the form_validation controller works in tandem with the dropzone controller. Hence need to append the dropzone-logo class (see dropzone controller addedFile bind event  ALSO the data-dropzone-logo-VALUE is only for the edit functionality to work with dropzone%>
       <div id="dropzone" class="dropzone dropzone-default dz-clickable mb-3 dropzone-logo" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="1" data-dropzone-logo="<%= { url: url_for(@logo), blob_signed_id: @logo.is_a?(ActiveStorage::Blob) ? @logo.signed_id : @logo.blob.signed_id }.to_json unless @logo.nil? %>"        data-dropzone-for-edit-logo-value='<%= @logo.to_json unless @logo.nil? %>'> <!-- Add this line -->
 
-      <%= f.file_field :logo, direct_upload: true, data: { target: 'dropzone.input', form_validation_target: "logo-blob" } %>
+      <%= f.file_field :logo, direct_upload: true, data: { dropzone_target: 'input', form_validation_target: "logo-blob" } %>
       <div class="dropzone-msg dz-message needsclick text-gray-600">
         <h3 class="dropzone-msg-title">Drag or click here to upload</h3>
         <span class="dropzone-msg-desc text-sm">Allowed file types png jpg</span>
         </div>
       </div>
-      <span class="error-message paragraph-xsmall-regular" data-target="form-validation.logoError"></span>
+      <span class="error-message paragraph-xsmall-regular" data-form-validation-target="logoError"></span>
     </div>
 
     <div class="form-input-wrapper">
       <%= f.label :photos, class: "label mb-2" %>
       <div id="dropzone" class="dropzone dropzone-default dz-clickable mb-3" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="20" data-dropzone-photos="<%= @photos.map { |photo| { url: url_for(photo), blob_signed_id: photo.is_a?(ActiveStorage::Attachment) ? photo.blob.signed_id : photo.signed_id } }.to_json unless @photos.nil? %>"      data-dropzone-photos-for-edit-value='<%= @photos.to_json unless @photos.nil? %>'> <!-- Add this line -->
-      <%= f.file_field :photos, multiple: true, direct_upload: true, data: { target: 'dropzone.input', form_validation_target: "photos-blobs" } %>
+      <%= f.file_field :photos, multiple: true, direct_upload: true, data: { dropzone_target: 'input', form_validation_target: "photos-blobs" } %>
       <div class="dropzone-msg dz-message needsclick text-gray-600">
         <h3 class="dropzone-msg-title">Drag or click here to upload</h3>
         <span class="dropzone-msg-desc text-sm">Allowed file types png jpg</span>
         </div>
       </div>
-      <span class="error-message paragraph-xsmall-regular" data-target="form-validation.photosError"></span>
+      <span class="error-message paragraph-xsmall-regular" data-form-validation-target="photosError"></span>
     </div>
 
 

@@ -10,7 +10,7 @@ class Referral < ApplicationRecord
   include PgSearch::Model
 
   belongs_to :product
-  belongs_to :list
+  belongs_to :list, optional: true
   acts_as_list scope: :list_id
 
   def list_id
