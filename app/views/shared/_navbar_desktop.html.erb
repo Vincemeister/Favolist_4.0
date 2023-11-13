@@ -1,5 +1,9 @@
 <div class="navbar-desktop">
-  <%= image_tag "https://res.cloudinary.com/dncij7vr6/image/upload/v1686124155/Favolist%204.0/app%20assets/favolist_logo_dftbgl.svg", alt: "Favolist Logo", class: "navbar-logo-desktop" %>
+
+  <%= link_to root_path, class: "navbar-logo-link" do %>
+    <%= image_tag "https://res.cloudinary.com/dncij7vr6/image/upload/v1686124155/Favolist%204.0/app%20assets/favolist_logo_dftbgl.svg", alt: "Favolist Logo", class: "navbar-logo-desktop" %>
+  <% end %>
+
   <div class="nav-items text-decoration-none">
 
     <% if user_signed_in? %>

@@ -34,16 +34,17 @@
       <%= f.association :list, collection: List.where(user: current_user), prompt: 'Select a list', required: true, input_html: {data: {form_validation_target: "list"}} %>
       <span class="error-message paragraph-xsmall-regular" data-form-validation-target="listError"></span>
     </div>
+    
+    <div class="form-input-wrapper">
+      <%= f.input :review, required: true, input_html: { id: 'long-text-area', class: 'long-text-area', data: {form_validation_target: "review"}} %>
+      <span class="error-message paragraph-xsmall-regular" data-form-validation-target="reviewError"></span>
+    </div>
 
     <div class="form-input-wrapper">
       <%= f.input :description, required: true, input_html: { id: 'long-text-area', class: 'long-text-area', data: {form_validation_target: "description"}} %>
       <span class="error-message paragraph-xsmall-regular" data-form-validation-target="descriptionError"></span>
     </div>
 
-    <div class="form-input-wrapper">
-      <%= f.input :review, required: true, input_html: { id: 'long-text-area', class: 'long-text-area', data: {form_validation_target: "review"}} %>
-      <span class="error-message paragraph-xsmall-regular" data-form-validation-target="reviewError"></span>
-    </div>
 
     <div class="form-input-wrapper">
       <%= f.input :url, required: true, input_html: {data: {form_validation_target: "url"}} %>
