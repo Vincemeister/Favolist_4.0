@@ -55,48 +55,53 @@ class UsersController < ApplicationController
   end
 
   def show
-    @iterating_for = "user_show"
-
-
-    if current_user
-      @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
-      @suggested_users = (User.where.not(id: current_user.id).where(is_creator: true) - current_user.followed).sample(1)
+    unless current_user == @user || @user.privacy == "public"
+      redirect_to no_permission_path
     else
+
+      @iterating_for = "user_show"
+
+
+      if current_user
+        @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
+        @suggested_users = (User.where.not(id: current_user.id).where(is_creator: true).where(privacy: 'public') - current_user.followed).sample(1)
+      else
+        @user_bookmarks = []
+        @suggested_users = User.all.where(is_creator: true).where(privacy: 'public').sample(1)
+      end
+
+
+      @products_count = @user.products.count
+      @lists_count = @user.lists.count
+      @referrals_count = @user.referrals.count
       @user_bookmarks = []
-      @suggested_users = User.all.where(is_creator: true).sample(1)
-    end
+
+      @type = params[:type] || "product"  # default to product if no type is given
+      @pagination_url = user_url(@user)
+      @product_page = params[:page] || 1
+      @list_page = params[:page] || 1
+      @referral_page = params[:page] || 1
 
 
-    @products_count = @user.products.count
-    @lists_count = @user.lists.count
-    @referrals_count = @user.referrals.count
-    @user_bookmarks = []
-
-    @type = params[:type] || "product"  # default to product if no type is given
-    @pagination_url = user_url(@user)
-    @product_page = params[:page] || 1
-    @list_page = params[:page] || 1
-    @referral_page = params[:page] || 1
-
-
-    case @type
-    when "product"
-      @products = @user.products.order(created_at: :desc).includes(:list, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
-                        .page(@product_page)
-    when "list"
-      @lists = @user.lists.order(:position)
-                   .includes(:user, background_image_attachment: :blob)
-                   .page(@list_page)
-    when "referral"
-      @referrals = @user.referrals.page(@referral_page)
-    end
+      case @type
+      when "product"
+        @products = @user.products.order(created_at: :desc).includes(:list, photos_attachments: :blob, user: [{avatar_attachment: :blob}])
+                          .page(@product_page)
+      when "list"
+        @lists = @user.lists.order(:position)
+                    .includes(:user, background_image_attachment: :blob)
+                    .page(@list_page)
+      when "referral"
+        @referrals = @user.referrals.page(@referral_page)
+      end
 
 
 
-    respond_to do |format|
-      format.html
-      format.json
-      format.turbo_stream
+      respond_to do |format|
+        format.html
+        format.json
+        format.turbo_stream
+      end
     end
   end
 

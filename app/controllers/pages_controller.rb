@@ -13,9 +13,9 @@ class PagesController < ApplicationController
 
     if current_user
       @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
-      @suggested_users = (User.where.not(id: current_user.id).where(is_creator: true) - current_user.followed).sample(1)
+      @suggested_users = (User.where.not(id: current_user.id).where(is_creator: true, privacy: 'public') - current_user.followed).sample(1)
       random_list = List.joins(:user)
-      .where(users: { is_creator: true })
+      .where(users: { is_creator: true, privacy: 'public' })
       .merge(User.viewable_by(current_user))
       .where.not(user_id: current_user.id)
       .order("RANDOM()")
@@ -23,9 +23,9 @@ class PagesController < ApplicationController
       @suggested_lists = random_list ? [random_list] : []
     else
       @user_bookmarks = []
-      @suggested_users = User.where(is_creator: true).sample(1)
+      @suggested_users = User.where(is_creator: true, privacy: 'public').sample(1)
       random_list = List.joins(:user)
-      .where(users: { is_creator: true })
+      .where(users: { is_creator: true, privacy: 'public' })
       .merge(User.viewable_by(nil))
       .order("RANDOM()")
       .first
@@ -36,9 +36,9 @@ class PagesController < ApplicationController
   def search
     if current_user
       @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
-      @suggested_users = (User.where.not(id: current_user.id).where(is_creator: true) - current_user.followed).sample(1)
+      @suggested_users = (User.where.not(id: current_user.id).where(is_creator: true, privacy: 'public') - current_user.followed).sample(1)
       random_list = List.joins(:user)
-      .where(users: { is_creator: true })
+      .where(users: { is_creator: true, privacy: 'public' })
       .merge(User.viewable_by(current_user))
       .where.not(user_id: current_user.id)
       .order("RANDOM()")
@@ -46,9 +46,9 @@ class PagesController < ApplicationController
       @suggested_lists = random_list ? [random_list] : []
     else
       @user_bookmarks = []
-      @suggested_users = User.where(is_creator: true).sample(1)
+      @suggested_users = User.where(is_creator: true, privacy: 'public').sample(1)
       random_list = List.joins(:user)
-      .where(users: { is_creator: true })
+      .where(users: { is_creator: true, privacy: 'public' })
       .merge(User.viewable_by(nil))
       .order("RANDOM()")
       .first
@@ -60,7 +60,7 @@ class PagesController < ApplicationController
     @products_count = Product.viewable_by(current_user).count
     @lists_count = List.viewable_by(current_user).count
     @referrals_count = Referral.viewable_by(current_user).count
-    @users_count = User.count
+    @users_count = User.where(privacy: 'public').count
     puts "PRODUCT COUNT: #{@products_count}"
     puts "LIST COUNT: #{@lists_count}"
     puts "REFERRAL COUNT: #{@referrals_count}"
@@ -110,12 +110,12 @@ class PagesController < ApplicationController
       @products = Product.where(id: search_products.pluck(:id)).viewable_by(current_user).page(@product_page)
       @lists = List.where(id: search_lists.pluck(:id)).viewable_by(current_user).page(@list_page)
       @referrals = Referral.search_by_product_title_user_username_and_list_name(params[:query][:query]).viewable_by(current_user).page(@referral_page)
-      @users = User.search_by_user_username_and_bio_and_list_name(params[:query][:query])
+      @users = User.search_by_user_username_and_bio_and_list_name(params[:query][:query]).where(privacy: 'public')
       .order(followers_count: :desc)
       .page(@users_page) || []
 
       #counts
-      @products_count = search_products.count
+      @products_count = @products.count
       @lists_count = @lists.count
       @referrals_count = @referrals.count
       @users_count = @users.count
@@ -128,7 +128,7 @@ class PagesController < ApplicationController
       when "referral"
         @referrals = Referral.search_by_product_title_user_username_and_list_name(params[:query][:query]).viewable_by(current_user).page(@referral_page)
       when "user"
-        @users = User.search_by_user_username_and_bio_and_list_name(params[:query][:query]).page(@users_page) || []
+        @users = User.search_by_user_username_and_bio_and_list_name(params[:query][:query]).where(privacy: 'public').page(@users_page) || []
       end
 
     else
@@ -147,7 +147,7 @@ class PagesController < ApplicationController
       when "referral"
         @referrals = Referral.viewable_by(current_user).page(@referral_page)
       when "user"
-        @users = User.includes(:followers).order(followers_count: :desc).page(@user_page)
+        @users = User.includes(:followers).where(privacy: 'public').order(followers_count: :desc).page(@user_page)
       end
     end
 
@@ -165,13 +165,13 @@ class PagesController < ApplicationController
     @products_count = Product.where(lists: { users: { is_creator: true }}).viewable_by(current_user).count
     @lists_count = List.where(users: { is_creator: true }).viewable_by(current_user).count
     @referrals_count = Referral.where(products: { lists: { users: { is_creator: true }}}).viewable_by(current_user).count
-    @users_count = User.where(is_creator: true).count
+    @users_count = User.where(is_creator: true, privacy: 'public').count
 
     if current_user
       @user_bookmarks = Bookmark.where(user_id: current_user.id).pluck(:product_id)
-      @suggested_users = (User.where.not(id: current_user.id).where(is_creator: true) - current_user.followed).sample(1)
+      @suggested_users = (User.where.not(id: current_user.id).where(is_creator: true, privacy: 'public') - current_user.followed).sample(1)
       random_list = List.joins(:user)
-      .where(users: { is_creator: true })
+      .where(users: { is_creator: true, privacy: 'public' })
       .merge(User.viewable_by(current_user))
       .where.not(user_id: current_user.id)
       .order("RANDOM()")
@@ -179,9 +179,9 @@ class PagesController < ApplicationController
       @suggested_lists = random_list ? [random_list] : []
     else
       @user_bookmarks = []
-      @suggested_users = User.where(is_creator: true).sample(1)
+      @suggested_users = User.where(is_creator: true, privacy: 'public').sample(1)
       random_list = List.joins(:user)
-      .where(users: { is_creator: true })
+      .where(users: { is_creator: true, privacy: 'public' })
       .merge(User.viewable_by(nil))
       .order("RANDOM()")
       .first
@@ -198,21 +198,21 @@ class PagesController < ApplicationController
 
 
     if params[:query].present?
-      search_products = Product.search_by_title_and_description_and_list_name_and_user_username(params[:query]).where(lists: { users: { is_creator: true }})
-      search_lists = List.search_by_name_and_description_and_product_title_and_user_username(params[:query]).where(users: { is_creator: true })
+      search_products = Product.search_by_title_and_description_and_list_name_and_user_username(params[:query]).where(lists: { users: { is_creator: true, privacy: 'public' }})
+      search_lists = List.search_by_name_and_description_and_product_title_and_user_username(params[:query]).where(users: { is_creator: true, privacy: 'public' })
 
       # Filter the results with the viewable_by scope
       @products = Product.where(id: search_products.pluck(:id)).viewable_by(current_user).page(@product_page)
       @lists = List.where(id: search_lists.pluck(:id)).viewable_by(current_user).page(@list_page)
       # Different logic for referrals at this time
-      @referrals = Referral.search_by_product_title_user_username_and_list_name(params[:query]).viewable_by(current_user).where(products: { lists: { users: { is_creator: true }}}).page(@referral_page)
+      @referrals = Referral.search_by_product_title_user_username_and_list_name(params[:query]).viewable_by(current_user).where(products: { lists: { users: { is_creator: true, privacy: 'public' }}}).page(@referral_page)
       # Users can always be found
-      @users = User.search_by_user_username_and_bio_and_list_name(params[:query]).where(is_creator: true) || []
+      @users = User.search_by_user_username_and_bio_and_list_name(params[:query]).where(is_creator: true, privacy: 'public') || []
     else
       case @type
       when "product"
         @products = Product.viewable_by(current_user)
-                           .includes(:list, photos_attachments: :blob, user: [{avatar_attachment: :blob}]).where(lists: { users: { is_creator: true }})
+                           .includes(:list, photos_attachments: :blob, user: [{avatar_attachment: :blob}]).where(lists: { users: { is_creator: true}})
                            .page(@product_page)
       when "list"
         @lists = List.viewable_by(current_user)
@@ -221,7 +221,7 @@ class PagesController < ApplicationController
       when "referral"
         @referrals = Referral.viewable_by(current_user).where(products: { lists: { users: { is_creator: true }}}).page(@referral_page)
       when "user"
-        @users = User.includes(:followers).where(is_creator: true).all.page(@user_page)
+        @users = User.includes(:followers).where(is_creator: true, privacy: 'public').all.page(@user_page)
       end
     end
 
