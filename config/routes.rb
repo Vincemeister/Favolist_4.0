@@ -4,6 +4,11 @@
 # root "articles#index"
 Rails.application.routes.draw do
   devise_for :users
+  # Sidekiq Web UI, only for admins.
+  require "sidekiq/web"
+  authenticate :user, ->(user) { user.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
   root to: "pages#home"
   get 'pages/about' => 'pages#about', as: 'about'
   get 'pages/search', to: 'pages#search', as: 'search'

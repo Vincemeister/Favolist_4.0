@@ -282,6 +282,12 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sidekiq (6.5.5)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.5.0)
+    sidekiq-failures (1.0.4)
+      sidekiq (>= 4.0.0)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -362,6 +368,8 @@ DEPENDENCIES
   rmagick
   sassc-rails
   selenium-webdriver
+  sidekiq (< 7)
+  sidekiq-failures (~> 1.0)
   simple_form!
   sprockets-rails
   stimulus-rails

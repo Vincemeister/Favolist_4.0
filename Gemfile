@@ -92,6 +92,11 @@ gem 'mail_form', '~> 1.5', '>= 1.5.1'
 gem 'money-rails'
 gem 'acts_as_list'
 
+gem "sidekiq", "< 7"
+gem "sidekiq-failures", "~> 1.0"
+
+
+
 
 
 
