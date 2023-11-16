@@ -73,7 +73,8 @@ class Product < ApplicationRecord
 
   def trigger_list_update
     Rails.logger.info "Triggering list update for List ID: #{list.id}" if list.present?
-    list.regenerate_background if list.present?
+    RegenerateBackgroundWorker.perform_async(self.list.id)
+
   end
 
 end

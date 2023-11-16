@@ -43,7 +43,6 @@ class List < ApplicationRecord
     puts "Regenerating background for List: #{id}"
 
     # Destroy the old background_image blob, if it exists
-    background_image.purge if background_image.attached?
 
     new_image = generate_background_image
     puts "Generated Image: #{new_image.inspect}"
@@ -55,6 +54,7 @@ class List < ApplicationRecord
     # Upload directly to Cloudinary
     uploaded_image = Cloudinary::Uploader.upload(file, public_id: "list_backgrounds/#{id}")
     # Attach the Cloudinary URL to the List instance via Active Storage
+    background_image.purge if background_image.attached?
     background_image.attach(io: URI.open(uploaded_image['url']), filename: "list_background_#{id}.jpg")
 end
 
