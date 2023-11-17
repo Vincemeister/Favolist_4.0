@@ -81,6 +81,14 @@
 
 }
 
+.disabled-button {
+  color: $neutral-300 !important;
+  cursor: not-allowed !important;
+  &:hover {
+    color: $neutral-300 !important;
+  }
+}
+
 @media(max-width: 991px) {
   .navbar-desktop {
     display: none;
