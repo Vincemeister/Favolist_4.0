@@ -409,7 +409,7 @@ class ScrapeProductsController < ApplicationController
         price = item['sku']['def']['promotionPrice']  # Adapted to the structure provided in your example
         original_price = item['sku']['def']['price']  # Extracting original price
         images = item['images'].map { |img| "https:#{img}" } # Convert protocol-relative URLs to absolute URLs
-        currency = data['settings'] ? data['settings']['currency'] : 'Unknown Currency'
+        currency = data['settings'] ? data['settings']['currency'] : ''
 
         html_description = item['description']['html']  # Getting the HTML description
 

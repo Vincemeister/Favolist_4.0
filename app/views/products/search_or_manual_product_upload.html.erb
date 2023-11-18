@@ -8,10 +8,8 @@
     <div class="fact-container" data-loading-screen-target="fact">Mangos are known throughout the world as the \"King of Fruits.\"</div>
   </div>
 
-
-
-
   <div class="search_upload_container" data-loading-screen-target="searchform">
+
     <%= form_with url: fetch_product_path, method: :post, class: 'search_form',
     data: { action: "submit->loading-screen#scrape" } do |f| %>
       <div class="custom-search-form-control form-group search-form">
@@ -31,5 +29,7 @@
     <%= link_to new_product_path, class: "button button-tertiary w-100" do %>
       Manually create product
     <% end %>
+
   </div>
+
 </div>

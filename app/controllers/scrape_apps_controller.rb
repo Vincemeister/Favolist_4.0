@@ -57,8 +57,9 @@ class ScrapeAppsController < ApplicationController
     logo = data["icon"]
     link = data["developerWebsite"]
     images = data["screenshots"]
+    currency = data["currency"] || "USD"
 
-    product_data = { title: title, price: price, description: description, logo: logo, images: images, url: link }
+    product_data = { title: title, price: price, currency: currency, description: description, logo: logo, images: images, url: link }
 
     # Print all at once, you can comment this out in production
     puts "TITLE: #{title}\nPRICE: #{price}\nDESCRIPTION: #{description}\nLOGO: #{logo}\nLINK: #{link}\nIMAGES: #{images}\nPRODUCT DATA: #{product_data}"
@@ -87,6 +88,7 @@ class ScrapeAppsController < ApplicationController
       # Validate and extract data
       title = data.dig("htmlInferred", "title") || "Unknown Title"
       price = 0
+      currency = data.dig("htmlInferred", "price")? data.dig("htmlInferred", "price") : "USD"
       description = data.dig("htmlInferred", "description") || ""
       images = [data.dig("openGraph", "image", "url")].compact
 
@@ -94,7 +96,7 @@ class ScrapeAppsController < ApplicationController
       logo = data.dig("htmlInferred", "favicon")
       # If the logo URL is an SVG, set it to nil
       logo = nil if logo&.end_with?('.svg')
-      product_data = { title: title, price: price, description: description, url: query, images: images, logo: logo }
+      product_data = { title: title, price: price, currency: currency, description: description, url: query, images: images, logo: logo }
       puts "GENERIC STORE PRODUCT DATA: #{product_data}"
       product_data
 
