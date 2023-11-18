@@ -40,6 +40,9 @@ application.register("hidemodal", HidemodalController)
 import ListPaginationController from "./list_pagination_controller"
 application.register("list-pagination", ListPaginationController)
 
+import LoadingScreenController from "./loading_screen_controller"
+application.register("loading-screen", LoadingScreenController)
+
 import NotificationController from "./notification_controller"
 application.register("notification", NotificationController)
 
@@ -66,6 +69,3 @@ application.register("slidingimagerows", SlidingimagerowsController)
 
 import UserPaginationController from "./user_pagination_controller"
 application.register("user-pagination", UserPaginationController)
-
-import Sortable from 'stimulus-sortable'
-application.register('sortable', Sortable)

@@ -6,6 +6,29 @@
   align-items: center;
   gap: 2em;
   padding: 0em 1em;
+  width: 100%;
+}
+
+
+.search_upload_field {
+  width: 100% ;
+}
+
+.link {
+  border-color: $neutral-100;
+  border-style: solid;
+  border-width: 1px;  /* Adjust as needed */
+  padding: 0.5em 1em;
+}
+
+.facts-and-search-upload-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 50%;
+  align-items: center;
+  gap: 2em;
+  padding: 0em 1em;
 
   @media(min-width: 992px) {
     width: 75%;
@@ -19,16 +42,35 @@
     width: 100%;
   }
 
+
 }
 
-
-.search_upload_field {
-  width: 100% ;
+.facts-container {
+  padding-top: 4em;
+  margin-top: 4em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3em;
 }
 
-.link {
-  border-color: $neutral-100;
-  border-style: solid;
-  border-width: 1px;  /* Adjust as needed */
-  padding: 0.5em 1em;
+.fact-container {
+  padding: 1em;
+  margin: 1em;
+  border: 1px solid #ddd; /* Light grey border */
+  border-radius: 5px; /* Rounded corners */
+  background-color: #f9f9f9; /* Light background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  width: 100%; /* Maximum width of the box */
+  word-wrap: break-word; /* Ensures text breaks to avoid overflow */
+}
+
+.loading-text-container {
+  padding: 1em;
+}
+
+.fact-number {
+  color: $primary; /* Replace with your primary color variable or value */
+  font-weight: bold;
 }

@@ -1,6 +1,9 @@
 require 'open-uri'
 require 'net/http'
 require 'nokogiri'
+require 'uri'
+require 'json'
+
 include CloudinaryHelper
 
 class ProductsController < ApplicationController
@@ -168,6 +171,24 @@ class ProductsController < ApplicationController
     render 'search_or_manual_product_upload'
   end
 
+  def fetch_facts
+    url = URI("https://facts-by-api-ninjas.p.rapidapi.com/v1/facts?limit=3")
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+    request = Net::HTTP::Get.new(url)
+    request["X-RapidAPI-Key"] = '971b32dc4emshdc908738f2fb7c0p15bcc5jsn4f8c98db4f7d'
+    request["X-RapidAPI-Host"] = 'facts-by-api-ninjas.p.rapidapi.com'
+
+    response = http.request(request)
+    puts "RESPONSE OF FETCH FACTS: #{response.read_body}"
+
+    if response.is_a?(Net::HTTPSuccess)
+      render json: response.read_body
+    else
+      render json: { error: "Failed to fetch facts" }, status: :bad_request
+    end
+  end
+
 
   def photos
 
@@ -236,6 +257,7 @@ class ProductsController < ApplicationController
     # Render the rows as JSON
     render json: rows
   end
+
 
 
   private
@@ -373,6 +395,10 @@ end
     Product.new(product_params)
     session.delete(:product_data)
   end
+
+
+
+
 end
 
 

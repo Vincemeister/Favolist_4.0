@@ -1,27 +1,35 @@
+<div class="facts-and-search-upload-container" data-controller="loading-screen">
 
-<div class="search_upload_container">
-  <%= form_with url: fetch_product_path, method: :post, class: 'search_form' do |f| %>
-    <div class="custom-search-form-control form-group search-form">
-      <div class="custom-input-group">
-        <%= f.text_field :link, class: "link w-100", placeholder: 'Paste product page or amazon link' %>
-        <div class="custom-input-group-append">
-          <%= button_tag(type: 'submit', class: "custom-btn") do %>
-            <i class="fas fa-search"></i>
-          <% end %>
+
+  <div id="loadingScreen" class="facts-container" style="display: none;">
+    <div class="loading-text-container">Loading... here are some random facts while we perform some computer magic in the background 💡</div>
+    <div class="fact-container" data-loading-screen-target="fact">In 1903 Mary Anderson invented the windshield wipers</div>
+    <div class="fact-container" data-loading-screen-target="fact">Crayola is a French word that means \"Oily chalk.\</div>
+    <div class="fact-container" data-loading-screen-target="fact">Mangos are known throughout the world as the \"King of Fruits.\"</div>
+  </div>
+
+
+
+
+  <div class="search_upload_container" data-loading-screen-target="searchform">
+    <%= form_with url: fetch_product_path, method: :post, class: 'search_form',
+    data: { action: "submit->loading-screen#scrape" } do |f| %>
+      <div class="custom-search-form-control form-group search-form">
+        <div class="custom-input-group">
+          <%= f.text_field :link, class: "link w-100", placeholder: 'Paste product page or amazon link' %>
+          <div class="custom-input-group-append">
+            <%= button_tag(type: 'submit', class: "custom-btn") do %>
+              <i class="fas fa-search"></i>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
 
+    or
 
-
-  or
-
-
-
-
-
-  <%= link_to new_product_path, class: "button button-tertiary w-100" do %>
-    Manually create product
-  <% end %>
+    <%= link_to new_product_path, class: "button button-tertiary w-100" do %>
+      Manually create product
+    <% end %>
+  </div>
 </div>

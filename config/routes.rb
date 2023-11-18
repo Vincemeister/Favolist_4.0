@@ -25,6 +25,9 @@ Rails.application.routes.draw do
   post '/fetch_product', to: 'scrape_products#fetch_product', as: 'fetch_product'
   post '/fetch_app_or_website', to: 'scrape_apps#fetch_app_or_website', as: 'fetch_app_or_website'
 
+  get '/fetch_facts', to: 'products#fetch_facts', as: 'fetch_facts'
+
+
   get 'settings/logout_and_redirect', to: 'settings#logout_and_redirect', as: 'logout_and_redirect'
 
 
