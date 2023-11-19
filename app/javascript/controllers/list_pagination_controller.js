@@ -110,6 +110,6 @@ tabHidden() {
 
   get #pageEnd() {
     const { scrollHeight, scrollTop, clientHeight } = document.documentElement;
-    return scrollHeight - scrollTop - clientHeight < 3000;
+    return scrollHeight - scrollTop - clientHeight < 2000;
   }
 }

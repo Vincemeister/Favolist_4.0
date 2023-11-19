@@ -81,18 +81,31 @@ export default class extends Controller {
 
     this.fetching = true;
 
-    await get(url.toString(), {
-      responseKind: "turbo-stream",
-    });
-    console.log("Finished product loading records...");
 
-    this.fetching = false;
-    this.pageValue += 1;
+    try {
+      await get(url.toString(), {
+        responseKind: "turbo-stream",
+      });
+      console.log("Finished product loading records...");
+    } catch (error) {
+      console.error("Error loading records:", error);
+    } finally {
+      this.removeSpinner();
+      this.fetching = false;
+      this.pageValue += 1;
+    }
   }
 
   // Detect if we're at the bottom of the page.
   get #pageEnd() {
     const { scrollHeight, scrollTop, clientHeight } = document.documentElement;
     return scrollHeight - scrollTop - clientHeight < 3000;
+  }
+
+  removeSpinner() {
+    const spinnerElement = this.productsTarget.querySelector("#spinner");
+    if (spinnerElement) {
+      spinnerElement.remove();
+    }
   }
 }
