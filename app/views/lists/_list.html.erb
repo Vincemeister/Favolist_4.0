@@ -1,5 +1,6 @@
 <div class="list-card-container" <% if list.user == current_user %> data-sortable-update-url="<%= list_path(list) %>" <% end %> >
-  <div class="list-card" style="background-image: url('<%= cl_image_path(list.background_image.key) %>');">
+  <div class="list-card" style="background-image: url('<%= list.background_image.present? ? cl_image_path(list.background_image.key) : asset_path('list_fallback_image.png') %>');">
+
     <%= link_to list_path(list, source: local_assigns[:iterating_for]), class: "text-decoration-none", id: "list_#{list.id}" do %>
       <div class="user-info">
         <% if @iterating_for == "user_show" %>
