@@ -1,7 +1,7 @@
 require 'open-uri'
 
 class ListsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [ :index, :show ]
+  skip_before_action :authenticate_user!, only: [ :index, :show ] 
   before_action :set_list, only: [:show, :edit, :update, :destroy, :add_product, :remove_product]
 
   def index

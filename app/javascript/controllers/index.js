@@ -69,3 +69,6 @@ application.register("slidingimagerows", SlidingimagerowsController)
 
 import UserPaginationController from "./user_pagination_controller"
 application.register("user-pagination", UserPaginationController)
+
+import Sortable from 'stimulus-sortable'
+application.register('sortable', Sortable)
