@@ -104,20 +104,20 @@ require "open-uri"
 #   i += 1
 # end
 
-new_lists_csv = "./db/data/new_lists.csv"
-i = 0
-CSV.foreach(new_lists_csv, headers: :first_row, header_converters: :symbol, encoding: 'utf-8') do |row|
-  puts "----------------- ROW #{i} -----------------"
-  p row[:profile]
-  list = List.new(
-    name: row[:list],
-    description: row[:info],
-  )
-  list.user = User.find_by(username: row[:profile])
-  list.save!
-  puts "created: #{list.name}"
-  i += 1
-end
+# new_lists_csv = "./db/data/new_lists.csv"
+# i = 0
+# CSV.foreach(new_lists_csv, headers: :first_row, header_converters: :symbol, encoding: 'utf-8') do |row|
+#   puts "----------------- ROW #{i} -----------------"
+#   p row[:profile]
+#   list = List.new(
+#     name: row[:list],
+#     description: row[:info],
+#   )
+#   list.user = User.find_by(username: row[:profile])
+#   list.save!
+#   puts "created: #{list.name}"
+#   i += 1
+# end
 
 
 # failed_lists_csv = "./db/data/failed_lists.csv"
