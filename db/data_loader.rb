@@ -532,6 +532,7 @@ require "open-uri"
 new_products_csv = "./db/data/new_products.csv"
 i = 0
 CSV.foreach(new_products_csv, headers: :first_row, header_converters: :symbol, encoding: 'utf-8') do |row|
+  i += 1
   puts "----------------- ROW #{i} -----------------"
   begin
     puts row[:title]
