@@ -104,20 +104,20 @@ require "open-uri"
 #   i += 1
 # end
 
-# new_lists_csv = "./db/data/new_lists.csv"
-# i = 0
-# CSV.foreach(new_lists_csv, headers: :first_row, header_converters: :symbol, encoding: 'utf-8') do |row|
-#   puts "----------------- ROW #{i} -----------------"
-#   p row[:profile]
-#   list = List.new(
-#     name: row[:list],
-#     description: row[:info],
-#   )
-#   list.user = User.find_by(username: row[:profile])
-#   list.save!
-#   puts "created: #{list.name}"
-#   i += 1
-# end
+new_lists_csv = "./db/data/new_lists.csv"
+i = 0
+CSV.foreach(new_lists_csv, headers: :first_row, header_converters: :symbol, encoding: 'utf-8') do |row|
+  puts "----------------- ROW #{i} -----------------"
+  p row[:profile]
+  list = List.new(
+    name: row[:list],
+    description: row[:info],
+  )
+  list.user = User.find_by(username: row[:profile])
+  list.save!
+  puts "created: #{list.name}"
+  i += 1
+end
 
 
 # failed_lists_csv = "./db/data/failed_lists.csv"
@@ -229,63 +229,6 @@ require "open-uri"
 # vr_products_csv = './db/data/vr_products.csv'
 # failed_products_csv = './db/data/failed_products.csv'
 
-# i = 0
-# CSV.foreach(vr_products_csv, headers: :first_row, header_converters: :symbol, encoding: 'utf-8') do |row|
-#   puts "----------------- ROW #{i} -----------------"
-#   begin
-#     puts row[:title]
-#     puts row[:description]
-#     puts row[:review]
-#     puts row[:price]
-#     puts row[:url]
-#     puts row[:logo]
-#     puts row[:photos]
-
-#     product = Product.new(
-#       title: row[:title],
-#       description: row[:description],
-#       review: row[:review],
-#       price: row[:price].to_i,
-#       url: row[:url],
-#     )
-
-#     logo = URI.open(row[:logo])
-#     product.logo.attach(io: logo, filename: "logo.jpg", content_type: "image/jpg")
-
-#     photo_urls = row[:photos].split("\n")
-#     photo_urls.each do |url|
-#       product_image = URI.open(url.strip)
-#       product.photos.attach(io: product_image, filename: "product_image.jpg", content_type: "image/jpg")
-#     end
-
-#     # Only create and assign referral if code and details are present.
-#     if row[:code].present? && row[:details].present?
-#       referral = Referral.new(
-#         code: row[:code],
-#         details: row[:details],
-#       )
-#       product.referral = referral
-#     end
-
-#     product.user = User.find_by(username: row[:profile])
-#     product.list = List.find_by(name: row[:list])
-#     product.save!
-
-#     puts "created: #{product.title}"
-#     i += 1
-
-#   rescue OpenURI::HTTPError => e
-#     puts "HTTP Error: Failed to open a URL (either #{row[:logo]} or one of the images) due to #{e.message}. Skipping this product."
-#     next
-#   rescue Errno::ENOENT => e
-#     puts "File Error: Failed to open a URL (either #{row[:logo]} or one of the images) due to #{e.message}. Skipping this product."
-#     next
-#   rescue => e
-#     puts "General Error: An unexpected error occurred processing the product #{row[:title]} due to #{e.message}. Skipping this product."
-#     next
-#   end
-# end
-
 
 # i = 0
 
@@ -348,185 +291,6 @@ require "open-uri"
 
 
 
-
-
-
-# i = 0
-
-# CSV.foreach(ah_products_csv, headers: :first_row, header_converters: :symbol, encoding: 'utf-8') do |row|
-#   puts "----------------- ROW #{i} -----------------"
-#   begin
-#     puts row[:title]
-#     puts row[:description]
-#     puts row[:review]
-#     puts row[:price]
-#     puts row[:url]
-#     puts row[:logo]
-#     puts row[:photos]
-
-#     product = Product.new(
-#       title: row[:title],
-#       description: row[:description],
-#       review: row[:review],
-#       price: row[:price].to_i,
-#       url: row[:url],
-#     )
-
-#     logo = URI.open(row[:logo])
-#     product.logo.attach(io: logo, filename: "logo.jpg", content_type: "image/jpg")
-
-#     photo_urls = row[:photos].split("\n")
-#     photo_urls.each do |url|
-#       product_image = URI.open(url.strip)
-#       product.photos.attach(io: product_image, filename: "product_image.jpg", content_type: "image/jpg")
-#     end
-
-#     # Only create and assign referral if code and details are present.
-#     if row[:code].present? && row[:details].present?
-#       referral = Referral.new(
-#         code: row[:code],
-#         details: row[:details],
-#       )
-#       product.referral = referral
-#     end
-
-#     product.user = User.find_by(username: row[:profile])
-#     product.list = List.find_by(name: row[:list])
-#     product.save!
-
-#     puts "created: #{product.title}"
-#     i += 1
-
-#   rescue OpenURI::HTTPError => e
-#     puts "HTTP Error: Failed to open a URL (either #{row[:logo]} or one of the images) due to #{e.message}. Skipping this product."
-#     next
-#   rescue Errno::ENOENT => e
-#     puts "File Error: Failed to open a URL (either #{row[:logo]} or one of the images) due to #{e.message}. Skipping this product."
-#     next
-#   rescue => e
-#     puts "General Error: An unexpected error occurred processing the product #{row[:title]} due to #{e.message}. Skipping this product."
-#     next
-#   end
-# end
-
-
-# i = 0
-
-# CSV.foreach(jr_products_csv, headers: :first_row, header_converters: :symbol, encoding: 'utf-8') do |row|
-#   puts "----------------- ROW #{i} -----------------"
-#   begin
-#     puts row[:title]
-#     puts row[:description]
-#     puts row[:review]
-#     puts row[:price]
-#     puts row[:url]
-#     puts row[:logo]
-#     puts row[:photos]
-
-#     product = Product.new(
-#       title: row[:title],
-#       description: row[:description],
-#       review: row[:review],
-#       price: row[:price].to_i,
-#       url: row[:url],
-#     )
-
-#     logo = URI.open(row[:logo])
-#     product.logo.attach(io: logo, filename: "logo.jpg", content_type: "image/jpg")
-
-#     photo_urls = row[:photos].split("\n")
-#     photo_urls.each do |url|
-#       product_image = URI.open(url.strip)
-#       product.photos.attach(io: product_image, filename: "product_image.jpg", content_type: "image/jpg")
-#     end
-
-#     # Only create and assign referral if code and details are present.
-#     if row[:code].present? && row[:details].present?
-#       referral = Referral.new(
-#         code: row[:code],
-#         details: row[:details],
-#       )
-#       product.referral = referral
-#     end
-
-#     product.user = User.find_by(username: row[:profile])
-#     product.list = List.find_by(name: row[:list])
-#     product.save!
-
-#     puts "created: #{product.title}"
-#     i += 1
-
-#   rescue OpenURI::HTTPError => e
-#     puts "HTTP Error: Failed to open a URL (either #{row[:logo]} or one of the images) due to #{e.message}. Skipping this product."
-#     next
-#   rescue Errno::ENOENT => e
-#     puts "File Error: Failed to open a URL (either #{row[:logo]} or one of the images) due to #{e.message}. Skipping this product."
-#     next
-#   rescue => e
-#     puts "General Error: An unexpected error occurred processing the product #{row[:title]} due to #{e.message}. Skipping this product."
-#     next
-#   end
-# end
-#
-#
-# i = 0
-#
-# CSV.foreach(failed_products_csv, headers: :first_row, header_converters: :symbol, encoding: 'utf-8') do |row|
-  # puts "----------------- ROW #{i} -----------------"
-  # begin
-    # puts row[:title]
-    # puts row[:description]
-    # puts row[:review]
-    # puts row[:price]
-    # puts row[:url]
-    # puts row[:logo]
-    # puts row[:photos]
-#
-    # product = Product.new(
-      # title: row[:title],
-      # description: row[:description],
-      # review: row[:review],
-      # price: row[:price].to_i,
-      # url: row[:url],
-    # )
-#
-    # logo = URI.open(row[:logo])
-    # product.logo.attach(io: logo, filename: "logo.jpg", content_type: "image/jpg")
-#
-    # photo_urls = row[:photos].split("\n")
-    # photo_urls.each do |url|
-      # product_image = URI.open(url.strip)
-      # product.photos.attach(io: product_image, filename: "product_image.jpg", content_type: "image/jpg")
-    # end
-#
-    # Only create and assign referral if code and details are present.
-    # if row[:code].present? && row[:details].present?
-      # referral = Referral.new(
-        # code: row[:code],
-        # details: row[:details],
-      # )
-      # product.referral = referral
-    # end
-#
-    # product.user = User.find_by(username: row[:profile])
-    # product.list = List.find_by(name: row[:list])
-    # product.save!
-#
-    # puts "created: #{product.title}"
-    # i += 1
-#
-  # rescue OpenURI::HTTPError => e
-    # puts "HTTP Error: Failed to open a URL (either #{row[:logo]} or one of the images) due to #{e.message}. Skipping this product."
-    # next
-  # rescue Errno::ENOENT => e
-    # puts "File Error: Failed to open a URL (either #{row[:logo]} or one of the images) due to #{e.message}. Skipping this product."
-    # next
-  # rescue => e
-    # puts "General Error: An unexpected error occurred processing the product #{row[:title]} due to #{e.message}. Skipping this product."
-    # next
-  # end
-# end
-#
 
 
 new_products_csv = "./db/data/new_products.csv"
