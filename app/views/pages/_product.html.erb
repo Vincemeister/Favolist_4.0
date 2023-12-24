@@ -49,7 +49,7 @@
         <%= link_to user_path(product.user) do %>
           <%= image_tag product.user.avatar, class: 'avatar-small'%>
         <% end %>
-        <%= link_to user_path(product.user) do %>
+        <%= link_to list_path(product.list) do %>
           <div class="username paragraph-small-medium">
             <%= product.user.username %>
             <span class="comment-date-and-reply-button">  •

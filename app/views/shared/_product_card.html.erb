@@ -147,7 +147,7 @@
         <div class="modal-body custom-modal-body ">
           <% if product.user == current_user %>
             <%= link_to new_product_path(original_product_id: product.id), class: "button button-tertiary w-100 mb-3" do %>
-              Copy listing
+              Duplicate listing
             <% end %>
             <%= link_to edit_product_path(product), class: "button button-tertiary w-100 mb-3" do %>
               Edit
@@ -155,7 +155,7 @@
             <div class="button button-danger w-100" data-bs-target="#deleteModal-<%= product.id %>" data-bs-toggle="modal" data-bs-dismiss="modal"> Delete</div>
           <% else %>
             <%= link_to new_product_path(original_product_id: product.id), class: "button button-tertiary w-100 mb-3" do %>
-              Copy listing
+              Duplicate listing
             <% end %>
             <%= link_to contacts_path, class: "button button-primary w-100 mb-3" do%>
               Report listing
