@@ -82,11 +82,10 @@ how I set up redis after really finding difficulties with it
 https://medium.com/@mohammedalaa/how-to-configure-redis-as-a-session-store-in-rails-7-8627c28fb4db
 
 =end
-gem "redis", "~> 5.3" # Redis client for Ruby
-gem "redis-actionpack", "~> 5.3" # Redis session store for ActionPack
-gem 'redis-store', '~> 1.9'
-gem 'redis-rack', '~> 2.1'
-
+gem "redis", "~> 4.8.1"  # Downgrade to 4.x series
+gem "redis-store", "~> 1.9.1"
+gem "redis-actionpack", "~> 5.3.0"
+gem "redis-rack", "~> 2.1.4"
 
 gem 'bullet', group: 'development'
 gem 'rack-mini-profiler'
