@@ -24,13 +24,16 @@ key = Rails.env.production? ? "_app_session" : "_app_session_#{Rails.env}"
 domain = Rails.env.production? ? "www.favolist.xyz" : "localhost"
 # domain = ENV.fetch("DOMAIN_NAME", "localhost")
 
+session_url = "#{ENV.fetch('REDIS_TLS_URL', 'redis://127.0.0.1:6379')}/0/session"
 
 Rails.application.config.session_store :redis_store,
-                                  url: session_url,
-                                  expire_after: 5.days,
-                                  key: key,
-                                  domain: domain,
-                                  threadsafe: true,
-                                  secure: secure,
-                                  same_site: :lax,
-                                  httponly: true
+                                       url: session_url,
+                                       ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE }, # Add this line
+                                       expire_after: 5.days,
+                                       key: "_app_session",
+                                       domain: "www.favolist.xyz",
+                                       threadsafe: true,
+                                       secure: true,
+                                       same_site: :lax,
+                                       httponly: true
+
