@@ -82,8 +82,12 @@ how I set up redis after really finding difficulties with it
 https://medium.com/@mohammedalaa/how-to-configure-redis-as-a-session-store-in-rails-7-8627c28fb4db
 
 =end
-gem "redis", "~> 5.0" # Redis client for Ruby
+gem "redis", "~> 5.3" # Redis client for Ruby
 gem "redis-actionpack", "~> 5.3" # Redis session store for ActionPack
+gem 'redis-store', '~> 1.9'
+gem 'redis-rack', '~> 2.1'
+
+
 gem 'bullet', group: 'development'
 gem 'rack-mini-profiler'
 gem 'rmagick' # to generate tiled backgrounds

@@ -363,8 +363,10 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-mini-profiler
   rails (~> 7.0.4, >= 7.0.4.2)
-  redis (~> 5.0)
+  redis (~> 5.3)
   redis-actionpack (~> 5.3)
+  redis-rack (~> 2.1)
+  redis-store (~> 1.9)
   rmagick
   sassc-rails
   selenium-webdriver
