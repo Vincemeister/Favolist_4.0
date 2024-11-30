@@ -13,36 +13,30 @@
 #   end
 # end
 
-
-redis_url = ENV["REDIS_TLS_URL"] || ENV["REDIS_URL"]
-
-if redis_url
-  Sidekiq.configure_server do |config|
-    config.redis = { url: redis_url, ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE } }
-  end
-
-  Sidekiq.configure_client do |config|
-    config.redis = { url: redis_url, ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE } }
-  end
-end
+require 'connection_pool'
 
 redis_config = {
   url: ENV.fetch('REDIS_TLS_URL'),
+  ssl: true,
   ssl_params: {
     verify_mode: OpenSSL::SSL::VERIFY_NONE,
-    ssl_version: 'TLSv1_2'
+    ssl_version: :TLSv1_2
   },
-  ssl: true,
-  namespace: 'session',
-  driver: :ruby
+  timeout: 1,
+  reconnect_attempts: 2
 }
 
-# The correct syntax for session_store
+REDIS_POOL = ConnectionPool.new(size: 5, timeout: 5) do
+  Redis.new(redis_config)
+end
+
 Rails.application.config.session_store(
   :redis_store,
-  servers: [redis_config],
+  redis_server: redis_config,
+  pool_size: 5,
+  pool_timeout: 5,
   expire_after: 5.days,
-  key: "_app_session",
+  key: '_app_session',
   secure: true,
   same_site: :lax,
   httponly: true
