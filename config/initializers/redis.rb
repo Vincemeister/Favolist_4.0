@@ -1,44 +1,47 @@
 require 'openssl'
 
-# Common SSL settings
-ssl_params = {
-  verify_mode: OpenSSL::SSL::VERIFY_NONE,
-  ssl_version: :TLSv1_2
+# Common Redis SSL configuration
+redis_ssl_params = {
+  ssl: true,
+  ssl_params: {
+    verify_mode: OpenSSL::SSL::VERIFY_NONE  # Required for Heroku Redis
+  }
 }
 
-# Session store Redis config (using main Redis instance)
-session_redis_config = {
-  url: ENV.fetch('REDIS_TLS_URL'),
+# Session store Redis config
+session_config = {
+  url: ENV.fetch('REDIS_TLS_URL', ENV['REDIS_URL']),
   ssl: true,
-  ssl_params: ssl_params,
-  timeout: 60,  # Matching your Sidekiq timeout
-  reconnect_attempts: 2
+  ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE },
+  timeout: 60,
+  reconnect_attempts: 2,
+  namespace: "session"
 }
 
 # Configure session store
-Rails.application.config.session_store(
-  :redis_store,
-  servers: [session_redis_config],
+Rails.application.config.session_store :redis_store, {
+  servers: [session_config],
   expire_after: 5.days,
-  key: '_app_session',
+  key: '_favolist_session',
   secure: Rails.env.production?,
-  same_site: :lax,
-  httponly: true
-)
-
-# Sidekiq Redis config (using dedicated Redis instance)
-sidekiq_redis_config = {
-  url: ENV.fetch('HEROKU_REDIS_CYAN_URL'),
-  ssl: true,
-  ssl_params: ssl_params,
-  network_timeout: 60  # Matching your Sidekiq timeout
+  same_site: :lax
 }
 
-# Configure Sidekiq
+# Sidekiq Redis config
 Sidekiq.configure_server do |config|
-  config.redis = sidekiq_redis_config
+  config.redis = {
+    url: ENV.fetch('HEROKU_REDIS_CYAN_URL', ENV['REDIS_URL']),
+    ssl: true,
+    ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE },
+    network_timeout: 60
+  }
 end
 
 Sidekiq.configure_client do |config|
-  config.redis = sidekiq_redis_config
+  config.redis = {
+    url: ENV.fetch('HEROKU_REDIS_CYAN_URL', ENV['REDIS_URL']),
+    ssl: true,
+    ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE },
+    network_timeout: 60
+  }
 end
