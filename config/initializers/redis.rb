@@ -1,33 +1,32 @@
 require 'openssl'
 
-# Common Redis SSL configuration
 redis_ssl_params = {
   ssl: true,
   ssl_params: {
-    verify_mode: OpenSSL::SSL::VERIFY_NONE  # Required for Heroku Redis
+    verify_mode: OpenSSL::SSL::VERIFY_NONE
   }
 }
 
-# Session store Redis config
-session_config = {
-  url: ENV.fetch('REDIS_TLS_URL', ENV['REDIS_URL']),
-  ssl: true,
-  ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE },
-  timeout: 60,
-  reconnect_attempts: 2,
-  namespace: "session"
-}
-
-# Configure session store
-Rails.application.config.session_store :redis_store, {
-  servers: [session_config],
+# Session store configuration
+Rails.application.config.session_store :redis_store,
+  servers: [{
+    url: ENV.fetch('REDIS_TLS_URL', ENV['REDIS_URL']),
+    ssl: true,
+    ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE }
+  }],
   expire_after: 5.days,
   key: '_favolist_session',
+  domain: '.favolist.xyz',
   secure: Rails.env.production?,
   same_site: :lax
+
+# Cache store configuration
+Rails.application.config.cache_store = :redis_cache_store, {
+  url: ENV.fetch('REDIS_CACHE_URL', ENV['REDIS_URL']),
+  ssl: false  # Since REDIS_CACHE_URL is non-SSL
 }
 
-# Sidekiq Redis config
+# Sidekiq configuration
 Sidekiq.configure_server do |config|
   config.redis = {
     url: ENV.fetch('HEROKU_REDIS_CYAN_URL', ENV['REDIS_URL']),
