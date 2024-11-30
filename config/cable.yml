@@ -13,3 +13,4 @@ production:
   adapter: redis
   url: <%= ENV.fetch("REDIS_TLS_URL") %>
   channel_prefix: Favolist_4_0_production
+

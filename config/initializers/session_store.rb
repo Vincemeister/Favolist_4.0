@@ -28,7 +28,10 @@ session_url = "#{ENV.fetch('REDIS_TLS_URL', 'redis://127.0.0.1:6379')}/0/session
 
 Rails.application.config.session_store :redis_store,
                                        url: session_url,
-                                       ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE }, # Add this line
+                                       ssl_params: {
+                                         verify_mode: OpenSSL::SSL::VERIFY_NONE,
+                                         ssl: true
+                                       },
                                        expire_after: 5.days,
                                        key: "_app_session",
                                        domain: "www.favolist.xyz",
@@ -37,3 +40,5 @@ Rails.application.config.session_store :redis_store,
                                        same_site: :lax,
                                        httponly: true
 
+
+                                      
