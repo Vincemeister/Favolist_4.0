@@ -6,8 +6,12 @@ Rails.application.routes.draw do
   devise_for :users
   # Sidekiq Web UI, only for admins.
   require "sidekiq/web"
-  authenticate :user, ->(user) { user.admin? } do
-    mount Sidekiq::Web => '/sidekiq'
+  if Rails.env.production?
+    authenticate :user, lambda { |u| u.admin? } do
+      mount Sidekiq::Web => '/sidekiq', as: :sidekiq_admin
+    end
+  else
+    mount Sidekiq::Web => '/sidekiq', as: :sidekiq_admin
   end
   root to: "pages#home"
   get 'pages/about' => 'pages#about', as: 'about'
@@ -97,6 +101,4 @@ Rails.application.routes.draw do
     end
   end
 
-  # Mount Sidekiq web interface
-  mount Sidekiq::Web => '/sidekiq'
 end
