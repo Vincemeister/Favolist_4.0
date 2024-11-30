@@ -1,42 +1,27 @@
-require 'openssl'
+# this is only for background jobs. I use a seperate redis instance (using the heroku data for redis add-on) for session storage
+# this initializer is only for the background jobs using the rediscloud add on
 
-redis_config = {
-  url: ENV.fetch('REDIS_TLS_URL', ENV['REDIS_URL']),
-  ssl: true,
-  ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE }
-}
+# url = ENV["REDISCLOUD_URL"]
 
-# Session store configuration
-Rails.application.config.session_store :redis_store, {
-  servers: [redis_config],
-  expire_after: 5.days,
-  key: '_favolist_session',
-  domain: '.favolist.xyz',
-  secure: Rails.env.production?,
-  same_site: :lax
-}
+# if url
+#   Sidekiq.configure_server do |config|
+#     config.redis = { url: url }
+#   end
 
-# Cache store configuration
-Rails.application.config.cache_store = :redis_cache_store, {
-  url: ENV.fetch('REDIS_CACHE_URL', ENV['REDIS_URL']),
-  ssl: false  # Since REDIS_CACHE_URL is non-SSL
-}
+#   Sidekiq.configure_client do |config|
+#     config.redis = { url: url }
+#   end
+# end
 
-# Sidekiq configuration
-Sidekiq.configure_server do |config|
-  config.redis = {
-    url: ENV.fetch('HEROKU_REDIS_CYAN_URL', ENV['REDIS_URL']),
-    ssl: true,
-    ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE },
-    network_timeout: 60
-  }
-end
 
-Sidekiq.configure_client do |config|
-  config.redis = {
-    url: ENV.fetch('HEROKU_REDIS_CYAN_URL', ENV['REDIS_URL']),
-    ssl: true,
-    ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE },
-    network_timeout: 60
-  }
+redis_url = ENV["REDIS_TLS_URL"] || ENV["REDIS_URL"]
+
+if redis_url
+  Sidekiq.configure_server do |config|
+    config.redis = { url: redis_url, ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE } }
+  end
+
+  Sidekiq.configure_client do |config|
+    config.redis = { url: redis_url, ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE } }
+  end
 end
