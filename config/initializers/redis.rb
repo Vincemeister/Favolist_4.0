@@ -1,17 +1,5 @@
 require 'openssl'
 
-# Session store configuration
-Rails.application.config.session_store :redis_store, {
-  url: ENV.fetch('REDIS_TLS_URL', ENV['REDIS_URL']),
-  ssl: true,
-  ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE },
-  expire_after: 5.days,
-  key: '_favolist_session',
-  domain: '.favolist.xyz',
-  secure: Rails.env.production?,
-  same_site: :lax
-}
-
 # Cache store configuration
 Rails.application.config.cache_store = :redis_cache_store, {
   url: ENV.fetch('REDIS_CACHE_URL', ENV['REDIS_URL']),
