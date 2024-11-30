@@ -14,18 +14,34 @@
 # end
 
 
-redis_url = ENV["REDISCLOUD_URL"] || 'redis://localhost:6379/1'
+redis_url = ENV["REDIS_TLS_URL"] || ENV["REDIS_URL"]
 
-Sidekiq.configure_server do |config|
-  config.redis = {
-    url: redis_url,
-    **REDIS_SSL_CONFIG
-  }
+if redis_url
+  Sidekiq.configure_server do |config|
+    config.redis = { url: redis_url, ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE } }
+  end
+
+  Sidekiq.configure_client do |config|
+    config.redis = { url: redis_url, ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE } }
+  end
 end
 
-Sidekiq.configure_client do |config|
-  config.redis = {
-    url: redis_url,
-    **REDIS_SSL_CONFIG
-  }
-end
+redis_config = {
+  url: ENV.fetch('REDIS_TLS_URL'),  # Using the TLS URL directly
+  ssl_params: {
+    verify_mode: OpenSSL::SSL::VERIFY_NONE,
+    ssl_version: 'TLSv1_2'
+  },
+  ssl: true,
+  namespace: 'session',  # Add namespace to avoid conflicts
+  driver: :ruby  # Explicitly use ruby driver which has better SSL support
+}
+
+Rails.application.config.session_store :redis_store, {
+  servers: redis_config,
+  expire_after: 5.days,
+  key: "_app_session",
+  secure: true,
+  same_site: :lax,
+  httponly: true
+}
