@@ -1,3 +1,19 @@
+# this is only for background jobs. I use a seperate redis instance (using the heroku data for redis add-on) for session storage
+# this initializer is only for the background jobs using the rediscloud add on
+
+# url = ENV["REDISCLOUD_URL"]
+
+# if url
+#   Sidekiq.configure_server do |config|
+#     config.redis = { url: url }
+#   end
+
+#   Sidekiq.configure_client do |config|
+#     config.redis = { url: url }
+#   end
+# end
+
+
 require 'redis'
 
 redis_config = {
@@ -6,11 +22,12 @@ redis_config = {
   ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE }
 }
 
-Redis.current = Redis.new(redis_config)
+# Create a Redis instance
+$redis = Redis.new(redis_config)
 
-# Configure session store with the same Redis connection
+# Configure session store
 Rails.application.config.session_store :redis_store,
-  redis_server: Redis.current,
+  servers: [redis_config],
   expire_after: 5.days,
   key: "_app_session",
   domain: "www.favolist.xyz",
