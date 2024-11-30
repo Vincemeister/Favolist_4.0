@@ -1,43 +1,44 @@
-# this is only for background jobs. I use a seperate redis instance (using the heroku data for redis add-on) for session storage
-# this initializer is only for the background jobs using the rediscloud add on
+require 'openssl'
 
-# url = ENV["REDISCLOUD_URL"]
+# Common SSL settings
+ssl_params = {
+  verify_mode: OpenSSL::SSL::VERIFY_NONE,
+  ssl_version: :TLSv1_2
+}
 
-# if url
-#   Sidekiq.configure_server do |config|
-#     config.redis = { url: url }
-#   end
-
-#   Sidekiq.configure_client do |config|
-#     config.redis = { url: url }
-#   end
-# end
-
-require 'connection_pool'
-
-redis_config = {
+# Session store Redis config (using main Redis instance)
+session_redis_config = {
   url: ENV.fetch('REDIS_TLS_URL'),
   ssl: true,
-  ssl_params: {
-    verify_mode: OpenSSL::SSL::VERIFY_NONE,
-    ssl_version: :TLSv1_2
-  },
-  timeout: 1,
+  ssl_params: ssl_params,
+  timeout: 60,  # Matching your Sidekiq timeout
   reconnect_attempts: 2
 }
 
-REDIS_POOL = ConnectionPool.new(size: 5, timeout: 5) do
-  Redis.new(redis_config)
-end
-
+# Configure session store
 Rails.application.config.session_store(
   :redis_store,
-  redis_server: redis_config,
-  pool_size: 5,
-  pool_timeout: 5,
+  servers: [session_redis_config],
   expire_after: 5.days,
   key: '_app_session',
-  secure: true,
+  secure: Rails.env.production?,
   same_site: :lax,
   httponly: true
 )
+
+# Sidekiq Redis config (using dedicated Redis instance)
+sidekiq_redis_config = {
+  url: ENV.fetch('HEROKU_REDIS_CYAN_URL'),
+  ssl: true,
+  ssl_params: ssl_params,
+  network_timeout: 60  # Matching your Sidekiq timeout
+}
+
+# Configure Sidekiq
+Sidekiq.configure_server do |config|
+  config.redis = sidekiq_redis_config
+end
+
+Sidekiq.configure_client do |config|
+  config.redis = sidekiq_redis_config
+end

@@ -97,4 +97,6 @@ Rails.application.routes.draw do
     end
   end
 
+  # Mount Sidekiq web interface
+  mount Sidekiq::Web => '/sidekiq'
 end
