@@ -1,18 +1,14 @@
 require 'sidekiq'
 require 'sidekiq/web'
 
-redis_config = {
-  url: ENV.fetch('HEROKU_REDIS_CYAN_URL'),
-  ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE },
-  network_timeout: 60
-}
+redis_url = ENV["REDIS_TLS_URL"] || ENV["REDIS_URL"]
 
 Sidekiq.configure_server do |config|
-  config.redis = redis_config
+  config.redis = { url: redis_url, ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE } }
 end
 
 Sidekiq.configure_client do |config|
-  config.redis = redis_config
+  config.redis = { url: redis_url, ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE } }
 end
 
 # Protect the Sidekiq web interface in production
