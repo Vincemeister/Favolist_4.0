@@ -4,13 +4,10 @@ development:
 test:
   adapter: test
 
-# production:
-#   adapter: redis
-#   url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
-#   channel_prefix: Favolist_4_0_production
-
 production:
   adapter: redis
-  url: <%= ENV.fetch("REDIS_TLS_URL") %>
+  url: <%= ENV.fetch("REDIS_TLS_URL") { ENV.fetch("REDIS_URL") } %>
   channel_prefix: Favolist_4_0_production
+  ssl_params:
+    verify_mode: <%= OpenSSL::SSL::VERIFY_NONE %>
 
